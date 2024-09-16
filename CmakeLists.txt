@@ -1,0 +1,36 @@
+cmake_minimum_required(VERSION 3.14)
+set(PROJECT_NAME atled)
+
+project(atled)
+# Set C++ standard to C++20
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+
+
+# Add your executable
+add_executable(atled src/main.cpp)
+
+# Link raylib to your project
+target_link_libraries(atled graphics)
+
+add_subdirectory(modules)
+
+# Add additional platform-specific libraries (for Linux)
+if (UNIX)
+    target_link_libraries(atled m pthread dl rt X11)
+endif()
+
+# Specify include directories for the project
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${CMAKE_SOURCE_DIR}/modules/actuators/include
+    ${CMAKE_SOURCE_DIR}/modules/algorithms/include
+    ${CMAKE_SOURCE_DIR}/modules/graphics/include
+    ${CMAKE_SOURCE_DIR}/modules/inputs/include
+    ${CMAKE_SOURCE_DIR}/modules/logging/include
+    ${CMAKE_SOURCE_DIR}/modules/sensors/include
+    ${CMAKE_SOURCE_DIR}/modules/sound/include
+    ${CMAKE_SOURCE_DIR}/modules/units/include
+    ${CMAKE_SOURCE_DIR}/modules/vision/include
+)
