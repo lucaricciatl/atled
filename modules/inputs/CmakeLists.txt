@@ -1,6 +1,8 @@
 # Create a library from the submodule's source files
 add_library(inputs
-    ./src/inputs.cpp
+    ./src/Inputs.cpp
+    ./src/Keyboard.cpp
+    ./src/Mouse.cpp
 )
 
 

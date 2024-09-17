@@ -64,12 +64,10 @@ void GraphicsContext::SetFlag(ConfigFlags flag) {
 }
 
 void GraphicsContext::SetTitle(const char* title) {
-  SetWindowTitle(title);
   windowTitle = title;
 }
 
 void GraphicsContext::SetSize(int width, int height) {
-  SetWindowSize(width, height);
   windowWidth = width;
   windowHeight = height;
 }

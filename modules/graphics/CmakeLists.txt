@@ -9,14 +9,16 @@ add_library(graphics
     src/Color.cpp
     src/LayerManager.cpp
     src/BuffersManager.cpp
-
+    src/Device.cpp
     #privates
+    src/TriangleBuffer2D.cpp
     src/PointBuffer2D.cpp
     src/PointBuffer3D.cpp
     src/LineBuffer2D.cpp
     src/LineBuffer3D.cpp
     src/Layer.cpp
     src/Pixel.cpp
+
 
 )
 
