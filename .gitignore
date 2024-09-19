@@ -1,0 +1,16 @@
+# Ignore build directory
+build/
+
+# Ignore build files (example extensions, add more as needed)
+*.o
+*.out
+*.a
+*.so
+*.exe
+*.dll
+*.pdb
+*.class
+*.jar
+*.war
+*.pyc
+*.pyo
