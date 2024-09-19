@@ -1,0 +1,40 @@
+# Create a library from the submodule's source files
+add_library(graphics_tests
+    src/CameraManagerTest.cpp
+    src/GraphicsContextTest.cpp
+    src/GraphicsManagerTest.cpp
+    src/Polyline2DTest.cpp
+    src/Polyline3DTest.cpp
+    src/Polygon2dTest.cpp
+    src/ColorTest.cpp
+    src/LayerManagerTest.cpp
+    src/BuffersManagerTest.cpp
+    src/DeviceTest.cpp
+    src/TriangleBuffer2DTest.cpp
+    src/PointBuffer2DTest.cpp
+    src/PointBuffer3DTest.cpp
+    src/LineBuffer2DTest.cpp
+    src/LineBuffer3DTest.cpp
+    src/LayerTest.cpp
+    src/PixelTest.cpp
+)
+
+# Fetch GoogleTest
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG release-1.12.1
+)
+FetchContent_MakeAvailable(googletest)
+
+# Enable testing
+enable_testing()
+
+# Link the tests with the graphics library and GoogleTest
+target_link_libraries(graphics_tests PRIVATE graphics gtest gtest_main)
+
+# Add tests to CTest
+add_test(NAME graphics_tests COMMAND graphics_tests)
+
+set_target_properties(graphics_tests PROPERTIES FOLDER "modules/tests")
