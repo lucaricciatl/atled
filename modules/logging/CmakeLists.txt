@@ -1,6 +1,6 @@
 # Create a library from the submodule's source files
 add_library(logging
-    ./src/logging.cpp
+    ./src/Logging.cpp
 )
 
 
