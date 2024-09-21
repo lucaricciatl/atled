@@ -6,6 +6,8 @@
 #include "GraphicsContext.hpp"
 #include "PolyLine2D.hpp"
 #include <memory>
+#include <Device.hpp>
+
 namespace {
 constexpr unsigned int defaultFramerate = 30;
 }
@@ -15,6 +17,7 @@ namespace graphics {
 GraphicsManager::GraphicsManager() {
   mContext = std::make_shared<GraphicsContext>();
   mThread = std::make_unique<std::thread>();
+  mDevice = Device().Create();
 };
 
 // Destructor

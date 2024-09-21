@@ -10,10 +10,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 # Add your executable
-add_executable(atled src/main.cpp)
+add_executable(atled src/atled.cpp)
 
 # Link raylib to your project
-target_link_libraries(atled graphics)
+target_link_libraries(atled PRIVATE graphics inputs)
 
 add_subdirectory(modules)
 

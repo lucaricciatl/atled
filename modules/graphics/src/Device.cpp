@@ -1,5 +1,5 @@
 #include "device.hpp"
-
+#include "raylib-cpp.hpp"  // Assuming raylib.h contains the RLAPI declarations
 namespace graphics {
 
 // Create a new Device instance
@@ -33,7 +33,7 @@ int Device::GetCurrentMonitor() const {
     return ::GetCurrentMonitor();
 }
 
-Vector2 Device::GetMonitorPosition(int aMonitor) const {
+raylib::Vector2 Device::GetMonitorPosition(int aMonitor) const {
     return ::GetMonitorPosition(aMonitor);
 }
 

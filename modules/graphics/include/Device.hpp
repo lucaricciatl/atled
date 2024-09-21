@@ -2,7 +2,7 @@
 #define DEVICE_HPP
 
 #include <memory>
-#include "raylib.h"  // Assuming raylib.h contains the RLAPI declarations
+#include "raylib-cpp.hpp"  // Assuming raylib.h contains the RLAPI declarations
 
 namespace graphics {
 
@@ -19,7 +19,7 @@ public:
     // Monitor-related functions
     int GetMonitorCount() const;
     int GetCurrentMonitor() const;
-    Vector2 GetMonitorPosition(int aMonitor) const;
+    raylib::Vector2 GetMonitorPosition(int aMonitor) const;
     int GetMonitorWidth(int aMonitor) const;
     int GetMonitorHeight(int aMonitor) const;
     int GetMonitorPhysicalWidth(int aMonitor) const;
