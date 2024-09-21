@@ -7,6 +7,7 @@
 #include "PolyLine2D.hpp"
 #include <memory>
 #include <Device.hpp>
+#include "PolygonBuffer2D.hpp"
 
 namespace {
 constexpr unsigned int defaultFramerate = 30;
@@ -127,16 +128,21 @@ void GraphicsManager::Render() {
     auto bm = layer->GetBufferManager();
     auto lb = bm->GetLineBuffer();
     auto pb = bm->GetPointBuffer();
+    PolygonBuffer2D polyBuffer;  // Assuming this gets the PolygonBuffer
+
     // Create a vector of 10 points
     std::vector<ColoredPoint2D> points;
-    for (int i = 0; i < 1000; ++i) {
+    for (int i = 0; i < 500; ++i) {
       points.emplace_back(static_cast<int>(200+100*sin(i*0.01)),
                           static_cast<int>(200+100*cos(i*0.01)),raylib::RED);  // Example points
     }
 
+            // Set the points buffer to the polygon buffer
+    polyBuffer.SetBuffer(points);
+    polyBuffer.DrawBuffer();  // Draw the random polygon
     // Use SetBuffer to set the 10 points to pd
-    lb->SetBuffer(points);
-    lb->DrawBuffer();
+    //lb->SetBuffer(points);
+    //lb->DrawBuffer();
     auto col = raylib::Color(0, 0, 0, 0);
     mContext->Clear(col);
     mContext->End();
