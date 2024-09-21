@@ -6,7 +6,6 @@ add_library(graphics
     src/Polyline2D.cpp 
     src/Polyline3D.cpp
     src/Polygon2D.cpp
-    src/Color.cpp
     src/LayerManager.cpp
     src/BuffersManager.cpp
     src/Device.cpp

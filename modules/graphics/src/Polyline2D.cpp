@@ -18,10 +18,10 @@ void Polyline2D::Draw() const {
   // Iterate through the points and draw lines between consecutive points
   for (size_t i = 0; i < mPoints.size() - 1; ++i) {
     // Get the start and end points for the line
-    int startPosX = mPoints[i].x;
-    int startPosY = mPoints[i].y;
-    int endPosX = mPoints[i + 1].x;
-    int endPosY = mPoints[i + 1].y;
+    int startPosX = static_cast<int>(mPoints[i].x);
+    int startPosY = static_cast<int>(mPoints[i].y);
+    int endPosX = static_cast<int>(mPoints[i + 1].x);
+    int endPosY = static_cast<int>(mPoints[i + 1].y);
 
     // Call the DrawLine function with the start and end points
     // Assuming the color is predefined or set somewhere else

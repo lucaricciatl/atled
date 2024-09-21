@@ -38,7 +38,8 @@ void PointBuffer2D::SetBuffer(std::vector<ColoredPoint2D> aBuffer) {
 
 void PointBuffer2D::DrawBuffer(){
   for (auto p : buffer) {
-    DrawPixel(p.x, p.y,p.color);
+    DrawPixel(static_cast<int>(p.x), static_cast<int>(p.y),
+              p.color);
   }
 };
 }  // namespace graphics

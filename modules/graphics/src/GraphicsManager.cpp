@@ -128,7 +128,7 @@ void GraphicsManager::Render() {
     auto bm = layer->GetBufferManager();
     auto lb = bm->GetLineBuffer();
     auto pb = bm->GetPointBuffer();
-    PolygonBuffer2D polyBuffer;  // Assuming this gets the PolygonBuffer
+    auto polyBuffer = bm->GetPolygonBuffer();  // Assuming this gets the PolygonBuffer
 
     // Create a vector of 10 points
     std::vector<ColoredPoint2D> points;
@@ -138,8 +138,8 @@ void GraphicsManager::Render() {
     }
 
             // Set the points buffer to the polygon buffer
-    polyBuffer.SetBuffer(points);
-    polyBuffer.DrawBuffer();  // Draw the random polygon
+    polyBuffer->SetBuffer(points);
+    polyBuffer->DrawBuffer();  // Draw the random polygon
     // Use SetBuffer to set the 10 points to pd
     //lb->SetBuffer(points);
     //lb->DrawBuffer();

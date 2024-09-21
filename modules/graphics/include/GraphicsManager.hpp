@@ -38,7 +38,7 @@ class GraphicsManager {
   void SetTargetFramerate(unsigned int frameRate);
   std::shared_ptr<GraphicsContext> GetGraphicsContext();
 
-  void Render();
+  virtual void Render() ;
   void Start();
   void Stop();
 
