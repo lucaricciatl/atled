@@ -3,6 +3,7 @@
 #include "GraphicsManager.hpp"
 #include "Polyline2D.hpp"
 #include "Mouse.hpp"
+#include "Keyboard.hpp"
 
 int main() {
   // Initialize the GraphicsManager
@@ -10,6 +11,8 @@ int main() {
   auto ctx = graphicsMng->GetGraphicsContext();
   ctx->SetSize(900,900);
   ctx->SetTitle("Atled");
+  KeyboardInput keyboard;
+  keyboard.Start();
   auto configs = graphics::GfxConfig(
       { FLAG_MSAA_4X_HINT, FLAG_WINDOW_RESIZABLE});
   input::Mouse mouse;

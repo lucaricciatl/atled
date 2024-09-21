@@ -81,8 +81,8 @@ void Mouse::Run() {
   while (running) {
     // Example: log mouse position every frame
     MousePosition pos = GetMousePosition();
-    std::cout << "Mouse Position: (" << pos.x << ", " << pos.y << ")"
-              << std::endl;
+    //std::cout << "Mouse Position: (" << pos.x << ", " << pos.y << ")"
+    //          << std::endl;
 
     // Sleep to avoid overwhelming the CPU
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
