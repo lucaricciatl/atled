@@ -9,9 +9,11 @@
 #include <Device.hpp>
 #include "PolygonBuffer2D.hpp"
 #include "ShaderManager.hpp"
-
+#include <cmath>
 namespace {
 constexpr unsigned int defaultFramerate = 30;
+float times = 0.0f;  // Initialize time variable
+
 }
 
 namespace graphics {
@@ -130,7 +132,7 @@ void GraphicsManager::Render() {
     auto pb = bm->GetPointBuffer();
     auto polyBuffer = bm->GetPolygonBuffer();
 
-    // 1. Draw a line using points
+    // 1. Draw a line with oscillating points
     {
       std::vector<ColoredPoint2D> linePoints;
       int x1 = 50, y1 = 50;
@@ -140,52 +142,63 @@ void GraphicsManager::Render() {
         float t = static_cast<float>(i) / numPoints;
         int x = static_cast<int>(x1 + t * (x2 - x1));
         int y = static_cast<int>(y1 + t * (y2 - y1));
+
+        // Apply sinusoidal oscillation
+        float oscillation =
+            100.0f *
+            sin(times + i * 0.1f);  // Amplitude and frequency of oscillation
+        y += static_cast<int>(
+            oscillation);  // Modify y-position with oscillation
+
         linePoints.emplace_back(x, y, raylib::RED);
       }
       pb->SetBuffer(linePoints);
       pb->DrawBuffer();
     }
 
-    // 2. Draw a circle using lines
+    // 2. Draw an oscillating circle using lines
     {
       std::vector<ColoredPoint2D> circleLines;
-      int centerX = 400, centerY = 200, radius = 100;
+      int centerX = 600, centerY = 600, radius = 100;
       int segments = 100;  // Number of segments to approximate the circle
       for (int i = 0; i < segments; ++i) {
-        float theta1 = (2.0f * PI * i) / segments;
-        float theta2 = (2.0f * PI * (i + 1)) / segments;
-        int x1 = static_cast<int>(centerX + radius * cos(theta1));
-        int y1 = static_cast<int>(centerY + radius * sin(theta1));
-        int x2 = static_cast<int>(centerX + radius * cos(theta2));
-        int y2 = static_cast<int>(centerY + radius * sin(theta2));
-        circleLines.emplace_back(x1, y1,raylib::GREEN);
+        float theta2 = (PI * (i ))*2 / segments;
+
+
+        // Oscillate the radius
+        float oscillatingRadius = radius + 100.0f * abs(sin(times * 0.01f));
+        int x2 = static_cast<int>(centerX + oscillatingRadius * cos(theta2));
+        int y2 = static_cast<int>(centerY + oscillatingRadius * sin(theta2));
+
         circleLines.emplace_back(x2, y2, raylib::GREEN);
       }
+      circleLines.emplace_back(circleLines[0]);
       lb->SetBuffer(circleLines);
       lb->DrawBuffer();
     }
 
-    // 3. Draw an irregular polygon using polygons
-    std::vector<ColoredPoint2D> points;
-    points.emplace_back(static_cast<int>(700 + 0), static_cast<int>(700 + 0),
-                        raylib::RED);  // Example points
-    for (int i = 0; i < 50; ++i) {
-      points.emplace_back(static_cast<int>(700 + 100 * sin(i * 0.01)),
-                          static_cast<int>(700 + 100 * cos(i * 0.01)),
+    // 3. Draw an oscillating irregular polygon
+    {
+      std::vector<ColoredPoint2D> points;
+      points.emplace_back(static_cast<int>(700 + 0), static_cast<int>(700 + 0),
                           raylib::RED);  // Example points
+      for (int i = 0; i < 50; ++i) {
+        // Apply oscillation to the polygon points
+        int x = static_cast<int>(700 + 100 * sin(i * 0.01));
+        int y = static_cast<int>(700 + 100 * cos(i * 0.01));
+        points.emplace_back(x, y, raylib::RED);
+      }
+
+      // Set the points buffer to the polygon buffer
+      polyBuffer->SetBuffer(points);
+      polyBuffer->DrawBuffer();  // Draw the oscillating polygon
     }
-    // Set the points buffer to the polygon buffer
-    polyBuffer->SetBuffer(points);
-    polyBuffer->DrawBuffer();  // Draw the random polygon
-    // Use SetBuffer to set the 10 points to pd
-    // lb->SetBuffer(points);
-    // lb->DrawBuffer();
+
     auto col = raylib::Color(0, 0, 0, 0);
     mContext->Clear(col);
     mContext->End();
 
-  } else {
-    std::cerr << "Error: Graphics context is not initialized." << std::endl;
+    times += 0.01f;  // Increment time for oscillation
   }
 }
 }  // namespace graphics
