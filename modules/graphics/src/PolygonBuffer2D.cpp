@@ -73,7 +73,6 @@ void PolygonBuffer2D::DrawBuffer() {
     mPolygon.Clear();             // Clear any previous points in mPolygon
     mPolygon.AddPoints(mBuffer);  // Assuming Polygon2D has AddPoints() for bulk insertion
     mPolygon.Draw(true);              // Assuming Polygon2D has a Draw() method to render the polygon
-    mPolygon.Clear();             // Clear after drawing to reset the polygon
 }
 
 }  // namespace graphics

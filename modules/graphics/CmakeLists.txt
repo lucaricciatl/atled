@@ -9,6 +9,7 @@ add_library(graphics
     src/LayerManager.cpp
     src/BuffersManager.cpp
     src/Device.cpp
+    src/SharedrManager.cpp
     #privates
     src/TriangleBuffer2D.cpp
     src/PointBuffer2D.cpp
@@ -67,3 +68,43 @@ target_include_directories(graphics PUBLIC
 )
 
 set_target_properties(graphics PROPERTIES FOLDER "modules")
+
+
+# Specify the directory containing your shaders
+set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
+
+# Collect all shader files
+file(GLOB SHADER_FILES ${SHADER_DIR}/*)
+
+# Specify the directory containing your shaders
+set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
+
+# Collect all shader files
+file(GLOB SHADER_FILES ${SHADER_DIR}/*)
+
+# Ensure the resources/shaders directory is created in the Debug directory
+add_custom_command(
+    TARGET graphics POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory
+        ../../Debug/resources/shaders
+    COMMENT "Creating resources/shaders directory in Debug directory"
+)
+
+# Collect all shader files
+file(GLOB SHADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*)
+
+# Copy shader files to the resources/shaders folder after building the graphics target
+foreach(SHADER_FILE ${SHADER_FILES})
+    get_filename_component(SHADER_NAME ${SHADER_FILE} NAME)
+
+    # Debug: Print the name and source path of the shader
+    message(STATUS "Copying shader file: ${SHADER_FILE} as ${SHADER_NAME}")
+
+    add_custom_command(
+        TARGET graphics POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${SHADER_FILE}
+            $<TARGET_FILE_DIR:graphics>../../../../Debug/resources/shaders/${SHADER_NAME}
+        COMMENT "Copying shader: ${SHADER_NAME} to $<TARGET_FILE_DIR:graphics>/resources/shaders"
+    )
+endforeach()

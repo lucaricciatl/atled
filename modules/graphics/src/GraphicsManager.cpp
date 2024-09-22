@@ -8,6 +8,7 @@
 #include <memory>
 #include <Device.hpp>
 #include "PolygonBuffer2D.hpp"
+#include "ShaderManager.hpp"
 
 namespace {
 constexpr unsigned int defaultFramerate = 30;
@@ -119,7 +120,6 @@ void GraphicsManager::RenderLoop() {
 }
 
 void GraphicsManager::Render() {
-
   if (mContext->isReady) {
     mContext->Begin();
 
@@ -128,21 +128,58 @@ void GraphicsManager::Render() {
     auto bm = layer->GetBufferManager();
     auto lb = bm->GetLineBuffer();
     auto pb = bm->GetPointBuffer();
-    auto polyBuffer = bm->GetPolygonBuffer();  // Assuming this gets the PolygonBuffer
+    auto polyBuffer = bm->GetPolygonBuffer();
 
-    // Create a vector of 10 points
-    std::vector<ColoredPoint2D> points;
-    for (int i = 0; i < 500; ++i) {
-      points.emplace_back(static_cast<int>(200+100*sin(i*0.01)),
-                          static_cast<int>(200+100*cos(i*0.01)),raylib::RED);  // Example points
+    // 1. Draw a line using points
+    {
+      std::vector<ColoredPoint2D> linePoints;
+      int x1 = 50, y1 = 50;
+      int x2 = 250, y2 = 250;
+      int numPoints = 200;  // Number of points along the line
+      for (int i = 0; i <= numPoints; ++i) {
+        float t = static_cast<float>(i) / numPoints;
+        int x = static_cast<int>(x1 + t * (x2 - x1));
+        int y = static_cast<int>(y1 + t * (y2 - y1));
+        linePoints.emplace_back(x, y, raylib::RED);
+      }
+      pb->SetBuffer(linePoints);
+      pb->DrawBuffer();
     }
 
-            // Set the points buffer to the polygon buffer
+    // 2. Draw a circle using lines
+    {
+      std::vector<ColoredPoint2D> circleLines;
+      int centerX = 400, centerY = 200, radius = 100;
+      int segments = 100;  // Number of segments to approximate the circle
+      for (int i = 0; i < segments; ++i) {
+        float theta1 = (2.0f * PI * i) / segments;
+        float theta2 = (2.0f * PI * (i + 1)) / segments;
+        int x1 = static_cast<int>(centerX + radius * cos(theta1));
+        int y1 = static_cast<int>(centerY + radius * sin(theta1));
+        int x2 = static_cast<int>(centerX + radius * cos(theta2));
+        int y2 = static_cast<int>(centerY + radius * sin(theta2));
+        circleLines.emplace_back(x1, y1,raylib::GREEN);
+        circleLines.emplace_back(x2, y2, raylib::GREEN);
+      }
+      lb->SetBuffer(circleLines);
+      lb->DrawBuffer();
+    }
+
+    // 3. Draw an irregular polygon using polygons
+    std::vector<ColoredPoint2D> points;
+    points.emplace_back(static_cast<int>(700 + 0), static_cast<int>(700 + 0),
+                        raylib::RED);  // Example points
+    for (int i = 0; i < 50; ++i) {
+      points.emplace_back(static_cast<int>(700 + 100 * sin(i * 0.01)),
+                          static_cast<int>(700 + 100 * cos(i * 0.01)),
+                          raylib::RED);  // Example points
+    }
+    // Set the points buffer to the polygon buffer
     polyBuffer->SetBuffer(points);
     polyBuffer->DrawBuffer();  // Draw the random polygon
     // Use SetBuffer to set the 10 points to pd
-    //lb->SetBuffer(points);
-    //lb->DrawBuffer();
+    // lb->SetBuffer(points);
+    // lb->DrawBuffer();
     auto col = raylib::Color(0, 0, 0, 0);
     mContext->Clear(col);
     mContext->End();
@@ -151,5 +188,4 @@ void GraphicsManager::Render() {
     std::cerr << "Error: Graphics context is not initialized." << std::endl;
   }
 }
-
 }  // namespace graphics
