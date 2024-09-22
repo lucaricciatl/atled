@@ -2,7 +2,6 @@
 #define POLYGONBUFFER2D_HPP
 
 #include <vector>
-#include "color.hpp"
 #include "Polygon2D.hpp"
 #include "PointBuffer2D.hpp"
 

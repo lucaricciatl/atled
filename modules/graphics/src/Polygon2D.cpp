@@ -1,5 +1,5 @@
 #include "Polygon2D.hpp"
-#include "raylib.hpp"  // Assuming you are using raylib for rendering
+#include "raylib.h"  // Assuming you are using raylib for rendering
 #include "rlgl.h" // Make sure to include this header
 
 namespace graphics {
@@ -19,11 +19,11 @@ void Polygon2D::Draw(bool filled = true) const {
   }
 
   // Create an array of Vector2 for the polygon vertices
-  std::vector<Vector2> vertices;
+  std::vector<raylib::Vector2> vertices;
   vertices.reserve(mPoints.size());
 
   // Assuming all points have the same color
-  Color fillColor = mPoints[0].color;
+  raylib::Color fillColor = mPoints[0].color;
 
   // Populate the vertices vector
   for (const auto& point : mPoints) {
@@ -32,32 +32,32 @@ void Polygon2D::Draw(bool filled = true) const {
   }
 
   // Set up the color
-  rlColor4ub(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+  raylib::rlColor4ub(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
   if (filled) {
     // Begin drawing triangles
-    rlBegin(RL_TRIANGLES);
+    raylib::rlBegin(RL_TRIANGLES);
 
     // Triangulate the polygon by creating a fan from the first vertex
     for (size_t i = 1; i < vertices.size() - 1; ++i) {
-      rlVertex2f(vertices[0].x, vertices[0].y);
-      rlVertex2f(vertices[i].x, vertices[i].y);
-      rlVertex2f(vertices[i + 1].x, vertices[i + 1].y);
+      raylib::rlVertex2f(vertices[0].x, vertices[0].y);
+      raylib::rlVertex2f(vertices[i].x, vertices[i].y);
+      raylib::rlVertex2f(vertices[i + 1].x, vertices[i + 1].y);
     }
   } else {
     // Begin drawing lines
-    rlBegin(RL_LINES);
+    raylib::rlBegin(RL_LINES);
 
     // Draw lines between each pair of vertices
     for (size_t i = 0; i < vertices.size(); ++i) {
-      const Vector2& start = vertices[i];
-      const Vector2& end = vertices[(i + 1) % vertices.size()];  // Wrap around
-      rlVertex2f(start.x, start.y);
-      rlVertex2f(end.x, end.y);
+      const raylib::Vector2& start = vertices[i];
+      const raylib::Vector2& end = vertices[(i + 1) % vertices.size()];  // Wrap around
+      raylib::rlVertex2f(start.x, start.y);
+      raylib::rlVertex2f(end.x, end.y);
     }
   }
 
-  rlEnd();
+  raylib::rlEnd();
 }
 
 

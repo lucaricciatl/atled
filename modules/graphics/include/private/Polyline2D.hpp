@@ -1,7 +1,6 @@
 #pragma once 
 
 #include <vector>
-#include "raylib-cpp.hpp" // Include raylib header for Color and DrawLine functions
 #include "PointBuffer2D.hpp"
 
 namespace graphics {

@@ -3,7 +3,7 @@
 
 #include <string_view>
 
-#include "raylib-cpp.hpp"
+#include "raylib.h"
 
 namespace {
 static constexpr int defaultHeight = 420;
@@ -21,7 +21,7 @@ GraphicsContext::GraphicsContext() {
 
 GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
                                  const char* aWindowTitle,
-                                 std::vector<ConfigFlags> flags) {
+                                 std::vector<raylib::ConfigFlags> flags) {
   windowWidth = aWindowWidth;
   windowHeight = aWindowHeight;
   windowTitle = aWindowTitle;
@@ -38,29 +38,29 @@ GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
   windowTitle = aWindowTitle;
 }
 
-GraphicsContext::~GraphicsContext() { CloseWindow(); }
+GraphicsContext::~GraphicsContext() { raylib::CloseWindow(); }
 
-void GraphicsContext::InitWindowManager(std::vector<ConfigFlags> flags) {
+void GraphicsContext::InitWindowManager(std::vector<raylib::ConfigFlags> flags) {
   for (auto flag : flags) {
     SetFlag(flag);
   }
-  InitWindow(windowWidth, windowHeight, windowTitle);
+  raylib::InitWindow(windowWidth, windowHeight, windowTitle);
 }
 
 void GraphicsContext::InitWindowManager() {
-  InitWindow(windowWidth, windowHeight, windowTitle);
+  raylib::InitWindow(windowWidth, windowHeight, windowTitle);
 }
 
 // Function to unset a flag (or multiple flags)
-void GraphicsContext::UnsetFlag(ConfigFlags flag) {
+void GraphicsContext::UnsetFlag(raylib::ConfigFlags flag) {
   currentFlags &= ~flag;         // Unset the specific flag(s)
-  SetConfigFlags(currentFlags);  // Update the window flags
+  raylib::SetConfigFlags(currentFlags);  // Update the window flags
 }
 
-void GraphicsContext::SetFlag(ConfigFlags flag) {
+void GraphicsContext::SetFlag(raylib::ConfigFlags flag) {
   // Set the configuration flags using the provided flags
   currentFlags |= flag;  // Set the specific flag(s)
-  SetConfigFlags(currentFlags);
+  raylib::SetConfigFlags(currentFlags);
 }
 
 void GraphicsContext::SetTitle(const char* title) {
@@ -76,9 +76,9 @@ int GraphicsContext::GetWidth() const { return windowWidth; }
 
 int GraphicsContext::GetHeight() const { return windowHeight; }
 
-void GraphicsContext::Begin() const { BeginDrawing(); }
-void GraphicsContext::End() const { EndDrawing(); }
+void GraphicsContext::Begin() const { raylib::BeginDrawing(); }
+void GraphicsContext::End() const { raylib::EndDrawing(); }
 
-void GraphicsContext::Clear(raylib::Color aColor) { ClearBackground(aColor); };
+void GraphicsContext::Clear(raylib::Color aColor) { raylib::ClearBackground(aColor); };
 
 }  // namespace graphics

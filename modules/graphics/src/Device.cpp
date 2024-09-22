@@ -1,5 +1,5 @@
 #include "device.hpp"
-#include "raylib-cpp.hpp"  // Assuming raylib.h contains the RLAPI declarations
+#include "raylib.h"  // Assuming raylib.h contains the RLAPI declarations
 namespace graphics {
 
 // Create a new Device instance
@@ -9,52 +9,52 @@ std::unique_ptr<Device> Device::Create() {
 
 // Screen-related functions
 int Device::GetScreenWidth() const {
-    return ::GetScreenWidth();
+    return raylib::GetScreenWidth();
 }
 
 int Device::GetScreenHeight() const {
-    return ::GetScreenHeight();
+    return raylib::GetScreenHeight();
 }
 
 int Device::GetRenderWidth() const {
-    return ::GetRenderWidth();
+    return raylib::GetRenderWidth();
 }
 
 int Device::GetRenderHeight() const {
-    return ::GetRenderHeight();
+    return raylib::GetRenderHeight();
 }
 
 // Monitor-related functions
 int Device::GetMonitorCount() const {
-    return ::GetMonitorCount();
+    return raylib::GetMonitorCount();
 }
 
 int Device::GetCurrentMonitor() const {
-    return ::GetCurrentMonitor();
+    return raylib::GetCurrentMonitor();
 }
 
 raylib::Vector2 Device::GetMonitorPosition(int aMonitor) const {
-    return ::GetMonitorPosition(aMonitor);
+    return raylib::GetMonitorPosition(aMonitor);
 }
 
 int Device::GetMonitorWidth(int aMonitor) const {
-    return ::GetMonitorWidth(aMonitor);
+    return raylib::GetMonitorWidth(aMonitor);
 }
 
 int Device::GetMonitorHeight(int aMonitor) const {
-    return ::GetMonitorHeight(aMonitor);
+    return raylib::GetMonitorHeight(aMonitor);
 }
 
 int Device::GetMonitorPhysicalWidth(int aMonitor) const {
-    return ::GetMonitorPhysicalWidth(aMonitor);
+    return raylib::GetMonitorPhysicalWidth(aMonitor);
 }
 
 int Device::GetMonitorPhysicalHeight(int aMonitor) const {
-    return ::GetMonitorPhysicalHeight(aMonitor);
+    return raylib::GetMonitorPhysicalHeight(aMonitor);
 }
 
 int Device::GetMonitorRefreshRate(int aMonitor) const {
-    return ::GetMonitorRefreshRate(aMonitor);
+    return raylib::GetMonitorRefreshRate(aMonitor);
 }
 
 } // namespace graphics

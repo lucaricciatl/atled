@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
-#include "Color.hpp"
-
+#include "raylib.h"
 namespace graphics {
 
 // Simple structure to represent a 2D point

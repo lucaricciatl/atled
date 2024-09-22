@@ -1,4 +1,3 @@
-#include "Color.hpp"
 #include "GraphicsContext.hpp"
 #include "GraphicsManager.hpp"
 #include "Polyline2D.hpp"
@@ -14,7 +13,7 @@ int main() {
   KeyboardInput keyboard;
   keyboard.Start();
   auto configs = graphics::GfxConfig(
-      { FLAG_MSAA_4X_HINT, FLAG_WINDOW_RESIZABLE});
+      { raylib::FLAG_MSAA_4X_HINT, raylib::FLAG_WINDOW_RESIZABLE});
   input::Mouse mouse;
   mouse.Start();  // Start the mouse thread
   graphicsMng->SetConfigs(configs);

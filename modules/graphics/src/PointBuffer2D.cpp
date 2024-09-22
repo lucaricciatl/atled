@@ -1,6 +1,6 @@
 #pragma once
 #include "PointBuffer2D.hpp"
-#include "raylib-cpp.hpp"
+#include "raylib.h"
 #include "PolyLine2D.hpp"
 
 namespace graphics {

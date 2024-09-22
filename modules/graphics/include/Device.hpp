@@ -2,7 +2,7 @@
 #define DEVICE_HPP
 
 #include <memory>
-#include "raylib-cpp.hpp"  // Assuming raylib.h contains the RLAPI declarations
+#include "raylib.h"  // Assuming raylib.h contains the RLAPI declarations
 
 namespace graphics {
 

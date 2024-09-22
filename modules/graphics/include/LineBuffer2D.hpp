@@ -2,7 +2,6 @@
 #include <vector>
 #include <utility>  // for std::move
 
-#include "Color.hpp"
 #include "PointBuffer2D.hpp"
 #include "Polyline2D.hpp"
 

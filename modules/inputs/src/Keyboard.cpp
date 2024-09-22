@@ -3,7 +3,7 @@
 #include <iostream>
 #include <chrono>
 
-KeyboardInput::KeyboardInput() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false), exitKey(KEY_ESCAPE) {
+KeyboardInput::KeyboardInput() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false), exitKey(raylib::KEY_ESCAPE) {
 }
 
 KeyboardInput::~KeyboardInput() {
@@ -37,7 +37,7 @@ void KeyboardInput::Update() {
 
     // Update keyStatesBuffer with the current keyboard state
     for (int key = 0; key < 512; ++key) {
-        keyStatesBuffer[key] = ::IsKeyDown(key);
+        keyStatesBuffer[key] = raylib::IsKeyDown(key);
     }
 
     // Update keyStates
@@ -47,32 +47,32 @@ void KeyboardInput::Update() {
     }
 
     // Get key presses and add to queue
-    int keyPressed = ::GetKeyPressed();
+    int keyPressed = raylib::GetKeyPressed();
     while (keyPressed != 0) {
         {
             std::lock_guard<std::mutex> lockQueue(keyQueueMutex);
             keyQueue.push(keyPressed);
         }
-        keyPressed = ::GetKeyPressed();
+        keyPressed = raylib::GetKeyPressed();
     }
 
     // Get char presses and add to queue
-    int charPressed = ::GetCharPressed();
+    int charPressed = raylib::GetCharPressed();
     while (charPressed != 0) {
         {
             std::lock_guard<std::mutex> lockCharQueue(charQueueMutex);
             charQueue.push(charPressed);
         }
-        charPressed = ::GetCharPressed();
+        charPressed = raylib::GetCharPressed();
     }
 
     // Set the exit key in raylib
-    ::SetExitKey(exitKey);
+    raylib::SetExitKey(exitKey);
 
     // Check for exit key
-    if (::IsKeyPressed(exitKey)) {
+    if (raylib::IsKeyPressed(exitKey)) {
         // Signal the application to close
-        CloseWindow();
+        raylib::CloseWindow();
     }
 }
 

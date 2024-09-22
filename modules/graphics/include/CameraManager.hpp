@@ -1,6 +1,6 @@
 #pragma once
 
-#include "raylib-cpp.hpp"
+#include "raylib.h"
 #include <vector>
 
 namespace graphics {

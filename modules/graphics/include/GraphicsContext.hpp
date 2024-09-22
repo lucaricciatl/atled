@@ -1,5 +1,5 @@
 #pragma once
-#include "raylib-cpp.hpp"
+#include "raylib.h"
 #include "LayerManager.hpp"
 
 namespace graphics {
@@ -7,15 +7,15 @@ class GraphicsContext {
  public:
   GraphicsContext();
   GraphicsContext(int aWindowWidth, int aWindowHeight, const char* aWindowTitle,
-                  std::vector<ConfigFlags> flags); 
+                  std::vector<raylib::ConfigFlags> flags); 
   GraphicsContext(int aWindowWidth, int aWindowHeight,
                   const char* aWindowTitle);
   ~GraphicsContext();
   void InitWindowManager();
-  void InitWindowManager(std::vector<ConfigFlags> flags);
-  void SetFlag(ConfigFlags flag);
+  void InitWindowManager(std::vector<raylib::ConfigFlags> flags);
+  void SetFlag(raylib::ConfigFlags flag);
   // Function to unset a flag (or multiple flags)
-  void UnsetFlag(ConfigFlags flag);
+  void UnsetFlag(raylib::ConfigFlags flag);
   void SetTitle(const char* title);
   void SetSize(int width, int height);
   int GetWidth() const;
