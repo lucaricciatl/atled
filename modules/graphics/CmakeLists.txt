@@ -30,7 +30,6 @@ add_subdirectory(gfx)
 
 # Link raylib to the graphics library
 target_link_libraries(graphics PUBLIC raylib)
-set_target_properties(raylib PROPERTIES FOLDER "modules/graphics/gfx/")
 
 # Specify include directories for the submodule
 target_include_directories(graphics PUBLIC

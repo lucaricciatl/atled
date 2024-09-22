@@ -13,7 +13,6 @@
 namespace {
 constexpr unsigned int defaultFramerate = 30;
 float times = 0.0f;  // Initialize time variable
-
 }
 
 namespace graphics {
@@ -126,12 +125,15 @@ void GraphicsManager::Render() {
     mContext->Begin();
 
     mContext->mLayerManager.AddLayer(1);
+    mContext->mLayerManager.AddLayer(2);
     auto layer = mContext->mLayerManager.GetLayerById(1);
+    auto layer2 = mContext->mLayerManager.GetLayerById(2);
     auto bm = layer->GetBufferManager();
+    auto bm2 = layer2->GetBufferManager();
     auto lb = bm->GetLineBuffer();
     auto pb = bm->GetPointBuffer();
     auto polyBuffer = bm->GetPolygonBuffer();
-
+    auto polyBuffer2 = bm2->GetPolygonBuffer();
     // 1. Draw a line with oscillating points
     {
       std::vector<ColoredPoint2D> linePoints;
@@ -180,13 +182,14 @@ void GraphicsManager::Render() {
     // 3. Draw an oscillating irregular polygon
     {
       std::vector<ColoredPoint2D> points;
+      auto colrt = raylib::Color(255, 0, 0, 100);
       points.emplace_back(static_cast<int>(700 + 0), static_cast<int>(700 + 0),
-                          raylib::RED);  // Example points
-      for (int i = 0; i < 50; ++i) {
+                          colrt);  // Example points
+      for (int i = 0; i < abs((13*sin(times*0.01))); ++i) {
         // Apply oscillation to the polygon points
-        int x = static_cast<int>(700 + 100 * sin(i * 0.01));
-        int y = static_cast<int>(700 + 100 * cos(i * 0.01));
-        points.emplace_back(x, y, raylib::RED);
+        int x = static_cast<int>(700 + 100 * sin(2*PI/12*i));
+        int y = static_cast<int>(700 + 100 * cos(2*PI/12* i));
+        points.emplace_back(x, y, colrt);
       }
 
       // Set the points buffer to the polygon buffer
@@ -194,6 +197,28 @@ void GraphicsManager::Render() {
       polyBuffer->DrawBuffer();  // Draw the oscillating polygon
     }
 
+        // 4. Draw an oscillating irregular polygon
+    {
+      std::vector<ColoredPoint2D> points2;
+      auto colrt = raylib::Color(255, 0, 0, 100);
+      int x1 = static_cast<int>(400 + 200);
+      int y1 = static_cast<int>(200 + 130);
+      points2.emplace_back(x1, y1, colrt);
+      int x2 = static_cast<int>(400 + 130 );
+      int y2 = static_cast<int>(200 + 120 );
+      points2.emplace_back(x2, y2, colrt);
+
+      int x3 = static_cast<int>(400 + 100);
+      int y3 = static_cast<int>(200 + 0);
+      points2.emplace_back(x3, y3, colrt);
+
+      int x4 = static_cast<int>(400 + 0);
+      int y4 = static_cast<int>(200 + 100);
+      points2.emplace_back(x4, y4, colrt);
+      // Set the points buffer to the polygon buffer
+      polyBuffer2->SetBuffer(points2);
+      polyBuffer2->DrawBuffer();  // Draw the oscillating polygon
+    }
     auto col = raylib::Color(0, 0, 0, 0);
     mContext->Clear(col);
     mContext->End();
