@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
 #include "raylib.h"
+#include "Buffer2D.hpp"
+#include <vector>
+
 namespace graphics {
 
 // Simple structure to represent a 2D point
@@ -25,7 +28,7 @@ struct ColoredPoint2D : Point2D {
 };
 
 
-class PointBuffer2D {
+class PointBuffer2D : public Buffer2D {
  public:
   PointBuffer2D();
   ~PointBuffer2D();
@@ -38,7 +41,7 @@ class PointBuffer2D {
   void clearBuffer();
   size_t getSize() const;
   bool isEmpty() const;
-  void DrawBuffer();
+  void DrawBuffer() ;
 
  private:
   std::vector<ColoredPoint2D> buffer;  // A dynamic list of 2D points

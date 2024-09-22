@@ -129,11 +129,11 @@ void GraphicsManager::Render() {
     auto layer = mContext->mLayerManager.GetLayerById(1);
     auto layer2 = mContext->mLayerManager.GetLayerById(2);
     auto bm = layer->GetBufferManager();
-    auto bm2 = layer2->GetBufferManager();
-    auto lb = bm->GetLineBuffer();
-    auto pb = bm->GetPointBuffer();
-    auto polyBuffer = bm->GetPolygonBuffer();
-    auto polyBuffer2 = bm2->GetPolygonBuffer();
+    std::shared_ptr<Buffer2D> pb = bm->createBuffer(BufferType::POINT2D);
+    std::shared_ptr<Buffer2D> lb = bm->createBuffer(BufferType::LINE2D);
+    std::shared_ptr<Buffer2D> polyBuffer = bm->createBuffer(BufferType::POLY2D);
+    std::shared_ptr<Buffer2D> polyBuffer2 =
+        bm->createBuffer(BufferType::POLY2D);
     // 1. Draw a line with oscillating points
     {
       std::vector<ColoredPoint2D> linePoints;

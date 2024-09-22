@@ -4,11 +4,12 @@
 #include <vector>
 #include "Polygon2D.hpp"
 #include "PointBuffer2D.hpp"
+#include "Buffer2D.hpp"
 
 namespace graphics {
 
-class PolygonBuffer2D {
-public:
+class PolygonBuffer2D : public Buffer2D {
+ public:
     // Add a point to the buffer
     void AddPoint(float aX, float aY);
 
@@ -43,7 +44,7 @@ public:
     void AppendToBuffer(ColoredPoint2D aPoint);
 
     // Draw the buffer by drawing the Polygon2D
-    void DrawBuffer();
+    void DrawBuffer() override;
 
 private:
     std::vector<ColoredPoint2D> mBuffer;  // Buffer to store points

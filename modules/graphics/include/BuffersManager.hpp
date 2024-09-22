@@ -1,21 +1,34 @@
-#pragma once
+// BuffersManager.hpp
+
+#ifndef BUFFERSMANAGER_HPP
+#define BUFFERSMANAGER_HPP
+
 #include <memory>
-#include "PointBuffer2D.hpp"
-#include "LineBuffer2D.hpp"
-#include "PolygonBuffer2D.hpp"
+#include <string>
+#include <vector>
+#include "Buffer2D.hpp"
 
 namespace graphics {
 
+	enum BufferType { POINT2D, LINE2D, POLY2D };
 class BuffersManager {
  public:
   BuffersManager();
-  std::shared_ptr<PointBuffer2D> GetPointBuffer();
-  std::shared_ptr<LineBuffer2D> GetLineBuffer();
-  std::shared_ptr<PolygonBuffer2D> GetPolygonBuffer();
+  ~BuffersManager();
+
+  // Create a new buffer of a specified type and add it to the manager
+  std::shared_ptr<Buffer2D> createBuffer(const BufferType type);
+
+  // Delete a buffer from the manager
+  void deleteBuffer(const std::shared_ptr<Buffer2D>& buffer);
+
+  // Get all buffers
+  const std::vector<std::shared_ptr<Buffer2D>>& getBuffers() const;
+
  private:
-  std::shared_ptr<PointBuffer2D> mPointBuffer;
-  std::shared_ptr<LineBuffer2D> mLineBuffer;
-  std::shared_ptr<PolygonBuffer2D> mPolygonBuffer;
+  std::vector<std::shared_ptr<Buffer2D>> mBuffers;
 };
 
-}  // namespace Graphics
+}  // namespace graphics
+
+#endif  // BUFFERSMANAGER_HPP

@@ -4,10 +4,11 @@
 
 #include "PointBuffer2D.hpp"
 #include "Polyline2D.hpp"
+#include "Buffer2D.hpp"
 
 namespace graphics {
 
-class LineBuffer2D {
+class LineBuffer2D : public Buffer2D {
  public:
 // Constructor
 LineBuffer2D() : mLine() {
@@ -37,7 +38,7 @@ LineBuffer2D() : mLine() {
   void AppendToBuffer(ColoredPoint2D aPoint);
 
   // Draw the buffer
-  void DrawBuffer();
+  void DrawBuffer() override;
 
  private:
   std::vector<ColoredPoint2D> mBuffer;  // Stores the points in the line buffer

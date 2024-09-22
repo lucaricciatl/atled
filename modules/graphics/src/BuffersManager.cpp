@@ -1,22 +1,53 @@
+// BuffersManager.cpp
+
 #include "BuffersManager.hpp"
+
+#include <algorithm>
+
 #include "LineBuffer2D.hpp"
 #include "PointBuffer2D.hpp"
-
+#include "PolygonBuffer2D.hpp"
+#include "Buffer2D.hpp"
 
 namespace graphics {
-BuffersManager::BuffersManager() {
-  mPointBuffer = std::make_shared<PointBuffer2D>();
-  mLineBuffer = std::make_shared<LineBuffer2D>();
-  mPolygonBuffer = std::make_shared<PolygonBuffer2D>();
-};
-std::shared_ptr<PointBuffer2D> BuffersManager::GetPointBuffer() {
-  return mPointBuffer;
-}
-std::shared_ptr<LineBuffer2D> BuffersManager::GetLineBuffer() {
-  return mLineBuffer;
-};
 
-std::shared_ptr<PolygonBuffer2D> BuffersManager::GetPolygonBuffer() {
-  return mPolygonBuffer;
-};
+BuffersManager::BuffersManager() {
+  // Constructor implementation
+}
+
+BuffersManager::~BuffersManager() {
+  // Destructor implementation
+  mBuffers.clear();
+}
+
+std::shared_ptr<Buffer2D> BuffersManager::createBuffer(const BufferType type) {
+  std::shared_ptr<Buffer2D> buffer;
+
+  if (type == POINT2D) {
+    buffer = std::make_shared<PointBuffer2D>();
+  } else if (type == LINE2D) {
+    buffer = std::make_shared<LineBuffer2D>();
+  } else if (type == POLY2D) {
+    buffer = std::make_shared<PolygonBuffer2D>();
+  } else {
+    // Handle unknown buffer type
+    return nullptr;
+  }
+
+  mBuffers.push_back(buffer);
+  return buffer;
+}
+
+void BuffersManager::deleteBuffer(const std::shared_ptr<Buffer2D>& buffer) {
+  auto it = std::find(mBuffers.begin(), mBuffers.end(), buffer);
+  if (it != mBuffers.end()) {
+    mBuffers.erase(it);
+  }
+}
+
+const std::vector<std::shared_ptr<Buffer2D>>& BuffersManager::getBuffers()
+    const {
+  return mBuffers;
+}
+
 }  // namespace graphics
