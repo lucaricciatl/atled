@@ -24,10 +24,6 @@ add_library(graphics
 
 )
 
-# raylib
-add_subdirectory(gfx)
-
-
 # Link raylib to the graphics library
 target_link_libraries(graphics PUBLIC raylib)
 
