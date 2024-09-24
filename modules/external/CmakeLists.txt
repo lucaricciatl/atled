@@ -1,1 +1,13 @@
+# Add the subdirectory 'utils'
 add_subdirectory(utils)
+
+# Create a library from the submodule's source files
+add_library(external INTERFACE
+    # List the source files here or use file(GLOB ...) to find them dynamically
+)
+
+# Link raylib to the external library
+target_link_libraries(external INTERFACE raylib)
+
+# Set the properties of the target library
+set_target_properties(external PROPERTIES FOLDER "modules")
