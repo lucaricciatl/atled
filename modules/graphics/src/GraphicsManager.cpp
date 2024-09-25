@@ -1,19 +1,20 @@
 #include "GraphicsManager.hpp"
 
+#include <Device.hpp>
 #include <chrono>
+#include <cmath>
 #include <iostream>
+#include <memory>
 #include <thread>
+
 #include "GraphicsContext.hpp"
 #include "PolyLine2D.hpp"
-#include <memory>
-#include <Device.hpp>
 #include "PolygonBuffer2D.hpp"
 #include "ShaderManager.hpp"
-#include <cmath>
 namespace {
 constexpr unsigned int defaultFramerate = 30;
 float times = 0.0f;  // Initialize time variable
-}
+}  // namespace
 
 namespace graphics {
 
@@ -29,11 +30,10 @@ GraphicsManager::~GraphicsManager() {
   Stop();
 }
 
-  void GraphicsManager::SetConfigs(GfxConfig aGfxConfigs){
+void GraphicsManager::SetConfigs(GfxConfig aGfxConfigs) {
   mConfigs = std::make_shared<GfxConfig>(
       aGfxConfigs);  // Create a shared pointer to a copy of aGfxConfigs
 };
-
 
 void GraphicsManager::SetTargetFramerate(unsigned int frameRate) {
   mFrameRate = frameRate;
@@ -56,40 +56,36 @@ void GraphicsManager::Start() {
   mRunning = true;
   RenderLoop();
 
-  //CameraLoop();
-
+  // CameraLoop();
 }
-
 
 void GraphicsManager::CameraStep() {
   using namespace std::chrono;
   auto frameDuration =
       milliseconds(1000 / mFrameRate);  // Same frame duration as RenderLoop
 
+  auto frameStart = steady_clock::now();
 
-    auto frameStart = steady_clock::now();
-
-    // Update camera here
-    if (mCamera) {
-      try {
-        mCamera->Update();  // Assuming CameraManager has an Update function
-                            // that updates camera position, orientation, etc.
-      } catch (const std::exception& e) {
-        std::cerr << "Camera update threw an exception: " << e.what()
-                  << std::endl;
-        mRunning = false;  // Stop the loop on exception
-      }
+  // Update camera here
+  if (mCamera) {
+    try {
+      mCamera->Update();  // Assuming CameraManager has an Update function
+                          // that updates camera position, orientation, etc.
+    } catch (const std::exception& e) {
+      std::cerr << "Camera update threw an exception: " << e.what()
+                << std::endl;
+      mRunning = false;  // Stop the loop on exception
     }
+  }
 
-    auto frameEnd = steady_clock::now();
-    auto elapsed = duration_cast<milliseconds>(frameEnd - frameStart);
-    auto sleepTime = frameDuration - elapsed;
+  auto frameEnd = steady_clock::now();
+  auto elapsed = duration_cast<milliseconds>(frameEnd - frameStart);
+  auto sleepTime = frameDuration - elapsed;
 
-    // Sleep for the remaining time in the frame if needed
-    if (sleepTime > milliseconds(0)) {
-      std::this_thread::sleep_for(sleepTime);
-    }
-  
+  // Sleep for the remaining time in the frame if needed
+  if (sleepTime > milliseconds(0)) {
+    std::this_thread::sleep_for(sleepTime);
+  }
 }
 
 // The rendering loop method
@@ -152,7 +148,7 @@ void GraphicsManager::Render() {
         y += static_cast<int>(
             oscillation);  // Modify y-position with oscillation
 
-        linePoints.emplace_back(x, y, raylib::RED);
+        linePoints.emplace_back(x, y, RED);
       }
       pb->SetBuffer(linePoints);
       pb->DrawBuffer();
@@ -164,31 +160,50 @@ void GraphicsManager::Render() {
       int centerX = 600, centerY = 600, radius = 100;
       int segments = 100;  // Number of segments to approximate the circle
       for (int i = 0; i < segments; ++i) {
-        float theta2 = (PI * (i ))*2 / segments;
-
+        float theta2 = (PI * (i)) * 2 / segments;
 
         // Oscillate the radius
         float oscillatingRadius = radius + 100.0f * abs(sin(times * 0.01f));
         int x2 = static_cast<int>(centerX + oscillatingRadius * cos(theta2));
         int y2 = static_cast<int>(centerY + oscillatingRadius * sin(theta2));
 
-        circleLines.emplace_back(x2, y2, raylib::GREEN);
+        circleLines.emplace_back(x2, y2, GREEN);
       }
       circleLines.emplace_back(circleLines[0]);
       lb->SetBuffer(circleLines);
       lb->DrawBuffer();
     }
 
+    std::vector<ColoredPoint2D> points2;
+    auto colrt = RED;
+    int x1 = static_cast<int>(400 + 200);
+    int y1 = static_cast<int>(200 + 130);
+    points2.emplace_back(x1, y1, colrt);
+    int x2 = static_cast<int>(400 + 130);
+    int y2 = static_cast<int>(200 + 120);
+    points2.emplace_back(x2, y2, colrt);
+
+    int x3 = static_cast<int>(400 + 100);
+    int y3 = static_cast<int>(200 + 0);
+    points2.emplace_back(x3, y3, colrt);
+
+    int x4 = static_cast<int>(400 + 0);
+    int y4 = static_cast<int>(200 + 100);
+    points2.emplace_back(x4, y4, colrt);
+    // Set the points buffer to the polygon buffer
+    polyBuffer2->SetBuffer(points2);
+    polyBuffer2->DrawBuffer();  // Draw the oscillating polygon
+
     // 3. Draw an oscillating irregular polygon
     {
       std::vector<ColoredPoint2D> points;
-      auto colrt = raylib::Color(255, 0, 0, 100);
+      auto colrt = RED;
       points.emplace_back(static_cast<int>(700 + 0), static_cast<int>(700 + 0),
                           colrt);  // Example points
-      for (int i = 0; i < abs((13*sin(times*0.01))); ++i) {
+      for (int i = 0; i < (13 * sin(times * 0.1)); ++i) {
         // Apply oscillation to the polygon points
-        int x = static_cast<int>(700 + 100 * sin(2*PI/12*i));
-        int y = static_cast<int>(700 + 100 * cos(2*PI/12* i));
+        int x = static_cast<int>(700 + 100 * sin(2 * PI / 12 * i));
+        int y = static_cast<int>(700 + 100 * cos(2 * PI / 12 * i));
         points.emplace_back(x, y, colrt);
       }
 
@@ -197,29 +212,9 @@ void GraphicsManager::Render() {
       polyBuffer->DrawBuffer();  // Draw the oscillating polygon
     }
 
-        // 4. Draw an oscillating irregular polygon
-    {
-      std::vector<ColoredPoint2D> points2;
-      auto colrt = raylib::Color(255, 0, 0, 100);
-      int x1 = static_cast<int>(400 + 200);
-      int y1 = static_cast<int>(200 + 130);
-      points2.emplace_back(x1, y1, colrt);
-      int x2 = static_cast<int>(400 + 130 );
-      int y2 = static_cast<int>(200 + 120 );
-      points2.emplace_back(x2, y2, colrt);
+    // 4. Draw an oscillating irregular polygon
 
-      int x3 = static_cast<int>(400 + 100);
-      int y3 = static_cast<int>(200 + 0);
-      points2.emplace_back(x3, y3, colrt);
-
-      int x4 = static_cast<int>(400 + 0);
-      int y4 = static_cast<int>(200 + 100);
-      points2.emplace_back(x4, y4, colrt);
-      // Set the points buffer to the polygon buffer
-      polyBuffer2->SetBuffer(points2);
-      polyBuffer2->DrawBuffer();  // Draw the oscillating polygon
-    }
-    auto col = raylib::Color(0, 0, 0, 0);
+    auto col = BLACK;
     mContext->Clear(col);
     mContext->End();
 

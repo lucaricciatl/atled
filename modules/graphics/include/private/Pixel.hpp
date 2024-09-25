@@ -1,5 +1,5 @@
 #pragma once
-#include "raylib.h"
+#include "gfx.hpp"
 #include "PointBuffer2D.hpp"
 
 namespace graphics {

@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "raylib.h"
+#include "gfx.hpp"
 #include "Buffer2D.hpp"
 #include <vector>
 
@@ -15,15 +15,15 @@ struct Point2D {
 };
 
 struct ColoredPoint2D : Point2D {
-  raylib::Color color;
+  Color color;
 
   // Default constructor
   ColoredPoint2D(float x_val = 0, float y_val = 0,
-                 raylib::Color clr = raylib::Color())
+                 Color clr = Color())
       : Point2D(x_val, y_val), color(clr) {}
 
   // Constructor from Point2D
-  ColoredPoint2D(const Point2D& pt, raylib::Color clr = raylib::Color())
+  ColoredPoint2D(const Point2D& pt, Color clr = Color())
       : Point2D(pt), color(clr) {}
 };
 

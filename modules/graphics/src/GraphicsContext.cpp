@@ -3,7 +3,7 @@
 
 #include <string_view>
 
-#include "raylib.h"
+#include "gfx.hpp"
 
 namespace {
 static constexpr int defaultHeight = 420;
@@ -21,7 +21,7 @@ GraphicsContext::GraphicsContext() {
 
 GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
                                  const char* aWindowTitle,
-                                 std::vector<raylib::ConfigFlags> flags) {
+                                 std::vector<gfx::ConfigFlags> flags) {
   windowWidth = aWindowWidth;
   windowHeight = aWindowHeight;
   windowTitle = aWindowTitle;
@@ -38,29 +38,29 @@ GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
   windowTitle = aWindowTitle;
 }
 
-GraphicsContext::~GraphicsContext() { raylib::CloseWindow(); }
+GraphicsContext::~GraphicsContext() { gfx::CloseWindow(); }
 
-void GraphicsContext::InitWindowManager(std::vector<raylib::ConfigFlags> flags) {
+void GraphicsContext::InitWindowManager(std::vector<gfx::ConfigFlags> flags) {
   for (auto flag : flags) {
     SetFlag(flag);
   }
-  raylib::InitWindow(windowWidth, windowHeight, windowTitle);
+  gfx::InitWindow(windowWidth, windowHeight, windowTitle);
 }
 
 void GraphicsContext::InitWindowManager() {
-  raylib::InitWindow(windowWidth, windowHeight, windowTitle);
+  gfx::InitWindow(windowWidth, windowHeight, windowTitle);
 }
 
 // Function to unset a flag (or multiple flags)
-void GraphicsContext::UnsetFlag(raylib::ConfigFlags flag) {
+void GraphicsContext::UnsetFlag(gfx::ConfigFlags flag) {
   currentFlags &= ~flag;         // Unset the specific flag(s)
-  raylib::SetConfigFlags(currentFlags);  // Update the window flags
+  gfx::SetConfigFlags(currentFlags);  // Update the window flags
 }
 
-void GraphicsContext::SetFlag(raylib::ConfigFlags flag) {
+void GraphicsContext::SetFlag(gfx::ConfigFlags flag) {
   // Set the configuration flags using the provided flags
   currentFlags |= flag;  // Set the specific flag(s)
-  raylib::SetConfigFlags(currentFlags);
+  gfx::SetConfigFlags(currentFlags);
 }
 
 void GraphicsContext::SetTitle(const char* title) {
@@ -76,9 +76,9 @@ int GraphicsContext::GetWidth() const { return windowWidth; }
 
 int GraphicsContext::GetHeight() const { return windowHeight; }
 
-void GraphicsContext::Begin() const { raylib::BeginDrawing(); }
-void GraphicsContext::End() const { raylib::EndDrawing(); }
+void GraphicsContext::Begin() const { gfx::BeginDrawing(); }
+void GraphicsContext::End() const { gfx::EndDrawing(); }
 
-void GraphicsContext::Clear(raylib::Color aColor) { raylib::ClearBackground(aColor); };
+void GraphicsContext::Clear(Color aColor) { gfx::ClearBackground(aColor); };
 
 }  // namespace graphics

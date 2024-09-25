@@ -3,7 +3,7 @@
 #include "Polyline2D.hpp"
 #include "Mouse.hpp"
 #include "Keyboard.hpp"
-
+#include "gfx.hpp"
 int main() {
   // Initialize the GraphicsManager
   auto graphicsMng = std::make_shared<graphics::GraphicsManager>();
@@ -12,8 +12,7 @@ int main() {
   ctx->SetTitle("Atled");
   KeyboardInput keyboard;
   keyboard.Start();
-  auto configs = graphics::GfxConfig(
-      { raylib::FLAG_MSAA_4X_HINT, raylib::FLAG_WINDOW_RESIZABLE});
+  auto configs = graphics::GfxConfig();
   input::Mouse mouse;
   mouse.Start();  // Start the mouse thread
   graphicsMng->SetConfigs(configs);

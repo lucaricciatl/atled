@@ -3,7 +3,7 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "raylib.h"
+#include "gfx.hpp"
 #include <string>
 namespace graphics {
 

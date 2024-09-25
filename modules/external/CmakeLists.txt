@@ -2,12 +2,12 @@
 add_subdirectory(utils)
 
 # Create a library from the submodule's source files
-add_library(external INTERFACE
-    # List the source files here or use file(GLOB ...) to find them dynamically
-)
+add_library(external src/input.cpp src/gfx.cpp)
 
 # Link raylib to the external library
-target_link_libraries(external INTERFACE raylib)
+target_link_libraries(external raylib)
 
 # Set the properties of the target library
 set_target_properties(external PROPERTIES FOLDER "modules")
+
+target_include_directories(external PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")

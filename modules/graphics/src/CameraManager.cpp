@@ -1,6 +1,6 @@
 
 #include "CameraManager.hpp"
-#include "raylib.h"
+#include "gfx.hpp"
 #include <vector>
 
 namespace graphics {
@@ -48,9 +48,9 @@ void CameraManager::Update(float moveSpeed, float turnSpeed) {
 }
 
 // Begin 3D mode
-void CameraManager::Begin3D() { BeginMode3D(camera); }
+void CameraManager::Begin3D() { gfx::BeginMode3D(camera); }
 
 // End 3D mode
-void CameraManager::End3D() { EndMode3D(); }
+void CameraManager::End3D() { gfx::EndMode3D(); }
 
 }  // namespace graphics

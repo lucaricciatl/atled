@@ -3,7 +3,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "raylib.h"
+#include "gfx.hpp"
 
 class ShaderManager {
 public:
@@ -32,10 +32,10 @@ public:
     void SetShaderValueV(const std::string& shaderName, int locIndex, const void* value, int uniformType, int count);
 
     // Set shader uniform value (matrix 4x4)
-    void SetShaderValueMatrix(const std::string& shaderName, int locIndex, raylib::Matrix mat);
+    void SetShaderValueMatrix(const std::string& shaderName, int locIndex, types::Matrix mat);
 
     // Set shader uniform value for texture (sampler2d)
-    void SetShaderValueTexture(const std::string& shaderName, int locIndex, raylib::Texture2D texture);
+    void SetShaderValueTexture(const std::string& shaderName, int locIndex, types::Texture texture);
 
     // Begin custom shader drawing
     void BeginShaderMode(const std::string& shaderName);
@@ -50,10 +50,10 @@ public:
     void UnloadAllShaders();
 
     // Get Shader object
-    raylib::Shader GetShader(const std::string& shaderName);
+    types::Shader GetShader(const std::string& shaderName);
 
 private:
-    std::unordered_map<std::string, raylib::Shader> shaders;
+    std::unordered_map<std::string, types::Shader> shaders;
 };
 
 #endif // SHADER_MANAGER_HPP

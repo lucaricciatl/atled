@@ -1,9 +1,11 @@
 #include "Keyboard.hpp"
-#include "raylib.h"
+#include "gfx.hpp"
+#include "input.hpp"
 #include <iostream>
 #include <chrono>
 
-KeyboardInput::KeyboardInput() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false), exitKey(raylib::KEY_ESCAPE) {
+
+KeyboardInput::KeyboardInput() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false), exitKey(KeyboardKey::KEY_ESCAPE) {
 }
 
 KeyboardInput::~KeyboardInput() {
@@ -37,7 +39,7 @@ void KeyboardInput::Update() {
 
     // Update keyStatesBuffer with the current keyboard state
     for (int key = 0; key < 512; ++key) {
-        keyStatesBuffer[key] = raylib::IsKeyDown(key);
+        keyStatesBuffer[key] = input::IsKeyDown(key);
     }
 
     // Update keyStates
@@ -47,32 +49,32 @@ void KeyboardInput::Update() {
     }
 
     // Get key presses and add to queue
-    int keyPressed = raylib::GetKeyPressed();
+    int keyPressed = input::GetKeyPressed();
     while (keyPressed != 0) {
         {
             std::lock_guard<std::mutex> lockQueue(keyQueueMutex);
             keyQueue.push(keyPressed);
         }
-        keyPressed = raylib::GetKeyPressed();
+        keyPressed = input::GetKeyPressed();
     }
 
     // Get char presses and add to queue
-    int charPressed = raylib::GetCharPressed();
+    int charPressed = input::GetCharPressed();
     while (charPressed != 0) {
         {
             std::lock_guard<std::mutex> lockCharQueue(charQueueMutex);
             charQueue.push(charPressed);
         }
-        charPressed = raylib::GetCharPressed();
+        charPressed = input::GetCharPressed();
     }
 
     // Set the exit key in raylib
-    raylib::SetExitKey(exitKey);
+    input::SetExitKey(exitKey);
 
     // Check for exit key
-    if (raylib::IsKeyPressed(exitKey)) {
+    if (input::IsKeyPressed(exitKey)) {
         // Signal the application to close
-        raylib::CloseWindow();
+        gfx::CloseWindow();
     }
 }
 

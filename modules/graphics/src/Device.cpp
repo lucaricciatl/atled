@@ -1,5 +1,5 @@
 #include "device.hpp"
-#include "raylib.h"  // Assuming raylib.h contains the RLAPI declarations
+#include "gfx.hpp"  // Assuming gfx.hpp contains the RLAPI declarations
 namespace graphics {
 
 // Create a new Device instance
@@ -9,52 +9,52 @@ std::unique_ptr<Device> Device::Create() {
 
 // Screen-related functions
 int Device::GetScreenWidth() const {
-    return raylib::GetScreenWidth();
+    return gfx::GetScreenWidth();
 }
 
 int Device::GetScreenHeight() const {
-    return raylib::GetScreenHeight();
+    return gfx::GetScreenHeight();
 }
 
 int Device::GetRenderWidth() const {
-    return raylib::GetRenderWidth();
+    return gfx::GetRenderWidth();
 }
 
 int Device::GetRenderHeight() const {
-    return raylib::GetRenderHeight();
+    return gfx::GetRenderHeight();
 }
 
 // Monitor-related functions
 int Device::GetMonitorCount() const {
-    return raylib::GetMonitorCount();
+    return gfx::GetMonitorCount();
 }
 
 int Device::GetCurrentMonitor() const {
-    return raylib::GetCurrentMonitor();
+    return gfx::GetCurrentMonitor();
 }
 
-raylib::Vector2 Device::GetMonitorPosition(int aMonitor) const {
-    return raylib::GetMonitorPosition(aMonitor);
+Vector2 Device::GetMonitorPosition(int aMonitor) const {
+    return gfx::GetMonitorPosition(aMonitor);
 }
 
 int Device::GetMonitorWidth(int aMonitor) const {
-    return raylib::GetMonitorWidth(aMonitor);
+    return gfx::GetMonitorWidth(aMonitor);
 }
 
 int Device::GetMonitorHeight(int aMonitor) const {
-    return raylib::GetMonitorHeight(aMonitor);
+    return gfx::GetMonitorHeight(aMonitor);
 }
 
 int Device::GetMonitorPhysicalWidth(int aMonitor) const {
-    return raylib::GetMonitorPhysicalWidth(aMonitor);
+    return gfx::GetMonitorPhysicalWidth(aMonitor);
 }
 
 int Device::GetMonitorPhysicalHeight(int aMonitor) const {
-    return raylib::GetMonitorPhysicalHeight(aMonitor);
+    return gfx::GetMonitorPhysicalHeight(aMonitor);
 }
 
 int Device::GetMonitorRefreshRate(int aMonitor) const {
-    return raylib::GetMonitorRefreshRate(aMonitor);
+    return gfx::GetMonitorRefreshRate(aMonitor);
 }
 
 } // namespace graphics

@@ -1,6 +1,6 @@
 #pragma once
 #include "Pixel.hpp"  // Assicurati di includere il file che contiene la classe PointBuffer2D
-#include "raylib.h"
+#include "gfx.hpp"
 #include "PointBuffer2D.hpp"
 
 namespace graphics {

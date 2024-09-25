@@ -19,11 +19,11 @@ void Polygon2D::Draw(bool filled = true) const {
   }
 
   // Create an array of Vector2 for the polygon vertices
-  std::vector<raylib::Vector2> vertices;
+  std::vector<Vector2> vertices;
   vertices.reserve(mPoints.size());
 
   // Assuming all points have the same color
-  raylib::Color fillColor = mPoints[0].color;
+  Color fillColor = mPoints[0].color;
 
   // Populate the vertices vector
   for (const auto& point : mPoints) {
@@ -32,32 +32,32 @@ void Polygon2D::Draw(bool filled = true) const {
   }
 
   // Set up the color
-  raylib::rlColor4ub(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+  gfx::rlColor4ub(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
   if (filled) {
     // Begin drawing triangles
-    raylib::rlBegin(RL_TRIANGLES);
+    gfx::rlBegin(RL_TRIANGLES);
 
     // Triangulate the polygon by creating a fan from the first vertex
     for (size_t i = 1; i < vertices.size() - 1; ++i) {
-      raylib::rlVertex2f(vertices[0].x, vertices[0].y);
-      raylib::rlVertex2f(vertices[i].x, vertices[i].y);
-      raylib::rlVertex2f(vertices[i + 1].x, vertices[i + 1].y);
+      gfx::rlVertex2f(vertices[0].x, vertices[0].y);
+      gfx::rlVertex2f(vertices[i].x, vertices[i].y);
+      gfx::rlVertex2f(vertices[i + 1].x, vertices[i + 1].y);
     }
   } else {
     // Begin drawing lines
-    raylib::rlBegin(RL_LINES);
+    gfx::rlBegin(RL_LINES);
 
     // Draw lines between each pair of vertices
     for (size_t i = 0; i < vertices.size(); ++i) {
-      const raylib::Vector2& start = vertices[i];
-      const raylib::Vector2& end = vertices[(i + 1) % vertices.size()];  // Wrap around
-      raylib::rlVertex2f(start.x, start.y);
-      raylib::rlVertex2f(end.x, end.y);
+      const Vector2& start = vertices[i];
+      const Vector2& end = vertices[(i + 1) % vertices.size()];  // Wrap around
+      gfx::rlVertex2f(start.x, start.y);
+      gfx::rlVertex2f(end.x, end.y);
     }
   }
 
-  raylib::rlEnd();
+  gfx::rlEnd();
 }
 
 

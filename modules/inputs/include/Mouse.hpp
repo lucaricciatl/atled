@@ -1,7 +1,7 @@
 #ifndef MOUSE_H
 #define MOUSE_H
 
-#include "raylib.h"
+#include "input.hpp"
 #include <atomic>
 #include <thread>
 

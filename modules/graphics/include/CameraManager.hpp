@@ -1,10 +1,11 @@
 #pragma once
 
-#include "raylib.h"
+#include "gfx.hpp"
 #include <vector>
-
+#include "camera.hpp"
 namespace graphics {
-  using namespace raylib ;
+  using namespace gfx ;
+  using namespace camera;
 
   class CameraManager {
    public:
@@ -26,7 +27,7 @@ namespace graphics {
     void DrawGrid(int slices = 10, float spacing = 1.0f);
 
    private:
-    raylib::Camera camera;  // The Raylib camera object
+    Camera camera;  // The gfx camera object
   };
 
 }
