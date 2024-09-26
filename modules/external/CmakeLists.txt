@@ -6,7 +6,13 @@ add_library(external src/input.cpp src/gfx.cpp)
 # Link raylib to the external library
 target_link_libraries(external raylib)
 
-# Set the properties of the target library
+# Set visibility properties for the external library
+set_target_properties(external PROPERTIES
+    FOLDER "modules"
+    CXX_VISIBILITY_PRESET hidden  # Hide symbols by default
+    VISIBILITY_INLINES_HIDDEN YES # Hide inline symbols as well
+)
+
 set_target_properties(external PROPERTIES FOLDER "modules")
 
 target_include_directories(external PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
