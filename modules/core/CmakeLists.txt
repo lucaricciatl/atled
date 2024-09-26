@@ -1,7 +1,7 @@
 # Add the subdirectory 'utils'
 
 # Create a library from the submodule's source files
-add_library(core src/input.cpp src/graphics.cpp)
+add_library(core)
 
 # Link raylib to the external library
 target_link_libraries(core raylib)
