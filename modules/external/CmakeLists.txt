@@ -1,5 +1,4 @@
-# Add the subdirectory 'utils'
-add_subdirectory(utils)
+add_subdirectory(raylib)
 
 # Create a library from the submodule's source files
 add_library(external src/input.cpp src/gfx.cpp)
