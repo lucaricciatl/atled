@@ -2,7 +2,7 @@
 #include "GraphicsContext.hpp"
 
 #include <string_view>
-
+#include "windowFactory.hpp"
 #include "gfx.hpp"
 
 namespace {
@@ -44,17 +44,23 @@ void GraphicsContext::InitWindowManager(std::vector<gfx::ConfigFlags> flags) {
   for (auto flag : flags) {
     SetFlag(flag);
   }
-  gfx::InitWindow(windowWidth, windowHeight, windowTitle);
+  InitWindowManager();
 }
 
 void GraphicsContext::InitWindowManager() {
-  gfx::InitWindow(windowWidth, windowHeight, windowTitle);
+  // Create the window and store it in the member variable
+  mWindow = WindowFactory::CreateWindow(WindowType::Raylib);
+
+  // Initialize the window with dimensions and title
+  if (mWindow) {
+    mWindow->InitWindow(windowWidth, windowHeight, windowTitle);
+  }
 }
 
 // Function to unset a flag (or multiple flags)
 void GraphicsContext::UnsetFlag(gfx::ConfigFlags flag) {
   currentFlags &= ~flag;         // Unset the specific flag(s)
-  gfx::SetConfigFlags(currentFlags);  // Update the window flags
+  SetConfigFlags(currentFlags);  // Update the window flags
 }
 
 void GraphicsContext::SetFlag(gfx::ConfigFlags flag) {

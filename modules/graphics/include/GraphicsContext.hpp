@@ -1,6 +1,7 @@
 #pragma once
 #include "gfx.hpp"
 #include "LayerManager.hpp"
+#include "IWindow.hpp"
 
 namespace graphics {
 class GraphicsContext {
@@ -28,6 +29,7 @@ class GraphicsContext {
 
   LayerManager mLayerManager;
  private:
+  std::unique_ptr<IWindow> mWindow;
   int windowWidth;
   int windowHeight;
   const char* windowTitle;
