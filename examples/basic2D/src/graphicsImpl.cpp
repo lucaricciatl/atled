@@ -56,7 +56,7 @@ void GraphicsManagerImpl::Render() {
         float theta2 = (PI * (i)) * 2 / segments;
 
         // Oscillate the radius
-        float oscillatingRadius = radius + 100.0f * abs(sin(times * 0.01f));
+        float oscillatingRadius = radius + 100.0f * abs(sin(times));
         int x2 = static_cast<int>(centerX + oscillatingRadius * cos(theta2));
         int y2 = static_cast<int>(centerY + oscillatingRadius * sin(theta2));
 
@@ -93,10 +93,10 @@ void GraphicsManagerImpl::Render() {
       auto colrt = RED;
       points.emplace_back(static_cast<int>(700 + 0), static_cast<int>(700 + 0),
                           colrt);  // Example points
-      for (int i = 0; i < (13 * sin(times * 0.1)); ++i) {
+      for (int i = 0; i < (53 * sin(times * 0.1)); ++i) {
         // Apply oscillation to the polygon points
-        int x = static_cast<int>(700 + 100 * sin(2 * PI / 12 * i));
-        int y = static_cast<int>(700 + 100 * cos(2 * PI / 12 * i));
+        int x = static_cast<int>(700 + 100 * sin(2 * PI / 52 * i));
+        int y = static_cast<int>(700 + 100 * cos(2 * PI / 52 * i));
         points.emplace_back(x, y, colrt);
       }
 
@@ -107,10 +107,10 @@ void GraphicsManagerImpl::Render() {
 
     // 4. Draw an oscillating irregular polygon
 
-    auto col = BLACK;
+    auto col = Color(0,0,0,23);
     mContext->Clear(col);
     mContext->End();
 
-    times += 0.01f;  // Increment time for oscillation
+    times += 0.1f;  // Increment time for oscillation
   }
 }

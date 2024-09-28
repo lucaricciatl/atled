@@ -7,10 +7,11 @@
 #include <vector>
 
 #include "CameraManager.hpp"
-#include "IDisplay.hpp"
 #include "GraphicsContext.hpp"
+#include "IDisplay.hpp"
 
 namespace graphics {
+
 
 struct GfxConfig {
   // Static default flag

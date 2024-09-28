@@ -3,7 +3,7 @@
 #include "Mouse.hpp"
 #include "Keyboard.hpp"
 
-int main() {
+    int main() {
   // Initialize the GraphicsManager
   auto graphicsMng = std::make_shared<GraphicsManagerImpl>();
   graphicsMng->Init();
@@ -12,7 +12,8 @@ int main() {
   ctx->SetTitle("Atled");
   KeyboardInput keyboard;
   keyboard.Start();
-  auto configs = graphics::GfxConfig();
+  auto configs =
+      graphics::GfxConfig({FLAG_WINDOW_UNDECORATED,FLAG_WINDOW_TRANSPARENT});
   input::Mouse mouse;
   mouse.Start();  // Start the mouse thread
   graphicsMng->SetConfigs(configs);
