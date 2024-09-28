@@ -3,15 +3,16 @@
 
 #include "IFontLoader.hpp"
 #include "RaylibFontLoader.hpp"
-
+#include <memory>  // For std::unique_ptr
+#include <string>
 // Factory class to create instances of FontLoader
 class FontLoaderFactory {
 public:
     // Static method to create and return a FontLoader instance
-    static IFontLoader* CreateFontLoader() {
-        // Currently, it creates a RaylibFontLoader
-        return new RaylibFontLoader();
-    }
+
+
+static std::unique_ptr<IFontLoader> CreateFontLoader(const std::string& type);
+
 };
 
 #endif // FONTLOADERFACTORY_HPP
