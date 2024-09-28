@@ -19,6 +19,7 @@ add_library(graphics
     src/PolygonBuffer2D.cpp
     src/Layer.cpp
     src/Pixel.cpp
+    src/TextRenderer.cpp
 
 
 )

@@ -1,2 +1,3 @@
 project(examples)
 add_subdirectory(basic2D)
+add_subdirectory(3BodyProblem)

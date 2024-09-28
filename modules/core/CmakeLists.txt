@@ -1,7 +1,16 @@
 # Add the subdirectory 'utils'
 
 # Create a library from the submodule's source files
-add_library(core src/RaylibWindow.cpp src/windowFactory.cpp src/RaylibDisplay.cpp src/displayFactory.cpp)
+add_library(core 
+src/RaylibWindow.cpp 
+src/windowFactory.cpp 
+src/RaylibDisplay.cpp 
+src/displayFactory.cpp
+src/Raylibtext.cpp 
+src/textFactory.cpp
+src/RaylibFontLoader.cpp 
+src/fontLoaderFactory.cpp
+)
 
 # Link raylib to the external library
 target_link_libraries(core external raylib)
