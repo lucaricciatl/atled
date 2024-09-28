@@ -27,7 +27,6 @@ public:
     bool IsKeyUp(int key);
     int GetKeyPressed();
     int GetCharPressed();
-    void SetExitKey(int key);
 
 private:
     void ProcessingThread();
@@ -48,7 +47,6 @@ private:
     std::mutex charQueueMutex;
     std::queue<int> charQueue;
 
-    int exitKey;
 };
 
 #endif // KEYBOARDINPUT_HPP

@@ -13,6 +13,7 @@ public:
 
     // Window functions
     void InitWindow(int width, int height, const char *title);
+    void CloseWindow(void);
     bool ShouldClose(void) const;
     bool IsReady(void) const;
     bool IsFullscreen(void) const;

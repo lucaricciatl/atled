@@ -9,6 +9,7 @@ public:
 
     // Declare all the window-related methods as pure virtual functions
     virtual void InitWindow(int width, int height, const char *title) = 0;
+    virtual void CloseWindow(void) = 0;
     virtual bool ShouldClose(void) const = 0;
     virtual bool IsReady(void) const = 0;
     virtual bool IsFullscreen(void) const = 0;

@@ -38,7 +38,7 @@ GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
   windowTitle = aWindowTitle;
 }
 
-GraphicsContext::~GraphicsContext() { gfx::CloseWindow(); }
+GraphicsContext::~GraphicsContext() { mWindow->CloseWindow(); }
 
 void GraphicsContext::InitWindowManager(std::vector<gfx::ConfigFlags> flags) {
   for (auto flag : flags) {

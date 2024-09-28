@@ -15,6 +15,10 @@ void RaylibWindow::InitWindow(int width, int height, const char *title) {
     ::InitWindow(width, height, title);  // Calls Raylib's InitWindow
 }
 
+void RaylibWindow::CloseWindow() {
+    return ::CloseWindow();
+}
+
 bool RaylibWindow::ShouldClose() const {
     return ::WindowShouldClose();
 }

@@ -5,7 +5,7 @@
 #include <chrono>
 
 
-KeyboardInput::KeyboardInput() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false), exitKey(KeyboardKey::KEY_ESCAPE) {
+KeyboardInput::KeyboardInput() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false) {
 }
 
 KeyboardInput::~KeyboardInput() {
@@ -68,14 +68,6 @@ void KeyboardInput::Update() {
         charPressed = input::GetCharPressed();
     }
 
-    // Set the exit key in raylib
-    input::SetExitKey(exitKey);
-
-    // Check for exit key
-    if (input::IsKeyPressed(exitKey)) {
-        // Signal the application to close
-        gfx::CloseWindow();
-    }
 }
 
 void KeyboardInput::ProcessingThread() {
@@ -152,7 +144,3 @@ int KeyboardInput::GetCharPressed() {
     return 0;
 }
 
-void KeyboardInput::SetExitKey(int key) {
-    exitKey = key;
-    // ::SetExitKey is called in Update() to ensure it's executed on the main thread
-}

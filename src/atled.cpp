@@ -1,9 +1,8 @@
 #include "GraphicsContext.hpp"
 #include "GraphicsManager.hpp"
-#include "Polyline2D.hpp"
 #include "Mouse.hpp"
 #include "Keyboard.hpp"
-#include "gfx.hpp"
+
 int main() {
   // Initialize the GraphicsManager
   auto graphicsMng = std::make_shared<graphics::GraphicsManager>();
