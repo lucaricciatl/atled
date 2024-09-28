@@ -1,11 +1,12 @@
 #include "GraphicsContext.hpp"
-#include "GraphicsManager.hpp"
+#include "graphicsImpl.hpp"
 #include "Mouse.hpp"
 #include "Keyboard.hpp"
 
 int main() {
   // Initialize the GraphicsManager
-  auto graphicsMng = std::make_shared<graphics::GraphicsManager>();
+  auto graphicsMng = std::make_shared<GraphicsManagerImpl>();
+  graphicsMng->Init();
   auto ctx = graphicsMng->GetGraphicsContext();
   ctx->SetSize(900,900);
   ctx->SetTitle("Atled");
