@@ -1,6 +1,6 @@
 #include "GraphicsManager.hpp"
 
-#include <Device.hpp>
+#include <DisplayFactory.hpp>
 #include <chrono>
 #include <cmath>
 #include <iostream>
@@ -11,9 +11,12 @@
 #include "PolyLine2D.hpp"
 #include "PolygonBuffer2D.hpp"
 #include "ShaderManager.hpp"
+
+
 namespace {
 constexpr unsigned int defaultFramerate = 30;
 float times = 0.0f;  // Initialize time variable
+DisplayType displayType = DisplayType::Raylib;
 }  // namespace
 
 namespace graphics {
@@ -21,7 +24,10 @@ namespace graphics {
 GraphicsManager::GraphicsManager() {
   mContext = std::make_shared<GraphicsContext>();
   mThread = std::make_unique<std::thread>();
-  mDevice = Device().Create();
+  mDisplay = DisplayFactory::CreateDisplay(displayType);
+  if (!mDisplay) {
+      throw std::runtime_error("Failed to create display device!");
+  }
 };
 
 // Destructor

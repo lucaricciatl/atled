@@ -42,24 +42,6 @@ public:
     void SetOpacity(float opacity);
     void Focus(void);
 
-    // Window information retrieval functions
-    void *GetHandle(void) const;
-    int GetScreenWidth(void) const;
-    int GetScreenHeight(void) const;
-    int GetRenderWidth(void) const;
-    int GetRenderHeight(void) const;
-    int GetMonitorCount(void) const;
-    int GetCurrentMonitor(void) const;
-    Vector2 GetMonitorPosition(int monitor) const;
-    int GetMonitorWidth(int monitor) const;
-    int GetMonitorHeight(int monitor) const;
-    int GetMonitorPhysicalWidth(int monitor) const;
-    int GetMonitorPhysicalHeight(int monitor) const;
-    int GetMonitorRefreshRate(int monitor) const;
-    Vector2 GetPosition(void) const;
-    Vector2 GetScaleDPI(void) const;
-    const char *GetMonitorName(int monitor) const;
-
     // Clipboard functions
     void SetClipboardText(const char *text);
     const char *GetClipboardText(void) const;

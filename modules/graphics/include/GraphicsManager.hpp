@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "CameraManager.hpp"
-#include "Device.hpp"
+#include "IDisplay.hpp"
 #include "GraphicsContext.hpp"
 
 namespace graphics {
@@ -50,6 +50,6 @@ class GraphicsManager {
   std::shared_ptr<GraphicsContext> mContext;
   std::shared_ptr<CameraManager> mCamera;
   std::shared_ptr<GfxConfig> mConfigs;
-  std::unique_ptr<Device> mDevice;
+  std::unique_ptr<IDisplay> mDisplay;
 };
 }  // namespace graphics

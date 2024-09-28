@@ -8,7 +8,6 @@ add_library(graphics
     src/Polygon2D.cpp
     src/LayerManager.cpp
     src/BuffersManager.cpp
-    src/Device.cpp
     #src/SharedrManager.cpp
     #src/Texture2D.cpp
     #privates

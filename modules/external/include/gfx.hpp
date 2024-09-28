@@ -37,23 +37,7 @@ typedef ::Color Color;  // Using the fully qualified type from raylib
 #define GFX_MAGENTA    { 255, 0, 255, 255 }     // Magenta
 #define GFX_RAYWHITE   { 245, 245, 245, 255 }   // My own White
 
-int GetScreenWidth(void);                                   // Get current screen width
-int GetScreenHeight(void);                                  // Get current screen height
-int GetRenderWidth(void);                                   // Get current render width (it considers HiDPI)
-int GetRenderHeight(void);                                  // Get current render height (it considers HiDPI)
-int GetMonitorCount(void);                                  // Get number of connected monitors
-int GetCurrentMonitor(void);                                // Get current connected monitor
-Vector2 GetMonitorPosition(int monitor);                    // Get specified monitor position
-int GetMonitorWidth(int monitor);                           // Get specified monitor width (current video mode used by monitor)
-int GetMonitorHeight(int monitor);                          // Get specified monitor height (current video mode used by monitor)
-int GetMonitorPhysicalWidth(int monitor);                   // Get specified monitor physical width in millimetres
-int GetMonitorPhysicalHeight(int monitor);                  // Get specified monitor physical height in millimetres
-int GetMonitorRefreshRate(int monitor);                     // Get specified monitor refresh rate
-Vector2 GetWindowPosition(void);                            // Get window position XY on monitor
-Vector2 GetWindowScaleDPI(void);                            // Get window scale DPI factor
-const char *GetMonitorName(int monitor);                    // Get the human-readable, UTF-8 encoded name of the specified monitor
-void SetClipboardText(const char *text);                    // Set clipboard text content
-const char *GetClipboardText(void);                         // Get clipboard text content
+
 void EnableEventWaiting(void);                              // Enable waiting for events on EndDrawing(), no automatic event polling
 void DisableEventWaiting(void);                             // Disable waiting for events on EndDrawing(), automatic events polling
 

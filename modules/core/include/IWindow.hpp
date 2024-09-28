@@ -38,23 +38,6 @@ public:
     virtual void SetOpacity(float opacity) = 0;
     virtual void Focus(void) = 0;
 
-    virtual void *GetHandle(void) const = 0;
-    virtual int GetScreenWidth(void) const = 0;
-    virtual int GetScreenHeight(void) const = 0;
-    virtual int GetRenderWidth(void) const = 0;
-    virtual int GetRenderHeight(void) const = 0;
-    virtual int GetMonitorCount(void) const = 0;
-    virtual int GetCurrentMonitor(void) const = 0;
-    virtual Vector2 GetMonitorPosition(int monitor) const = 0;
-    virtual int GetMonitorWidth(int monitor) const = 0;
-    virtual int GetMonitorHeight(int monitor) const = 0;
-    virtual int GetMonitorPhysicalWidth(int monitor) const = 0;
-    virtual int GetMonitorPhysicalHeight(int monitor) const = 0;
-    virtual int GetMonitorRefreshRate(int monitor) const = 0;
-    virtual Vector2 GetPosition(void) const = 0;
-    virtual Vector2 GetScaleDPI(void) const = 0;
-    virtual const char *GetMonitorName(int monitor) const = 0;
-
     virtual void SetClipboardText(const char *text) = 0;
     virtual const char *GetClipboardText(void) const = 0;
 
