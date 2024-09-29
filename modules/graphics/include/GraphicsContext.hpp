@@ -29,6 +29,7 @@ class GraphicsContext {
 
   LayerManager mLayerManager;
  private:
+  //std::unique_ptr<CameraManager> mCamera;
   std::unique_ptr<IWindow> mWindow;
   int windowWidth;
   int windowHeight;

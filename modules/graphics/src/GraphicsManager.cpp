@@ -73,17 +73,6 @@ void GraphicsManager::CameraStep() {
 
   auto frameStart = steady_clock::now();
 
-  // Update camera here
-  if (mCamera) {
-    try {
-      mCamera->Update();  // Assuming CameraManager has an Update function
-                          // that updates camera position, orientation, etc.
-    } catch (const std::exception& e) {
-      std::cerr << "Camera update threw an exception: " << e.what()
-                << std::endl;
-      mRunning = false;  // Stop the loop on exception
-    }
-  }
 
   auto frameEnd = steady_clock::now();
   auto elapsed = duration_cast<milliseconds>(frameEnd - frameStart);
