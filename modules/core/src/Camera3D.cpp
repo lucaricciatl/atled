@@ -12,17 +12,6 @@ rCamera3D::rCamera3D(Vector3 position, Vector3 target, Vector3 up, float fovy, i
 rCamera3D::rCamera3D() {
 }
 
-// Implement printCameraInfo for Camera3D
-void rCamera3D::printCameraInfo() const {
-    std::cout << "Camera3D Info - Position: ("
-              << mCamera3D.position.x << ", "
-              << mCamera3D.position.y << ", "
-              << mCamera3D.position.z << "), Target: ("
-              << mCamera3D.target.x << ", "
-              << mCamera3D.target.y << ", "
-              << mCamera3D.target.z << ")\n";
-}
-
 // Setters for Camera3D
 void rCamera3D::setPosition(const Vector3& position) {
     mCamera3D.position = position;

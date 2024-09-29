@@ -3,29 +3,29 @@
 
 #include "CameraBase.hpp"
 
-
 // Concrete class for Camera2D
 class rCamera2D : public CameraBase {
 public:
-
-    rCamera2D(Vector2 offset, Vector2 target, float rotation, float zoom);
-    rCamera2D();
-
-    void printCameraInfo() const override;
+    rCamera2D();  // Constructor
 
     // Setters for Camera2D properties
-    void setOffset(const Vector2& offset);
-    void setTarget(const Vector2& target);
-    void setRotation(float rotation);
-    void setZoom(float zoom);
+    void setOffset(const Vector2& offset) override;
+    void setTarget(const Vector2& target) override;  // Proper override for setTarget
+    void setRotation(float rotation) override;
+    void setZoom(float zoom) override;
 
     // Getters for Camera2D properties
-    Vector2 getOffset() const;
-    Vector2 getTarget() const;
-    float getRotation() const;
-    float getZoom() const;
+    Vector2 getOffset() const override;
+    Vector2 getTarget() const override;
+    float getRotation() const override;
+    float getZoom() const override;
 
-    Camera2D mCamera2D;
+    void BeginCamera() override;
+
+private:
+    ::Camera2D mCamera2D;  // Raylib's Camera2D
 };
 
-#endif // CAMERA2D_HPP
+#endif  // CAMERA2D_HPP
+
+

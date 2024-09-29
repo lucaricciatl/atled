@@ -1,14 +1,16 @@
 
 #include "GraphicsContext.hpp"
-
+#include "CameraBase.hpp"
+#include "CameraFactory.hpp"
 #include <string_view>
 #include "windowFactory.hpp"
+#include "Camera2D.hpp"
+#include "Camera3D.hpp"
 #include "gfx.hpp"
 
 namespace {
 static constexpr int defaultHeight = 420;
 static constexpr int defaultWidth = 680;
-
 static constexpr const char* defaultTitle = "Window";
 }  // namespace
 
@@ -50,7 +52,7 @@ void GraphicsContext::InitWindowManager(std::vector<gfx::ConfigFlags> flags) {
 void GraphicsContext::InitWindowManager() {
   // Create the window and store it in the member variable
   mWindow = WindowFactory::CreateWindow(WindowType::Raylib);
-
+  mCamera = CameraFactory::createCamera(CameraType::CAMERA_2D);
   // Initialize the window with dimensions and title
   if (mWindow) {
     mWindow->InitWindow(windowWidth, windowHeight, windowTitle);
@@ -80,10 +82,14 @@ void GraphicsContext::SetSize(int width, int height) {
 
 int GraphicsContext::GetWidth() const { return windowWidth; }
 
+std::shared_ptr<CameraBase> GraphicsContext::GetCamera() {
+  return mCamera;
+}
+
 int GraphicsContext::GetHeight() const { return windowHeight; }
 
-void GraphicsContext::Begin() const { gfx::BeginDrawing(); }
-void GraphicsContext::End() const { gfx::EndDrawing(); }
+void GraphicsContext::BeginDrawing() const { gfx::BeginDrawing(); }
+void GraphicsContext::EndDrawing() const { gfx::EndDrawing(); }
 
 void GraphicsContext::Clear(Color aColor) { gfx::ClearBackground(aColor); };
 

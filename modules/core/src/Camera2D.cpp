@@ -1,24 +1,8 @@
 #include "Camera2D.hpp"
 
-// Constructor for mCamera2D
-rCamera2D::rCamera2D(Vector2 offset, Vector2 target, float rotation, float zoom) {
-    mCamera2D.offset = offset;
-    mCamera2D.target = target;
-    mCamera2D.rotation = rotation;
-    mCamera2D.zoom = zoom;
-}
-
-// Constructor for mCamera2D
+// Constructor for rCamera2D
 rCamera2D::rCamera2D() {
-}
-
-// Implement printCameraInfo for mCamera2D
-void rCamera2D::printCameraInfo() const {
-    std::cout << "mCamera2D Info - Offset: ("
-              << mCamera2D.offset.x << ", "
-              << mCamera2D.offset.y << "), Target: ("
-              << mCamera2D.target.x << ", "
-              << mCamera2D.target.y << ")\n";
+    // You can initialize any values for mCamera2D here if needed.
 }
 
 // Setters for mCamera2D
@@ -26,7 +10,7 @@ void rCamera2D::setOffset(const Vector2& offset) {
     mCamera2D.offset = offset;
 }
 
-void rCamera2D::setTarget(const Vector2& target) {
+void rCamera2D::setTarget(const Vector2& target) {  // Correct the name to setTarget
     mCamera2D.target = target;
 }
 
@@ -53,4 +37,8 @@ float rCamera2D::getRotation() const {
 
 float rCamera2D::getZoom() const {
     return mCamera2D.zoom;
+}
+
+void rCamera2D::BeginCamera() {
+    BeginMode2D(mCamera2D);
 }

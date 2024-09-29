@@ -11,7 +11,6 @@ src/textFactory.cpp
 src/RaylibFontLoader.cpp 
 src/fontLoaderFactory.cpp
 src/Camera2D.cpp 
-src/Camera3D.cpp 
 src/CameraFactory.cpp
 )
 

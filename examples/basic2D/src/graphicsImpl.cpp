@@ -22,7 +22,8 @@ void GraphicsManagerImpl::Init() {
 
 void GraphicsManagerImpl::Render() {
   if (mContext->isReady) {
-    mContext->Begin();
+    mContext->BeginDrawing();
+
     // 1. Draw a line with oscillating points
     {
       std::vector<ColoredPoint2D> linePoints;
@@ -109,7 +110,7 @@ void GraphicsManagerImpl::Render() {
 
     auto col = Color(0,0,0,23);
     mContext->Clear(col);
-    mContext->End();
+    mContext->EndDrawing();
 
     times += 0.1f;  // Increment time for oscillation
   }

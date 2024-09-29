@@ -19,7 +19,7 @@ enum class CameraType {
 // Factory class for creating Camera objects
 class CameraFactory {
 public:
-    static std::unique_ptr<CameraBase> createCamera(CameraType type);
+    static std::shared_ptr<CameraBase> createCamera(CameraType type);
 };
 
 #endif // CAMERA_HPP
