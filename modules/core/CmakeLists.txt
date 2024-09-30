@@ -20,4 +20,7 @@ target_link_libraries(core external raylib)
 # Set the properties of the target library
 set_target_properties(core PROPERTIES FOLDER "modules")
 
+target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include/camera")
+target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include/display")
+target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include/window")
 target_include_directories(core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")

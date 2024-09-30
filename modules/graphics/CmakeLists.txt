@@ -35,6 +35,11 @@ target_include_directories(graphics PUBLIC
 
 target_include_directories(graphics PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/private
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/buffers
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/layers
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/camera 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/shapes 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 set_target_properties(graphics PROPERTIES FOLDER "modules")
