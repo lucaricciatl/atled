@@ -81,7 +81,7 @@ void rCamera2D::IncreaseOffset(const float& deltaX, const float& deltaY) {
 }
 
 void rCamera2D::IncreaseZoom(const float& deltaZoom) {
-    mCamera2D.zoom += deltaZoom;
+    SetZoom(mCamera2D.zoom + deltaZoom);
 }
 
 // Begin camera mode
