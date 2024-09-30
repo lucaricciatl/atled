@@ -1,8 +1,10 @@
 #include "graphicsImpl.hpp"
-
 #include <cmath>
 #include <iostream>
 #include <vector>
+#include "Keyboard.hpp"
+#include "Mouse.hpp"
+#include "Camera2D.hpp"  // Include your Camera2D implementation
 
 using namespace graphics;
 
@@ -13,11 +15,14 @@ struct Body {
   Color color;
 };
 
+// Constants and Input
 namespace {
 const float G = 6.67430e-9f;   // Gravitational constant
 const float deltaTime = 1.0f;  // Fixed time step
 const float softening = 1.0f;  // Softening factor to prevent singularity
 float stime = 0.0f;            // Simulation time
+input::KeyboardInput Keyboard;
+input::Mouse mouse;
 }  // namespace
 
 std::vector<Body> bodies;  // Global vector to hold the bodies
@@ -39,6 +44,7 @@ Vector2 CalculateGravitationalForce(const Body& body1, const Body& body2) {
   return force;
 }
 
+// Function to update the positions and velocities of bodies
 void UpdateBodies(std::vector<Body>& bodies) {
   std::vector<Body> newBodies = bodies;
 
@@ -67,12 +73,11 @@ void UpdateBodies(std::vector<Body>& bodies) {
   bodies = newBodies;
 }
 
+// Function to render individual bodies with a buffer
 void RenderBodyWithBuffer(std::shared_ptr<graphics::Buffer2D> buffer,
                           const Body& body, int numSegments = 100) {
   std::vector<ColoredPoint2D> points;
-  float radius = 8 * std::log(body.mass) /
-                 std::log(1.0e10f);  // Scale radius based on the mass
-
+  float radius = 8 * std::log(body.mass) / std::log(1.0e10f);  // Scale radius based on the mass
   Color bodyColor = body.color;
 
   // Generate points for the circle approximation
@@ -87,8 +92,8 @@ void RenderBodyWithBuffer(std::shared_ptr<graphics::Buffer2D> buffer,
   buffer->DrawBuffer();
 }
 
-void RenderBodies(GraphicsManagerImpl* gfxManager,
-                  const std::vector<Body>& bodies) {
+// Function to render all bodies
+void RenderBodies(GraphicsManagerImpl* gfxManager, const std::vector<Body>& bodies) {
   if (bodies.size() > 0) {
     RenderBodyWithBuffer(gfxManager->polyBuffer, bodies[0]);
   }
@@ -100,6 +105,7 @@ void RenderBodies(GraphicsManagerImpl* gfxManager,
   }
 }
 
+// Initialize Graphics Manager and Bodies
 void GraphicsManagerImpl::Init() {
   mContext->mLayerManager.AddLayer(1);
   mContext->mLayerManager.AddLayer(2);
@@ -119,19 +125,44 @@ void GraphicsManagerImpl::Init() {
   bodies.push_back({{450.0f, 450.0f}, {0.0f, 0.0f}, 1e12f, BLUE});
 }
 
+// Global camera settings
+Vector2 offset = {0.0f, 0.0f};  // Initial camera offset
+float defaultzoom = 0.4f;       // Default zoom level
+float zoom = 0.0f;              // Global zoom adjustment
+
+// Render the scene
 void GraphicsManagerImpl::Render() {
   if (mContext->isReady) {
     mContext->BeginDrawing();
-    mContext->GetCamera()->setOffset(Vector2({300.0f, 300.0f}));
-    mContext->GetCamera()->setTarget(Vector2{20.0f, 20.0f});
-    mContext->GetCamera()->setRotation(0.0f);
-    mContext->GetCamera()->setZoom(0.4f);
-    mContext->GetCamera()->BeginCamera();
 
-    // Update the bodies' positions
+    // Handle panning with mouse drag
+    if (mouse.IsButtonDown(MOUSE_BUTTON_LEFT)) {
+      input::MousePosition delta = mouse.GetMouseDelta();
+      offset.x -= delta.x * (defaultzoom + zoom);  // Adjust offset by zoom level
+      offset.y -= delta.y * (defaultzoom + zoom);  // Adjust offset by zoom level
+    }
+
+    // Handle zoom with mouse wheel
+    float mouseWheelMove = mouse.GetMouseWheelMove();
+    zoom += mouseWheelMove * 0.05f;  // Adjust zoom speed
+
+    // Clamp zoom level to avoid extreme values
+    zoom = std::clamp(zoom, -defaultzoom, 5.0f - defaultzoom);
+
+    // Set the camera offset and zoom
+    auto camera = mContext->GetCamera();
+    camera->SetOffsetX(300.0f - offset.x);
+    camera->SetOffsetY(300.0f - offset.y);
+    camera->SetTargetX(20.0f);
+    camera->SetTargetY(20.0f);
+    camera->SetRotation(0.0f);
+    camera->SetZoom(defaultzoom + zoom);  // Apply the zoom change
+
+    // Begin camera rendering
+    camera->BeginCamera();
+
+    // Update and render bodies
     UpdateBodies(bodies);
-
-    // Render the bodies
     RenderBodies(this, bodies);
 
     // Clear the screen with a transparency effect

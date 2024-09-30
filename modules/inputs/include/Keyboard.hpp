@@ -7,6 +7,8 @@
 #include <queue>
 #include <vector>
 
+namespace input{
+
 class KeyboardInput {
 public:
     KeyboardInput();
@@ -48,5 +50,7 @@ private:
     std::queue<int> charQueue;
 
 };
+
+}
 
 #endif // KEYBOARDINPUT_HPP

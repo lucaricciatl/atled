@@ -2,30 +2,42 @@
 #define CAMERA2D_HPP
 
 #include "CameraBase.hpp"
+#include "raylib.h"  // Assuming you are using Raylib's Camera2D
 
-// Concrete class for Camera2D
+// Concrete class for Camera2D that inherits from CameraBase
 class rCamera2D : public CameraBase {
 public:
-    rCamera2D();  // Constructor
+    // Constructors
+    rCamera2D();  // Default constructor
+    rCamera2D(Vector2 offset, Vector2 target, float rotation, float zoom);  // Parameterized constructor
 
     // Setters for Camera2D properties
-    void setOffset(const Vector2& offset) override;
-    void setTarget(const Vector2& target) override;  // Proper override for setTarget
-    void setRotation(float rotation) override;
-    void setZoom(float zoom) override;
+    void SetOffsetX(const float& offset) override;
+    void SetOffsetY(const float& offset) override;
+    void SetTargetX(const float& target) override;
+    void SetTargetY(const float& target) override;
+    void SetRotation(const float& rotation) override;
+    void SetZoom(const float& zoom) override;
 
     // Getters for Camera2D properties
-    Vector2 getOffset() const override;
-    Vector2 getTarget() const override;
-    float getRotation() const override;
-    float getZoom() const override;
+    float GetOffsetX() const override;
+    float GetOffsetY() const override;
+    float GetTargetX() const override;
+    float GetTargetY() const override;
+    float GetRotation() const override;
+    float GetZoom() const override;
 
+    // Other methods for Camera2D
     void BeginCamera() override;
 
+    // Methods to change offsets and zoom
+    void IncreaseOffsetX(const float& deltaX) override;
+    void IncreaseOffsetY(const float& deltaY) override;
+    void IncreaseOffset(const float& deltaX, const float& deltaY) override;
+    void IncreaseZoom(const float& deltaZoom) override;
+
 private:
-    ::Camera2D mCamera2D;  // Raylib's Camera2D
+    ::Camera2D mCamera2D;  // Using Raylib's Camera2D struct
 };
 
 #endif  // CAMERA2D_HPP
-
-

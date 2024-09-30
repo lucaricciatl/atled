@@ -4,7 +4,7 @@
 #include <iostream>
 #include <chrono>
 
-
+namespace input{
 KeyboardInput::KeyboardInput() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false) {
 }
 
@@ -144,3 +144,4 @@ int KeyboardInput::GetCharPressed() {
     return 0;
 }
 
+}

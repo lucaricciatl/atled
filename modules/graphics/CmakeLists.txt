@@ -25,7 +25,7 @@ add_library(graphics
 )
 
 # Link gfx to the graphics library
-target_link_libraries(graphics PUBLIC external core)
+target_link_libraries(graphics PUBLIC core)
 
 # Specify include directories for the submodule
 target_include_directories(graphics PUBLIC
