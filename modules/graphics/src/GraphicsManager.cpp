@@ -10,7 +10,6 @@
 #include "GraphicsContext.hpp"
 #include "PolyLine2D.hpp"
 #include "PolygonBuffer2D.hpp"
-#include "ShaderManager.hpp"
 
 
 namespace {

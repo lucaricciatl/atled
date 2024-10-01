@@ -1,6 +1,6 @@
 #include "Keyboard.hpp"
 #include "gfx.hpp"
-#include "input.hpp"
+#include "raylib.h"
 #include <iostream>
 #include <chrono>
 
@@ -39,7 +39,7 @@ void KeyboardInput::Update() {
 
     // Update keyStatesBuffer with the current keyboard state
     for (int key = 0; key < 512; ++key) {
-        keyStatesBuffer[key] = input::IsKeyDown(key);
+        keyStatesBuffer[key] =::IsKeyDown(key);
     }
 
     // Update keyStates
@@ -49,23 +49,23 @@ void KeyboardInput::Update() {
     }
 
     // Get key presses and add to queue
-    int keyPressed = input::GetKeyPressed();
+    int keyPressed =::GetKeyPressed();
     while (keyPressed != 0) {
         {
             std::lock_guard<std::mutex> lockQueue(keyQueueMutex);
             keyQueue.push(keyPressed);
         }
-        keyPressed = input::GetKeyPressed();
+        keyPressed =::GetKeyPressed();
     }
 
     // Get char presses and add to queue
-    int charPressed = input::GetCharPressed();
+    int charPressed =::GetCharPressed();
     while (charPressed != 0) {
         {
             std::lock_guard<std::mutex> lockCharQueue(charQueueMutex);
             charQueue.push(charPressed);
         }
-        charPressed = input::GetCharPressed();
+        charPressed =::GetCharPressed();
     }
 
 }

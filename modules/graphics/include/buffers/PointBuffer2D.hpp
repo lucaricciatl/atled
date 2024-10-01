@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "gfx.hpp"
 #include "Buffer2D.hpp"
 #include <vector>
 
@@ -15,7 +14,7 @@ struct Point2D {
 };
 
 struct ColoredPoint2D : Point2D {
-  Color color;
+  ::Color color;
 
   // Default constructor
   ColoredPoint2D(float x_val = 0, float y_val = 0,

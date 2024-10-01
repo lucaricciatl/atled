@@ -1,5 +1,4 @@
 #pragma once
-#include "gfx.hpp"
 #include "LayerManager.hpp"
 #include "CameraBase.hpp"
 #include "IWindow.hpp"
@@ -9,20 +8,20 @@ class GraphicsContext {
  public:
   GraphicsContext();
   GraphicsContext(int aWindowWidth, int aWindowHeight, const char* aWindowTitle,
-                  std::vector<gfx::ConfigFlags> flags); 
+                  std::vector<::ConfigFlags> flags); 
   GraphicsContext(int aWindowWidth, int aWindowHeight,
                   const char* aWindowTitle);
   ~GraphicsContext();
   // init
   void InitWindowManager();
-  void InitWindowManager(std::vector<gfx::ConfigFlags> flags);
+  void InitWindowManager(std::vector<::ConfigFlags> flags);
 
   // set
-  void SetFlag(gfx::ConfigFlags flag);
+  void SetFlag(::ConfigFlags flag);
   void SetTitle(const char* title);
   void SetSize(int width, int height);
   // unset 
-  void UnsetFlag(gfx::ConfigFlags flag);
+  void UnsetFlag(::ConfigFlags flag);
   // get
   std::shared_ptr<CameraBase> GetCamera();
   int GetWidth() const;
@@ -31,7 +30,7 @@ class GraphicsContext {
   void SetTargetFPS(int fps);
   void BeginDrawing() const;
   void EndDrawing() const ;
-  void Clear(gfx::Color aColor);
+  void Clear(::Color aColor);
   bool isReady;
   LayerManager mLayerManager;
 

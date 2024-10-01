@@ -1,18 +1,18 @@
-#include "Polygon2D.hpp"
+#include "Polygon2DImpl.hpp"
 #include "raylib.h"  // Assuming you are using raylib for rendering
 #include "rlgl.h" // Make sure to include this header
 
 namespace graphics {
 
-void Polygon2D::AddPoint(ColoredPoint2D aPoint) {
+void Polygon2DImpl::AddPoint(ColoredPoint2D aPoint) {
     mPoints.push_back(aPoint);
 }
 
-void Polygon2D::AddPoints(const std::vector<ColoredPoint2D>& aPoints) {
+void Polygon2DImpl::AddPoints(const std::vector<ColoredPoint2D>& aPoints) {
     mPoints.insert(mPoints.end(), aPoints.begin(), aPoints.end());
 }
 
-void Polygon2D::Draw(bool filled = true) const {
+void Polygon2DImpl::Draw(bool filled = true) const {
   // Ensure we have at least three points to form a polygon
   if (mPoints.size() < 3) {
     return;
@@ -32,45 +32,45 @@ void Polygon2D::Draw(bool filled = true) const {
   }
 
   // Set up the color
-  gfx::rlColor4ub(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
+  ::rlColor4ub(fillColor.r, fillColor.g, fillColor.b, fillColor.a);
 
   if (filled) {
     // Begin drawing triangles
-    gfx::rlBegin(RL_TRIANGLES);
+    ::rlBegin(RL_TRIANGLES);
 
     // Triangulate the polygon by creating a fan from the first vertex
     for (size_t i = 1; i < vertices.size() - 1; ++i) {
-      gfx::rlVertex2f(vertices[0].x, vertices[0].y);
-      gfx::rlVertex2f(vertices[i].x, vertices[i].y);
-      gfx::rlVertex2f(vertices[i + 1].x, vertices[i + 1].y);
+      ::rlVertex2f(vertices[0].x, vertices[0].y);
+      ::rlVertex2f(vertices[i].x, vertices[i].y);
+      ::rlVertex2f(vertices[i + 1].x, vertices[i + 1].y);
     }
   } else {
     // Begin drawing lines
-    gfx::rlBegin(RL_LINES);
+    ::rlBegin(RL_LINES);
 
     // Draw lines between each pair of vertices
     for (size_t i = 0; i < vertices.size(); ++i) {
       const Vector2& start = vertices[i];
       const Vector2& end = vertices[(i + 1) % vertices.size()];  // Wrap around
-      gfx::rlVertex2f(start.x, start.y);
-      gfx::rlVertex2f(end.x, end.y);
+      ::rlVertex2f(start.x, start.y);
+      ::rlVertex2f(end.x, end.y);
     }
   }
 
-  gfx::rlEnd();
+  ::rlEnd();
 }
 
 
 
-void Polygon2D::Clear() {
+void Polygon2DImpl::Clear() {
     mPoints.clear();
 }
 
-size_t Polygon2D::GetPointCount() const {
+size_t Polygon2DImpl::GetPointCount() const {
     return mPoints.size();
 }
 
-ColoredPoint2D Polygon2D::GetPoint(size_t aIndex) const {
+ColoredPoint2D Polygon2DImpl::GetPoint(size_t aIndex) const {
     if (aIndex < mPoints.size()) {
         return mPoints[aIndex];
     }

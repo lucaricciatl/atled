@@ -1,24 +1,27 @@
-
-
+# Add raylib as a subdirectory
 add_subdirectory(raylib)
 
 # Create a library from the submodule's source files
-add_library(external src/input.cpp src/gfx.cpp)
+# Add the actual source files or replace with appropriate sources for the "external" library
+add_library(external INTERFACE
+    # Add the source files of the external library here
+    # For example: external.cpp, another_source.cpp
+)
 
 # Link raylib to the external library
-target_link_libraries(external raylib)
+target_link_libraries(external INTERFACE raylib)
 
 # Set visibility properties for the external library
 set_target_properties(external PROPERTIES
-    FOLDER "modules"
-    CXX_VISIBILITY_PRESET hidden  # Hide symbols by default
-    VISIBILITY_INLINES_HIDDEN YES # Hide inline symbols as well
+    FOLDER "modules/external"
+    CXX_VISIBILITY_PRESET hidden           # Hide symbols by default
+    VISIBILITY_INLINES_HIDDEN YES          # Hide inline symbols as well
 )
 
-set_target_properties(external PROPERTIES FOLDER "modules/external")
+# Add include directories for the external library
+target_include_directories(external INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-target_include_directories(external PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-
+# Organize raylib and other targets under the same folder structure
 set_target_properties(raylib PROPERTIES FOLDER "modules/external")
 set_target_properties(uninstall PROPERTIES FOLDER "modules/external")
 set_target_properties(update_mappings PROPERTIES FOLDER "modules/external")

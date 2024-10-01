@@ -49,11 +49,11 @@ void PolygonBuffer2D::SetBuffer(std::vector<ColoredPoint2D> aBuffer) {
     mBuffer = std::move(aBuffer);  // Efficient move to avoid copying
 }
 
-// Load the buffer points into the Polygon2D object for drawing
+// Load the buffer points into the Polygon2DImpl object for drawing
 void PolygonBuffer2D::LoadBuffer() {
     mPolygon.Clear();  // Clear the polygon before loading new points
     for (const auto& point : mBuffer) {
-        mPolygon.AddPoint(point);  // Assuming Polygon2D has AddPoint() method
+        mPolygon.AddPoint(point);  // Assuming Polygon2DImpl has AddPoint() method
     }
 }
 
@@ -68,11 +68,11 @@ void PolygonBuffer2D::AppendToBuffer(ColoredPoint2D aPoint) {
     mBuffer.emplace_back(std::move(aPoint));  // Move to avoid copying
 }
 
-// Draw the buffer by drawing the Polygon2D
+// Draw the buffer by drawing the Polygon2DImpl
 void PolygonBuffer2D::DrawBuffer() {
     mPolygon.Clear();             // Clear any previous points in mPolygon
-    mPolygon.AddPoints(mBuffer);  // Assuming Polygon2D has AddPoints() for bulk insertion
-    mPolygon.Draw(true);              // Assuming Polygon2D has a Draw() method to render the polygon
+    mPolygon.AddPoints(mBuffer);  // Assuming Polygon2DImpl has AddPoints() for bulk insertion
+    mPolygon.Draw(true);              // Assuming Polygon2DImpl has a Draw() method to render the polygon
 }
 
 }  // namespace graphics

@@ -6,7 +6,7 @@
 #include "windowFactory.hpp"
 #include "Camera2D.hpp"
 #include "Camera3D.hpp"
-#include "gfx.hpp"
+#include "raylib.h"
 
 namespace {
 static constexpr int defaultHeight = 420;
@@ -42,7 +42,7 @@ GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
 
 GraphicsContext::~GraphicsContext() { mWindow->CloseWindow(); }
 
-void GraphicsContext::InitWindowManager(std::vector<gfx::ConfigFlags> flags) {
+void GraphicsContext::InitWindowManager(std::vector<::ConfigFlags> flags) {
   for (auto flag : flags) {
     SetFlag(flag);
   }
@@ -60,15 +60,15 @@ void GraphicsContext::InitWindowManager() {
 }
 
 // Function to unset a flag (or multiple flags)
-void GraphicsContext::UnsetFlag(gfx::ConfigFlags flag) {
+void GraphicsContext::UnsetFlag(ConfigFlags flag) {
   currentFlags &= ~flag;         // Unset the specific flag(s)
   SetConfigFlags(currentFlags);  // Update the window flags
 }
 
-void GraphicsContext::SetFlag(gfx::ConfigFlags flag) {
+void GraphicsContext::SetFlag(ConfigFlags flag) {
   // Set the configuration flags using the provided flags
   currentFlags |= flag;  // Set the specific flag(s)
-  gfx::SetConfigFlags(currentFlags);
+  ::SetConfigFlags(currentFlags);
 }
 
 void GraphicsContext::SetTitle(const char* title) {
@@ -88,9 +88,9 @@ std::shared_ptr<CameraBase> GraphicsContext::GetCamera() {
 
 int GraphicsContext::GetHeight() const { return windowHeight; }
 
-void GraphicsContext::BeginDrawing() const { gfx::BeginDrawing(); }
-void GraphicsContext::EndDrawing() const { gfx::EndDrawing(); }
+void GraphicsContext::BeginDrawing() const { ::BeginDrawing(); }
+void GraphicsContext::EndDrawing() const { ::EndDrawing(); }
 
-void GraphicsContext::Clear(Color aColor) { gfx::ClearBackground(aColor); };
+void GraphicsContext::Clear(Color aColor) { ::ClearBackground(aColor); };
 
 }  // namespace graphics

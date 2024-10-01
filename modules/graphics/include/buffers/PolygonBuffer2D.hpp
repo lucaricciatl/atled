@@ -2,7 +2,7 @@
 #define POLYGONBUFFER2D_HPP
 
 #include <vector>
-#include "Polygon2D.hpp"
+#include "Polygon2DImpl.hpp"
 #include "PointBuffer2D.hpp"
 #include "Buffer2D.hpp"
 
@@ -34,7 +34,7 @@ class PolygonBuffer2D : public Buffer2D {
     // Set the buffer with a new set of points using move semantics
     void SetBuffer(std::vector<ColoredPoint2D> aBuffer);
 
-    // Load the buffer points into the Polygon2D object for drawing
+    // Load the buffer points into the Polygon2DImpl object for drawing
     void LoadBuffer();
 
     // Append multiple points to the buffer, using reserve for optimization
@@ -43,12 +43,12 @@ class PolygonBuffer2D : public Buffer2D {
     // Append a single point to the buffer using emplace_back
     void AppendToBuffer(ColoredPoint2D aPoint);
 
-    // Draw the buffer by drawing the Polygon2D
+    // Draw the buffer by drawing the Polygon2DImpl
     void DrawBuffer() override;
 
 private:
     std::vector<ColoredPoint2D> mBuffer;  // Buffer to store points
-    Polygon2D mPolygon;                   // Polygon object for drawing
+    Polygon2DImpl mPolygon;                   // Polygon object for drawing
 };
 
 }  // namespace graphics

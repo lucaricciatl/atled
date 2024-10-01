@@ -4,7 +4,7 @@ add_library(graphics
     src/GraphicsManager.cpp
     src/Polyline2D.cpp 
     src/Polyline3D.cpp
-    src/Polygon2D.cpp
+    src/Polygon2DImpl.cpp
     src/LayerManager.cpp
     src/BuffersManager.cpp
     src/TriangleBuffer2D.cpp
@@ -15,7 +15,6 @@ add_library(graphics
     src/PolygonBuffer2D.cpp
     src/Layer.cpp
     src/Pixel.cpp
-    src/TextRenderer.cpp
     src/rectangle.cpp 
     src/RegularPolygon.cpp 
     src/Circle.cpp 

@@ -1,5 +1,5 @@
 #include "Mouse.hpp"
-#include "input.hpp"
+#include "raylib.h"
 #include "types.hpp"
 #include <iostream>
 namespace input {
@@ -11,53 +11,53 @@ Mouse::~Mouse() {
 }
 
 // Cursor control functions
-void Mouse::ShowCursor() { input::ShowCursor(); }
-void Mouse::HideCursor() { input::HideCursor(); }
-bool Mouse::IsCursorHidden() const { return input::IsCursorHidden(); }
-void Mouse::EnableCursor() { input::EnableCursor(); }
-void Mouse::DisableCursor() { input::DisableCursor(); }
-bool Mouse::IsCursorOnScreen() const { return input::IsCursorOnScreen(); }
+void Mouse::ShowCursor() { ::ShowCursor(); }
+void Mouse::HideCursor() { ::HideCursor(); }
+bool Mouse::IsCursorHidden() const { return ::IsCursorHidden(); }
+void Mouse::EnableCursor() { ::EnableCursor(); }
+void Mouse::DisableCursor() { ::DisableCursor(); }
+bool Mouse::IsCursorOnScreen() const { return ::IsCursorOnScreen(); }
 
 // Mouse button functions
 bool Mouse::IsButtonPressed(int button) const {
-  return input::IsMouseButtonPressed(button);
+  return ::IsMouseButtonPressed(button);
 }
 bool Mouse::IsButtonDown(int button) const {
-  return input::IsMouseButtonDown(button);
+  return ::IsMouseButtonDown(button);
 }
 bool Mouse::IsButtonReleased(int button) const {
-  return input::IsMouseButtonReleased(button);
+  return ::IsMouseButtonReleased(button);
 }
-bool Mouse::IsButtonUp(int button) const { return input::IsMouseButtonUp(button); }
+bool Mouse::IsButtonUp(int button) const { return ::IsMouseButtonUp(button); }
 
 // Mouse position functions
-int Mouse::GetMouseX() const { return input::GetMouseX(); }
-int Mouse::GetMouseY() const { return input::GetMouseY(); }
+int Mouse::GetMouseX() const { return ::GetMouseX(); }
+int Mouse::GetMouseY() const { return ::GetMouseY(); }
 MousePosition Mouse::GetMousePosition() const {
-  Vector2 pos = input::GetMousePosition();
+  Vector2 pos = ::GetMousePosition();
   return {static_cast<int>(pos.x), static_cast<int>(pos.y)};
 }
 MousePosition Mouse::GetMouseDelta() const {
-  Vector2 delta = input::GetMouseDelta();
+  Vector2 delta = ::GetMouseDelta();
   return {static_cast<int>(delta.x), static_cast<int>(delta.y)};
 }
-void Mouse::SetMousePosition(int x, int y) { input::SetMousePosition(x, y); }
+void Mouse::SetMousePosition(int x, int y) { ::SetMousePosition(x, y); }
 void Mouse::SetMouseOffset(int offsetX, int offsetY) {
-  input::SetMouseOffset(offsetX, offsetY);
+  ::SetMouseOffset(offsetX, offsetY);
 }
 void Mouse::SetMouseScale(float scaleX, float scaleY) {
-  input::SetMouseScale(scaleX, scaleY);
+  ::SetMouseScale(scaleX, scaleY);
 }
 
 // Mouse wheel functions
-float Mouse::GetMouseWheelMove() const { return input::GetMouseWheelMove(); }
+float Mouse::GetMouseWheelMove() const { return ::GetMouseWheelMove(); }
 MousePosition Mouse::GetMouseWheelMoveV() const {
-  Vector2 move = input::GetMouseWheelMoveV();
+  Vector2 move = ::GetMouseWheelMoveV();
   return {static_cast<int>(move.x), static_cast<int>(move.y)};
 }
 
 // Mouse cursor functions
-void Mouse::SetMouseCursor(int cursor) { input::SetMouseCursor(cursor); }
+void Mouse::SetMouseCursor(int cursor) { ::SetMouseCursor(cursor); }
 
 // Start the mouse thread
 void Mouse::Start() {
