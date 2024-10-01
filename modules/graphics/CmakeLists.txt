@@ -20,7 +20,10 @@ add_library(graphics
     src/Layer.cpp
     src/Pixel.cpp
     src/TextRenderer.cpp
-
+    src/rectangle.cpp 
+    src/RegularPolygon.cpp 
+    src/Circle.cpp 
+    src/Arc.cpp
 
 )
 
