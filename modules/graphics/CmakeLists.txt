@@ -1,6 +1,5 @@
 # Create a library from the submodule's source files
 add_library(graphics
-    src/CameraManager.cpp
     src/GraphicsContext.cpp
     src/GraphicsManager.cpp
     src/Polyline2D.cpp 
@@ -8,9 +7,6 @@ add_library(graphics
     src/Polygon2D.cpp
     src/LayerManager.cpp
     src/BuffersManager.cpp
-    #src/SharedrManager.cpp
-    #src/Texture2D.cpp
-    #privates
     src/TriangleBuffer2D.cpp
     src/PointBuffer2D.cpp
     src/PointBuffer3D.cpp

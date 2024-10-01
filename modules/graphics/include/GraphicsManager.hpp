@@ -5,8 +5,6 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-
-#include "CameraManager.hpp"
 #include "GraphicsContext.hpp"
 #include "IDisplay.hpp"
 
@@ -49,7 +47,6 @@ class GraphicsManager {
  protected:
   std::unique_ptr<std::thread> mThread;
   std::shared_ptr<GraphicsContext> mContext;
-  std::shared_ptr<CameraManager> mCamera;
   std::shared_ptr<GfxConfig> mConfigs;
   std::unique_ptr<IDisplay> mDisplay;
 };

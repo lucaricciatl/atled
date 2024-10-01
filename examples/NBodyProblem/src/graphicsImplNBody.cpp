@@ -23,7 +23,7 @@ struct Body {
 // Constants and Input
 namespace {
 const float G = 6.67430e-9f;   // Gravitational constant
-const float deltaTime = 0.03f;  // Fixed time step
+const float deltaTime = 0.05f;  // Fixed time step
 const float softening = 6.0f;  // Softening factor to prevent singularity
 float stime = 0.0f;            // Simulation time
 input::KeyboardInput Keyboard;
