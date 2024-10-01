@@ -8,16 +8,16 @@
 
 class Arc : public Shape {
 private:
-    std::vector<double> center; // 2D center (x, y)
+    Coordinates2D center; // 2D center (x, y)
     double radius;              // Radius of the arc
-    double angle;               // Angle of the arc in degrees
+    double angle;               // Angle of the arc in degrees clockwise
 
 public:
     // Constructor that accepts center (2D vector), radius, and angle
-    Arc(const std::vector<double>& aCenter, double aRadius, double aAngle);
+    Arc(const Coordinates2D& aCenter, double aRadius, double aAngle);
 
     // Getter for center
-    std::vector<double> getCenter() const;
+    Coordinates2D getCenter() const;
 
     // Getter for radius
     double getRadius() const;
@@ -26,7 +26,7 @@ public:
     double getAngle() const;
 
     // Setter for center
-    void setCenter(const std::vector<double>& aCenter);
+    void setCenter(const Coordinates2D& aCenter);
 
     // Setter for radius
     void setRadius(double aRadius);

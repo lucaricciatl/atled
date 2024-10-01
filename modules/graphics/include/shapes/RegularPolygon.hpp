@@ -8,17 +8,17 @@
 
 class RegularPolygon : public Shape {
 private:
-    std::vector<double> center; // 2D center (x, y)
+    Coordinates2D center; // 2D center (x, y)
     int sides;                  // Number of sides
     double sideLength;          // Length of each side
     double radius;              // Radius of the polygon
 
 public:
     // Constructor that accepts the center (2D vector), number of sides, side length, and radius
-    RegularPolygon(const std::vector<double>& aCenter, int s, double length, double r);
+    RegularPolygon(const Coordinates2D& aCenter, int s, double length, double r);
 
     // Getter for center
-    std::vector<double> getCenter() const;
+    Coordinates2D getCenter() const;
 
     // Getter for sides
     int getSides() const;
@@ -30,7 +30,7 @@ public:
     double getRadius() const;
 
     // Setter for center
-    void setCenter(const std::vector<double>& aCenter);
+    void setCenter(const Coordinates2D& aCenter);
 
     // Setter for sides
     void setSides(int s);

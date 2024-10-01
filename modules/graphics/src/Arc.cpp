@@ -4,14 +4,13 @@
 #include <numbers>  // C++20 feature
 
 // Constructor implementation
-Arc::Arc(const std::vector<double>& aCenter, double aRadius, double aAngle) : center(aCenter), radius(aRadius), angle(aAngle) {
-    assert(center.size() == 2 && "Center must be a 2D vector (x, y).");
+Arc::Arc(const Coordinates2D& aCenter, double aRadius, double aAngle) : center(aCenter), radius(aRadius), angle(aAngle) {
     assert(radius > 0 && "Radius must be greater than 0.");
     assert(angle > 0 && angle <= 360 && "Angle must be between 0 and 360 degrees.");
 }
 
 // Getter for center
-std::vector<double> Arc::getCenter() const {
+Coordinates2D Arc::getCenter() const {
     return center;
 }
 
@@ -26,8 +25,7 @@ double Arc::getAngle() const {
 }
 
 // Setter for center with validation
-void Arc::setCenter(const std::vector<double>& aCenter) {
-    assert(aCenter.size() == 2 && "Center must be a 2D vector (x, y).");
+void Arc::setCenter(const Coordinates2D& aCenter) {
     center = aCenter;
 }
 
@@ -41,12 +39,4 @@ void Arc::setRadius(double aRadius) {
 void Arc::setAngle(double aAngle) {
     assert(aAngle > 0 && aAngle <= 360 && "Angle must be between 0 and 360 degrees.");
     angle = aAngle;
-}
-
-// Function to calculate the length of the arc
-double Arc::getLength() const {
-    // Arc length formula: L = 2 * pi * radius * (angle / 360)
-  return 2 *
-         #include<numbers>  // C++20 feature
-           std::numbers::pi * radius * (angle / 360.0);
 }
