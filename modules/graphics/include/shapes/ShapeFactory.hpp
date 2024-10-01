@@ -7,6 +7,7 @@
 #include "Rectangle.hpp"
 #include "RegularPolygon.hpp"
 
+namespace graphics {
 class ShapeFactory {
 public:
     // Factory method to create a Circle
@@ -18,5 +19,5 @@ public:
     // Factory method to create a RegularPolygon
     static std::unique_ptr<Shape> createRegularPolygon(const std::vector<double>& center, int sides, double sideLength, double radius);
 };
-
+}
 #endif // SHAPEFACTORY_HPP

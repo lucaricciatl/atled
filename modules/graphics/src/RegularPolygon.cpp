@@ -2,6 +2,9 @@
 
 #include <cassert>  // For assert
 
+
+namespace graphics {
+
 // Constructor implementation
 RegularPolygon::RegularPolygon(const Coordinates2D& aCenter, int s,
                                double length, double r) : center(aCenter), sides(s), sideLength(length), radius(r) {
@@ -43,4 +46,6 @@ void RegularPolygon::setSideLength(double length) {
 void RegularPolygon::setRadius(double r) {
   assert(r > 0 && "Radius must be greater than 0.");
   radius = r;
+}
+
 }

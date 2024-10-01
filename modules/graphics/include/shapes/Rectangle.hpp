@@ -4,6 +4,9 @@
 #include "Shape.hpp"
 #include <vector>
 
+
+namespace graphics {
+
 class Rectangle : public Shape {
 private:
     Coordinates2D mUpperRight; // Upper right corner (x, y)
@@ -21,5 +24,7 @@ public:
     void setUpperRight(const Coordinates2D& aUpperRight);
     void setLowerLeft(const Coordinates2D& aLowerLeft);
 };
+
+}
 
 #endif // RECTANGLE_HPP

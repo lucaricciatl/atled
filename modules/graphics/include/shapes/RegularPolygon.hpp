@@ -6,6 +6,8 @@
 #include <iostream>
 #include <cmath>
 
+namespace graphics {
+
 class RegularPolygon : public Shape {
 private:
     Coordinates2D center; // 2D center (x, y)
@@ -43,4 +45,5 @@ public:
 
 };
 
+}
 #endif // REGULARPOLYGON_HPP

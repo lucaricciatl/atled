@@ -3,9 +3,12 @@
 #include "shape.hpp"
 #include <vector>
 
+
+namespace graphics {
+
 class Circle: public Shape {
 private:
-    Coordinates2D mCenter; // 2D center (x, y)
+    Coordinates2D mCenter;       // 2D center (x, y)
     float mRadius;               // Radius of the circle
 
 public:
@@ -25,4 +28,5 @@ public:
     void setCenter(const Coordinates2D& aCenter);
 };
 
+}
 #endif // CIRCLE_HPP

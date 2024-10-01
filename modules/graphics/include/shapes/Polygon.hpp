@@ -5,6 +5,9 @@
 #include <vector>
 #include <iostream>
 
+
+namespace graphics {
+
 class Polygon : public Shape {
 private:
     std::vector<Coordinates2D> points; // List of points (each point is a 2D vector)
@@ -18,5 +21,7 @@ public:
 
     void SetPoints(const std::vector<Coordinates2D>& aPoints);
 };
+
+}
 
 #endif // POLYGON_HPP

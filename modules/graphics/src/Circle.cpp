@@ -4,6 +4,9 @@
 #include <iostream>
 #include <stdexcept>  // For std::invalid_argument
 
+
+namespace graphics {
+
 // Constructor implementation
 Circle::Circle(const Coordinates2D& aCenter, const float& aRadius)
     : mRadius(aRadius) {
@@ -26,4 +29,5 @@ void Circle::setRadius(const float& aRadius) {
 // Setter for center with assert
 void Circle::setCenter(const Coordinates2D& aCenter) {
   mCenter = aCenter;
+}
 }

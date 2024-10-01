@@ -6,6 +6,9 @@
 #include <iostream>
 #include <cmath>
 
+
+namespace graphics {
+
 class Arc : public Shape {
 private:
     Coordinates2D center; // 2D center (x, y)
@@ -37,5 +40,7 @@ public:
     // Function to calculate the length of the arc
     double getLength() const;
 };
+
+}
 
 #endif // ARC_HPP

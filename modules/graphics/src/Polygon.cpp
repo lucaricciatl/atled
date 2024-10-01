@@ -2,6 +2,9 @@
 #include <cassert>  // For assert
 #include <cmath>    // For sqrt
 
+
+namespace graphics {
+
 // Constructor implementation
 Polygon::Polygon(const std::vector<Coordinates2D>& aPoints) {
     assert(aPoints.size() >= 3 && "A polygon must have at least 3 points.");
@@ -17,4 +20,6 @@ std::vector<Coordinates2D> Polygon::getPoints() const {
 void Polygon::SetPoints(const std::vector<Coordinates2D>& aPoints) {
     assert(aPoints.size() >= 3 && "A polygon must have at least 3 points.");
     points = aPoints;
+}
+
 }

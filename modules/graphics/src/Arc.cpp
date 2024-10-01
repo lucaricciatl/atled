@@ -3,6 +3,8 @@
 #include <cmath>    // For M_PI
 #include <numbers>  // C++20 feature
 
+
+namespace graphics {
 // Constructor implementation
 Arc::Arc(const Coordinates2D& aCenter, double aRadius, double aAngle) : center(aCenter), radius(aRadius), angle(aAngle) {
     assert(radius > 0 && "Radius must be greater than 0.");
@@ -39,4 +41,5 @@ void Arc::setRadius(double aRadius) {
 void Arc::setAngle(double aAngle) {
     assert(aAngle > 0 && aAngle <= 360 && "Angle must be between 0 and 360 degrees.");
     angle = aAngle;
+}
 }
