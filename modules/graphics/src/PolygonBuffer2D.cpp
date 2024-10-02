@@ -40,7 +40,7 @@ bool PolygonBuffer2D::IsEmpty() const noexcept {
 }
 
 // Get a constant reference to the buffer
-const std::vector<ColoredPoint2D>& PolygonBuffer2D::GetBuffer() const noexcept {
+std::vector<ColoredPoint2D> PolygonBuffer2D::GetBuffer() const noexcept {
     return mBuffer;
 }
 

@@ -8,7 +8,7 @@
 namespace graphics {
 
 class Polygon2DImpl {
-public:
+ public:
     // Add a single point to the polygon
     void AddPoint(ColoredPoint2D aPoint);
 

@@ -10,16 +10,14 @@ namespace graphics {
 
 class Polygon : public Shape {
 private:
-    std::vector<Coordinates2D> points; // List of points (each point is a 2D vector)
 
 public:
     // Constructor that accepts a list of points
-    Polygon(const std::vector<Coordinates2D>& aPoints);
+    Polygon(std::vector<Coordinates2D> aPoints, Color aColor);
 
-    // Getter for the list of points
-    std::vector<Coordinates2D> getPoints() const;
+    void SetPoints(std::vector<Coordinates2D> aPoints,Color aColor);
 
-    void SetPoints(const std::vector<Coordinates2D>& aPoints);
+    void Draw();
 };
 
 }

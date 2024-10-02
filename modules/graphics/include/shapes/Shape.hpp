@@ -3,27 +3,24 @@
 
 #include <iostream>
 #include <PolygonBuffer2D.hpp>
-
+#include "PointBuffer2D.hpp"
 
 namespace graphics {
-
-struct Coordinates2D {
-  float x, y;
-};
 
 class Shape {
  public:
   virtual ~Shape() = default;
 
-  void SetColor(float aColor);
-  void Translate();
+  void SetColor(Color aColor);
+  void Translate(float dx, float dy);
   void TranslateX(float aX);
   void TranslateY(float aY);
   void Rotate(const float aAngle);
 
- protected:
-  PolygonBuffer2D aBuffer;
+   protected:
+  PolygonBuffer2D mBuffer;
+  ::Color mColor;  // Color of the shape
 };
+}  // namespace graphics
 #endif  // SHAPE_HPP
 
-}
