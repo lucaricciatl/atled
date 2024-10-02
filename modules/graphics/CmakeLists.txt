@@ -18,7 +18,9 @@ add_library(graphics
     src/rectangle.cpp 
     src/RegularPolygon.cpp 
     src/Circle.cpp 
+    src/Polygon.cpp 
     src/Arc.cpp
+    src/Shape.cpp
 
 )
 

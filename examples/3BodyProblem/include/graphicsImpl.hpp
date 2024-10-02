@@ -17,5 +17,5 @@ public :
   std::shared_ptr<graphics::Buffer2D> lb;
   std::shared_ptr<graphics::Buffer2D> polyBuffer ;
   std::shared_ptr<graphics::Buffer2D> polyBuffer2;
-    std::shared_ptr<graphics::Buffer2D> polyBuffer3;
+  std::shared_ptr<graphics::Buffer2D> polyBuffer3;
 };

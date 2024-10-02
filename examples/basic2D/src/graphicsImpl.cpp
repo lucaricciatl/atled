@@ -1,6 +1,6 @@
 #include "graphicsImpl.hpp"
 #include <iostream>
-
+#include "Polygon.hpp"
 using namespace graphics;
 
 namespace {
@@ -82,11 +82,16 @@ void GraphicsManagerImpl::Render() {
     points2.emplace_back(x3, y3, colrt);
 
     int x4 = static_cast<int>(400 + 0);
-    int y4 = static_cast<int>(200 + 100);
+    int y4 = static_cast<int>(200 + 600);
     points2.emplace_back(x4, y4, colrt);
     // Set the points buffer to the polygon buffer
-    polyBuffer2->SetBuffer(points2);
-    polyBuffer2->DrawBuffer();  // Draw the oscillating polygon
+
+    // Create a Polygon object
+    graphics::Polygon polygon(points2);
+
+  // Draw the polygon
+  polygon.Draw();
+
 
     // 3. Draw an oscillating irregular polygon
     {

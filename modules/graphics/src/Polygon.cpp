@@ -25,8 +25,14 @@ std::vector<ColoredPoint2D> TransformToColoredPoints(const std::vector<Coordinat
 }
 // Constructor that accepts a list of points and a color
 Polygon::Polygon(std::vector<Coordinates2D> aPoints, Color aColor) {
-    SetPoints(aPoints,aColor);
+    mBuffer.SetBuffer(TransformToColoredPoints(aPoints,aColor));
+    mBuffer.LoadBuffer();
 }
+
+Polygon::Polygon(std::vector<ColoredPoint2D> aPoints){
+    mBuffer.SetBuffer(aPoints);
+    mBuffer.LoadBuffer();
+};
 
 // Setter for the list of points with validation
 void Polygon::SetPoints(std::vector<Coordinates2D> aPoints,Color aColor) {
@@ -34,6 +40,10 @@ void Polygon::SetPoints(std::vector<Coordinates2D> aPoints,Color aColor) {
     mBuffer.SetBuffer(TransformToColoredPoints(aPoints,aColor));
     mBuffer.LoadBuffer();
 }
+void Polygon::SetPoints(std::vector<ColoredPoint2D> aPoints) {
+  mBuffer.SetBuffer(aPoints);
+  mBuffer.LoadBuffer();
+};
 
 // Setter for the list of points with validation
 void Polygon::Draw() {
