@@ -11,15 +11,16 @@ class Shape {
  public:
   virtual ~Shape() = default;
 
-  void SetColor(Color aColor);
   void Translate(float dx, float dy);
   void TranslateX(float aX);
   void TranslateY(float aY);
   void Rotate(const float aAngle);
+  void Draw();
 
    protected:
   PolygonBuffer2D mBuffer;
-  ::Color mColor;  // Color of the shape
+
+
 };
 }  // namespace graphics
 #endif  // SHAPE_HPP

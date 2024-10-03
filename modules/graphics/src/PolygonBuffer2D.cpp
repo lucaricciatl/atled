@@ -70,8 +70,6 @@ void PolygonBuffer2D::AppendToBuffer(ColoredPoint2D aPoint) {
 
 // Draw the buffer by drawing the Polygon2DImpl
 void PolygonBuffer2D::DrawBuffer() {
-    mPolygon.Clear();             // Clear any previous points in mPolygon
-    mPolygon.AddPoints(mBuffer);  // Assuming Polygon2DImpl has AddPoints() for bulk insertion
     mPolygon.Draw(true);              // Assuming Polygon2DImpl has a Draw() method to render the polygon
 }
 

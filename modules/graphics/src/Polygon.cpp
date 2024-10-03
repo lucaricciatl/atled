@@ -45,9 +45,4 @@ void Polygon::SetPoints(std::vector<ColoredPoint2D> aPoints) {
   mBuffer.LoadBuffer();
 };
 
-// Setter for the list of points with validation
-void Polygon::Draw() {
-    mBuffer.DrawBuffer();
-}
-
 }

@@ -5,10 +5,7 @@
 
 namespace graphics {
 
-// Set the color for the shape
-  void Shape::SetColor(Color aColor) {
-    mColor = aColor;
-  }
+
 
   // Translate only in X direction by aX
   void Shape::TranslateX(float aX) {
@@ -38,6 +35,7 @@ void Shape::Rotate(const float aAngle) {
     }
 
     // Optionally reload the buffer into the drawing object
+    
     mBuffer.LoadBuffer();
 }
 // Translate the shape by dx and dy
@@ -50,5 +48,9 @@ void Shape::Translate(float dx, float dy) {
 
     // Optionally reload the buffer into the drawing object
     mBuffer.LoadBuffer();
+}
+
+void Shape::Draw() {
+  mBuffer.DrawBuffer();
 }
 }

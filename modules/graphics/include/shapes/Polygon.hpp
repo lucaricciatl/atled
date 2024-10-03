@@ -19,7 +19,7 @@ public:
 
     void SetPoints(std::vector<Coordinates2D> aPoints,Color aColor);
     void SetPoints(std::vector<ColoredPoint2D> aPoints);
-    void Draw();
+
 };
 
 }
