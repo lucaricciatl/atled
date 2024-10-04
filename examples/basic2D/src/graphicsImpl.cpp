@@ -1,6 +1,8 @@
 #include "graphicsImpl.hpp"
 #include <iostream>
 #include "Polygon.hpp"
+#include "Arc.hpp"
+
 using namespace graphics;
 
 namespace {
@@ -20,10 +22,18 @@ void GraphicsManagerImpl::Init() {
   polyBuffer2 = bm->createBuffer(BufferType::POLY2D);
 }
 
+// Define a function to add points
+void addColoredPoint(std::vector<ColoredPoint2D>& points, int x, int y,
+                     Color color) {
+  points.emplace_back(x, y, color);
+}
+
 void GraphicsManagerImpl::Render() {
   if (mContext->isReady) {
     mContext->BeginDrawing();
 
+    auto col = Color(0, 0, 0, 23);
+    mContext->Clear(col);
     // 1. Draw a line with oscillating points
     {
       std::vector<ColoredPoint2D> linePoints;
@@ -68,53 +78,41 @@ void GraphicsManagerImpl::Render() {
       lb->DrawBuffer();
     }
 
-    std::vector<ColoredPoint2D> points2;
-    auto colrt = RED;
-    int x1 = static_cast<int>(400 + 200);
-    int y1 = static_cast<int>(200 + 130);
-    points2.emplace_back(x1, y1, colrt);
-    int x2 = static_cast<int>(400 + 130);
-    int y2 = static_cast<int>(200 + 120);
-    points2.emplace_back(x2, y2, colrt);
+// Define colors
+    const auto colorRed = RED;
+    const auto colorBlue = BLUE;
 
-    int x3 = static_cast<int>(400 + 100);
-    int y3 = static_cast<int>(200 + 0);
-    points2.emplace_back(x3, y3, colrt);
+    // Define the center, radius, and angles for the arc
+    Coordinates2D arcCenter = {300, 300};  // Example center coordinates
+    double arcRadius = 200.0;              // Example radius
+    double startAngle = 0.0;               // Start angle in degrees
+    double endAngle = 70.0;               // End angle in degrees
+    double thickness = 70.0;                // End angle in degrees
 
-    int x4 = static_cast<int>(400 + 0);
-    int y4 = static_cast<int>(200 + 600);
-    points2.emplace_back(x4, y4, colrt);
-    // Set the points buffer to the polygon buffer
+    // Create an Arc object (this will generate the points for the arc)
+    graphics::Arc arc(arcCenter, arcRadius, startAngle, endAngle,thickness, colorRed);
 
-    // Create a Polygon object
-    graphics::Polygon polygon(points2);
+    arc.Draw();
 
-  // Draw the polygon
-  polygon.Draw();
+    // Create polygons
+    //graphics::Polygon polygon1(points2);
 
+    // Add points to points3 (keeping this as is for the second polygon)
+    std::vector<ColoredPoint2D> points3;
+    addColoredPoint(points3, 200, 630, colorBlue);
+    addColoredPoint(points3, 130, 920, colorBlue);
+    addColoredPoint(points3, 500, 0, colorBlue);
+    addColoredPoint(points3, 400, 300, colorBlue);
 
+    graphics::Polygon polygon2(points3);
+
+    // Draw polygons
+    //polygon1.Draw();
+    polygon2.Draw();
     // 3. Draw an oscillating irregular polygon
-    {
-      std::vector<ColoredPoint2D> points;
-      auto colrt = RED;
-      points.emplace_back(static_cast<int>(700 + 0), static_cast<int>(700 + 0),
-                          colrt);  // Example points
-      for (int i = 0; i < (53 * sin(times * 0.1)); ++i) {
-        // Apply oscillation to the polygon points
-        int x = static_cast<int>(700 + 100 * sin(2 * PI / 52 * i));
-        int y = static_cast<int>(700 + 100 * cos(2 * PI / 52 * i));
-        points.emplace_back(x, y, colrt);
-      }
-
-      // Set the points buffer to the polygon buffer
-      polyBuffer->SetBuffer(points);
-      polyBuffer->DrawBuffer();  // Draw the oscillating polygon
-    }
-
+    
     // 4. Draw an oscillating irregular polygon
 
-    auto col = Color(0,0,0,23);
-    mContext->Clear(col);
     mContext->EndDrawing();
 
     times += 0.1f;  // Increment time for oscillation

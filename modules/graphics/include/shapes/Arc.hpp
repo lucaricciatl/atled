@@ -12,8 +12,8 @@ namespace graphics {
 class Arc : public Shape {
  public:
   // Constructor to initialize Arc with center, radius, angle, and color
-  Arc(const Coordinates2D& aCenter, double aRadius, double aStartAngle,
-      double aEndAngle, const Color& aColor);
+  Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
+      double aEndAngle, double thickness, const Color& aColor);
   // Setter for center
   void setCenter(const Coordinates2D& aCenter);
 
@@ -32,18 +32,20 @@ class Arc : public Shape {
   // Getter for angle
   double getAngle() const;
 
+
+  void Draw();
   // Redraw the arc (used when any of the properties change)
   void updateArc();
 
  private:
+  int ComputePointsNumber();
   Coordinates2D center;
-  Color mColor;
+  ::Color mColor;
   double radius;
   double mStartAngle;
   double mEndAngle;
+  double mThickess;
 
-  // Internal method to generate points for the arc
-  std::vector<ColoredPoint2D> generateArcPoints(int aPointCount) const;
 };
 }  // namespace graphics
 
