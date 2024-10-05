@@ -1,4 +1,5 @@
 project(examples)
 add_subdirectory(basic2D)
+add_subdirectory(shapesex)
 add_subdirectory(3BodyProblem)
 add_subdirectory(NBodyProblem)
