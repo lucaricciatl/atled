@@ -92,7 +92,19 @@ void GraphicsManager::RenderLoop() {
 
     if (true) {
       try {
-        Render();
+        if (mContext->isReady) {
+          if (!WindowShouldClose())  // Detect window close button or ESC key
+          {
+            // Draw
+            //-----------------------------------------------------
+
+            Render();
+
+            //-----------------------------------------------------
+          } else {
+            CloseWindow();
+          }
+        }
 
       } catch (const std::exception& e) {
         std::cerr << "Render function threw an exception: " << e.what()
@@ -116,6 +128,7 @@ void GraphicsManager::Init() {
 }
 
 void GraphicsManager::Render() {
+  BeginDrawing();
+  EndDrawing();
 }
-
 }  // namespace graphics

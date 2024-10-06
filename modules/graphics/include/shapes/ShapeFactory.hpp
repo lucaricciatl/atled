@@ -6,18 +6,31 @@
 #include "Circle.hpp"
 #include "Rectangle.hpp"
 #include "RegularPolygon.hpp"
+#include "Arc.hpp"
 
 namespace graphics {
+
+enum class shapeType{
+    circle,
+    arc,
+    rectangle,
+    regularPolygon,
+    };
+
 class ShapeFactory {
 public:
-    // Factory method to create a Circle
-    static std::unique_ptr<Shape> createCircle(const std::vector<double>& center, double radius);
 
-    // Factory method to create a Rectangle
-    static std::unique_ptr<Shape> createRectangle(const std::vector<double>& upperRight, const std::vector<double>& lowerLeft);
+    static std::shared_ptr<Shape> CreateShape(const shapeType aType);
+    //// Factory method to create a Circle
+    //static std::shared_ptr<Shape> createCircle(const std::vector<double>& center, double radius);
 
-    // Factory method to create a RegularPolygon
-    static std::unique_ptr<Shape> createRegularPolygon(const std::vector<double>& center, int sides, double sideLength, double radius);
+    //// Factory method to create a Rectangle
+    //static std::shared_ptr<Shape> createRectangle(const std::vector<double>& upperRight, const std::vector<double>& lowerLeft);
+
+    //// Factory method to create a RegularPolygon
+    //static std::shared_ptr<Shape> createRegularPolygon(const std::vector<double>& center, int sides, double sideLength, double radius);
+
+    static std::shared_ptr<Shape> createArc(const std::vector<double>& center, double radius, double startAngle, double endAngle, double thickness);
 };
 }
 #endif // SHAPEFACTORY_HPP

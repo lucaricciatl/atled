@@ -21,7 +21,7 @@ add_library(graphics
     src/Polygon.cpp 
     src/Arc.cpp
     src/Shape.cpp
-
+    src/ShapeFactory.cpp
 )
 
 # Link gfx to the graphics library

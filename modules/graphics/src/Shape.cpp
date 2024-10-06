@@ -1,56 +1,49 @@
 #include "Shape.hpp"
-#include <PolygonBuffer2D.hpp>
-#include <cmath>      // For sin and cos functions
-#include <numbers>    // For std::numbers::pi (C++20)
+#include <cmath>
+#include <numbers>
 
 namespace graphics {
 
-
-
-  // Translate only in X direction by aX
-  void Shape::TranslateX(float aX) {
+// Translate only in X direction by aX
+void Shape::TranslateX(float aX) {
     Translate(aX, 0.0f);
-  }
+}
 
-  // Translate only in Y direction by aY
-  void Shape::TranslateY(float aY) {
+// Translate only in Y direction by aY
+void Shape::TranslateY(float aY) {
     Translate(0.0f, aY);
-  }
+}
 
 // Rotate the shape by a given angle (in degrees)
-void Shape::Rotate(const float aAngle) {
-    // Convert the angle to radians
-    float radians = aAngle * std::numbers::pi / 180.0f;
+void Shape::Rotate(float aAngle) {
+    float radians = aAngle * std::numbers::pi_v<float> / 180.0f;
     
-    // Cosine and sine of the angle
-    float cosAngle = std::cos(radians);
-    float sinAngle = std::sin(radians);
+    const float cosAngle = std::cos(radians);
+    const float sinAngle = std::sin(radians);
 
     // Rotate each point around the origin (0,0)
     for (auto& point : mBuffer.GetBuffer()) {
-        float newX = point.x * cosAngle - point.y * sinAngle;
-        float newY = point.x * sinAngle + point.y * cosAngle;
+        const float newX = point.x * cosAngle - point.y * sinAngle;
+        const float newY = point.x * sinAngle + point.y * cosAngle;
         point.x = newX;
         point.y = newY;
     }
 
-    // Optionally reload the buffer into the drawing object
-    
     mBuffer.LoadBuffer();
 }
+
 // Translate the shape by dx and dy
-void Shape::Translate(float dx, float dy) {
-    // Iterate over each point in the buffer and apply the translation
+void Shape::Translate(float aDx, float aDy) {
     for (auto& point : mBuffer.GetBuffer()) {
-        point.x += dx;
-        point.y += dy;
+        point.x += aDx;
+        point.y += aDy;
     }
 
-    // Optionally reload the buffer into the drawing object
     mBuffer.LoadBuffer();
 }
 
 void Shape::Draw() {
-  mBuffer.DrawBuffer();
+    mBuffer.DrawBuffer();
 }
-}
+
+} // namespace graphics

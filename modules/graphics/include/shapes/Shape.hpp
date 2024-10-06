@@ -15,7 +15,7 @@ class Shape {
   void TranslateX(float aX);
   void TranslateY(float aY);
   void Rotate(const float aAngle);
-  void Draw();
+  virtual void Draw();
 
    protected:
   PolygonBuffer2D mBuffer;

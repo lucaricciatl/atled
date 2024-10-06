@@ -9,41 +9,32 @@
 namespace graphics {
 
 class RegularPolygon : public Shape {
-private:
-    Coordinates2D center; // 2D center (x, y)
-    int sides;                  // Number of sides
-    double sideLength;          // Length of each side
-    double radius;              // Radius of the polygon
-
 public:
-    // Constructor that accepts the center (2D vector), number of sides, side length, and radius
-    RegularPolygon(const Coordinates2D& aCenter, int s, double length, double r);
+    // Constructor
+    RegularPolygon(const Coordinates2D& aCenter, int sides, double sideLength, double radius);
 
-    // Getter for center
+    // Getters
     Coordinates2D getCenter() const;
-
-    // Getter for sides
     int getSides() const;
-
-    // Getter for side length
     double getSideLength() const;
-
-    // Getter for radius
     double getRadius() const;
 
-    // Setter for center
+    // Setters
     void setCenter(const Coordinates2D& aCenter);
-
-    // Setter for sides
-    void setSides(int s);
-
-    // Setter for side length
+    void setSides(int sides);
     void setSideLength(double length);
+    void setRadius(double radius);
 
-    // Setter for radius
-    void setRadius(double r);
+    // Additional methods
+    void Draw() override;
 
+private:
+    Coordinates2D center;
+    int sides;
+    double sideLength;
+    double radius;
 };
+
 
 }
 #endif // REGULARPOLYGON_HPP

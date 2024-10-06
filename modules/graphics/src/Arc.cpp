@@ -39,8 +39,8 @@ int Arc::ComputePointsNumber() { return ((radius + mThickess) / 20); }
 void Arc::Draw() {
   DrawRing(::Vector2(center.x, center.y), radius - mThickess,
            radius + mThickess,
-           mStartAngle,
-            mEndAngle,10, mColor);
+           mStartAngle, mEndAngle, ComputePointsNumber(),
+           mColor);
 }
     // Method to update the arc by generating points and setting them in the Polygon
 // base class

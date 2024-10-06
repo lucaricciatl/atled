@@ -10,13 +10,10 @@ float times = 0.0f;  // Initialize time variable
 }  // namespace
 
 
-void GraphicsManagerImpl::Init() {
-
-}
+void GraphicsManagerImpl::Init() {  }
 
 
 void GraphicsManagerImpl::Render() {
-  if (mContext->isReady) {
-
-  }
+  BeginDrawing();
+  EndDrawing();
 }

@@ -8,6 +8,7 @@
 #include "PointBuffer2D.hpp"
 #include "PolygonBuffer2D.hpp"
 #include "Buffer2D.hpp"
+#include "ShapeFactory.hpp"
 
 namespace graphics {
 
@@ -18,6 +19,16 @@ BuffersManager::BuffersManager() {
 BuffersManager::~BuffersManager() {
   // Destructor implementation
   mBuffers.clear();
+}
+
+
+std::shared_ptr<Shape> BuffersManager::createShapeBuffer(const shapeType type) {
+  std::shared_ptr<Shape> buffer;
+
+  buffer = ShapeFactory::CreateShape(type);
+
+  mShapeBuffers.push_back(buffer);
+  return buffer;
 }
 
 std::shared_ptr<Buffer2D> BuffersManager::createBuffer(const BufferType type) {

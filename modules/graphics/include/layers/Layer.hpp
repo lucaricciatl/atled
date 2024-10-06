@@ -19,5 +19,6 @@ class Layer {
  private:
   LayerId id;
   std::shared_ptr<BuffersManager> mBufferManager;
+  
 };
 }  // namespace graphics
