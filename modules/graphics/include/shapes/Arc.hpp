@@ -14,14 +14,13 @@ class Arc : public Shape {
   // Constructor to initialize Arc with center, radius, angle, and color
   Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
       double aEndAngle, double thickness, const Color& aColor);
+
+  Arc()  = default;
   // Setter for center
   void setCenter(const Coordinates2D& aCenter);
 
   // Setter for radius
   void setRadius(double aRadius);
-
-  // Setter for angle
-  void setAngle(double aAngle);
 
   // Getter for center
   Coordinates2D getCenter() const;
@@ -29,13 +28,18 @@ class Arc : public Shape {
   // Getter for radius
   double getRadius() const;
 
-  // Getter for angle
-  double getAngle() const;
+  void setStartAngle(double aStartAngle);
 
+  // Set end angle of the arc
+  void setEndAngle(double aEndAngle);
+  // Set thickness of the arc
+  void SetThickness(double thickness);
+  // Setters
 
-  void Draw();
-  // Redraw the arc (used when any of the properties change)
-  void updateArc();
+  void SetColor(Color& aColor);
+
+  void Draw() override;
+
 
  private:
   int ComputePointsNumber();

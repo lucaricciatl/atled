@@ -28,8 +28,12 @@ std::shared_ptr<Shape> ShapeFactory::CreateShape(const shapeType aType) {
 //}
 
 // Factory method to create an Arc
-std::shared_ptr<Shape> ShapeFactory::createArc(const std::vector<double>& center, double radius, double startAngle, double endAngle, double thickness) {
+std::shared_ptr<Arc> ShapeFactory::createArc(const std::vector<double>& center, double radius, double startAngle, double endAngle, double thickness) {
     return std::make_shared<Arc>(Coordinates2D(center[0], center[1]), radius, startAngle, endAngle, thickness, Color{255, 0, 0, 255});  // Example color
+}
+
+std::shared_ptr<Arc> ShapeFactory::createArc() {
+  return std::make_shared<Arc>();  // Example color
 }
 
 }

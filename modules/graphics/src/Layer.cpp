@@ -20,4 +20,11 @@ void Layer::SetId(LayerId aId) { id = aId; };
 std::shared_ptr<BuffersManager> Layer::GetBufferManager() {
   return mBufferManager;
 };
+
+void Layer::Draw() {
+  auto shapes = mBufferManager->getShapeBuffers();
+  for (auto shape : shapes) {
+    shape->Draw();
+  };
+}
 }  // namespace graphics

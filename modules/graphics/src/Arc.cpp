@@ -19,32 +19,36 @@ Arc::Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
   assert(radius > 0 && "Radius must be greater than 0.");
 }
 
+// Set end angle of the arc
+void Arc::setEndAngle(double aEndAngle) { mEndAngle = aEndAngle; }
+
+// Set thickness of the arc
+void Arc::SetThickness(double thickness) { mThickess = thickness; }
+
 // Setters
-void Arc::setCenter(const Coordinates2D& aCenter) {
-  center = aCenter;
-}
+void Arc::setCenter(const Coordinates2D& aCenter) { center = aCenter; }
+void Arc::setStartAngle(double aStartAngle) { mStartAngle = aStartAngle; };
 
 void Arc::setRadius(double aRadius) {
   assert(aRadius > 0 && "Radius must be greater than 0.");
   radius = aRadius;
 }
 
+void Arc::SetColor(Color& aColor){ mColor = aColor; }
+
 // Getters
 Coordinates2D Arc::getCenter() const { return center; }
 
 double Arc::getRadius() const { return radius; }
 
-int Arc::ComputePointsNumber() { return ((radius + mThickess) / 20); }
+int Arc::ComputePointsNumber() { 
+   constexpr int pointsPerRadiant = 50;
+    return   ( (mEndAngle-mStartAngle)* (radius + mThickess) /pointsPerRadiant);
+}
 
 void Arc::Draw() {
   DrawRing(::Vector2(center.x, center.y), radius - mThickess,
-           radius + mThickess,
-           mStartAngle, mEndAngle, ComputePointsNumber(),
+           radius + mThickess, mStartAngle, mEndAngle, ComputePointsNumber(),
            mColor);
 }
-    // Method to update the arc by generating points and setting them in the Polygon
-// base class
-void Arc::updateArc() {
-}
-
 }  // namespace graphics

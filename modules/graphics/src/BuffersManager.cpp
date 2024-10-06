@@ -31,6 +31,10 @@ std::shared_ptr<Shape> BuffersManager::createShapeBuffer(const shapeType type) {
   return buffer;
 }
 
+void BuffersManager::AddShapeBuffer(std::shared_ptr<Arc> aArc) {
+  mShapeBuffers.push_back(aArc);
+}
+
 std::shared_ptr<Buffer2D> BuffersManager::createBuffer(const BufferType type) {
   std::shared_ptr<Buffer2D> buffer;
 
@@ -57,8 +61,12 @@ void BuffersManager::deleteBuffer(const std::shared_ptr<Buffer2D>& buffer) {
 }
 
 const std::vector<std::shared_ptr<Buffer2D>>& BuffersManager::getBuffers()
-    const {
+   {
   return mBuffers;
 }
 
+
+const std::vector<std::shared_ptr<Shape>>& BuffersManager::getShapeBuffers() {
+  return mShapeBuffers;
+}
 }  // namespace graphics

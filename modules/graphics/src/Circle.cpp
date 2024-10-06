@@ -15,16 +15,11 @@ Circle::Circle(const Coordinates2D& aCenter, const float& aRadius)
 }
 
 // Getter for radius
-float Circle::getRadius() const { return mRadius; }
+double Circle::getRadius() const { return mRadius; }
 
 // Getter for center
 Coordinates2D Circle::getCenter() const { return mCenter; }
 
-// Setter for radius with assert
-void Circle::setRadius(const float& aRadius) {
-  assert(aRadius > 0 && "Radius must be positive.");
-  mRadius = aRadius;
-}
 
 // Setter for center with assert
 void Circle::setCenter(const Coordinates2D& aCenter) {

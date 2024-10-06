@@ -104,11 +104,7 @@ void GraphicsManagerImpl::Render() {
     addColoredPoint(points3, 500, 0, colorBlue);
     addColoredPoint(points3, 400, 300, colorBlue);
 
-    graphics::Polygon polygon2(points3);
 
-    // Draw polygons
-    //polygon1.Draw();
-    polygon2.Draw();
     // 3. Draw an oscillating irregular polygon
     
     // 4. Draw an oscillating irregular polygon

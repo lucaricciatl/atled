@@ -10,14 +10,8 @@ namespace graphics {
 class Shape {
  public:
   virtual ~Shape() = default;
-
-  void Translate(float dx, float dy);
-  void TranslateX(float aX);
-  void TranslateY(float aY);
-  void Rotate(const float aAngle);
-  virtual void Draw();
-
-   protected:
+  virtual void Draw() = 0 ;
+  protected:
   PolygonBuffer2D mBuffer;
 
 

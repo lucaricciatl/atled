@@ -21,6 +21,8 @@ class BuffersManager {
   BuffersManager();
   ~BuffersManager();
   std::shared_ptr<Shape> createShapeBuffer(const shapeType type);
+  void AddShapeBuffer(
+      std::shared_ptr<Arc> aArc);
   // Create a new buffer of a specified type and add it to the manager
   std::shared_ptr<Buffer2D> createBuffer(const BufferType type);
   // Create a new buffer of a specified type and add it to the manager
@@ -28,7 +30,9 @@ class BuffersManager {
   void deleteBuffer(const std::shared_ptr<Buffer2D>& buffer);
 
   // Get all buffers
-  const std::vector<std::shared_ptr<Buffer2D>>& getBuffers() const;
+  const std::vector<std::shared_ptr<Buffer2D>>& getBuffers();
+  const std::vector<std::shared_ptr<Shape>>& getShapeBuffers();
+
 
  private:
   std::vector<std::shared_ptr<Buffer2D>> mBuffers;

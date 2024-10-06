@@ -7,7 +7,6 @@
 #include <vector>
 #include "GraphicsContext.hpp"
 #include "IDisplay.hpp"
-
 namespace graphics {
 
 
@@ -43,6 +42,11 @@ class GraphicsManager {
 
   std::atomic<bool> mRunning;
   unsigned int mFrameRate;
+
+
+  // drawing methods
+  void AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc);
+  void DrawLayer(const int& aLayerId);
 
  protected:
   std::unique_ptr<std::thread> mThread;

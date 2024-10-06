@@ -30,7 +30,8 @@ public:
     //// Factory method to create a RegularPolygon
     //static std::shared_ptr<Shape> createRegularPolygon(const std::vector<double>& center, int sides, double sideLength, double radius);
 
-    static std::shared_ptr<Shape> createArc(const std::vector<double>& center, double radius, double startAngle, double endAngle, double thickness);
+    static std::shared_ptr<Arc> createArc(const std::vector<double>& center, double radius, double startAngle, double endAngle, double thickness);
+    static std::shared_ptr<Arc> createArc();
 };
 }
 #endif // SHAPEFACTORY_HPP

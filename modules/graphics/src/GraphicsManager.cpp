@@ -6,7 +6,9 @@
 #include <iostream>
 #include <memory>
 #include <thread>
-
+#include "Arc.hpp"
+#include "ShapeFactory.hpp"
+#include "Shape.hpp"
 #include "GraphicsContext.hpp"
 #include "PolyLine2D.hpp"
 #include "PolygonBuffer2D.hpp"
@@ -131,4 +133,19 @@ void GraphicsManager::Render() {
   BeginDrawing();
   EndDrawing();
 }
+
+// drawing methods
+void GraphicsManager::AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) {
+  mContext->mLayerManager.AddLayer(aLayerId);
+  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
+  layer->GetBufferManager()->AddShapeBuffer(aArc);
+};
+
+
+void GraphicsManager::DrawLayer(const int& aLayerId) {
+  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
+  layer->Draw();
+};
+
 }  // namespace graphics
+
