@@ -21,18 +21,21 @@ class ShapeFactory {
 public:
 
     static std::shared_ptr<Shape> CreateShape(const shapeType aType);
-    //// Factory method to create a Circle
-    static std::shared_ptr<Circle> createCircle(const std::vector<double>& center, double radius);
 
-    static std::shared_ptr<Circle> createCircle(); 
+    static std::shared_ptr<Circle> CreateCircle(const std::vector<double>& center, double radius);
+    static std::shared_ptr<Circle> CreateCircle(); 
+    
+    static std::shared_ptr<Arc> CreateArc(const std::vector<double>& center,
+                                          double radius, double startAngle,
+                                          double endAngle, double thickness);
+    static std::shared_ptr<Arc> CreateArc();
     //// Factory method to create a Rectangle
     //static std::shared_ptr<Shape> createRectangle(const std::vector<double>& upperRight, const std::vector<double>& lowerLeft);
 
     //// Factory method to create a RegularPolygon
     //static std::shared_ptr<Shape> createRegularPolygon(const std::vector<double>& center, int sides, double sideLength, double radius);
 
-    static std::shared_ptr<Arc> createArc(const std::vector<double>& center, double radius, double startAngle, double endAngle, double thickness);
-    static std::shared_ptr<Arc> createArc();
+
 };
 }
 #endif // SHAPEFACTORY_HPP

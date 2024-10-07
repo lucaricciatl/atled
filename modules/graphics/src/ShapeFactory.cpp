@@ -6,22 +6,22 @@ namespace graphics {
 std::shared_ptr<Shape> ShapeFactory::CreateShape(const shapeType aType) {
     switch (aType) {
         case shapeType::arc:
-            return createArc();  // Example parameters
+            return CreateArc();  // Example parameters
         case shapeType::circle:
-            return createCircle();
+            return CreateCircle();
         default:
             return nullptr;
     }
 }
 
 //Factory method to create a Circle
-std::shared_ptr<Circle> createCircle(const std::vector<double>& center,
+std::shared_ptr<Circle> CreateCircle(const std::vector<double>& center,
                                      double radius){
 
     return std::make_shared<Circle>();
 }
 
-std::shared_ptr<Circle> ShapeFactory::createCircle() {
+std::shared_ptr<Circle> ShapeFactory::CreateCircle() {
   return std::make_shared<Circle>();  // Example color
 }
 //
@@ -36,11 +36,11 @@ std::shared_ptr<Circle> ShapeFactory::createCircle() {
 //}
 
 // Factory method to create an Arc
-std::shared_ptr<Arc> ShapeFactory::createArc(const std::vector<double>& center, double radius, double startAngle, double endAngle, double thickness) {
+std::shared_ptr<Arc> ShapeFactory::CreateArc(const std::vector<double>& center, double radius, double startAngle, double endAngle, double thickness) {
     return std::make_shared<Arc>(Coordinates2D(center[0], center[1]), radius, startAngle, endAngle, thickness, Color{255, 0, 0, 255});  // Example color
 }
 
-std::shared_ptr<Arc> ShapeFactory::createArc() {
+std::shared_ptr<Arc> ShapeFactory::CreateArc() {
   return std::make_shared<Arc>();  // Example color
 }
 

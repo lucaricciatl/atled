@@ -16,7 +16,7 @@
 
 namespace {
 constexpr unsigned int defaultFramerate = 30;
-float times = 0.0f;  // Initialize time variable
+float times = 0.0f; 
 DisplayType displayType = DisplayType::Raylib;
 }  // namespace
 
@@ -32,15 +32,13 @@ GraphicsManager::GraphicsManager() {
   }
 };
 
-// Destructor
 GraphicsManager::~GraphicsManager() {
-  // Stop the thread
   Stop();
 }
 
 void GraphicsManager::SetConfigs(GfxConfig aGfxConfigs) {
   mConfigs = std::make_shared<GfxConfig>(
-      aGfxConfigs);  // Create a shared pointer to a copy of aGfxConfigs
+      aGfxConfigs);  
 };
 
 void GraphicsManager::SetTargetFramerate(unsigned int frameRate) {
@@ -52,7 +50,6 @@ std::shared_ptr<GraphicsContext> GraphicsManager::GetGraphicsContext() {
 }
 
 void GraphicsManager::Stop() {
-  // Stop the thread and join it
   mRunning = false;
   if (mThread->joinable()) {
     mThread->join();
@@ -70,22 +67,16 @@ void GraphicsManager::Start() {
 void GraphicsManager::CameraStep() {
   using namespace std::chrono;
   auto frameDuration =
-      milliseconds(1000 / mFrameRate);  // Same frame duration as RenderLoop
-
+      milliseconds(1000 / mFrameRate);
   auto frameStart = steady_clock::now();
-
-
   auto frameEnd = steady_clock::now();
   auto elapsed = duration_cast<milliseconds>(frameEnd - frameStart);
   auto sleepTime = frameDuration - elapsed;
-
-  // Sleep for the remaining time in the frame if needed
   if (sleepTime > milliseconds(0)) {
     std::this_thread::sleep_for(sleepTime);
   }
 }
 
-// The rendering loop method
 void GraphicsManager::RenderLoop() {
   using namespace std::chrono;
   auto frameDuration = milliseconds(1000 / mFrameRate);
@@ -95,14 +86,10 @@ void GraphicsManager::RenderLoop() {
     if (true) {
       try {
         if (mContext->isReady) {
-          if (!WindowShouldClose())  // Detect window close button or ESC key
+          if (!WindowShouldClose()) 
           {
             // Draw
-            //-----------------------------------------------------
-
             Render();
-
-            //-----------------------------------------------------
           } else {
             CloseWindow();
           }
@@ -111,7 +98,7 @@ void GraphicsManager::RenderLoop() {
       } catch (const std::exception& e) {
         std::cerr << "Render function threw an exception: " << e.what()
                   << std::endl;
-        mRunning = false;  // Stop the loop on exception
+        mRunning = false;  
       }
     }
 

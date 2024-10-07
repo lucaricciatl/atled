@@ -50,24 +50,20 @@ void GraphicsContext::InitWindowManager(std::vector<::ConfigFlags> flags) {
 }
 
 void GraphicsContext::InitWindowManager() {
-  // Create the window and store it in the member variable
   mWindow = WindowFactory::CreateWindow(WindowType::Raylib);
   mCamera = CameraFactory::createCamera(CameraType::CAMERA_2D);
-  // Initialize the window with dimensions and title
   if (mWindow) {
     mWindow->InitWindow(windowWidth, windowHeight, windowTitle);
   }
 }
 
-// Function to unset a flag (or multiple flags)
 void GraphicsContext::UnsetFlag(ConfigFlags flag) {
-  currentFlags &= ~flag;         // Unset the specific flag(s)
-  SetConfigFlags(currentFlags);  // Update the window flags
+  currentFlags &= ~flag;         
+  SetConfigFlags(currentFlags);  
 }
 
 void GraphicsContext::SetFlag(ConfigFlags flag) {
-  // Set the configuration flags using the provided flags
-  currentFlags |= flag;  // Set the specific flag(s)
+  currentFlags |= flag; 
   ::SetConfigFlags(currentFlags);
 }
 

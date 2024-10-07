@@ -20,16 +20,16 @@ Arc::Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
 }
 
 // Set end angle of the arc
-void Arc::setEndAngle(double aEndAngle) { mEndAngle = aEndAngle; }
+void Arc::SetEndAngle(double aEndAngle) { mEndAngle = aEndAngle; }
 
 // Set thickness of the arc
 void Arc::SetThickness(double thickness) { mThickess = thickness; }
 
 // Setters
-void Arc::setCenter(const Coordinates2D& aCenter) { center = aCenter; }
-void Arc::setStartAngle(double aStartAngle) { mStartAngle = aStartAngle; };
+void Arc::SetCenter(const Coordinates2D& aCenter) { center = aCenter; }
+void Arc::SetStartAngle(double aStartAngle) { mStartAngle = aStartAngle; };
 
-void Arc::setRadius(double aRadius) {
+void Arc::SetRadius(double aRadius) {
   assert(aRadius > 0 && "Radius must be greater than 0.");
   radius = aRadius;
 }
@@ -37,9 +37,9 @@ void Arc::setRadius(double aRadius) {
 void Arc::SetColor(Color& aColor){ mColor = aColor; }
 
 // Getters
-Coordinates2D Arc::getCenter() const { return center; }
+Coordinates2D Arc::GetCenter() const { return center; }
 
-double Arc::getRadius() const { return radius; }
+double Arc::GetRadius() const { return radius; }
 
 int Arc::ComputePointsNumber() { 
    constexpr int pointsPerRadiant = 50;
