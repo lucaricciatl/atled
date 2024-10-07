@@ -31,8 +31,8 @@ std::shared_ptr<Shape> BuffersManager::createShapeBuffer(const shapeType type) {
   return buffer;
 }
 
-void BuffersManager::AddShapeBuffer(std::shared_ptr<Arc> aArc) {
-  mShapeBuffers.push_back(aArc);
+void BuffersManager::AddShapeBuffer(std::shared_ptr<Shape> aShape) {
+  mShapeBuffers.push_back(aShape);
 }
 
 std::shared_ptr<Buffer2D> BuffersManager::createBuffer(const BufferType type) {

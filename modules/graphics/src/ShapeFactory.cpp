@@ -6,16 +6,24 @@ namespace graphics {
 std::shared_ptr<Shape> ShapeFactory::CreateShape(const shapeType aType) {
     switch (aType) {
         case shapeType::arc:
-            return createArc({0.0, 0.0}, 1.0, 0.0, 180.0, 0.1);  // Example parameters
+            return createArc();  // Example parameters
+        case shapeType::circle:
+            return createCircle();
         default:
             return nullptr;
     }
 }
 
-//// Factory method to create a Circle
-//std::shared_ptr<Shape> ShapeFactory::createCircle(const std::vector<double>& center, double radius) {
-//    return std::make_shared<Circle>(center, radius);
-//}
+//Factory method to create a Circle
+std::shared_ptr<Circle> createCircle(const std::vector<double>& center,
+                                     double radius){
+
+    return std::make_shared<Circle>();
+}
+
+std::shared_ptr<Circle> ShapeFactory::createCircle() {
+  return std::make_shared<Circle>();  // Example color
+}
 //
 //// Factory method to create a Rectangle
 //std::shared_ptr<Shape> ShapeFactory::createRectangle(const std::vector<double>& upperRight, const std::vector<double>& lowerLeft) {

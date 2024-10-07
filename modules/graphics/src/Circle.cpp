@@ -7,12 +7,6 @@
 
 namespace graphics {
 
-// Constructor implementation
-Circle::Circle(const Coordinates2D& aCenter, const float& aRadius)
-    : mRadius(aRadius) {
-  assert(aRadius >= 0 && "Readius must be positive");
-  mCenter = aCenter;  // Store the center if it's valid
-}
 
 // Getter for radius
 double Circle::getRadius() const { return mRadius; }
@@ -24,5 +18,14 @@ Coordinates2D Circle::getCenter() const { return mCenter; }
 // Setter for center with assert
 void Circle::setCenter(const Coordinates2D& aCenter) {
   mCenter = aCenter;
+}
+
+void Circle::setColor(Color aColor) { mColor = aColor; }
+
+// Setter for center with assert
+void Circle::SetRadius(const float& aRadius) { mRadius = aRadius; }
+
+void Circle::Draw(){
+  DrawCircleV(::Vector2(mCenter.x, mCenter.y),mRadius,mColor);
 }
 }

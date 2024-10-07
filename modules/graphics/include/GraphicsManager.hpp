@@ -5,10 +5,10 @@
 #include <iostream>
 #include <thread>
 #include <vector>
+
 #include "GraphicsContext.hpp"
 #include "IDisplay.hpp"
 namespace graphics {
-
 
 struct GfxConfig {
   // Static default flag
@@ -43,9 +43,9 @@ class GraphicsManager {
   std::atomic<bool> mRunning;
   unsigned int mFrameRate;
 
-
   // drawing methods
   void AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc);
+  void AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCircle);
   void DrawLayer(const int& aLayerId);
 
  protected:

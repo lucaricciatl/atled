@@ -22,7 +22,7 @@ class BuffersManager {
   ~BuffersManager();
   std::shared_ptr<Shape> createShapeBuffer(const shapeType type);
   void AddShapeBuffer(
-      std::shared_ptr<Arc> aArc);
+      std::shared_ptr<Shape> aShape);
   // Create a new buffer of a specified type and add it to the manager
   std::shared_ptr<Buffer2D> createBuffer(const BufferType type);
   // Create a new buffer of a specified type and add it to the manager

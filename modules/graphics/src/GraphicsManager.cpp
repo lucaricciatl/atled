@@ -141,6 +141,11 @@ void GraphicsManager::AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) {
   layer->GetBufferManager()->AddShapeBuffer(aArc);
 };
 
+void GraphicsManager::AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCircle) {
+  mContext->mLayerManager.AddLayer(aLayerId);
+  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
+  layer->GetBufferManager()->AddShapeBuffer(aCircle);
+};
 
 void GraphicsManager::DrawLayer(const int& aLayerId) {
   auto layer = mContext->mLayerManager.GetLayerById(aLayerId);

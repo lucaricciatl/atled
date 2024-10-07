@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Polygon.hpp"
 #include "Arc.hpp"
+#include "Circle.hpp"
 #include "shapeFactory.hpp"
 using namespace graphics;
 
@@ -21,13 +22,19 @@ void GraphicsManagerImpl::Render() {
   arc->setRadius(100);
   arc->SetThickness(12);
   auto col= Color(244, 244, 9, 50);
-
   arc->SetColor(col);
   AddArc(1, arc);
+
+  
+  auto circle = ShapeFactory::createCircle();
+  circle->setCenter(Coordinates2D(200, 400));
+  circle->SetRadius(100);
+  circle->setColor(col);
+  AddCircle(2, circle);
 
   BeginDrawing();
 
   DrawLayer(1);
-
+  DrawLayer(2);
   EndDrawing();
 }

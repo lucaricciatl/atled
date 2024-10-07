@@ -22,8 +22,9 @@ public:
 
     static std::shared_ptr<Shape> CreateShape(const shapeType aType);
     //// Factory method to create a Circle
-    //static std::shared_ptr<Shape> createCircle(const std::vector<double>& center, double radius);
+    static std::shared_ptr<Circle> createCircle(const std::vector<double>& center, double radius);
 
+    static std::shared_ptr<Circle> createCircle(); 
     //// Factory method to create a Rectangle
     //static std::shared_ptr<Shape> createRectangle(const std::vector<double>& upperRight, const std::vector<double>& lowerLeft);
 
