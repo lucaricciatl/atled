@@ -1,5 +1,5 @@
 #pragma once
-#include "gfx.hpp"
+#include "glwp.hpp"
 #include "PointBuffer2D.hpp"
 
 namespace graphics {

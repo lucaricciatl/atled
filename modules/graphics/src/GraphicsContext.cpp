@@ -6,7 +6,7 @@
 #include "windowFactory.hpp"
 #include "Camera2D.hpp"
 #include "Camera3D.hpp"
-#include "raylib.h"
+#include "glwp.hpp"
 
 namespace {
 static constexpr int defaultHeight = 420;
@@ -23,7 +23,7 @@ GraphicsContext::GraphicsContext() {
 
 GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
                                  const char* aWindowTitle,
-                                 std::vector<gfx::ConfigFlags> flags) {
+                                 std::vector<glwp::ConfigFlags> flags) {
   windowWidth = aWindowWidth;
   windowHeight = aWindowHeight;
   windowTitle = aWindowTitle;

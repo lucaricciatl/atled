@@ -1,6 +1,5 @@
 #include "Mouse.hpp"
-#include "raylib.h"
-#include "types.hpp"
+#include "glwp.hpp"
 #include <iostream>
 namespace input {
 

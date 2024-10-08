@@ -1,8 +1,6 @@
 #include "raylib.h"
-#include "types.hpp"
 
-namespace input{
-using namespace types;
+namespace glwp{
 //------------------------------------------------------------------------------------
 // Input Handling Functions (Module: core)
 //------------------------------------------------------------------------------------

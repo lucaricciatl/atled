@@ -2,8 +2,6 @@
 
 #ifndef BUFFER2D_HPP
 #define BUFFER2D_HPP
-
-#include "gfx.hpp"
 #include <vector>
 
 namespace graphics {

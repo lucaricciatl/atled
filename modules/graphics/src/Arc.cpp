@@ -1,5 +1,5 @@
 #include "Arc.hpp"
-
+#include "glwp.hpp"
 #include <cassert>  // For assert
 #include <cmath>    // For M_PI
 #include <numbers>  // C++20 feature
@@ -8,7 +8,7 @@ namespace graphics {
 
 // Constructor
 Arc::Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
-         double aEndAngle,double thickness, const Color& aColor)
+         double aEndAngle, double thickness, const glwp::Color& aColor)
     : Shape(),
       center(aCenter),
       radius(aRadius),
@@ -34,7 +34,7 @@ void Arc::SetRadius(double aRadius) {
   radius = aRadius;
 }
 
-void Arc::SetColor(Color& aColor){ mColor = aColor; }
+void Arc::SetColor(glwp::Color& aColor){ mColor = aColor; }
 
 // Getters
 Coordinates2D Arc::GetCenter() const { return center; }
@@ -47,7 +47,7 @@ int Arc::ComputePointsNumber() {
 }
 
 void Arc::Draw() {
-  DrawRing(::Vector2(center.x, center.y), radius - mThickess,
+  DrawRing(glwp::Vector2(center.x, center.y), radius - mThickess,
            radius + mThickess, mStartAngle, mEndAngle, ComputePointsNumber(),
            mColor);
 }

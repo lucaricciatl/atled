@@ -2,16 +2,16 @@
 #define RECTANGLE_HPP
 
 #include <vector>
-#include "glwp.hpp"
-#include "Shape.hpp"
+
+#include "Model2D.hpp"
 
 namespace {
 // Rename raylib struct to avoid conflicts
-typedef glwp::Rectangle RectangleStruct;
+typedef ::Rectangle RectangleStruct;
 }  // namespace
 namespace graphics {
 
-class Rectangle : public Shape {
+class Rectangle : public Model2D {
  private:
   Coordinates2D mUpperLeft;    
   Coordinates2D mBottomRight; 
@@ -22,7 +22,7 @@ class Rectangle : public Shape {
   Rectangle(const Coordinates2D& aUpperLeft, const Coordinates2D& aBottomRight);
   Rectangle() = default;
 
-  glwp::Color GetColor() const;    
+  ::Color GetColor() const;    
   double GetRotation() const;  
   Coordinates2D GetUpperLeft() const;
   Coordinates2D GetBottomRight() const;

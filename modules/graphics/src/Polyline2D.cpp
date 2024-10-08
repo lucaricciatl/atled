@@ -1,6 +1,6 @@
 #include "Polyline2D.hpp"
 #include "PointBuffer2D.hpp"
-#include "gfx.hpp"
+#include "glwp.hpp"
 
 namespace graphics {
 

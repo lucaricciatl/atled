@@ -2,6 +2,7 @@
 #include <vector>
 #include "Buffer2D.hpp"
 #include <vector>
+#include "glwp.hpp"
 
 namespace graphics {
 
@@ -17,14 +18,15 @@ typedef Point2D Coordinates2D;
 
 
 struct ColoredPoint2D : Point2D {
-  ::Color color;  // Assuming Color is a global type
+  glwp::Color color;  // Assuming Color is a global type
 
   // Default constructor
-  ColoredPoint2D(float x_val = 0, float y_val = 0, Color clr = Color())
+  ColoredPoint2D(float x_val = 0, float y_val = 0,
+                 glwp::Color clr = glwp::Color())
       : Point2D(x_val, y_val), color(clr) {}
 
   // Constructor from Point2D
-  ColoredPoint2D(const Point2D& pt, Color clr = Color())
+  ColoredPoint2D(const Point2D& pt, glwp::Color clr = glwp::Color())
       : Point2D(pt), color(clr) {}
 };
 

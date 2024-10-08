@@ -1,16 +1,16 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
-#include "shape.hpp"
+#include "Model2D.hpp"
 #include <vector>
 
 
 namespace graphics {
 
-class Circle: public Shape {
+class Circle: public Model2D {
 private:
     Coordinates2D mCenter;       
     float mRadius;               
-    glwp::Color mColor;
+    Color mColor;
 
 public:
 
