@@ -22,6 +22,7 @@ add_library(graphics
     src/Arc.cpp
     src/Shape.cpp
     src/ShapeFactory.cpp
+    src/Rectangle.cpp
 )
 
 # Link gfx to the graphics library

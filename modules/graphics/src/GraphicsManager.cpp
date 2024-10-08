@@ -134,6 +134,13 @@ void GraphicsManager::AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCi
   layer->GetBufferManager()->AddShapeBuffer(aCircle);
 };
 
+void GraphicsManager::AddRectangle(const int& aLayerId,
+                                std::shared_ptr<Rectangle> aRectangle) {
+  mContext->mLayerManager.AddLayer(aLayerId);
+  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
+  layer->GetBufferManager()->AddShapeBuffer(aRectangle);
+};
+
 void GraphicsManager::DrawLayer(const int& aLayerId) {
   auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
   layer->Draw();

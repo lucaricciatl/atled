@@ -1,27 +1,41 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 
-#include "Shape.hpp"
 #include <vector>
 
+#include "Shape.hpp"
 
+namespace {
+// Rename raylib struct to avoid conflicts
+typedef ::Rectangle RectangleStruct;
+}  // namespace
 namespace graphics {
 
 class Rectangle : public Shape {
-private:
-    Coordinates2D mUpperRight; 
-    Coordinates2D mLowerLeft;  
+ private:
+  Coordinates2D mUpperLeft;    
+  Coordinates2D mBottomRight; 
+  ::Color mColor;
+  double mRotation;
 
-public:
-    Rectangle(const Coordinates2D& aUpperRight, const Coordinates2D& aLowerLeft);
+ public:
+  Rectangle(const Coordinates2D& aUpperLeft, const Coordinates2D& aBottomRight);
+  Rectangle() = default;
 
-    Coordinates2D getUpperRight() const;
-    Coordinates2D getLowerLeft() const;
+  ::Color GetColor() const;    
+  double GetRotation() const;  
+  Coordinates2D GetUpperLeft() const;
+  Coordinates2D GetBottomRight() const;
 
-    void setUpperRight(const Coordinates2D& aUpperRight);
-    void setLowerLeft(const Coordinates2D& aLowerLeft);
+
+  void SetUpperLeft(const Coordinates2D& aUpperLeft);
+  void SetBottomRight(const Coordinates2D& aBottomRight);
+  void SetColor(const ::Color& color);  
+  void SetRotation(double rotation);    
+
+  void Draw() override;
 };
 
-}
+}  // namespace graphics
 
-#endif // RECTANGLE_HPP
+#endif  // RECTANGLE_HPP

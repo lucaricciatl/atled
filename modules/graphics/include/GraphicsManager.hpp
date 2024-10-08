@@ -46,6 +46,8 @@ class GraphicsManager {
   // drawing methods
   void AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc);
   void AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCircle);
+  void AddRectangle(const int& aLayerId, std::shared_ptr<Rectangle> aRectangle);
+
   void DrawLayer(const int& aLayerId);
 
  protected:
