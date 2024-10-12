@@ -1,11 +1,13 @@
 #include "Model2DFactory.hpp"
-
+#include "Model2D.hpp"
+#include <memory>
 
 namespace graphics {
 
-std::shared_ptr<Model2D> Model2DFactory::CreateModel2D(const Model2DType aType) {
+std::shared_ptr<Model2D> Model2DFactory::CreateModel2D(
+    const Model2DType aType) {
     switch (aType) {
-        case Model2DType::arc:
+    case Model2DType::arc:
             return CreateArc();  
         case Model2DType::circle:
             return CreateCircle();

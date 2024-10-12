@@ -7,8 +7,8 @@
 #include <memory>
 #include <thread>
 #include "Arc.hpp"
-#include "ShapeFactory.hpp"
-#include "Shape.hpp"
+#include "Model2DFactory.hpp"
+#include "Model2D.hpp"
 #include "GraphicsContext.hpp"
 #include "PolyLine2D.hpp"
 #include "PolygonBuffer2D.hpp"

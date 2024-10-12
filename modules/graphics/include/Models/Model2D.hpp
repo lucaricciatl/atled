@@ -7,9 +7,9 @@
 
 namespace graphics {
 
-class Shape {
+class Model2D {
  public:
-  virtual ~Shape() = default;
+  virtual ~Model2D() = default;
   virtual void Draw() = 0 ;
   protected:
   PolygonBuffer2D mBuffer;

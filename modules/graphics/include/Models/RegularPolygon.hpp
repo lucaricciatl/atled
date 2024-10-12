@@ -1,14 +1,14 @@
 #ifndef REGULARPOLYGON_HPP
 #define REGULARPOLYGON_HPP
 
-#include "Shape.hpp"
+#include "Model2D.hpp"
 #include <vector>
 #include <iostream>
 #include <cmath>
 
 namespace graphics {
 
-class RegularPolygon : public Shape {
+class RegularPolygon : public Model2D {
 public:
     // Constructor
     RegularPolygon(const Coordinates2D& aCenter, int sides, double sideLength, double radius);

@@ -1,5 +1,5 @@
-#ifndef SHAPEFACTORY_HPP
-#define SHAPEFACTORY_HPP
+#ifndef MODELFACTORY_HPP
+#define MODELFACTORY_HPP
 
 #include <memory>
 
@@ -7,20 +7,20 @@
 #include "Circle.hpp"
 #include "Rectangle.hpp"
 #include "RegularPolygon.hpp"
-#include "Shape.hpp"
+#include "Model2D.hpp"
 
 namespace graphics {
 
-enum class shapeType {
+enum class Model2DType {
   circle,
   arc,
   rectangle,
   regularPolygon,
 };
 
-class ShapeFactory {
+class Model2DFactory {
  public:
-  static std::shared_ptr<Shape> CreateShape(const shapeType aType);
+  static std::shared_ptr<Model2D> CreateModel2D(const Model2DType aType);
 
   static std::shared_ptr<Circle> CreateCircle(const std::vector<double>& center,
                                               double radius);
@@ -41,4 +41,4 @@ class ShapeFactory {
   // std::vector<double>& center, int sides, double sideLength, double radius);
 };
 }  // namespace graphics
-#endif  // SHAPEFACTORY_HPP
+#endif  // MODELACTORY_HPP

@@ -8,8 +8,8 @@
 #include "PointBuffer2D.hpp"
 #include "PolygonBuffer2D.hpp"
 #include "Buffer2D.hpp"
-#include "ShapeFactory.hpp"
-
+#include "Model2DFactory.hpp"
+#include "Model2D.hpp"
 namespace graphics {
 
 BuffersManager::BuffersManager() {
@@ -22,16 +22,17 @@ BuffersManager::~BuffersManager() {
 }
 
 
-std::shared_ptr<Shape> BuffersManager::createShapeBuffer(const shapeType type) {
-  std::shared_ptr<Shape> buffer;
+std::shared_ptr<Model2D> BuffersManager::createShapeBuffer(
+    const Model2DType type) {
+  std::shared_ptr<Model2D> buffer;
 
-  buffer = ShapeFactory::CreateShape(type);
+  buffer = Model2DFactory::CreateModel2D(type);
 
   mShapeBuffers.push_back(buffer);
   return buffer;
 }
 
-void BuffersManager::AddShapeBuffer(std::shared_ptr<Shape> aShape) {
+void BuffersManager::AddShapeBuffer(std::shared_ptr<Model2D> aShape) {
   mShapeBuffers.push_back(aShape);
 }
 
@@ -66,7 +67,7 @@ const std::vector<std::shared_ptr<Buffer2D>>& BuffersManager::getBuffers()
 }
 
 
-const std::vector<std::shared_ptr<Shape>>& BuffersManager::getShapeBuffers() {
+const std::vector<std::shared_ptr<Model2D>>& BuffersManager::getShapeBuffers() {
   return mShapeBuffers;
 }
 }  // namespace graphics

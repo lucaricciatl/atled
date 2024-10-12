@@ -8,8 +8,8 @@
 
 namespace graphics {
 
-class Polygon : public Shape {
-private:
+class Polygon : public Model2D {
+ private:
 
 public:
     // Constructor that accepts a list of points

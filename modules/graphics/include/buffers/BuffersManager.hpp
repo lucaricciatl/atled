@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 #include "Buffer2D.hpp"
-#include "Shape.hpp"
-#include "ShapeFactory.hpp"
+#include "Model2D.hpp"
+#include "Model2DFactory.hpp"
 #include "Arc.hpp"
 #include "Rectangle.hpp"
 #include "Circle.hpp"
@@ -21,18 +21,17 @@ class BuffersManager {
  public:
   BuffersManager();
   ~BuffersManager();
-  std::shared_ptr<Shape> createShapeBuffer(const shapeType type);
-  void AddShapeBuffer(
-      std::shared_ptr<Shape> aShape);
+  std::shared_ptr<Model2D> createShapeBuffer(const Model2DType type);
+  void AddShapeBuffer(std::shared_ptr<Model2D> aShape);
   std::shared_ptr<Buffer2D> createBuffer(const BufferType type);
   void deleteBuffer(const std::shared_ptr<Buffer2D>& buffer);
   const std::vector<std::shared_ptr<Buffer2D>>& getBuffers();
-  const std::vector<std::shared_ptr<Shape>>& getShapeBuffers();
+  const std::vector<std::shared_ptr<Model2D>>& getShapeBuffers();
 
 
  private:
   std::vector<std::shared_ptr<Buffer2D>> mBuffers;
-  std::vector<std::shared_ptr<Shape>> mShapeBuffers;
+  std::vector<std::shared_ptr<Model2D>> mShapeBuffers;
 };
 
 }  // namespace graphics

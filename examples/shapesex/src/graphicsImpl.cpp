@@ -4,7 +4,7 @@
 #include "Arc.hpp"
 #include "Circle.hpp"
 #include "Rectangle.hpp"
-#include "shapeFactory.hpp"
+#include "Model2DFactory.hpp"
 using namespace graphics;
 
 namespace {
@@ -22,7 +22,7 @@ void GraphicsManagerImpl::Init() {
 }
 
 void GraphicsManagerImpl::Render() {
-  auto arc = ShapeFactory::CreateArc();
+  auto arc = Model2DFactory::CreateArc();
   arc->SetCenter(Coordinates2D(200, 200));
   arc->SetStartAngle(-180);
   arc->SetEndAngle(0);
@@ -32,13 +32,13 @@ void GraphicsManagerImpl::Render() {
   arc->SetColor(col);
   AddArc(1, arc);
   
-  auto circle = ShapeFactory::CreateCircle();
+  auto circle = Model2DFactory::CreateCircle();
   circle->SetCenter(Coordinates2D(200, 400));
   circle->SetRadius(100);
   circle->SetColor(col);
   AddCircle(2, circle);
 
-  auto rectangle = ShapeFactory::CreateRectangle();
+  auto rectangle = Model2DFactory::CreateRectangle();
   rectangle->SetUpperLeft(Coordinates2D(200, 700));
   rectangle->SetBottomRight(Coordinates2D(400, 900));
   rectangle->SetColor(col);

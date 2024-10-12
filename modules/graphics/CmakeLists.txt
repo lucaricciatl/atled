@@ -20,8 +20,8 @@ add_library(graphics
     src/Circle.cpp 
     src/Polygon.cpp 
     src/Arc.cpp
-    src/Shape.cpp
-    src/ShapeFactory.cpp
+    src/Model2D.cpp
+    src/Model2DFactory.cpp
     src/Rectangle.cpp
 )
 
@@ -39,7 +39,7 @@ target_include_directories(graphics PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/buffers
     ${CMAKE_CURRENT_SOURCE_DIR}/include/layers
     ${CMAKE_CURRENT_SOURCE_DIR}/include/camera 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/shapes 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Models
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
