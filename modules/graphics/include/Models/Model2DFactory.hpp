@@ -6,6 +6,8 @@
 #include "Arc.hpp"
 #include "Circle.hpp"
 #include "Rectangle.hpp"
+#include "Line.hpp"
+#include "PolyLine.hpp"
 #include "RegularPolygon.hpp"
 #include "Model2D.hpp"
 
@@ -16,6 +18,8 @@ enum class Model2DType {
   arc,
   rectangle,
   regularPolygon,
+  line,
+  polyline,
 };
 
 class Model2DFactory {
@@ -36,6 +40,13 @@ class Model2DFactory {
       const std::vector<double>& lowerLeft);
   static std::shared_ptr<Rectangle> CreateRectangle();
 
+  static std::shared_ptr<Line> CreateLine(Coordinates2D aStart, Coordinates2D aEnd, double thickness, const Color& aColor);
+  static std::shared_ptr<Line> CreateLine();
+
+  static std::shared_ptr<Polyline> CreatePolyline();  // Default Polyline
+  static std::shared_ptr<Polyline> CreatePolyline(
+      const std::vector<Coordinates2D>& points, double thickness,
+      const Color& color);
   //// Factory method to create a RegularPolygon
   // static std::shared_ptr<Shape> createRegularPolygon(const
   // std::vector<double>& center, int sides, double sideLength, double radius);

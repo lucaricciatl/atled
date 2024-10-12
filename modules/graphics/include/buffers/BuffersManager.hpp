@@ -16,7 +16,9 @@
 
 namespace graphics {
 
-	enum BufferType { POINT2D, LINE2D, POLY2D, SHAPE2D };
+	enum BufferType { 
+    SHAPE2D
+     };
 class BuffersManager {
  public:
   BuffersManager();

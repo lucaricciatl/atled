@@ -45,11 +45,30 @@ void GraphicsManagerImpl::Render() {
   rectangle->SetRotation(20);
   AddRectangle(3, rectangle);
 
+  auto line = Model2DFactory::CreateLine();
+  line->SetStartPoint(Coordinates2D(500, 500));
+  line->SetColor(col);
+  line->SetEndPoint(Coordinates2D(500, 600));
+  line->SetThickness(3);
+  AddLine(4, line);
+
+  // Add the polyline here
+  auto polyline = Model2DFactory::CreatePolyline();
+  std::vector<Coordinates2D> points = {
+      Coordinates2D(600, 600), Coordinates2D(700, 650), Coordinates2D(650, 700),
+      Coordinates2D(700, 750)};
+  polyline->SetPoints(points);
+  polyline->SetThickness(5);
+  polyline->SetColor(col);
+  AddPolyline(5, polyline);
+
   BeginDrawing();
 
   DrawLayer(1);
   DrawLayer(2);
   DrawLayer(3);
+  DrawLayer(4);
+  DrawLayer(5);
 
   EndDrawing();
 }

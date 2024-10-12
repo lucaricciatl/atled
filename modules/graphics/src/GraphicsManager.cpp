@@ -141,6 +141,20 @@ void GraphicsManager::AddRectangle(const int& aLayerId,
   layer->GetBufferManager()->AddShapeBuffer(aRectangle);
 };
 
+void GraphicsManager::AddLine(const int& aLayerId,
+                                   std::shared_ptr<Line> aLine) {
+  mContext->mLayerManager.AddLayer(aLayerId);
+  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
+  layer->GetBufferManager()->AddShapeBuffer(aLine);
+};
+
+void GraphicsManager::AddPolyline(const int& aLayerId,
+                                  std::shared_ptr<Polyline> aPolyline) {
+  mContext->mLayerManager.AddLayer(aLayerId);
+  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
+  layer->GetBufferManager()->AddShapeBuffer(aPolyline);
+}
+
 void GraphicsManager::DrawLayer(const int& aLayerId) {
   auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
   layer->Draw();

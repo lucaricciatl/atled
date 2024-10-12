@@ -2,16 +2,11 @@
 add_library(graphics
     src/GraphicsContext.cpp
     src/GraphicsManager.cpp
-    src/Polyline2D.cpp 
     src/Polyline3D.cpp
     src/Polygon2DImpl.cpp
     src/LayerManager.cpp
     src/BuffersManager.cpp
     src/TriangleBuffer2D.cpp
-    src/PointBuffer2D.cpp
-    src/PointBuffer3D.cpp
-    src/LineBuffer2D.cpp
-    src/LineBuffer3D.cpp
     src/PolygonBuffer2D.cpp
     src/Layer.cpp
     src/Pixel.cpp
@@ -23,6 +18,8 @@ add_library(graphics
     src/Model2D.cpp
     src/Model2DFactory.cpp
     src/Rectangle.cpp
+    src/Line.cpp
+    src/Polyline.cpp 
 )
 
 # Link gfx to the graphics library

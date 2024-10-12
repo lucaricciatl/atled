@@ -4,7 +4,6 @@
 
 #include <algorithm>
 
-#include "LineBuffer2D.hpp"
 #include "PointBuffer2D.hpp"
 #include "PolygonBuffer2D.hpp"
 #include "Buffer2D.hpp"
@@ -39,11 +38,7 @@ void BuffersManager::AddShapeBuffer(std::shared_ptr<Model2D> aShape) {
 std::shared_ptr<Buffer2D> BuffersManager::createBuffer(const BufferType type) {
   std::shared_ptr<Buffer2D> buffer;
 
-  if (type == POINT2D) {
-    buffer = std::make_shared<PointBuffer2D>();
-  } else if (type == LINE2D) {
-    buffer = std::make_shared<LineBuffer2D>();
-  } else if (type == POLY2D) {
+  if (type == BufferType::SHAPE2D) {
     buffer = std::make_shared<PolygonBuffer2D>();
   } else {
     // Handle unknown buffer type
