@@ -19,8 +19,10 @@ std::shared_ptr<Model2D> Model2DFactory::CreateModel2D(
       return CreateRectangle();
     case Model2DType::line:  
       return CreateLine();
-    case Model2DType::polyline:  // Add case for polyline
+    case Model2DType::polyline:
       return CreatePolyline();
+    case Model2DType::triangle:
+      return CreateTriangle();
     default:
       return nullptr;
   }
@@ -83,6 +85,25 @@ std::shared_ptr<Polyline> Model2DFactory::CreatePolyline(
 // Factory method to create a default Polyline
 std::shared_ptr<Polyline> Model2DFactory::CreatePolyline() {
   return std::make_shared<Polyline>();
+}
+
+std::shared_ptr<Triangle> Model2DFactory::CreateTriangle(const Coordinates2D& point1, const Coordinates2D& point2, const Coordinates2D& point3, const Color& color) {
+    return std::make_shared<Triangle>(point1, point2, point3, color);
+}
+
+// Factory method to create a default Triangle
+std::shared_ptr<Triangle> Model2DFactory::CreateTriangle() {
+    return std::make_shared<Triangle>();
+}
+
+// Factory method to create a Polygon with parameters
+std::shared_ptr<Polygon> Model2DFactory::CreatePolygon(const std::vector<Coordinates2D>& points, const Color& color) {
+    return std::make_shared<Polygon>(points, color);
+}
+
+// Factory method to create a default Polygon
+std::shared_ptr<Polygon> Model2DFactory::CreatePolygon() {
+    return std::make_shared<Polygon>();
 }
 
 }  // namespace graphics

@@ -1,27 +1,33 @@
 #ifndef POLYGON_HPP
 #define POLYGON_HPP
 
-#include "Model2D.hpp"
 #include <vector>
-#include <iostream>
-
+#include "Model2D.hpp"
 
 namespace graphics {
 
 class Polygon : public Model2D {
+ public:
+  // Constructor with parameters
+  Polygon(const std::vector<Coordinates2D>& points, const Color& color);
+  // Default constructor
+  Polygon() = default;
+
+  // Setters and Getters
+  void SetPoints(const std::vector<Coordinates2D>& points);
+  const std::vector<Coordinates2D>& GetPoints() const;
+
+  void SetColor(const Color& color);
+  Color GetColor() const;
+
+  // Overridden Draw method
+  void Draw() override;
+
  private:
-
-public:
-    // Constructor that accepts a list of points
- Polygon();
-    Polygon(std::vector<Coordinates2D> aPoints, Color aColor);
-    Polygon(std::vector<ColoredPoint2D> aPoints);
-
-    void SetPoints(std::vector<Coordinates2D> aPoints,Color aColor);
-    void SetPoints(std::vector<ColoredPoint2D> aPoints);
-
+  std::vector<Coordinates2D> mPoints;
+  Color mColor;
 };
 
-}
+}  // namespace graphics
 
-#endif // POLYGON_HPP
+#endif  // POLYGON_HPP

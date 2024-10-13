@@ -8,6 +8,7 @@
 #include "Rectangle.hpp"
 #include "Line.hpp"
 #include "PolyLine.hpp"
+#include "Triangle.hpp"
 #include "RegularPolygon.hpp"
 #include "Model2D.hpp"
 
@@ -20,6 +21,8 @@ enum class Model2DType {
   regularPolygon,
   line,
   polyline,
+  triangle,
+  polygon,
 };
 
 class Model2DFactory {
@@ -43,13 +46,15 @@ class Model2DFactory {
   static std::shared_ptr<Line> CreateLine(Coordinates2D aStart, Coordinates2D aEnd, double thickness, const Color& aColor);
   static std::shared_ptr<Line> CreateLine();
 
-  static std::shared_ptr<Polyline> CreatePolyline();  // Default Polyline
+  static std::shared_ptr<Polyline> CreatePolyline();  
   static std::shared_ptr<Polyline> CreatePolyline(
       const std::vector<Coordinates2D>& points, double thickness,
       const Color& color);
-  //// Factory method to create a RegularPolygon
-  // static std::shared_ptr<Shape> createRegularPolygon(const
-  // std::vector<double>& center, int sides, double sideLength, double radius);
+  static std::shared_ptr<Triangle> CreateTriangle();  
+  static std::shared_ptr<Triangle> CreateTriangle(const Coordinates2D& point1, const Coordinates2D& point2, const Coordinates2D& point3, const Color& color);
+ static std::shared_ptr<Polygon> CreatePolygon(); 
+  static std::shared_ptr<Polygon> CreatePolygon(const std::vector<Coordinates2D>& points, const Color& color);
+
 };
 }  // namespace graphics
 #endif  // MODELACTORY_HPP

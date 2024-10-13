@@ -20,6 +20,7 @@ add_library(graphics
     src/Rectangle.cpp
     src/Line.cpp
     src/Polyline.cpp 
+    src/Triangle.cpp
 )
 
 # Link gfx to the graphics library

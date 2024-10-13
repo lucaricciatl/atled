@@ -49,6 +49,8 @@ class GraphicsManager {
   void AddRectangle(const int& aLayerId, std::shared_ptr<Rectangle> aRectangle);
   void AddLine(const int& aLayerId, std::shared_ptr<Line> aLine);
   void AddPolyline(const int& aLayerId, std::shared_ptr<Polyline> aPolyline);
+  void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle);
+  void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon);
   void DrawLayer(const int& aLayerId);
 
  protected:

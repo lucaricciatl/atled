@@ -62,6 +62,28 @@ void GraphicsManagerImpl::Render() {
   polyline->SetColor(col);
   AddPolyline(5, polyline);
 
+  auto triangle = Model2DFactory::CreateTriangle();
+  triangle->SetPoints(
+    Coordinates2D(850, 600),
+    Coordinates2D(800, 500),
+    Coordinates2D(750, 600)
+  );
+  triangle->SetColor(col);
+  AddTriangle(6, triangle);
+
+  auto polygon = Model2DFactory::CreatePolygon();
+  std::vector<Coordinates2D> polygonPoints = {
+    Coordinates2D(300, 300),
+    Coordinates2D(350, 400),
+    Coordinates2D(400, 350),
+    Coordinates2D(450, 400),
+    Coordinates2D(500, 300),
+    Coordinates2D(400, 250)
+  };
+  polygon->SetPoints(polygonPoints);
+  polygon->SetColor(col);
+  AddPolygon(7, polygon);
+
   BeginDrawing();
 
   DrawLayer(1);
@@ -69,6 +91,8 @@ void GraphicsManagerImpl::Render() {
   DrawLayer(3);
   DrawLayer(4);
   DrawLayer(5);
+  DrawLayer(6);
+  DrawLayer(7);
 
   EndDrawing();
 }

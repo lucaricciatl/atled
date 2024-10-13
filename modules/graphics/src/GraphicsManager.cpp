@@ -155,6 +155,17 @@ void GraphicsManager::AddPolyline(const int& aLayerId,
   layer->GetBufferManager()->AddShapeBuffer(aPolyline);
 }
 
+void GraphicsManager::AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) {
+    mContext->mLayerManager.AddLayer(aLayerId);
+    auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
+    layer->GetBufferManager()->AddShapeBuffer(aTriangle);
+}
+
+void GraphicsManager::AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) {
+    mContext->mLayerManager.AddLayer(aLayerId);
+    auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
+    layer->GetBufferManager()->AddShapeBuffer(aPolygon);
+}
 void GraphicsManager::DrawLayer(const int& aLayerId) {
   auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
   layer->Draw();
