@@ -17,6 +17,7 @@ class Layer {
   void SetId(LayerId id );
   std::shared_ptr<BuffersManager> GetBufferManager();
   void Draw();
+
  private:
   LayerId id;
   std::shared_ptr<BuffersManager> mBufferManager;

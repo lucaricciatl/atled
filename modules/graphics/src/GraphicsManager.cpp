@@ -171,5 +171,9 @@ void GraphicsManager::DrawLayer(const int& aLayerId) {
   layer->Draw();
 };
 
+void GraphicsManager::Clear(::Color aColor){
+  mContext->Clear(aColor);
+};
+
 }  // namespace graphics
 

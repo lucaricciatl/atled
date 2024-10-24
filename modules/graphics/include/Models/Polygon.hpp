@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Model2D.hpp"
+#include "Triangle.hpp"
 
 namespace graphics {
 
@@ -26,6 +27,10 @@ class Polygon : public Model2D {
  private:
   std::vector<Coordinates2D> mPoints;
   Color mColor;
+
+ protected:
+  const std::vector<Triangle>  PerformTriangulation();
+
 };
 
 }  // namespace graphics

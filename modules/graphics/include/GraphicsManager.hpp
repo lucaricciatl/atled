@@ -52,6 +52,7 @@ class GraphicsManager {
   void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle);
   void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon);
   void DrawLayer(const int& aLayerId);
+  void Clear(::Color aColor);
 
  protected:
   std::unique_ptr<std::thread> mThread;

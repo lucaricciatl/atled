@@ -2,18 +2,18 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Project name
-project(NBody)
+project(nBody)
 
 # Add the source files
 set(SOURCES
-    src/NBody.cpp
-    src/graphicsImplNBody.cpp
+    src/drawing2D.cpp
+    src/graphicsImpl.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_include_directories(NBody PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(nBody PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC atled)
 
-set_target_properties(NBody PROPERTIES FOLDER "examples")
+set_target_properties(nBody PROPERTIES FOLDER "examples")
