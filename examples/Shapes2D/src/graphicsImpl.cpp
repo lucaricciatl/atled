@@ -5,12 +5,13 @@
 #include "Circle.hpp"
 #include "Rectangle.hpp"
 #include "Model2DFactory.hpp"
+#include "opencv2/opencv.hpp"
+
 using namespace graphics;
 
 namespace {
 float times = 0.0f;  // Initialize time variable
 }  // namespace
-
 
 void GraphicsManagerImpl::Init() {  
   auto ctx = GetGraphicsContext();

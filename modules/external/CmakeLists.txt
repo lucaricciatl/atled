@@ -1,4 +1,6 @@
 # Add raylib as a subdirectory
+
+
 add_subdirectory(raylib)
 
 # Create a library from the submodule's source files
@@ -17,12 +19,89 @@ set_target_properties(external PROPERTIES
     CXX_VISIBILITY_PRESET hidden           # Hide symbols by default
     VISIBILITY_INLINES_HIDDEN YES          # Hide inline symbols as well
 )
+# Organize raylib and other targets under the same folder structure
+set_target_properties(raylib PROPERTIES FOLDER "modules/external/raylib")
+set_target_properties(uninstall PROPERTIES FOLDER "modules/external/raylib")
+set_target_properties(update_mappings PROPERTIES FOLDER "modules/external/raylib")
+set_target_properties(glfw PROPERTIES FOLDER "modules/external/raylib")
+
 
 # Add include directories for the external library
 target_include_directories(external INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-# Organize raylib and other targets under the same folder structure
-set_target_properties(raylib PROPERTIES FOLDER "modules/external")
-set_target_properties(uninstall PROPERTIES FOLDER "modules/external")
-set_target_properties(update_mappings PROPERTIES FOLDER "modules/external")
-set_target_properties(glfw PROPERTIES FOLDER "modules/external")
+set(OpenCV_VERSION "4.8.0")
+# Specify the path where OpenCV is cloned
+set(OpenCV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/opencv")
+
+# Define essential OpenCV modules
+set(BUILD_LIST "core,imgproc" CACHE STRING "Subset of OpenCV modules to build")
+
+set(OPENCV_LOGGING_SKIP_LOG_TAGS ON CACHE BOOL "Skip using LogTag in logging")
+set(BUILD_opencv_videoio OFF CACHE BOOL "Disable videoio module to avoid Win32 dependency")
+set(BUILD_EXAMPLES OFF CACHE BOOL "Don't build the examples")
+set(BUILD_TESTS OFF CACHE BOOL "Don't build the tests")
+set(BUILD_PERF_TESTS OFF CACHE BOOL "Don't build the performance tests")
+set(BUILD_JAVA OFF CACHE BOOL "Don't build Java bindings")
+set(BUILD_opencv_python3 OFF CACHE BOOL "Don't build Python bindings")
+set(BUILD_opencv_apps OFF CACHE BOOL "Don't build OpenCV applications")
+set(WITH_WIN32UI OFF CACHE BOOL "Disable Win32 UI dependency")
+set(WITH_MSMF OFF CACHE BOOL "Disable Microsoft Media Foundation dependency")
+
+# Add OpenCV as a subdirectory
+add_subdirectory(${OpenCV_DIR} ${OpenCV_BINARY_DIR})
+
+# Link OpenCV libraries to your target
+target_link_libraries(${PROJECT_NAME} INTERFACE opencv_core opencv_imgproc)
+
+# Optional: Set include directories
+target_include_directories(${PROJECT_NAME} INTERFACE
+    ${OpenCV_DIR}/include
+)# Collect all include directories within OpenCV modules
+file(GLOB OPENCV_INCLUDE_DIRS "${OpenCV_DIR}/modules/*/include")
+
+# Add include directories if they exist
+if(DEFINED OPENCV_INCLUDE_DIRS)
+    target_include_directories(${PROJECT_NAME} INTERFACE ${OPENCV_INCLUDE_DIRS})
+endif()
+
+# Conditionally set folder properties for each target
+foreach(target_name IN LISTS
+    opencv_core
+    opencv_imgproc
+    opencv_highgui
+    opencv_imgcodecs
+    opencv_video
+    opencv_videoio
+    opencv_calib3d
+    opencv_dnn
+    opencv_features2d
+    opencv_flann
+    opencv_gapi
+    opencv_ml
+    opencv_videoio_plugins
+    opencv_highgui_plugins
+    opencv_dnn_plugins
+    gen_opencv_python_source
+    gen_opencv_objc_source_visionos
+    gen_opencv_objc_source_osx
+    gen_opencv_objc_source_ios
+    gen_opencv_js_source
+    gen_opencv_java_source
+    opencv_ts
+    opencv_stitching
+    opencv_photo
+    opencv_objdetect
+    gen_opencv_objc_source
+)
+    if(TARGET ${target_name})
+        set_target_properties(${target_name} PROPERTIES FOLDER "modules/external/opencv")
+    endif()
+endforeach()
+
+# Optional: Install OpenCV in your project's build/install directory
+install(TARGETS opencv_core opencv_imgproc DESTINATION lib)
+install(DIRECTORY ${opencv_SOURCE_DIR}/include/opencv2 DESTINATION include/opencv2)
+
+include_directories(${PROJECT_NAME} PUBLIC
+       ${CMAKE_BINARY_DIR}/opencv2/include
+)
