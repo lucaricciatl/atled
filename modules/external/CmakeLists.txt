@@ -46,7 +46,7 @@ target_link_libraries(${PROJECT_NAME} INTERFACE opencv_core opencv_imgproc)
 
 # Specify OpenCV include directories
 target_include_directories(${PROJECT_NAME} INTERFACE ${OpenCV_DIR}/include
-C:/Users/blue/source/repos/lucaricciatl/atled/build)
+${CMAKE_BINARY_DIR})
 
 # Collect all include directories within OpenCV modules
 file(GLOB OPENCV_INCLUDE_DIRS "${OpenCV_DIR}/modules/*/include")
