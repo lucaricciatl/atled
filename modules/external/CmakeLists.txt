@@ -24,6 +24,8 @@ foreach(raylib_target IN LISTS uninstall update_mappings glfw)
         set_target_properties(${raylib_target} PROPERTIES FOLDER "modules/external/raylib")
     endif()
 endforeach()
+set_target_properties(update_mappings PROPERTIES FOLDER "modules/external/raylib")
+set_target_properties(glfw PROPERTIES FOLDER "modules/external/raylib")
 
 target_include_directories(external INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
@@ -55,6 +57,13 @@ file(GLOB OPENCV_INCLUDE_DIRS "${OpenCV_DIR}/modules/*/include")
 if(DEFINED OPENCV_INCLUDE_DIRS)
     target_include_directories(${PROJECT_NAME} INTERFACE ${OPENCV_INCLUDE_DIRS})
 endif()
+
+set_target_properties(opencv_dnn_plugins PROPERTIES FOLDER "modules/external/opencv")
+set_target_properties(opencv_highgui_plugins PROPERTIES FOLDER "modules/external/opencv")
+set_target_properties(opencv_videoio_plugins PROPERTIES FOLDER "modules/external/opencv")
+set_target_properties(opencv_core PROPERTIES FOLDER "modules/external/opencv")
+set_target_properties(opencv_imgproc PROPERTIES FOLDER "modules/external/opencv")
+set_target_properties(opencv_modules PROPERTIES FOLDER "modules/external/opencv")
 
 # Install core OpenCV libraries and headers to the build/install directory
 install(TARGETS opencv_core opencv_imgproc DESTINATION lib)
