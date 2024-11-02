@@ -5,7 +5,7 @@
 #include "Circle.hpp"
 #include "Rectangle.hpp"
 #include "Model2DFactory.hpp"
-#include "opencv2/opencv.hpp"
+#include "Point2D.hpp"
 
 using namespace graphics;
 
@@ -73,7 +73,7 @@ void GraphicsManagerImpl::Render() {
   AddTriangle(6, triangle);
 
   auto polygon = Model2DFactory::CreatePolygon();
-  std::vector<Coordinates2D> polygonPoints = {
+  const std::vector<Coordinates2D> polygonPoints = {
     Coordinates2D(300, 300),
     Coordinates2D(350, 400),
     Coordinates2D(400, 350),

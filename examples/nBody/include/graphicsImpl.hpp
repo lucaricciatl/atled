@@ -6,6 +6,7 @@
 #include <vector>
 #include "Circle.hpp"
 #include "Model2D.hpp"
+
 class GraphicsManagerImpl : public graphics::GraphicsManager {
 
 public :

@@ -5,6 +5,7 @@
 #include "Circle.hpp"
 #include "Model2DFactory.hpp"
 #include "Model2D.hpp"  
+
 using namespace graphics;
 
 // Define a struct for the bodies in the N-body simulation

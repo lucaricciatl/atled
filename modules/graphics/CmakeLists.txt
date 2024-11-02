@@ -24,8 +24,10 @@ add_library(graphics
     src/Triangulation.cpp
 )
 
+add_subdirectory(core)
 # Link gfx to the graphics library
 target_link_libraries(graphics PUBLIC core)
+target_link_libraries(graphics PUBLIC common)
 
 # Specify include directories for the submodule
 target_include_directories(graphics PUBLIC
@@ -41,6 +43,7 @@ target_include_directories(graphics PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Models
     ${CMAKE_CURRENT_SOURCE_DIR}/include/utils
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../common/include
 )
 
 set_target_properties(graphics PROPERTIES FOLDER "modules")

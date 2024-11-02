@@ -1,0 +1,17 @@
+# Set the minimum CMake version
+cmake_minimum_required(VERSION 3.10)
+
+# Set the project name
+project(common)
+
+# Specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# Include the header files directory
+include_directories(include)
+
+set(SOURCES src/Point2D.cpp)
+
+# Create the executable target
+add_library(${PROJECT_NAME} ${SOURCES})
