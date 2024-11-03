@@ -1,4 +1,14 @@
 
+# Create a library from the submodule's source files
+add_library(physics
+    ./src/rigidbody.cpp
+)
 
-add_subdirectory(frame)
-add_subdirectory(rigidbody)
+# Specify include directories for the submodule
+target_include_directories(physics PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+set_target_properties(physics PROPERTIES FOLDER "modules")
+target_link_libraries(physics PRIVATE math)
+target_include_directories(physics PRIVATE ${CMAKE_SOURCE_DIR}/modules/math/include)

@@ -6,6 +6,17 @@ project(atled)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Add Google Test as an external project
+include(FetchContent)
+FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/heads/main.zip
+)
+FetchContent_MakeAvailable(googletest)
+
+# Enable testing
+enable_testing()
+
 add_library(atled INTERFACE)
 
 # Link raylib to your project
@@ -33,3 +44,7 @@ target_include_directories(${PROJECT_NAME} INTERFACE
 )
 
 target_include_directories(external INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+# Link Google Test to your tests
+add_executable(tests tests/test_main.cpp)  # Create a test executable; you can add more test files
+target_link_libraries(tests PRIVATE gtest gtest_main atled)
