@@ -15,3 +15,4 @@ set(SOURCES src/Point2D.cpp)
 
 # Create the executable target
 add_library(${PROJECT_NAME} ${SOURCES})
+set_target_properties(common PROPERTIES FOLDER "modules")
