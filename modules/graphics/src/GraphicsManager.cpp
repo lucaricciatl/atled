@@ -60,21 +60,6 @@ void GraphicsManager::Start() {
   mContext->InitWindowManager(mConfigs->WindowConfig);
   mRunning = true;
   RenderLoop();
-
-  // CameraLoop();
-}
-
-void GraphicsManager::CameraStep() {
-  using namespace std::chrono;
-  auto frameDuration =
-      milliseconds(1000 / mFrameRate);
-  auto frameStart = steady_clock::now();
-  auto frameEnd = steady_clock::now();
-  auto elapsed = duration_cast<milliseconds>(frameEnd - frameStart);
-  auto sleepTime = frameDuration - elapsed;
-  if (sleepTime > milliseconds(0)) {
-    std::this_thread::sleep_for(sleepTime);
-  }
 }
 
 void GraphicsManager::RenderLoop() {

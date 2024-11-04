@@ -4,7 +4,7 @@
 #include "CameraBase.hpp"
 
 // Concrete class for Camera3D
-class RaylibCamera3D{
+class RaylibCamera3D : public CameraBase{
 public:
 
     RaylibCamera3D(Vector3 position, Vector3 target, Vector3 up, float fovy, int projection);
@@ -22,7 +22,7 @@ public:
     Vector3 getUp() const;
     float getFovy() const;
 
-    Camera3D mCamera3D;
+    ::Camera3D mCamera3D;
 };
 
 #endif // CAMERA3D_HPP

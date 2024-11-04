@@ -23,6 +23,7 @@ void GraphicsManagerImpl::Init() {
 }
 
 void GraphicsManagerImpl::Render() {
+  
   auto arc = Model2DFactory::CreateArc();
   arc->SetCenter(Coordinates2D(200, 200));
   arc->SetStartAngle(-180);

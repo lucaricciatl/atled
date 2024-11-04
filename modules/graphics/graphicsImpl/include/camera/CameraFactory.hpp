@@ -6,20 +6,22 @@
 #include "raylib.h"  // Assuming you're using Raylib for Vector2, Vector3
 #include "CameraBase.hpp"
 
-// Forward declarations for Camera2D and Camera3D
-class rCamera2D;
-class rCamera3D;
+// Enumeration for camera type
+enum class CameraType3D {
+    Raylib
+};
 
 // Enumeration for camera type
-enum class CameraType {
-    CAMERA_2D,
-    CAMERA_3D
+enum class CameraType2D {
+    Raylib
 };
 
 // Factory class for creating Camera objects
 class CameraFactory {
 public:
-    static std::shared_ptr<CameraBase> createCamera(CameraType type);
+    static std::shared_ptr<CameraBase> createCamera2D(CameraType2D type);
+    static std::shared_ptr<CameraBase> createCamera3D(CameraType3D type);
+
 };
 
 #endif // CAMERA_HPP

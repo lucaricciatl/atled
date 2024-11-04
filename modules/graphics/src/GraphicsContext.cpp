@@ -51,7 +51,6 @@ void GraphicsContext::InitWindowManager(std::vector<::ConfigFlags> flags) {
 
 void GraphicsContext::InitWindowManager() {
   mWindow = WindowFactory::CreateWindow(WindowType::Raylib);
-  mCamera = CameraFactory::createCamera(CameraType::CAMERA_2D);
   if (mWindow) {
     mWindow->InitWindow(windowWidth, windowHeight, windowTitle);
   }
@@ -77,10 +76,6 @@ void GraphicsContext::SetSize(int width, int height) {
 }
 
 int GraphicsContext::GetWidth() const { return windowWidth; }
-
-std::shared_ptr<CameraBase> GraphicsContext::GetCamera() {
-  return mCamera;
-}
 
 int GraphicsContext::GetHeight() const { return windowHeight; }
 
