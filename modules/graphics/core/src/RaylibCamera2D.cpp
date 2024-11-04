@@ -1,7 +1,7 @@
-#include "Camera2D.hpp"
+#include "RaylibCamera2D.hpp"
 
 // Default constructor
-rCamera2D::rCamera2D() {
+RaylibCamera2D::RaylibCamera2D() {
     mCamera2D.offset = {0.0f, 0.0f};
     mCamera2D.target = {0.0f, 0.0f};
     mCamera2D.rotation = 0.0f;
@@ -9,7 +9,7 @@ rCamera2D::rCamera2D() {
 }
 
 // Parameterized constructor
-rCamera2D::rCamera2D(Vector2 offset, Vector2 target, float rotation, float zoom) {
+RaylibCamera2D::RaylibCamera2D(Vector2 offset, Vector2 target, float rotation, float zoom) {
     mCamera2D.offset = offset;
     mCamera2D.target = target;
     mCamera2D.rotation = rotation;
@@ -17,74 +17,74 @@ rCamera2D::rCamera2D(Vector2 offset, Vector2 target, float rotation, float zoom)
 }
 
 // Setters
-void rCamera2D::SetOffsetX(const float& offset) {
+void RaylibCamera2D::SetOffsetX(const float& offset) {
     mCamera2D.offset.x = offset;
 }
 
-void rCamera2D::SetOffsetY(const float& offset) {
+void RaylibCamera2D::SetOffsetY(const float& offset) {
     mCamera2D.offset.y = offset;
 }
 
-void rCamera2D::SetTargetX(const float& target) {
+void RaylibCamera2D::SetTargetX(const float& target) {
     mCamera2D.target.x = target;
 }
 
-void rCamera2D::SetTargetY(const float& target) {
+void RaylibCamera2D::SetTargetY(const float& target) {
     mCamera2D.target.y = target;
 }
 
-void rCamera2D::SetRotation(const float& rotation) {
+void RaylibCamera2D::SetRotation(const float& rotation) {
     mCamera2D.rotation = rotation;
 }
 
-void rCamera2D::SetZoom(const float& zoom) {
+void RaylibCamera2D::SetZoom(const float& zoom) {
     mCamera2D.zoom = zoom;
 }
 
 // Getters
-float rCamera2D::GetOffsetX() const {
+float RaylibCamera2D::GetOffsetX() const {
     return mCamera2D.offset.x;
 }
 
-float rCamera2D::GetOffsetY() const {
+float RaylibCamera2D::GetOffsetY() const {
     return mCamera2D.offset.y;
 }
 
-float rCamera2D::GetTargetX() const {
+float RaylibCamera2D::GetTargetX() const {
     return mCamera2D.target.x;
 }
 
-float rCamera2D::GetTargetY() const {
+float RaylibCamera2D::GetTargetY() const {
     return mCamera2D.target.y;
 }
 
-float rCamera2D::GetRotation() const {
+float RaylibCamera2D::GetRotation() const {
     return mCamera2D.rotation;
 }
 
-float rCamera2D::GetZoom() const {
+float RaylibCamera2D::GetZoom() const {
     return mCamera2D.zoom;
 }
 
 // Methods to increase offsets and zoom
-void rCamera2D::IncreaseOffsetX(const float& deltaX) {
+void RaylibCamera2D::IncreaseOffsetX(const float& deltaX) {
     mCamera2D.offset.x += deltaX;
 }
 
-void rCamera2D::IncreaseOffsetY(const float& deltaY) {
+void RaylibCamera2D::IncreaseOffsetY(const float& deltaY) {
     mCamera2D.offset.y += deltaY;
 }
 
-void rCamera2D::IncreaseOffset(const float& deltaX, const float& deltaY) {
+void RaylibCamera2D::IncreaseOffset(const float& deltaX, const float& deltaY) {
     IncreaseOffsetX(deltaX);
     IncreaseOffsetY(deltaY);
 }
 
-void rCamera2D::IncreaseZoom(const float& deltaZoom) {
+void RaylibCamera2D::IncreaseZoom(const float& deltaZoom) {
     SetZoom(mCamera2D.zoom + deltaZoom);
 }
 
 // Begin camera mode
-void rCamera2D::BeginCamera() {
+void RaylibCamera2D::BeginCamera() {
     BeginMode2D(mCamera2D);  // Assuming Raylib's BeginMode2D function is used here
 }

@@ -10,7 +10,8 @@ src/Raylibtext.cpp
 src/textFactory.cpp
 src/RaylibFontLoader.cpp 
 src/fontLoaderFactory.cpp
-src/Camera2D.cpp 
+src/RaylibCamera3D.cpp 
+src/RaylibCamera2D.cpp 
 src/CameraFactory.cpp
 src/RaylibShader.cpp
 src/shaderFactory.cpp

@@ -4,11 +4,11 @@
 #include "CameraBase.hpp"
 
 // Concrete class for Camera3D
-class rCamera3D{
+class RaylibCamera3D{
 public:
 
-    rCamera3D(Vector3 position, Vector3 target, Vector3 up, float fovy, int projection);
-    rCamera3D();
+    RaylibCamera3D(Vector3 position, Vector3 target, Vector3 up, float fovy, int projection);
+    RaylibCamera3D();
 
     // Setters for Camera3D properties
     void setPosition(const Vector3& position);

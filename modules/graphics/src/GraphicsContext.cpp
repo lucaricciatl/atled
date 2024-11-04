@@ -4,8 +4,8 @@
 #include "CameraFactory.hpp"
 #include <string_view>
 #include "windowFactory.hpp"
-#include "Camera2D.hpp"
-#include "Camera3D.hpp"
+#include "RaylibCamera2D.hpp"
+#include "RaylibCamera3D.hpp"
 #include "glwp.hpp"
 
 namespace {

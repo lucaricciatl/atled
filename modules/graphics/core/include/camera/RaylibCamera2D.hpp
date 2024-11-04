@@ -5,11 +5,11 @@
 #include "raylib.h"  // Assuming you are using Raylib's Camera2D
 
 // Concrete class for Camera2D that inherits from CameraBase
-class rCamera2D : public CameraBase {
+class RaylibCamera2D : public CameraBase {
 public:
     // Constructors
-    rCamera2D();  // Default constructor
-    rCamera2D(Vector2 offset, Vector2 target, float rotation, float zoom);  // Parameterized constructor
+    RaylibCamera2D();  // Default constructor
+    RaylibCamera2D(Vector2 offset, Vector2 target, float rotation, float zoom);  // Parameterized constructor
 
     // Setters for Camera2D properties
     void SetOffsetX(const float& offset) override;
