@@ -1,62 +1,56 @@
+// GraphicsManager.hpp
 #pragma once
+#include "Model2D.hpp"
+#include "IGraphicManager.hpp"
 #include <atomic>
+#include <mutex>
 #include <chrono>
 #include <functional>
 #include <iostream>
 #include <thread>
 #include <vector>
 
-#include "GraphicsContext.hpp"
-#include "IDisplay.hpp"
 namespace graphics {
 
-struct GfxConfig {
-  // Static default flag
-  static constexpr ConfigFlags defaultFlags = FLAG_VSYNC_HINT;
+class GraphicsManager : public IGraphicManager {
+public:
+    GraphicsManager();
+    ~GraphicsManager() override;
 
-  // Vector to store window configuration flags
-  std::vector<ConfigFlags> WindowConfig;
+    void SetConfigs(const GfxConfig& gfxConfigs) override;
+    void RenderLoop() override;
+    void SetTargetFramerate(unsigned int frameRate) override;
+    std::shared_ptr<GraphicsContext> GetGraphicsContext() override;
+    void Init() override;
+    void Render() override;
 
-  // Constructor with default flags
-  GfxConfig() {
-    WindowConfig.push_back(defaultFlags);  // Initialize with the default flag
-  }
+    // Drawing methods
+    void AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) override;
+    void AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCircle) override;
+    void AddRectangle(const int& aLayerId, std::shared_ptr<Rectangle> aRectangle) override;
+    void AddLine(const int& aLayerId, std::shared_ptr<Line> aLine) override;
+    void AddPolyline(const int& aLayerId, std::shared_ptr<Polyline> aPolyline) override;
+    void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) override;
+    void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) override;
+    void DrawLayer(const int& aLayerId) override;
+    void Clear(::Color aColor) override;
 
-  // Constructor to allow custom flags
-  GfxConfig(std::vector<ConfigFlags> customFlags) : WindowConfig(customFlags) {}
+protected:
+    void Run(); // Thread loop function
+
+private:
+    int mFrameRate;
+    bool mRunning;
+    std::unique_ptr<std::thread> mThread;
+    std::shared_ptr<GraphicsContext> mContext;
+    std::shared_ptr<GfxConfig> mConfigs;
+    std::unique_ptr<IDisplay> mDisplay;
+
+    // Storage for drawing primitives, organized by layer
+    std::unordered_map<int, std::vector<std::shared_ptr<Model2D>>> layers;
+
+    // Synchronization
+    std::mutex layersMutex;
 };
 
-class GraphicsManager {
- public:
-  GraphicsManager();
-  ~GraphicsManager();
-  void SetConfigs(GfxConfig aGfxConfigs);
-  void RenderLoop();
-  void SetTargetFramerate(unsigned int frameRate);
-  std::shared_ptr<GraphicsContext> GetGraphicsContext();
-  virtual void Init();
-  virtual void Render();
-  void Start();
-  void Stop();
-
-  std::atomic<bool> mRunning;
-  unsigned int mFrameRate;
-
-  // drawing methods
-  void AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc);
-  void AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCircle);
-  void AddRectangle(const int& aLayerId, std::shared_ptr<Rectangle> aRectangle);
-  void AddLine(const int& aLayerId, std::shared_ptr<Line> aLine);
-  void AddPolyline(const int& aLayerId, std::shared_ptr<Polyline> aPolyline);
-  void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle);
-  void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon);
-  void DrawLayer(const int& aLayerId);
-  void Clear(::Color aColor);
-
- protected:
-  std::unique_ptr<std::thread> mThread;
-  std::shared_ptr<GraphicsContext> mContext;
-  std::shared_ptr<GfxConfig> mConfigs;
-  std::unique_ptr<IDisplay> mDisplay;
-};
-}  // namespace graphics
+} // namespace graphics

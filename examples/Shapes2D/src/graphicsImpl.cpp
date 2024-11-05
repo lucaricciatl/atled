@@ -20,6 +20,7 @@ void GraphicsManagerImpl::Init() {
   auto configs = graphics::GfxConfig({FLAG_WINDOW_RESIZABLE, FLAG_VSYNC_HINT,
                                       FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT});
   SetConfigs(configs);
+  ctx->InitWindowManager();
 }
 
 void GraphicsManagerImpl::Render() {
@@ -86,7 +87,6 @@ void GraphicsManagerImpl::Render() {
   polygon->SetColor(col);
   AddPolygon(7, polygon);
 
-  BeginDrawing();
 
   DrawLayer(1);
   DrawLayer(2);
@@ -96,5 +96,4 @@ void GraphicsManagerImpl::Render() {
   DrawLayer(6);
   DrawLayer(7);
 
-  EndDrawing();
 }

@@ -2,6 +2,7 @@
 #define KEYBOARDINPUTINTERFACE_HPP
 
 namespace input {
+enum class KeyboardType{Raylib};
 
 class IKeyboard {
 public:

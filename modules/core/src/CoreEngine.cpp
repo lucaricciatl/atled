@@ -1,11 +1,13 @@
+// CoreEngine.cpp
 #include "CoreEngine.hpp"
 
-namespace core {
+namespace engine {
 
-CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr /*, std::unique_ptr<graphics::GraphicsManager> graphicsMgr */)
-    : inputManager(std::move(inputMgr))
-    // , graphicsManager(std::move(graphicsMgr))
-    , isRunning(false) {
+CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr, std::unique_ptr<graphics::IGraphicManager> graphicsMgr)
+    : inputManager(std::move(inputMgr)),
+      graphicsManager(std::move(graphicsMgr)),
+      isRunning(false)
+{
 }
 
 CoreEngine::~CoreEngine() {
@@ -15,7 +17,8 @@ CoreEngine::~CoreEngine() {
 void CoreEngine::Initialize() {
     // Initialize input and graphics managers
     inputManager->Initialize();
-    // graphicsManager->Initialize();
+    graphicsManager->Init();
+
     isRunning = true;
 }
 
@@ -28,7 +31,7 @@ void CoreEngine::Run() {
 
 void CoreEngine::Shutdown() {
     if (isRunning) {
-        // graphicsManager->Shutdown();
+        // Shutdown graphics and input managers
         inputManager->Shutdown();
         isRunning = false;
     }
@@ -39,18 +42,16 @@ void CoreEngine::MainLoop() {
         // Update input
         inputManager->Update();
 
-        // Update game logic
-        // ...
-
-        // Render graphics
-        // graphicsManager->Render();
-
-        // Example: Check for exit condition (e.g., ESC key)
+        // Example: Handle input to control engine state
         if (inputManager->IsKeyPressed(KEY_ESCAPE)) {
             isRunning = false;
         }
 
-        // Optionally add a small sleep or frame rate limiter
+        // Example: Add some rendering logic
+        // graphicsManager->Clear(RAYWHITE);
+        // ... Add drawing primitives ...
+
+        // Optionally, include logic to synchronize with rendering thread
     }
 }
 

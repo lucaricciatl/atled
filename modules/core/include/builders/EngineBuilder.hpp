@@ -1,12 +1,12 @@
-#ifndef ENGINEBUILDER_HPP
-#define ENGINEBUILDER_HPP
+// EngineBuilder.hpp
+#pragma once
 
 #include <memory>
 #include "CoreEngine.hpp"
 #include "InputManagerBuilder.hpp"
-// #include "GraphicsManagerBuilder.hpp" // Placeholder for graphics management
+#include "GraphicManagerFactory.hpp"
 
-namespace core {
+namespace engine {
 
 class EngineBuilder {
 public:
@@ -15,16 +15,19 @@ public:
     // Methods to configure the engine
     EngineBuilder& SetKeyboardType(input::KeyboardType type);
     EngineBuilder& SetMouseType(input::MouseType type);
-    // EngineBuilder& SetGraphicsConfig(const graphics::GraphicsConfig& config); // Placeholder
+    EngineBuilder& SetGraphicsType(graphics::GraphicsType type);
+    EngineBuilder& SetGraphicsConfig(const graphics::GfxConfig& config);
+    EngineBuilder& SetTargetFramerate(unsigned int frameRate);
 
     // Build method to create the CoreEngine instance
     std::unique_ptr<CoreEngine> Build();
 
 private:
-    input::InputManagerBuilder inputManagerBuilder;
-    // graphics::GraphicsManagerBuilder graphicsManagerBuilder; // Placeholder
+    input::KeyboardType keyboardType = input::KeyboardType::Raylib; // Default type
+    input::MouseType mouseType = input::MouseType::Raylib;          // Default type
+    graphics::GraphicsType graphicsType = graphics::GraphicsType::Default;
+    graphics::GfxConfig gfxConfig;                                  // Default config
+    unsigned int targetFramerate = 60;                              // Default frame rate
 };
 
 } // namespace engine
-
-#endif // ENGINEBUILDER_HPP

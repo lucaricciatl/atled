@@ -15,6 +15,7 @@ class GraphicsContext {
   // init
   void InitWindowManager();
   void InitWindowManager(std::vector<::ConfigFlags> flags);
+  void InitWindowManager(::ConfigFlags flags);
 
   // set
   void SetFlag(::ConfigFlags flag);

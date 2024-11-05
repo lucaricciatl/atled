@@ -1,26 +1,47 @@
+// EngineBuilder.cpp
 #include "EngineBuilder.hpp"
 
-namespace core {
+namespace engine {
 
 EngineBuilder& EngineBuilder::SetKeyboardType(input::KeyboardType type) {
-    inputManagerBuilder.SetKeyboardType(type);
+    keyboardType = type;
     return *this;
 }
 
 EngineBuilder& EngineBuilder::SetMouseType(input::MouseType type) {
-    inputManagerBuilder.SetMouseType(type);
+    mouseType = type;
     return *this;
 }
 
-// EngineBuilder& EngineBuilder::SetGraphicsConfig(const graphics::GraphicsConfig& config) {
-//     graphicsManagerBuilder.SetConfig(config);
-//     return *this;
-// }
+EngineBuilder& EngineBuilder::SetGraphicsType(graphics::GraphicsType type) {
+    graphicsType = type;
+    return *this;
+}
+
+EngineBuilder& EngineBuilder::SetGraphicsConfig(const graphics::GfxConfig& config) {
+    gfxConfig = config;
+    return *this;
+}
+
+EngineBuilder& EngineBuilder::SetTargetFramerate(unsigned int frameRate) {
+    targetFramerate = frameRate;
+    return *this;
+}
 
 std::unique_ptr<CoreEngine> EngineBuilder::Build() {
-    auto inputManager = inputManagerBuilder.Build();
-    // auto graphicsManager = graphicsManagerBuilder.Build();
-    return std::make_unique<CoreEngine>(std::move(inputManager) /*, std::move(graphicsManager) */);
+    // Build InputManager using InputManagerBuilder
+    input::InputManagerBuilder inputBuilder;
+    inputBuilder.SetKeyboardType(keyboardType)
+                .SetMouseType(mouseType);
+    auto inputManager = inputBuilder.Build();
+
+    // Create GraphicsManager using GraphicsManagerFactory
+    auto graphicsManager = graphics::GraphicsManagerFactory::CreateGraphicsManager(graphicsType);
+    graphicsManager->SetConfigs(gfxConfig);
+    graphicsManager->SetTargetFramerate(targetFramerate);
+
+    // Create CoreEngine with configured InputManager and GraphicsManager
+    return std::make_unique<CoreEngine>(std::move(inputManager), std::move(graphicsManager));
 }
 
 } // namespace engine

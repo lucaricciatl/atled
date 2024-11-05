@@ -6,8 +6,9 @@ project(nBody)
 
 # Add the source files
 set(SOURCES
-    src/drawing2D.cpp
-    src/graphicsImpl.cpp
+    src/main.cpp
+    src/NBodySimulation.cpp
+    src/GraphicsManagerImpl.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

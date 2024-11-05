@@ -1,65 +1,34 @@
+// CoreEngine.hpp
+#pragma once
 
-
-
-namespace core{
-
-#include "CoreEngine.hpp"
+#include <memory>
+#include "InputManager.hpp"
+#include "IGraphicManager.hpp"
 
 namespace engine {
 
-CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr /*, std::unique_ptr<graphics::GraphicsManager> graphicsMgr */)
-    : inputManager(std::move(inputMgr))
-    // , graphicsManager(std::move(graphicsMgr))
-    , isRunning(false) {
-}
+class CoreEngine {
+public:
+    CoreEngine(std::unique_ptr<input::InputManager> inputMgr, std::unique_ptr<graphics::IGraphicManager> graphicsMgr);
+    ~CoreEngine();
 
-CoreEngine::~CoreEngine() {
-    Shutdown();
-}
+    // Initialize the engine components
+    void Initialize();
 
-void CoreEngine::Initialize() {
-    // Initialize input and graphics managers
-    inputManager->Initialize();
-    // graphicsManager->Initialize();
-    isRunning = true;
-}
+    // Run the main loop
+    void Run();
 
-void CoreEngine::Run() {
-    if (!isRunning) {
-        Initialize();
-    }
-    MainLoop();
-}
+    // Shutdown the engine components
+    void Shutdown();
 
-void CoreEngine::Shutdown() {
-    if (isRunning) {
-        // graphicsManager->Shutdown();
-        inputManager->Shutdown();
-        isRunning = false;
-    }
-}
+private:
+    std::unique_ptr<input::InputManager> inputManager;
+    std::unique_ptr<graphics::IGraphicManager> graphicsManager;
 
-void CoreEngine::MainLoop() {
-    while (isRunning) {
-        // Update input
-        inputManager->Update();
+    bool isRunning;
 
-        // Update game logic
-        // ...
-
-        // Render graphics
-        // graphicsManager->Render();
-
-        // Example: Check for exit condition (e.g., ESC key)
-        if (inputManager->IsKeyPressed(KEY_ESCAPE)) {
-            isRunning = false;
-        }
-
-        // Optionally add a small sleep or frame rate limiter
-    }
-}
+    // Main loop function
+    void MainLoop();
+};
 
 } // namespace engine
-
-
-}

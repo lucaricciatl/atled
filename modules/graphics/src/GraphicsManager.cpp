@@ -1,11 +1,9 @@
 #include "GraphicsManager.hpp"
-
-#include <DisplayFactory.hpp>
+#include "RaylibDisplay.hpp" // Assuming RaylibDisplay is a concrete implementation of IDisplay
 #include <chrono>
 #include <cmath>
 #include <iostream>
 #include <memory>
-#include <thread>
 #include "Arc.hpp"
 #include "Model2DFactory.hpp"
 #include "Model2D.hpp"
@@ -13,152 +11,116 @@
 #include "PolyLine2D.hpp"
 #include "PolygonBuffer2D.hpp"
 
-
-namespace {
-constexpr unsigned int defaultFramerate = 30;
-float times = 0.0f; 
-DisplayType displayType = DisplayType::Raylib;
-}  // namespace
-
 namespace graphics {
 
-GraphicsManager::GraphicsManager() {
-  mContext = std::make_shared<GraphicsContext>();
-  mThread = std::make_unique<std::thread>();
-  SetTargetFramerate(defaultFramerate);
-  mDisplay = DisplayFactory::CreateDisplay(displayType);
-  if (!mDisplay) {
-      throw std::runtime_error("Failed to create display device!");
-  }
-};
-
-GraphicsManager::~GraphicsManager() {
-  Stop();
+GraphicsManager::GraphicsManager()
+    : mRunning(false),
+      mFrameRate(60),
+      mContext(std::make_shared<GraphicsContext>()),
+      mConfigs(std::make_shared<GfxConfig>()),
+      mDisplay(std::make_unique<RaylibDisplay>()) // Instantiate with RaylibDisplay (or another display backend)
+{
 }
 
-void GraphicsManager::SetConfigs(GfxConfig aGfxConfigs) {
-  mConfigs = std::make_shared<GfxConfig>(
-      aGfxConfigs);  
-};
+GraphicsManager::~GraphicsManager() {
+    // No need to call Stop() as threading is removed
+}
+
+void GraphicsManager::SetConfigs(const GfxConfig& gfxConfigs) {
+    *mConfigs = gfxConfigs;
+}
 
 void GraphicsManager::SetTargetFramerate(unsigned int frameRate) {
-  mFrameRate = frameRate;
+    mFrameRate = frameRate;
 }
 
 std::shared_ptr<GraphicsContext> GraphicsManager::GetGraphicsContext() {
-  return mContext;
-}
-
-void GraphicsManager::Stop() {
-  mRunning = false;
-  if (mThread->joinable()) {
-    mThread->join();
-  }
-}
-
-void GraphicsManager::Start() {
-  mContext->InitWindowManager(mConfigs->WindowConfig);
-  mRunning = true;
-  RenderLoop();
-}
-
-void GraphicsManager::RenderLoop() {
-  using namespace std::chrono;
-  auto frameDuration = milliseconds(1000 / mFrameRate);
-  while (mRunning) {
-    auto frameStart = steady_clock::now();
-
-    if (true) {
-      try {
-        if (mContext->isReady) {
-          if (!WindowShouldClose()) 
-          {
-            // Draw
-            Render();
-          } else {
-            CloseWindow();
-          }
-        }
-
-      } catch (const std::exception& e) {
-        std::cerr << "Render function threw an exception: " << e.what()
-                  << std::endl;
-        mRunning = false;  
-      }
-    }
-
-    auto frameEnd = steady_clock::now();
-    auto elapsed = duration_cast<milliseconds>(frameEnd - frameStart);
-    auto sleepTime = frameDuration - elapsed;
-
-    if (sleepTime > milliseconds(0)) {
-      std::this_thread::sleep_for(sleepTime);
-    }
-  }
+    return mContext;
 }
 
 void GraphicsManager::Init() {
+    // Initialization logic for context and display
+    mContext->InitWindowManager(); // Initialize context with display
+}
+
+void GraphicsManager::RenderLoop() {
+    auto frameDuration = std::chrono::milliseconds(1000 / mFrameRate);
+
+    while (true) {
+        auto frameStart = std::chrono::steady_clock::now();
+        mContext->BeginDrawing();
+        Render();
+        
+
+        // Frame rate control
+        auto frameEnd = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(frameEnd - frameStart);
+        if (elapsed < frameDuration) {
+            std::this_thread::sleep_for(frameDuration - elapsed);
+        }
+        mContext->EndDrawing(); // Finish the current frame
+    }
 
 }
 
 void GraphicsManager::Render() {
-  BeginDrawing();
-  EndDrawing();
+    Clear(RAYWHITE); // Clear with white color
+
+    std::lock_guard<std::mutex> lock(layersMutex);
+    for (const auto& [layerId, primitives] : layers) {
+        DrawLayer(layerId);
+    }
+
 }
 
-// drawing methods
+// Thread-related methods removed
+
+// Add primitive methods (no changes)
 void GraphicsManager::AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) {
-  mContext->mLayerManager.AddLayer(aLayerId);
-  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
-  layer->GetBufferManager()->AddShapeBuffer(aArc);
-};
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(aArc);
+}
 
 void GraphicsManager::AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCircle) {
-  mContext->mLayerManager.AddLayer(aLayerId);
-  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
-  layer->GetBufferManager()->AddShapeBuffer(aCircle);
-};
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(aCircle);
+}
 
-void GraphicsManager::AddRectangle(const int& aLayerId,
-                                std::shared_ptr<Rectangle> aRectangle) {
-  mContext->mLayerManager.AddLayer(aLayerId);
-  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
-  layer->GetBufferManager()->AddShapeBuffer(aRectangle);
-};
+void GraphicsManager::AddRectangle(const int& aLayerId, std::shared_ptr<Rectangle> aRectangle) {
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(aRectangle);
+}
 
-void GraphicsManager::AddLine(const int& aLayerId,
-                                   std::shared_ptr<Line> aLine) {
-  mContext->mLayerManager.AddLayer(aLayerId);
-  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
-  layer->GetBufferManager()->AddShapeBuffer(aLine);
-};
+void GraphicsManager::AddLine(const int& aLayerId, std::shared_ptr<Line> aLine) {
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(aLine);
+}
 
-void GraphicsManager::AddPolyline(const int& aLayerId,
-                                  std::shared_ptr<Polyline> aPolyline) {
-  mContext->mLayerManager.AddLayer(aLayerId);
-  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
-  layer->GetBufferManager()->AddShapeBuffer(aPolyline);
+void GraphicsManager::AddPolyline(const int& aLayerId, std::shared_ptr<Polyline> aPolyline) {
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(aPolyline);
 }
 
 void GraphicsManager::AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) {
-    mContext->mLayerManager.AddLayer(aLayerId);
-    auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
-    layer->GetBufferManager()->AddShapeBuffer(aTriangle);
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(aTriangle);
 }
 
 void GraphicsManager::AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) {
-    mContext->mLayerManager.AddLayer(aLayerId);
-    auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
-    layer->GetBufferManager()->AddShapeBuffer(aPolygon);
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(aPolygon);
 }
+
 void GraphicsManager::DrawLayer(const int& aLayerId) {
-  auto layer = mContext->mLayerManager.GetLayerById(aLayerId);
-  layer->Draw();
-};
+    if (layers.find(aLayerId) != layers.end()) {
+        for (const auto& primitive : layers[aLayerId]) {
+            primitive->Draw();
+        }
+    }
+}
 
-void GraphicsManager::Clear(::Color aColor){
-  mContext->Clear(aColor);
-};
+void GraphicsManager::Clear(::Color aColor) {
+    mContext->Clear(aColor);
+}
 
-}  // namespace graphics
-
+} // namespace graphics

@@ -2,10 +2,10 @@
 #define INPUTMANAGER_HPP
 
 #include <memory>
-#include "KeyboardInputInterface.hpp"
-#include "MouseInterface.hpp"
-#include "KeyboardInputFactory.hpp"
-#include "MouseFactory.hpp"
+#include "IKeyboard.hpp"
+#include "IMouse.hpp"
+#include "IKeyboard.hpp"
+#include "IMouse.hpp"
 
 namespace input {
 
@@ -56,8 +56,8 @@ public:
     void SetMouseCursor(int cursor);
 
 private:
-    std::unique_ptr<KeyboardInputInterface> keyboardInput;
-    std::unique_ptr<MouseInterface> mouseInput;
+    std::unique_ptr<IKeyboard> keyboardInput;
+    std::unique_ptr<IMouse> mouseInput;
 };
 
 } // namespace input

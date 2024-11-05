@@ -2,7 +2,7 @@
 #define INPUTMANAGERBUILDER_HPP
 
 #include "InputManager.hpp"
-#include "KeyboardInputFactory.hpp"
+#include "KeyboardFactory.hpp"
 #include "MouseFactory.hpp"
 
 namespace input {

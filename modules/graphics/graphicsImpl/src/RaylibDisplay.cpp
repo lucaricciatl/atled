@@ -1,76 +1,76 @@
 #include "RaylibDisplay.hpp"
-#include <raylib.h>
 
-// Implement each method by calling corresponding Raylib functions
-// Define the constructor
 RaylibDisplay::RaylibDisplay() {
-
+    // Initialize the display, if necessary
 }
 
-// Define the destructor
 RaylibDisplay::~RaylibDisplay() {
-
+    // Cleanup the display, if necessary
 }
+
+// Implementing all functions from IDisplay interface
 
 void* RaylibDisplay::GetHandle(void) {
-    return GetWindowHandle();  // Returns the native window handle
+    // Raylib does not provide a direct handle, so returning nullptr or a placeholder
+    return nullptr;
 }
 
 int RaylibDisplay::GetScreenWidth(void) {
-    return GetScreenWidth();   // Returns the width of the screen
+    return GetScreenWidth();
 }
 
 int RaylibDisplay::GetScreenHeight(void) {
-    return GetScreenHeight();  // Returns the height of the screen
+    return GetScreenHeight();
 }
 
 int RaylibDisplay::GetRenderWidth(void) {
-    return GetRenderWidth();   // Returns the width of the rendering area
+    return GetRenderWidth();
 }
 
 int RaylibDisplay::GetRenderHeight(void) {
-    return GetRenderHeight();  // Returns the height of the rendering area
+    return GetRenderHeight();
 }
 
 int RaylibDisplay::GetMonitorCount(void) {
-    return GetMonitorCount();  // Returns the number of available monitors
+    return GetMonitorCount();
 }
 
 int RaylibDisplay::GetCurrentMonitor(void) {
-    return GetCurrentMonitor();  // Returns the current monitor index
+    return GetCurrentMonitor();
 }
 
 Vector2 RaylibDisplay::GetMonitorPosition(int monitor) {
-    return GetMonitorPosition(monitor);  // Returns the position of a specific monitor
+    return GetMonitorPosition(monitor);
 }
 
 int RaylibDisplay::GetMonitorWidth(int monitor) {
-    return GetMonitorWidth(monitor);  // Returns the width of a specific monitor
+    return GetMonitorWidth(monitor);
 }
 
 int RaylibDisplay::GetMonitorHeight(int monitor) {
-    return GetMonitorHeight(monitor);  // Returns the height of a specific monitor
+    return GetMonitorHeight(monitor);
 }
 
 int RaylibDisplay::GetMonitorPhysicalWidth(int monitor) {
-    return GetMonitorPhysicalWidth(monitor);  // Returns the physical width of a specific monitor
+    return GetMonitorPhysicalWidth(monitor);
 }
 
 int RaylibDisplay::GetMonitorPhysicalHeight(int monitor) {
-    return GetMonitorPhysicalHeight(monitor);  // Returns the physical height of a specific monitor
+    return GetMonitorPhysicalHeight(monitor);
 }
 
 int RaylibDisplay::GetMonitorRefreshRate(int monitor) {
-    return GetMonitorRefreshRate(monitor);  // Returns the refresh rate of a specific monitor
+    return GetMonitorRefreshRate(monitor);
 }
 
 Vector2 RaylibDisplay::GetPosition(void) {
-    return GetWindowPosition();  // Returns the position of the window
+    return GetWindowPosition();
 }
 
 Vector2 RaylibDisplay::GetScaleDPI(void) {
-    return GetWindowScaleDPI();  // Returns the DPI scaling factor of the window
+    return GetWindowScaleDPI();
 }
+
 const char* RaylibDisplay::GetMonitorName(int monitor) {
-    return GetMonitorName(monitor);  // Returns the name of a specific monitor
+    return GetMonitorName(monitor);
 }

@@ -1,32 +1,33 @@
+// RaylibDisplay.hpp
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include "raylib.h"  // Include raylib (or another library) for window management functions
+#include "raylib.h"  // Include raylib for window management functions
 #include "IDisplay.hpp"
 
 class RaylibDisplay : public IDisplay {
 public:
     RaylibDisplay();  
-    ~RaylibDisplay(); 
+    ~RaylibDisplay();  
 
+    // Implement all required virtual functions from IDisplay
 
-    // Window information retrieval functions
-    void *GetHandle(void) ;
-    int GetScreenWidth(void) ;
-    int GetScreenHeight(void) ;
-    int GetRenderWidth(void) ;
-    int GetRenderHeight(void) ;
-    int GetMonitorCount(void) ;
-    int GetCurrentMonitor(void) ;
-    Vector2 GetMonitorPosition(int monitor) ;
-    int GetMonitorWidth(int monitor) ;
-    int GetMonitorHeight(int monitor) ;
-    int GetMonitorPhysicalWidth(int monitor) ;
-    int GetMonitorPhysicalHeight(int monitor) ;
-    int GetMonitorRefreshRate(int monitor) ;
-    Vector2 GetPosition(void) ;
-    Vector2 GetScaleDPI(void) ;
-    const char *GetMonitorName(int monitor) ;
+    void* GetHandle(void) override;
+    int GetScreenWidth(void) override;
+    int GetScreenHeight(void) override;
+    int GetRenderWidth(void) override;
+    int GetRenderHeight(void) override;
+    int GetMonitorCount(void) override;
+    int GetCurrentMonitor(void) override;
+    Vector2 GetMonitorPosition(int monitor) override;
+    int GetMonitorWidth(int monitor) override;
+    int GetMonitorHeight(int monitor) override;
+    int GetMonitorPhysicalWidth(int monitor) override;
+    int GetMonitorPhysicalHeight(int monitor) override;
+    int GetMonitorRefreshRate(int monitor) override;
+    Vector2 GetPosition(void) override;
+    Vector2 GetScaleDPI(void) override;
+    const char* GetMonitorName(int monitor) override;
 };
 
 #endif // WINDOW_HPP
