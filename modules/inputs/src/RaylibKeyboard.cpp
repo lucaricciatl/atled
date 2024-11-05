@@ -1,25 +1,25 @@
-#include "Keyboard.hpp"
+#include "RaylibKeyboard.hpp"
 #include "glwp.hpp"
 #include "raylib.h"
 #include <iostream>
 #include <chrono>
 
 namespace input{
-KeyboardInput::KeyboardInput() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false) {
+RaylibKeyboard::RaylibKeyboard() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false) {
 }
 
-KeyboardInput::~KeyboardInput() {
+RaylibKeyboard::~RaylibKeyboard() {
     Stop();
 }
 
-void KeyboardInput::Start() {
+void RaylibKeyboard::Start() {
     if (!running.load()) {
         running = true;
-        processingThread = std::thread(&KeyboardInput::ProcessingThread, this);
+        processingThread = std::thread(&RaylibKeyboard::ProcessingThread, this);
     }
 }
 
-void KeyboardInput::Stop() {
+void RaylibKeyboard::Stop() {
     if (running.load()) {
         running = false;
         if (processingThread.joinable()) {
@@ -28,7 +28,7 @@ void KeyboardInput::Stop() {
     }
 }
 
-void KeyboardInput::Update() {
+void RaylibKeyboard::Update() {
     // This method must be called from the main thread
 
     // Update prevKeyStates
@@ -70,7 +70,7 @@ void KeyboardInput::Update() {
 
 }
 
-void KeyboardInput::ProcessingThread() {
+void RaylibKeyboard::ProcessingThread() {
   while (running.load()) {
     // Process queued characters
     Update();
@@ -90,7 +90,7 @@ void KeyboardInput::ProcessingThread() {
   }
 }
 
-bool KeyboardInput::IsKeyPressed(int key) {
+bool RaylibKeyboard::IsKeyPressed(int key) {
     std::lock_guard<std::mutex> lock(keyStateMutex);
     if (key >= 0 && key < static_cast<int>(keyStates.size())) {
         return (keyStates[key] && !prevKeyStates[key]);
@@ -98,13 +98,13 @@ bool KeyboardInput::IsKeyPressed(int key) {
     return false;
 }
 
-bool KeyboardInput::IsKeyPressedRepeat(int key) {
+bool RaylibKeyboard::IsKeyPressedRepeat(int key) {
     // Implement repeat logic if needed
     // For now, we'll treat it the same as IsKeyPressed
     return IsKeyPressed(key);
 }
 
-bool KeyboardInput::IsKeyDown(int key) {
+bool RaylibKeyboard::IsKeyDown(int key) {
     std::lock_guard<std::mutex> lock(keyStateMutex);
     if (key >= 0 && key < static_cast<int>(keyStates.size())) {
         return keyStates[key];
@@ -112,7 +112,7 @@ bool KeyboardInput::IsKeyDown(int key) {
     return false;
 }
 
-bool KeyboardInput::IsKeyReleased(int key) {
+bool RaylibKeyboard::IsKeyReleased(int key) {
     std::lock_guard<std::mutex> lock(keyStateMutex);
     if (key >= 0 && key < static_cast<int>(keyStates.size())) {
         return (!keyStates[key] && prevKeyStates[key]);
@@ -120,11 +120,11 @@ bool KeyboardInput::IsKeyReleased(int key) {
     return false;
 }
 
-bool KeyboardInput::IsKeyUp(int key) {
+bool RaylibKeyboard::IsKeyUp(int key) {
     return !IsKeyDown(key);
 }
 
-int KeyboardInput::GetKeyPressed() {
+int RaylibKeyboard::GetKeyPressed() {
     std::lock_guard<std::mutex> lock(keyQueueMutex);
     if (!keyQueue.empty()) {
         int key = keyQueue.front();
@@ -134,7 +134,7 @@ int KeyboardInput::GetKeyPressed() {
     return 0;
 }
 
-int KeyboardInput::GetCharPressed() {
+int RaylibKeyboard::GetCharPressed() {
     std::lock_guard<std::mutex> lock(charQueueMutex);
     if (!charQueue.empty()) {
         int character = charQueue.front();
