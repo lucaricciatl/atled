@@ -18,6 +18,30 @@ void Rectangle::SetUpperLeft(const Coordinates2D& aUpperLeft) {
 void Rectangle::SetBottomRight(const Coordinates2D& aBottomRight) {
   mBottomRight = aBottomRight;
 }
+
+// Implementation of SetSize
+void Rectangle::SetSize(float width, float height) {
+    assert(width >= 0 && height >= 0 && "Width and height must be non-negative");
+
+    // Update mBottomRight based on mUpperLeft and the new size
+    mBottomRight.x = mUpperLeft.x + width;
+    mBottomRight.y = mUpperLeft.y + height;
+}
+
+// Implementation of SetPosition
+void Rectangle::SetPosition(const Coordinates2D& position) {
+    // Calculate the current size
+    float width = mBottomRight.x - mUpperLeft.x;
+    float height = mBottomRight.y - mUpperLeft.y;
+
+    // Update mUpperLeft to the new position
+    mUpperLeft = position;
+
+    // Update mBottomRight based on the new mUpperLeft and the size
+    mBottomRight.x = mUpperLeft.x + width;
+    mBottomRight.y = mUpperLeft.y + height;
+}
+
 void Rectangle::SetColor(const ::Color& color) { mColor = color; }
 void Rectangle::SetRotation(double rotation) { mRotation = rotation; }
 Coordinates2D Rectangle::GetUpperLeft() const { return mUpperLeft; }

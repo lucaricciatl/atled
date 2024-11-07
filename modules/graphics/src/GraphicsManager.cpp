@@ -14,8 +14,7 @@
 namespace graphics {
 
 GraphicsManager::GraphicsManager()
-    : mRunning(false),
-      mFrameRate(60),
+    : mFrameRate(60),
       mContext(std::make_shared<GraphicsContext>()),
       mConfigs(std::make_shared<GfxConfig>()),
       mDisplay(std::make_unique<RaylibDisplay>()) // Instantiate with RaylibDisplay (or another display backend)
@@ -43,7 +42,7 @@ void GraphicsManager::Init() {
     mContext->InitWindowManager(); // Initialize context with display
 }
 
-void GraphicsManager::RenderLoop() {
+void GraphicsManager::Start() {
     auto frameDuration = std::chrono::milliseconds(1000 / mFrameRate);
 
     while (true) {

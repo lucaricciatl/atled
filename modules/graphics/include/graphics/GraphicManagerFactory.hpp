@@ -9,8 +9,7 @@
 namespace graphics {
 
 enum class GraphicsType {
-    Default,
-    Other
+    Default
 };
 
 class GraphicsManagerFactory {
@@ -18,6 +17,8 @@ public:
     static std::unique_ptr<IGraphicManager> CreateGraphicsManager(GraphicsType type) {
         switch (type) {
             case GraphicsType::Default:
+                return std::make_unique<GraphicsManager>();
+            default:
                 return std::make_unique<GraphicsManager>();
         }
     }

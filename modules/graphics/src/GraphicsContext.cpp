@@ -41,7 +41,7 @@ GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
   InitWindowManager();
 }
 
-GraphicsContext::~GraphicsContext() { mWindow->CloseWindow(); }
+GraphicsContext::~GraphicsContext() { if (mWindow){mWindow->CloseWindow();} }
 
 void GraphicsContext::InitWindowManager(std::vector<::ConfigFlags> flags) {
   for (auto flag : flags) {
@@ -57,8 +57,8 @@ void GraphicsContext::InitWindowManager(::ConfigFlags flags) {
 }
 
 void GraphicsContext::InitWindowManager() {
-  mWindow = WindowFactory::CreateWindow(WindowType::Raylib);
   if (mWindow) {
+    mWindow = WindowFactory::CreateWindow(WindowType::Raylib);
     mWindow->InitWindow(windowWidth, windowHeight, windowTitle);
   }
 }

@@ -27,7 +27,8 @@ class Rectangle : public Model2D {
   Coordinates2D GetUpperLeft() const;
   Coordinates2D GetBottomRight() const;
 
-
+  void SetSize(float width, float height);
+  void SetPosition(const Coordinates2D& position);
   void SetUpperLeft(const Coordinates2D& aUpperLeft);
   void SetBottomRight(const Coordinates2D& aBottomRight);
   void SetColor(const ::Color& color);  

@@ -2,3 +2,4 @@ project(examples)
 
 add_subdirectory(Shapes2D)
 add_subdirectory(nBody)
+add_subdirectory(template)

@@ -1,7 +1,6 @@
 # Create a library from the submodule's source files
 add_library(core
     ./src/CoreEngine.cpp
-    ./src/EngineBuilder.cpp
 )
 
 target_link_libraries(core PUBLIC inputs graphics)
@@ -9,8 +8,6 @@ target_link_libraries(core PUBLIC inputs graphics)
 # Specify include directories for the submodule
 target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/builders
 )
-
 
 set_target_properties(core PROPERTIES FOLDER "modules")

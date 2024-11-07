@@ -18,7 +18,7 @@ public:
     ~GraphicsManager() override;
 
     void SetConfigs(const GfxConfig& gfxConfigs) override;
-    void RenderLoop() override;
+    void Start() override;
     void SetTargetFramerate(unsigned int frameRate) override;
     std::shared_ptr<GraphicsContext> GetGraphicsContext() override;
     void Init() override;
@@ -40,7 +40,6 @@ protected:
 
 private:
     int mFrameRate;
-    bool mRunning;
     std::unique_ptr<std::thread> mThread;
     std::shared_ptr<GraphicsContext> mContext;
     std::shared_ptr<GfxConfig> mConfigs;

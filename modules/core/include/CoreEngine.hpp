@@ -1,34 +1,32 @@
-// CoreEngine.hpp
 #pragma once
 
+#include "IEngine.hpp"
+#include "InputManager.hpp"            // Include the full definition of InputManager
+#include "IGraphicManager.hpp"          // Include the full definition of IGraphicManager
 #include <memory>
-#include "InputManager.hpp"
-#include "IGraphicManager.hpp"
 
 namespace engine {
 
-class CoreEngine {
-public:
-    CoreEngine(std::unique_ptr<input::InputManager> inputMgr, std::unique_ptr<graphics::IGraphicManager> graphicsMgr);
-    ~CoreEngine();
 
-    // Initialize the engine components
-    void Initialize();
+    class CoreEngine : public IEngine {
+    public:
+        // Constructor with unique_ptr arguments
+        CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
+            std::unique_ptr<graphics::IGraphicManager> graphicsMgr);
+        ~CoreEngine() override = default;
 
-    // Run the main loop
-    void Run();
+        void Init() override;
+        void Stop() override;
+        void Start() override;
+        void Shutdown() override;
 
-    // Shutdown the engine components
-    void Shutdown();
+    protected:
+        void EngineLoop();
 
-private:
-    std::unique_ptr<input::InputManager> inputManager;
-    std::unique_ptr<graphics::IGraphicManager> graphicsManager;
-
-    bool isRunning;
-
-    // Main loop function
-    void MainLoop();
-};
+        std::unique_ptr<input::InputManager> inputManager;
+        std::unique_ptr<graphics::IGraphicManager> graphicsManager;
+        bool isRunning = false;
+        bool isReady = false;
+    };
 
 } // namespace engine

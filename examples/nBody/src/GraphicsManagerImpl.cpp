@@ -22,7 +22,7 @@ void GraphicsManagerImpl::Init() {
 }
 
 void GraphicsManagerImpl::Render() {
-    float dt = 0.01f; // Time step for the simulation
+    float dt = 0.005f; // Time step for the simulation
     simulation.Update(dt);
 
     Clear(Color(0, 0, 0, 255));

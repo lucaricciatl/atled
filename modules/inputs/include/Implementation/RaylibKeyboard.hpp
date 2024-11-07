@@ -13,7 +13,6 @@ namespace input {
 class RaylibKeyboard : public IKeyboard {
 public:
     RaylibKeyboard();
-    ~RaylibKeyboard() override;
 
     // Override functions from the interface
     void Start() override;

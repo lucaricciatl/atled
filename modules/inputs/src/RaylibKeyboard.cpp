@@ -8,10 +8,6 @@ namespace input{
 RaylibKeyboard::RaylibKeyboard() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false) {
 }
 
-RaylibKeyboard::~RaylibKeyboard() {
-    Stop();
-}
-
 void RaylibKeyboard::Start() {
     if (!running.load()) {
         running = true;

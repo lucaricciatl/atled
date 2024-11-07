@@ -6,8 +6,10 @@
 #include "IMouse.hpp"
 #include "IKeyboard.hpp"
 #include "IMouse.hpp"
-
+#include "MouseFactory.hpp"
+#include "KeyboardFactory.hpp"
 namespace input {
+    
 
 class InputManager {
 public:
@@ -15,7 +17,7 @@ public:
     ~InputManager();
 
     // Initialize and shutdown functions to start and stop input processing
-    void Initialize();
+    void Init();
     void Shutdown();
 
     // Update function to be called in the main loop to poll inputs

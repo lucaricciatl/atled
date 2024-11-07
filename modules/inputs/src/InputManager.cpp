@@ -4,15 +4,15 @@ namespace input {
 
 InputManager::InputManager(KeyboardType keyboardType, MouseType mouseType) {
     // Create keyboard and mouse inputs based on the specified types
-    keyboardInput = KeyboardInputFactory::CreateKeyboardInput(keyboardType);
-    mouseInput = MouseFactory::CreateMouse(mouseType);
+    keyboardInput = KeyboardFactory::CreateKeyboardInput();
+    mouseInput = MouseFactory::CreateMouse();
 }
 
 InputManager::~InputManager() {
     Shutdown();
 }
 
-void InputManager::Initialize() {
+void InputManager::Init() {
     keyboardInput->Start();
     mouseInput->Start();
 }

@@ -11,7 +11,6 @@ namespace input {
 class RaylibMouse : public IMouse {
 public:
   RaylibMouse();
-  ~RaylibMouse() override;
 
   // Cursor control functions
   void ShowCursor() override;

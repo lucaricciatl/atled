@@ -29,7 +29,7 @@ public:
     virtual ~IGraphicManager() = default;
 
     virtual void SetConfigs(const GfxConfig& gfxConfigs) = 0;
-    virtual void RenderLoop() = 0;
+    virtual void Start() = 0;
     virtual void SetTargetFramerate(unsigned int frameRate) = 0;
     virtual std::shared_ptr<GraphicsContext> GetGraphicsContext() = 0;
     virtual void Init() = 0;

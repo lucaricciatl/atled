@@ -1,58 +1,54 @@
 // CoreEngine.cpp
 #include "CoreEngine.hpp"
+#include <iostream>
+
 
 namespace engine {
 
-CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr, std::unique_ptr<graphics::IGraphicManager> graphicsMgr)
-    : inputManager(std::move(inputMgr)),
-      graphicsManager(std::move(graphicsMgr)),
-      isRunning(false)
-{
+    CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
+        std::unique_ptr<graphics::IGraphicManager> graphicsMgr)
+        : inputManager(std::move(inputMgr)),
+        graphicsManager(std::move(graphicsMgr)),
+        isRunning(false),
+        isReady(false) {}
+
+void CoreEngine::Init() {
+    std::cout << "Initializing Core Engine..." << std::endl;
+    isReady = true;  // Set the engine as ready after initialization
+    // Additional initialization logic here
 }
 
-CoreEngine::~CoreEngine() {
-    Shutdown();
-}
+void CoreEngine::Start() {
+    std::cout << "Starting Core Engine..." << std::endl;
 
-void CoreEngine::Initialize() {
-    // Initialize input and graphics managers
-    inputManager->Initialize();
-    graphicsManager->Init();
+    if (!isReady) {
+        Init();
+    }
 
     isRunning = true;
-}
 
-void CoreEngine::Run() {
-    if (!isRunning) {
-        Initialize();
+    while (isRunning) {
+        EngineLoop();
     }
-    MainLoop();
+
+    Shutdown();  // Cleanup after the loop ends
 }
 
 void CoreEngine::Shutdown() {
-    if (isRunning) {
-        // Shutdown graphics and input managers
-        inputManager->Shutdown();
-        isRunning = false;
-    }
+    std::cout << "Shutting down Core Engine..." << std::endl;
+    isRunning = false;
+    // Additional cleanup logic here
 }
 
-void CoreEngine::MainLoop() {
-    while (isRunning) {
-        // Update input
-        inputManager->Update();
-
-        // Example: Handle input to control engine state
-        if (inputManager->IsKeyPressed(KEY_ESCAPE)) {
-            isRunning = false;
-        }
-
-        // Example: Add some rendering logic
-        // graphicsManager->Clear(RAYWHITE);
-        // ... Add drawing primitives ...
-
-        // Optionally, include logic to synchronize with rendering thread
-    }
+void CoreEngine::Stop() {
+    std::cout << "Stopping Core Engine..." << std::endl;
+    isRunning = false;  // This will exit the main loop
 }
 
-} // namespace engine
+void CoreEngine::EngineLoop() {
+    // Default loop behavior
+    std::cout << "Running engine loop..." << std::endl;
+
+}
+
+}

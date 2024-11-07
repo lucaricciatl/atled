@@ -6,8 +6,6 @@ enum class KeyboardType{Raylib};
 
 class IKeyboard {
 public:
-    virtual ~IKeyboard() = default;
-
     // Start and stop the processing thread
     virtual void Start() = 0;
     virtual void Stop() = 0;

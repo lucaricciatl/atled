@@ -5,8 +5,7 @@ int main() {
 
   auto graphicsMng = std::make_shared<GraphicsManagerImpl>();
   graphicsMng->Init();
-
-  graphicsMng->RenderLoop();
+  graphicsMng->Start();
 
   return 0;
 }

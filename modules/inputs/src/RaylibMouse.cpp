@@ -6,10 +6,6 @@ namespace input {
 
 RaylibMouse::RaylibMouse() : running(false) {}
 
-RaylibMouse::~RaylibMouse() {
-  Stop();  // Ensure the thread is stopped when the object is destroyed
-}
-
 // Cursor control functions
 void RaylibMouse::ShowCursor() { ::ShowCursor(); }
 void RaylibMouse::HideCursor() { ::HideCursor(); }

@@ -13,9 +13,9 @@ InputManagerBuilder& InputManagerBuilder::SetMouseType(MouseType type) {
 }
 
 std::unique_ptr<InputManager> InputManagerBuilder::Build() {
-    auto keyboard = KeyboardInputFactory::CreateKeyboardInput(keyboardType);
-    auto mouse = MouseFactory::CreateMouse(mouseType);
-    return std::make_unique<InputManager>(std::move(keyboard), std::move(mouse));
+    return std::make_unique<InputManager>(keyboardType, mouseType);
+
 }
+
 
 } // namespace input
