@@ -1,11 +1,22 @@
-#include "GraphicsManagerImpl.hpp"
+// main.cpp
+#include "EngineBuilder.hpp"
+#include "CoreEngine.hpp"
 #include <memory>
+#include <engine.hpp>
 
 int main() {
-    auto graphicsManager = std::make_shared<GraphicsManagerImpl>(1000); // 1000 bodies for simulation
+    engine::EngineBuilder<Engine> builder;
 
-    graphicsManager->Init();
-    graphicsManager->Start(); // Runs the main rendering loop
+    std::unique_ptr<Engine> coreEngine = builder
+        .SetKeyboardType(input::KeyboardType::Raylib)
+        .SetMouseType(input::MouseType::Raylib)
+        .SetGraphicsType(graphics::GraphicsType::Default)
+        .SetTargetFramerate(60) // Set frame rate suitable for the game speed
+        .Build();
+
+    // Run the engine
+    coreEngine->Start();
+    coreEngine->Shutdown();
 
     return 0;
 }

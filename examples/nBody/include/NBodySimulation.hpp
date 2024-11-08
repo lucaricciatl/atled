@@ -1,14 +1,13 @@
-#ifndef NBODY_SIMULATION_HPP
-#define NBODY_SIMULATION_HPP
+#pragma once
 
+
+#include "Model2DFactory.hpp"
 #include "Point2D.hpp"
 #include <vector>
 #include <memory>
-#include "Circle.hpp"
-#include "Model2DFactory.hpp"
 #include <cmath>
+#include <ctime>
 
-using namespace graphics;
 
 struct Body {
     Coordinates2D position;
@@ -16,26 +15,26 @@ struct Body {
     float mass;
     Color color;
 
-    Body(Coordinates2D pos, Coordinates2D vel, float m, Color col)
+    Body(const Coordinates2D& pos, const Coordinates2D& vel, float m, const Color& col)
         : position(pos), velocity(vel), mass(m), color(col) {}
 };
 
 class NBodySimulation {
 public:
-    NBodySimulation(int numBodies);
+    NBodySimulation(int numBodies = 1000);
+
     void InitializeBodies();
     void Update(float dt);
-    const std::vector<std::shared_ptr<Circle>>& GetCircles() const;
+    const std::vector<std::shared_ptr<graphics::Circle>>& GetCircles() const;
 
 private:
     std::vector<Body> bodies;
-    std::vector<std::shared_ptr<Circle>> circles;
-    const float G = 6.67430e-11;
-    const float damping = 0.9;
-    const float distanceTolerance = 1.0;
+    std::vector<std::shared_ptr<graphics::Circle>> circles;
 
-    Coordinates2D CalculateGravitationalForce(const Body& a, const Body& b) const;
+    const float G = 6.67430e-11f;          // Gravitational constant
+    const float distanceTolerance = 1.0f; // Minimum distance to avoid division by zero
+    const float damping = 0.99f;           // Damping factor for velocity
+
     float Distance(const Coordinates2D& a, const Coordinates2D& b) const;
+    Coordinates2D CalculateGravitationalForce(const Body& a, const Body& b) const;
 };
-
-#endif // NBODY_SIMULATION_HPP
