@@ -1,18 +1,28 @@
-// Engine.tpp
+#include "engine.hpp"
 #include "CoreEngine.hpp"
-#include "SnakeGame.hpp"
-
-#include "CoreEngine.hpp"
-#include "SnakeGame.hpp"
 #include <iostream>
 #include <thread>
 #include <chrono>
 
 using namespace graphics;
 
-void engine::CoreEngine::EngineLoop() {
+// Default implementation of OnUpdate
+void  Engine::OnUpdate() {
+    // Default behavior for update
+    std::cout << "Updating engine state..." << std::endl;
+    // Placeholder for game logic or engine state updates
+}
+
+// Default implementation of OnShutdown
+void Engine::OnShutdown() {
+    std::cout << "Performing engine shutdown tasks..." << std::endl;
+    // Placeholder for cleanup or resource deallocation
+}
+
+// Default implementation of OnStart
+void Engine::OnStart() {
     auto ctx = graphicsManager->GetGraphicsContext();
-        ctx->SetSize(900, 900);
+    ctx->SetSize(900, 900);
     ctx->SetTitle("Window");
     auto configs = graphics::GfxConfig({ FLAG_WINDOW_RESIZABLE, FLAG_VSYNC_HINT,
                                         FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT });
@@ -48,7 +58,8 @@ void engine::CoreEngine::EngineLoop() {
     line->SetEndPoint(Coordinates2D(500, 600));
     line->SetThickness(3);
     graphicsManager->AddLine(4, line);
+}
 
-
+void Engine::OnRender() {
     graphicsManager->Render();
 }

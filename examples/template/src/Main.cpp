@@ -2,6 +2,7 @@
 #include "EngineBuilder.hpp"
 #include "CoreEngine.hpp"
 #include <memory>
+#include <Engine.hpp>
 
 int main() {
     engine::EngineBuilder<engine::CoreEngine> builder;
@@ -13,7 +14,6 @@ int main() {
         .SetTargetFramerate(60) // Set frame rate suitable for the game speed
         .Build();
 
-    engine->Init();
     engine->Start();
 
     return 0;

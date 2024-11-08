@@ -4,29 +4,41 @@
 #include "InputManager.hpp"            // Include the full definition of InputManager
 #include "IGraphicManager.hpp"          // Include the full definition of IGraphicManager
 #include <memory>
-
+#include <functional>
+#include <vector>
 namespace engine {
 
 
-    class CoreEngine : public IEngine {
-    public:
-        // Constructor with unique_ptr arguments
-        CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
-            std::unique_ptr<graphics::IGraphicManager> graphicsMgr);
-        ~CoreEngine() override = default;
+        class CoreEngine : public IEngine {
+        public:
+            // Constructor with unique_ptr arguments
+            CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
+                std::unique_ptr<graphics::IGraphicManager> graphicsMgr);
+            ~CoreEngine() override = default;
 
-        void Init() override;
-        void Stop() override;
-        void Start() override;
-        void Shutdown() override;
+            void Stop() override;
+            void Start() override;
+            void Shutdown() override;
 
-    protected:
-        virtual void EngineLoop();
+            // Register callback functions
+            virtual void OnStart() =0 ;
+            virtual void OnRender() =0 ;
+            virtual void OnShutdown() = 0;
+            virtual void OnUpdate() = 0;
 
-        std::shared_ptr<input::InputManager> inputManager;
-        std::shared_ptr<graphics::IGraphicManager> graphicsManager;
-        bool isRunning = false;
-        bool isReady = false;
-    };
+        protected:
+
+            void Init() override;
+            void EngineLoop();
+
+            std::shared_ptr<input::InputManager> inputManager;
+            std::shared_ptr<graphics::IGraphicManager> graphicsManager;
+            bool isRunning = false;
+            bool isReady = false;
+
+        };
+
+
+
 
 } // namespace engine
