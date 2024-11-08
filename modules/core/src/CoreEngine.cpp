@@ -5,50 +5,44 @@
 
 namespace engine {
 
-    CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
-        std::unique_ptr<graphics::IGraphicManager> graphicsMgr)
-        : inputManager(std::move(inputMgr)),
-        graphicsManager(std::move(graphicsMgr)),
-        isRunning(false),
-        isReady(false) {}
+	CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
+		std::unique_ptr<graphics::IGraphicManager> graphicsMgr)
+		: inputManager(std::move(inputMgr)),
+		graphicsManager(std::move(graphicsMgr)),
+		isRunning(false),
+		isReady(false) {}
 
-void CoreEngine::Init() {
-    std::cout << "Initializing Core Engine..." << std::endl;
-    isReady = true;  // Set the engine as ready after initialization
-    // Additional initialization logic here
-}
+	void CoreEngine::Init() {
+		std::cout << "Initializing Core Engine..." << std::endl;
+		isReady = true;  // Set the engine as ready after initialization
+		graphicsManager->Init();
+	}
 
-void CoreEngine::Start() {
-    std::cout << "Starting Core Engine..." << std::endl;
+	void CoreEngine::Start() {
+		std::cout << "Starting Core Engine..." << std::endl;
 
-    if (!isReady) {
-        Init();
-    }
+		if (!isReady) {
+			Init();
+		}
 
-    isRunning = true;
+		isRunning = true;
 
-    while (isRunning) {
-        EngineLoop();
-    }
+		while (isRunning) {
+			EngineLoop();
+		}
 
-    Shutdown();  // Cleanup after the loop ends
-}
+		Shutdown();  // Cleanup after the loop ends
+	}
 
-void CoreEngine::Shutdown() {
-    std::cout << "Shutting down Core Engine..." << std::endl;
-    isRunning = false;
-    // Additional cleanup logic here
-}
+	void CoreEngine::Shutdown() {
+		std::cout << "Shutting down Core Engine..." << std::endl;
+		isRunning = false;
+		// Additional cleanup logic here
+	}
 
-void CoreEngine::Stop() {
-    std::cout << "Stopping Core Engine..." << std::endl;
-    isRunning = false;  // This will exit the main loop
-}
-
-void CoreEngine::EngineLoop() {
-    // Default loop behavior
-    std::cout << "Running engine loop..." << std::endl;
-
-}
+	void CoreEngine::Stop() {
+		std::cout << "Stopping Core Engine..." << std::endl;
+		isRunning = false;  // This will exit the main loop
+	}
 
 }

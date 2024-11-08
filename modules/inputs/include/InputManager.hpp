@@ -13,6 +13,7 @@ namespace input {
 
 class InputManager {
 public:
+    InputManager();
     InputManager(KeyboardType keyboardType, MouseType mouseType);
     ~InputManager();
 

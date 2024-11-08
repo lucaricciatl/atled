@@ -33,6 +33,7 @@ public:
     void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) override;
     void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) override;
     void DrawLayer(const int& aLayerId) override;
+
     void Clear(::Color aColor) override;
 
 protected:

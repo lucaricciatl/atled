@@ -12,6 +12,8 @@ InputManager::~InputManager() {
     Shutdown();
 }
 
+InputManager::InputManager() {};
+
 void InputManager::Init() {
     keyboardInput->Start();
     mouseInput->Start();

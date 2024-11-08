@@ -57,7 +57,7 @@ void GraphicsContext::InitWindowManager(::ConfigFlags flags) {
 }
 
 void GraphicsContext::InitWindowManager() {
-  if (mWindow) {
+  if (!mWindow) {
     mWindow = WindowFactory::CreateWindow(WindowType::Raylib);
     mWindow->InitWindow(windowWidth, windowHeight, windowTitle);
   }

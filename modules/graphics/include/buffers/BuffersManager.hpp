@@ -29,7 +29,7 @@ class BuffersManager {
   void deleteBuffer(const std::shared_ptr<Buffer2D>& buffer);
   const std::vector<std::shared_ptr<Buffer2D>>& getBuffers();
   const std::vector<std::shared_ptr<Model2D>>& getShapeBuffers();
-
+  void ClearShapes();
 
  private:
   std::vector<std::shared_ptr<Buffer2D>> mBuffers;

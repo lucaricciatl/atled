@@ -65,4 +65,9 @@ const std::vector<std::shared_ptr<Buffer2D>>& BuffersManager::getBuffers()
 const std::vector<std::shared_ptr<Model2D>>& BuffersManager::getShapeBuffers() {
   return mShapeBuffers;
 }
+
+void BuffersManager::ClearShapes() {
+    mShapeBuffers.clear();
+}
+
 }  // namespace graphics

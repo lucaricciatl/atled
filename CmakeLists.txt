@@ -20,7 +20,7 @@ enable_testing()
 add_library(atled INTERFACE)
 
 # Link raylib to your project
-target_link_libraries(atled INTERFACE graphics inputs)
+target_link_libraries(atled INTERFACE graphics inputs core)
 
 add_subdirectory(modules)
 add_subdirectory(examples)
@@ -40,6 +40,7 @@ target_include_directories(${PROJECT_NAME} INTERFACE
     ${CMAKE_SOURCE_DIR}/modules/sensors/include
     ${CMAKE_SOURCE_DIR}/modules/sound/include
     ${CMAKE_SOURCE_DIR}/modules/units/include
+    ${CMAKE_SOURCE_DIR}/modules/core/include
     ${CMAKE_SOURCE_DIR}/modules/vision/include
 )
 

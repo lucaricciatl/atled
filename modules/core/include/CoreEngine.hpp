@@ -21,10 +21,10 @@ namespace engine {
         void Shutdown() override;
 
     protected:
-        void EngineLoop();
+        virtual void EngineLoop();
 
-        std::unique_ptr<input::InputManager> inputManager;
-        std::unique_ptr<graphics::IGraphicManager> graphicsManager;
+        std::shared_ptr<input::InputManager> inputManager;
+        std::shared_ptr<graphics::IGraphicManager> graphicsManager;
         bool isRunning = false;
         bool isReady = false;
     };

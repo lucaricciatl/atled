@@ -21,20 +21,17 @@ void GraphicsManagerImpl::Init() {
                                       FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT});
   SetConfigs(configs);
   ctx->InitWindowManager();
-}
 
-void GraphicsManagerImpl::Render() {
-  
   auto arc = Model2DFactory::CreateArc();
   arc->SetCenter(Coordinates2D(200, 200));
   arc->SetStartAngle(-180);
   arc->SetEndAngle(0);
   arc->SetRadius(100);
   arc->SetThickness(12);
-  auto col= Color(244, 244, 9, 50);
+  auto col = Color(244, 244, 9, 50);
   arc->SetColor(col);
   AddArc(1, arc);
-  
+
   auto circle = Model2DFactory::CreateCircle();
   circle->SetCenter(Coordinates2D(200, 400));
   circle->SetRadius(100);
@@ -59,7 +56,7 @@ void GraphicsManagerImpl::Render() {
   auto polyline = Model2DFactory::CreatePolyline();
   std::vector<Coordinates2D> points = {
       Coordinates2D(600, 600), Coordinates2D(700, 650), Coordinates2D(650, 700),
-      Coordinates2D(700, 750)};
+      Coordinates2D(700, 750) };
   polyline->SetPoints(points);
   polyline->SetThickness(5);
   polyline->SetColor(col);
@@ -67,9 +64,9 @@ void GraphicsManagerImpl::Render() {
 
   auto triangle = Model2DFactory::CreateTriangle();
   triangle->SetPoints(
-    Coordinates2D(850, 600),
-    Coordinates2D(800, 500),
-    Coordinates2D(750, 600)
+      Coordinates2D(850, 600),
+      Coordinates2D(800, 500),
+      Coordinates2D(750, 600)
   );
   triangle->SetColor(col);
   AddTriangle(6, triangle);
@@ -86,14 +83,4 @@ void GraphicsManagerImpl::Render() {
   polygon->SetPoints(polygonPoints);
   polygon->SetColor(col);
   AddPolygon(7, polygon);
-
-
-  DrawLayer(1);
-  DrawLayer(2);
-  DrawLayer(3);
-  DrawLayer(4);
-  DrawLayer(5);
-  DrawLayer(6);
-  DrawLayer(7);
-
 }

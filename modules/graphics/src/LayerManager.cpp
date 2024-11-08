@@ -93,4 +93,12 @@ void LayerManager::RemoveLayer(const LayerId& id) {
   }
 }
 
+// Clear all primitives in a layer by ID
+void LayerManager::ClearLayer(const LayerId& id) {
+    Layer* layer = GetLayerById(id);
+    if (layer) {
+        layer->ClearPrimitives();  // Assuming Layer has a ClearPrimitives() function to remove all primitives
+    }
+}
+
 }  // namespace graphics

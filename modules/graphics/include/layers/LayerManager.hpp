@@ -17,7 +17,7 @@ class LayerManager {
   void AddLayer(const LayerId& id);
   void AddLayer(Layer layer);
   void RemoveLayer(const LayerId& id);
-
+  void ClearLayer(const LayerId& id);
   void EnableIdReassign(bool aIdReassign);
 
  private:

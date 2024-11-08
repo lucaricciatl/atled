@@ -27,4 +27,10 @@ void Layer::Draw() {
     shape->Draw();
   };
 }
+
+// Clear all primitives in the layer
+void Layer::ClearPrimitives() {
+    mBufferManager->ClearShapes();  // Assuming BuffersManager has a ClearShapes() function
+}
+
 }  // namespace graphics

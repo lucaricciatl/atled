@@ -1,0 +1,20 @@
+# Set minimum CMake version
+cmake_minimum_required(VERSION 3.10)
+
+# Project name
+project(snake)
+
+# Add the source files
+set(SOURCES
+    src/main.cpp
+    src/Engine.cpp
+    src/SnakeGame.cpp
+)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_include_directories(snake PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC atled)
+
+set_target_properties(snake PROPERTIES FOLDER "examples")

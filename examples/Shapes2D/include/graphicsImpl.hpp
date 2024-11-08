@@ -8,6 +8,4 @@ class GraphicsManagerImpl : public graphics::GraphicsManager {
 
 public :
   void Init() override;
-  void Render() override;
-
 };

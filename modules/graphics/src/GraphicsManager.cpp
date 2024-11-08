@@ -47,7 +47,7 @@ void GraphicsManager::Start() {
 
     while (true) {
         auto frameStart = std::chrono::steady_clock::now();
-        mContext->BeginDrawing();
+
         Render();
         
 
@@ -57,19 +57,16 @@ void GraphicsManager::Start() {
         if (elapsed < frameDuration) {
             std::this_thread::sleep_for(frameDuration - elapsed);
         }
-        mContext->EndDrawing(); // Finish the current frame
     }
-
 }
 
 void GraphicsManager::Render() {
-    Clear(RAYWHITE); // Clear with white color
-
     std::lock_guard<std::mutex> lock(layersMutex);
+    GetGraphicsContext()->BeginDrawing();
     for (const auto& [layerId, primitives] : layers) {
         DrawLayer(layerId);
     }
-
+    GetGraphicsContext()->EndDrawing(); // Finish the current frame
 }
 
 // Thread-related methods removed
