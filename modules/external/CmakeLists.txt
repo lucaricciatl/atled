@@ -1,12 +1,10 @@
 # Add raylib as a subdirectory
 add_subdirectory(raylib)
-add_subdirectory(glm)
 # Create an interface library to represent raylib
 add_library(external INTERFACE)
 
 # Link raylib to the external interface library
 target_link_libraries(external INTERFACE raylib)
-target_link_libraries(external INTERFACE glm)
 
 # Set properties for the external library
 set_target_properties(external PROPERTIES
@@ -66,8 +64,6 @@ set_target_properties(opencv_core PROPERTIES FOLDER "modules/external/opencv")
 set_target_properties(opencv_imgproc PROPERTIES FOLDER "modules/external/opencv")
 set_target_properties(opencv_modules PROPERTIES FOLDER "modules/external/opencv")
 set_target_properties(opencv_perf_tests PROPERTIES FOLDER "modules/external/opencv")
-
-set_target_properties(glm PROPERTIES FOLDER "modules/external/math")
 
 # Install core OpenCV libraries and headers to the build/install directory
 install(TARGETS opencv_core opencv_imgproc DESTINATION lib)
