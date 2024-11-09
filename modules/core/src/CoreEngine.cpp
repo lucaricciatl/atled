@@ -1,22 +1,30 @@
 // CoreEngine.cpp
 #include "CoreEngine.hpp"
 #include <iostream>
+#include <memory>
 
 
 namespace engine {
-
+    void CoreEngine::pollInput() {
+        while (true) {
+            inputManager->Update(); // Poll inputs
+        }
+    }
 
         CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
             std::unique_ptr<graphics::IGraphicManager> graphicsMgr)
             : inputManager(std::move(inputMgr)), graphicsManager(std::move(graphicsMgr)) {}
 
         void CoreEngine::Init() {
-            graphicsManager->GetGraphicsContext()->InitWindowManager();
+            inputManager->Init(); // Initialize input manager
         }
 
         void CoreEngine::Start() {
-            isRunning = true;
+            Init();
             OnStart();
+            isRunning = true;
+            // Start the input handling thread
+            inputThread = std::make_unique<std::thread>(&CoreEngine::pollInput, this);
             EngineLoop();
         }
 
@@ -25,6 +33,10 @@ namespace engine {
         }
 
         void CoreEngine::Shutdown() {
+            isRunning = false; // Stop the input thread
+            if (inputThread && inputThread->joinable()) {
+                inputThread->join(); // Wait for the input thread to finish
+            }
             OnShutdown(); 
         }
 

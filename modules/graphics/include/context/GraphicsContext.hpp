@@ -32,7 +32,6 @@ class GraphicsContext {
   void EndDrawing() const ;
   void Clear(::Color aColor);
   bool isReady;
-  LayerManager mLayerManager;
 
  private:
   std::unique_ptr<IWindow> mWindow;

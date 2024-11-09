@@ -36,6 +36,10 @@ namespace engine {
             bool isRunning = false;
             bool isReady = false;
 
+        private:
+            void pollInput();
+            std::unique_ptr<std::thread> inputThread; // Thread for input handling
+
         };
 
 

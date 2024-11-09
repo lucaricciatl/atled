@@ -11,7 +11,7 @@ int main() {
         .SetKeyboardType(input::KeyboardType::Raylib)
         .SetMouseType(input::MouseType::Raylib)
         .SetGraphicsType(graphics::GraphicsType::Default)
-        .SetTargetFramerate(60) // Set frame rate suitable for the game speed
+        .SetTargetFramerate(60) 
         .Build();
 
     // Run the engine
