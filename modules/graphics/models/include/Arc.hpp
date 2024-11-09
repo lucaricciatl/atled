@@ -4,7 +4,7 @@
 #include <cassert>
 #include <cmath>
 #include <vector>
-
+#include "Model2D.hpp"
 #include "Polygon.hpp"
 
 namespace graphics {

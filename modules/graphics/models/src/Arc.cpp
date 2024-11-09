@@ -47,8 +47,8 @@ int Arc::ComputePointsNumber() {
 }
 
 void Arc::Draw() {
-  DrawRing(glwp::Vector2(center.x, center.y), radius - mThickess,
-           radius + mThickess, mStartAngle, mEndAngle, ComputePointsNumber(),
-           mColor);
+    Vector2 position = { center.x, center.y };
+    DrawRing(position, radius - mThickess, radius + mThickess, 
+             mStartAngle, mEndAngle, ComputePointsNumber(), mColor);
 }
 }  // namespace graphics
