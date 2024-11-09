@@ -13,6 +13,7 @@ namespace graphics {
 
     enum class CameraType
     {
+        Invalid,
         Raylib,
     };
 

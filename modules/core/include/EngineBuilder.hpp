@@ -29,10 +29,10 @@ public:
     std::unique_ptr<T> Build();
 
 private:
-    KeyboardType keyboardType = KeyboardType::Raylib; // Default type
-    MouseType mouseType = MouseType::Raylib;          // Default type
-    GraphicsType graphicsType = GraphicsType::Default;
-    CameraType cameraType = CameraType::Raylib;
+    KeyboardType keyboardType = KeyboardType::Invalid; // Default type
+    MouseType mouseType = MouseType::Invalid;          // Default type
+    GraphicsType graphicsType = GraphicsType::Invalid;
+    CameraType cameraType = CameraType::Invalid;
     GfxConfig gfxConfig;                              // Default config
     unsigned int targetFramerate = 60;                // Default frame rate
 };

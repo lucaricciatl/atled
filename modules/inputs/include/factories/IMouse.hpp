@@ -3,7 +3,10 @@
 
 namespace input {
 
-enum class MouseType{Raylib};
+enum class MouseType{ 
+	Invalid,
+	Raylib
+};
 
 struct MousePosition {
   int x;

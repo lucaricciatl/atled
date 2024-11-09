@@ -10,7 +10,7 @@ int main() {
     std::unique_ptr<Engine> coreEngine = builder
         .SetKeyboardType(input::KeyboardType::Raylib)
         .SetMouseType(input::MouseType::Raylib)
-        .SetGraphicsType(graphics::GraphicsType::Default)
+        .SetGraphicsType(graphics::GraphicsType::Raylib)
         .SetTargetFramerate(60) // Set frame rate suitable for the game speed
         .Build();
 

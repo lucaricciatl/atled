@@ -9,17 +9,18 @@
 namespace graphics {
 
 enum class GraphicsType {
-    Default
+    Invalid,
+    Raylib
 };
 
 class GraphicsManagerFactory {
 public:
     static std::unique_ptr<IGraphicManager> CreateGraphicsManager(GraphicsType type) {
         switch (type) {
-            case GraphicsType::Default:
+            case GraphicsType::Raylib:
                 return std::make_unique<GraphicsManager>();
             default:
-                return std::make_unique<GraphicsManager>();
+                return nullptr;
         }
     }
 };
