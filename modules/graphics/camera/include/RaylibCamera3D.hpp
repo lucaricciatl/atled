@@ -2,6 +2,7 @@
 #define CAMERA3D_HPP
 
 #include "CameraBase.hpp"
+#include "raylib.h"  
 
 // Concrete class for Camera3D
 class RaylibCamera3D : public CameraBase{

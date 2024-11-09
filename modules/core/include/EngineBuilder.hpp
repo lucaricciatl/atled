@@ -5,6 +5,7 @@
 #include "InputManagerBuilder.hpp"
 #include "GraphicManagerFactory.hpp"
 #include "CoreEngine.hpp"
+#include "CameraManager.hpp"
 
 using namespace input;
 using namespace graphics;
@@ -20,6 +21,7 @@ public:
     EngineBuilder& SetKeyboardType(KeyboardType type);
     EngineBuilder& SetMouseType(MouseType type);
     EngineBuilder& SetGraphicsType(GraphicsType type);
+    EngineBuilder& SetCameraType(CameraType type);
     EngineBuilder& SetGraphicsConfig(const GfxConfig& config);
     EngineBuilder& SetTargetFramerate(unsigned int frameRate);
 
@@ -30,6 +32,7 @@ private:
     KeyboardType keyboardType = KeyboardType::Raylib; // Default type
     MouseType mouseType = MouseType::Raylib;          // Default type
     GraphicsType graphicsType = GraphicsType::Default;
+    CameraType cameraType = CameraType::Raylib;
     GfxConfig gfxConfig;                              // Default config
     unsigned int targetFramerate = 60;                // Default frame rate
 };
@@ -51,6 +54,12 @@ EngineBuilder<T>& EngineBuilder<T>::SetMouseType(MouseType type) {
 template <typename T>
 EngineBuilder<T>& EngineBuilder<T>::SetGraphicsType(GraphicsType type) {
     graphicsType = type;
+    return *this;
+}
+
+template <typename T>
+EngineBuilder<T>& EngineBuilder<T>::SetCameraType(CameraType type) {
+    cameraType = type;
     return *this;
 }
 
@@ -79,8 +88,9 @@ std::unique_ptr<T> EngineBuilder<T>::Build() {
     graphicsManager->SetConfigs(gfxConfig);
     graphicsManager->SetTargetFramerate(targetFramerate);
 
+    std::unique_ptr<CameraManager> cameraManager;
     // Create an instance of T with the configured InputManager and GraphicsManager
-    return std::make_unique<T>(std::move(inputManager), std::move(graphicsManager));
+    return std::make_unique<T>(std::move(inputManager), std::move(graphicsManager),std::move(cameraManager));
 }
 
 } // namespace engine

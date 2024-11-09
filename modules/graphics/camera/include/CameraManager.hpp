@@ -11,6 +11,11 @@
 
 namespace graphics {
 
+    enum class CameraType
+    {
+        Raylib,
+    };
+
 class CameraManager {
 public:
     CameraManager();

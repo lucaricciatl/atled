@@ -4,7 +4,7 @@
 #include <iostream>
 #include <memory>  // For std::unique_ptr
 
-#include "raylib.h"  // Assuming you're using Raylib for Vector2, Vector3
+
 
 // Abstract base class for cameras
 class CameraBase {
