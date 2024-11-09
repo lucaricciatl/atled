@@ -22,12 +22,23 @@ add_library(graphics
     src/Polyline.cpp 
     src/Triangle.cpp
     src/Triangulation.cpp
+    src/RaylibWindow.cpp 
+    src/windowFactory.cpp 
+    src/RaylibDisplay.cpp 
+    src/displayFactory.cpp
+    src/Raylibtext.cpp 
+    src/textFactory.cpp
+    src/RaylibFontLoader.cpp 
+    src/fontLoaderFactory.cpp
+    src/RaylibCamera3D.cpp 
+    src/RaylibCamera2D.cpp 
+    src/CameraFactory.cpp
+    src/RaylibShader.cpp
+    src/shaderFactory.cpp
 )
 
-add_subdirectory(graphicsImpl)
 # Link gfx to the graphics library
-target_link_libraries(graphics PUBLIC graphicsImpl)
-target_link_libraries(graphics PUBLIC common)
+target_link_libraries(graphics PUBLIC common external)
 
 # Specify include directories for the submodule
 target_include_directories(graphics PUBLIC
@@ -44,6 +55,10 @@ target_include_directories(graphics PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/camera 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Models
     ${CMAKE_CURRENT_SOURCE_DIR}/include/utils
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/display
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/window
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/fonts
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/shader
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/../common/include
 )
