@@ -1,6 +1,8 @@
 // GraphicsManager.hpp
 #pragma once
+#include "Model.hpp"
 #include "Model2D.hpp"
+#include "Model3D.hpp"
 #include "IGraphicManager.hpp"
 #include <atomic>
 #include <mutex>
@@ -32,6 +34,7 @@ public:
     void AddPolyline(const int& aLayerId, std::shared_ptr<Polyline> aPolyline) override;
     void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) override;
     void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) override;
+    void AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) override;
     void DrawLayer(const int& aLayerId) override;
 
     void Clear(::Color aColor) override;
@@ -47,7 +50,7 @@ private:
     std::unique_ptr<IDisplay> mDisplay;
 
     // Storage for drawing primitives, organized by layer
-    std::unordered_map<int, std::vector<std::shared_ptr<Model2D>>> layers;
+    std::unordered_map<int, std::vector<std::shared_ptr<Model>>> layers;
 
     // Synchronization
     std::mutex layersMutex;

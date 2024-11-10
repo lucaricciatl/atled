@@ -21,9 +21,9 @@ BuffersManager::~BuffersManager() {
 }
 
 
-std::shared_ptr<Model2D> BuffersManager::createShapeBuffer(
+std::shared_ptr<Model> BuffersManager::createShapeBuffer(
     const Model2DType type) {
-  std::shared_ptr<Model2D> buffer;
+  std::shared_ptr<Model> buffer;
 
   buffer = Model2DFactory::CreateModel2D(type);
 
@@ -31,7 +31,7 @@ std::shared_ptr<Model2D> BuffersManager::createShapeBuffer(
   return buffer;
 }
 
-void BuffersManager::AddShapeBuffer(std::shared_ptr<Model2D> aShape) {
+void BuffersManager::AddShapeBuffer(std::shared_ptr<Model> aShape) {
   mShapeBuffers.push_back(aShape);
 }
 
@@ -62,7 +62,7 @@ const std::vector<std::shared_ptr<Buffer2D>>& BuffersManager::getBuffers()
 }
 
 
-const std::vector<std::shared_ptr<Model2D>>& BuffersManager::getShapeBuffers() {
+const std::vector<std::shared_ptr<Model>>& BuffersManager::getShapeBuffers() {
   return mShapeBuffers;
 }
 

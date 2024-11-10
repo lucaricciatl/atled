@@ -8,7 +8,7 @@
 
 namespace graphics {
 
-std::shared_ptr<Model2D> Model2DFactory::CreateModel2D(
+std::shared_ptr<Model> Model2DFactory::CreateModel2D(
     const Model2DType aType) {
   switch (aType) {
     case Model2DType::arc:

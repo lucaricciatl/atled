@@ -6,7 +6,7 @@
 
 namespace graphics {
 
-class Circle: public Model2D {
+class Circle: public Model {
 private:
     Coordinates2D mCenter;       
     float mRadius;               

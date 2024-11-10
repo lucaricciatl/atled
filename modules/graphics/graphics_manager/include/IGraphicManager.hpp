@@ -5,6 +5,7 @@
 #include <vector>
 #include "GraphicsContext.hpp"
 #include "IDisplay.hpp"
+#include "Sphere.hpp"
 
 namespace graphics {
 
@@ -43,6 +44,7 @@ public:
     virtual void AddPolyline(const int& aLayerId, std::shared_ptr<Polyline> aPolyline) = 0;
     virtual void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) = 0;
     virtual void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) = 0;
+    virtual void AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) = 0;
     virtual void DrawLayer(const int& aLayerId) = 0;
     virtual void Clear(::Color aColor) = 0;
 };

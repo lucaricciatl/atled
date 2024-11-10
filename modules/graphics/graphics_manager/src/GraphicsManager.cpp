@@ -71,52 +71,59 @@ void GraphicsManager::Render() {
 
 // Thread-related methods removed
 
-// Add primitive methods (no changes)
+
 void GraphicsManager::AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) {
     std::lock_guard<std::mutex> lock(layersMutex);
-    layers[aLayerId].push_back(aArc);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aArc));
 }
 
 void GraphicsManager::AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCircle) {
     std::lock_guard<std::mutex> lock(layersMutex);
-    layers[aLayerId].push_back(aCircle);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aCircle));
 }
 
 void GraphicsManager::AddRectangle(const int& aLayerId, std::shared_ptr<Rectangle> aRectangle) {
     std::lock_guard<std::mutex> lock(layersMutex);
-    layers[aLayerId].push_back(aRectangle);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aRectangle));
 }
 
 void GraphicsManager::AddLine(const int& aLayerId, std::shared_ptr<Line> aLine) {
     std::lock_guard<std::mutex> lock(layersMutex);
-    layers[aLayerId].push_back(aLine);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aLine));
 }
 
 void GraphicsManager::AddPolyline(const int& aLayerId, std::shared_ptr<Polyline> aPolyline) {
     std::lock_guard<std::mutex> lock(layersMutex);
-    layers[aLayerId].push_back(aPolyline);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aPolyline));
 }
 
 void GraphicsManager::AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) {
     std::lock_guard<std::mutex> lock(layersMutex);
-    layers[aLayerId].push_back(aTriangle);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aTriangle));
+}
+
+void GraphicsManager::AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) {
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aSphere));
 }
 
 void GraphicsManager::AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) {
     std::lock_guard<std::mutex> lock(layersMutex);
-    layers[aLayerId].push_back(aPolygon);
-}
-
-void GraphicsManager::DrawLayer(const int& aLayerId) {
-    if (layers.find(aLayerId) != layers.end()) {
-        for (const auto& primitive : layers[aLayerId]) {
-            primitive->Draw();
-        }
-    }
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aPolygon));
 }
 
 void GraphicsManager::Clear(::Color aColor) {
     mContext->Clear(aColor);
+}
+
+void GraphicsManager::DrawLayer(const int& aLayerId) {
+    // Check if the specified layer exists in the map
+    if (layers.find(aLayerId) != layers.end()) {
+        // Iterate over each Model in the layer
+        for (const auto& primitive : layers[aLayerId]) {
+            primitive->Draw();  // Calls the specific Draw implementation for each model
+        }
+    }
 }
 
 } // namespace graphics

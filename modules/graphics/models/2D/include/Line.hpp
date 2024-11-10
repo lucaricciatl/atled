@@ -4,12 +4,12 @@
 #include <cassert>
 #include <cmath>
 #include <vector>
-
+#include "Model.hpp"
 #include "Polygon.hpp"
 
 namespace graphics {
 
-class Line : public Model2D {
+class Line : public Model {
  public:
   Line(Coordinates2D aStart, Coordinates2D aEnd, double thickness, const Color& aColor);
   Line() = default;

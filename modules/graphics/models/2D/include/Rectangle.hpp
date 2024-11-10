@@ -11,7 +11,7 @@ typedef ::Rectangle RectangleStruct;
 }  // namespace
 namespace graphics {
 
-class Rectangle : public Model2D {
+class Rectangle : public Model{
  private:
   Coordinates2D mUpperLeft;    
   Coordinates2D mBottomRight; 
