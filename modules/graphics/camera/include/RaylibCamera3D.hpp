@@ -30,6 +30,8 @@ public:
     void SetRotation(float rotation) override;
     float GetRotation() const override;
 
+    void SetFovy(float aFovy) override;
+
 private:
     Camera3D mCamera;
 };

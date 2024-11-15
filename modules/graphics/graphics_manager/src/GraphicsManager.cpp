@@ -10,6 +10,7 @@
 #include "GraphicsContext.hpp"
 #include "PolyLine2D.hpp"
 #include "PolygonBuffer2D.hpp"
+#include "Cube.hpp"
 
 namespace graphics {
 
@@ -109,6 +110,11 @@ void GraphicsManager::AddTriangle(const int& aLayerId, std::shared_ptr<Triangle>
 void GraphicsManager::AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) {
     std::lock_guard<std::mutex> lock(layersMutex);
     layers[aLayerId].push_back(std::static_pointer_cast<Model>(aSphere));
+}
+
+void GraphicsManager::AddCube(const int& aLayerId, std::shared_ptr<Cube> aCube) {
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aCube));
 }
 
 void GraphicsManager::AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) {

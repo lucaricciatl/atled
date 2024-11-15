@@ -36,6 +36,7 @@ public:
     void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) override;
     void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) override;
     void AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) override;
+    void AddCube(const int& aLayerId, std::shared_ptr<Cube> aCube) override;
     void DrawLayer(const int& aLayerId) override;
 
     // Drawing 3D methods

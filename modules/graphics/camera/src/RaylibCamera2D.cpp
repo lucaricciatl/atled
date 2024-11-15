@@ -20,6 +20,10 @@ void RaylibCamera2D::SetPosition(Vector3 position) {
 void RaylibCamera2D::UpdateCamera() {
 }
 
+void RaylibCamera2D::SetFovy(float aFovy)
+{
+    
+}
 
 Vector3 RaylibCamera2D::GetPosition() const {
     return {mCamera.offset.x, mCamera.offset.y, 0.0f};

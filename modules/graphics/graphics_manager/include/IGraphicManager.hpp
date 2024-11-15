@@ -7,6 +7,7 @@
 #include "CameraManager.hpp"
 #include "IDisplay.hpp"
 #include "Sphere.hpp"
+#include "Cube.hpp"
 
 namespace graphics {
 
@@ -48,6 +49,7 @@ public:
     virtual void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) = 0;
     virtual void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) = 0;
     virtual void AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) = 0;
+    virtual void AddCube(const int& aLayerId, std::shared_ptr<Cube> aCube) = 0;
     virtual void DrawLayer(const int& aLayerId) = 0;
     virtual void Clear(::Color aColor) = 0;
 };

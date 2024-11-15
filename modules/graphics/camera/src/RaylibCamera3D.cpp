@@ -18,6 +18,10 @@ void RaylibCamera3D::EndCamera() {
     EndMode3D();
 }
 
+void RaylibCamera3D::SetFovy(float aFovy) {
+    mCamera.fovy = aFovy;
+}
+
 void RaylibCamera3D::SetPosition(Vector3 position) {
     mCamera.position = position;
     UpdateCamera();

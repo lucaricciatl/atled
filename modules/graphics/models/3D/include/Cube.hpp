@@ -2,20 +2,43 @@
 #define CUBE_HPP
 
 #include "Model3D.hpp"
+#include "raylib.h"  // Assuming raylib is used for Vector3 and Color types
 
 namespace graphics {
 
-class Cube : public Model{
- public:
-    Cube(float sideLength = 1.0f) : mSideLength(sideLength) {}
+class Cube : public Model {
+public:
+    
+    // Constructor with default dimensions
+    Cube(float width = 1.0f, float height = 1.0f, float length = 1.0f);
 
-    void Draw() override {
-        // Implement the drawing logic for a 3D cube
-        std::cout << "Drawing a 3D cube with side length: " << mSideLength << std::endl;
-    }
+    // Override draw function
+    void Draw() override;
 
- private:
-    float mSideLength;  // Side length of the cube
+    // Setters for dimensions
+    void SetWidth(float width);
+    void SetHeight(float height);
+    void SetLength(float length);
+
+    // Getters for dimensions
+    float GetWidth() const;
+    float GetHeight() const;
+    float GetLength() const;
+
+    // Setter for center position
+    void SetCenterPos(const Vector3& centerPos);
+    // Getter for center position
+    Vector3 GetCenterPos() const;
+
+    // Setter for color
+    void SetColor(const Color& color);
+    // Getter for color
+    Color GetColor() const;
+
+private:
+    Vector3 mDimensions; // Dimensions of the cube (width, height, length)
+    Vector3 mCenterPos;  // Center position of the cube
+    Color mColor;        // Color of the cube
 };
 
 }  // namespace graphics

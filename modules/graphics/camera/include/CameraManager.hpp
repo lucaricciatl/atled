@@ -11,6 +11,12 @@
 
 namespace graphics {
 
+    enum class WorldType
+    {
+        World2D,
+        World3D,
+    };
+
     enum class CameraType
     {
         Invalid,
@@ -50,7 +56,7 @@ public:
     void SetCameraTargetY(float target);
     void SetCameraRotation(float rotation);
     void SetCameraZoom(float zoom);
-
+    void SetFovy(float aFovy);
     float GetCameraOffsetX() const;
     float GetCameraOffsetY() const;
     float GetCameraTargetX() const;

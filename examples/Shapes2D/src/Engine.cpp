@@ -21,16 +21,16 @@ bool running = true; // Flag to control the input thread
 // Default implementation of OnUpdate
 void Engine::OnUpdate() {
     if (inputManager->IsKeyDown(KEY_W)) {
-        cameraManager->SetCameraTargetY(cameraManager->GetCameraTargetY() - .01f); // Move view up
+        cameraManager->SetCameraTargetY(cameraManager->GetCameraTargetY() - 0.2f); // Move view up
     }
     if (inputManager->IsKeyDown(KEY_S)) {
-        cameraManager->SetCameraTargetY(cameraManager->GetCameraTargetY() + .01f); // Move view down
+        cameraManager->SetCameraTargetY(cameraManager->GetCameraTargetY() + 0.2f); // Move view down
     }
     if (inputManager->IsKeyDown(KEY_A)) {
-        cameraManager->SetCameraTargetX(cameraManager->GetCameraTargetX() - .01f); // Move view left
+        cameraManager->SetCameraTargetX(cameraManager->GetCameraTargetX() - 0.2f); // Move view left
     }
     if (inputManager->IsKeyDown(KEY_D)) {
-        cameraManager->SetCameraTargetX(cameraManager->GetCameraTargetX() + .01f); // Move view right
+        cameraManager->SetCameraTargetX(cameraManager->GetCameraTargetX() + 0.2f); // Move view right
     }
 
     // Zoom logic

@@ -21,7 +21,7 @@ public:
     virtual void SetUp(Vector3 up) = 0;  // For 3D cameras
     virtual void SetZoom(float zoom) = 0;
     virtual void SetRotation(float rotation) = 0;
-
+    virtual void SetFovy(float aFovy) = 0;
     // Getters
     virtual Vector3 GetPosition() const = 0;
     virtual Vector3 GetTarget() const = 0;

@@ -100,6 +100,10 @@ float CameraManager::GetCameraOffsetX() const {
     return 0.0f;
 }
 
+void CameraManager::SetFovy(float aFovy) {
+    mActiveCamera->SetFovy(aFovy);
+}
+
 float CameraManager::GetCameraOffsetY() const {
     if (mActiveCamera) {
         return mActiveCamera->GetPosition().y;
