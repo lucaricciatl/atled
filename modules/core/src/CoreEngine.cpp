@@ -13,11 +13,13 @@ namespace engine {
 
         CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
             std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
-            std::unique_ptr<graphics::CameraManager> cameraMgr)
+            std::shared_ptr<graphics::CameraManager> cameraMgr)
             : inputManager(std::move(inputMgr)), graphicsManager(std::move(graphicsMgr)), cameraManager(std::move(cameraMgr)) {}
 
         void CoreEngine::Init() {
             inputManager->Init(); // Initialize input manager
+
+            cameraManager->Start();
         }
 
         void CoreEngine::Start() {

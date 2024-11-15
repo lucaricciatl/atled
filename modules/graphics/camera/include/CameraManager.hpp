@@ -7,7 +7,7 @@
 
 #include "GraphicsContext.hpp"
 #include "IDisplay.hpp"
-#include "CameraBase.hpp"
+#include "ICamera.hpp"
 
 namespace graphics {
 
@@ -23,13 +23,13 @@ public:
     ~CameraManager();
 
     // Add a camera to the manager
-    void AddCamera(std::shared_ptr<CameraBase> camera);
+    void AddCamera(std::shared_ptr<ICamera> camera);
 
     // Set the active camera by index
     void SetActiveCamera(size_t index);
 
     // Get the active camera
-    std::shared_ptr<CameraBase> GetActiveCamera() const;
+    std::shared_ptr<ICamera> GetActiveCamera() const;
 
     // Start rendering loop
     void Start();
@@ -58,14 +58,18 @@ public:
     float GetCameraRotation() const;
     float GetCameraZoom() const;
 
+    void BeginActiveCamera();
+
+    void EndActiveCamera();
+
 private:
-    std::vector<std::shared_ptr<CameraBase>> mCameras;
-    std::shared_ptr<CameraBase> mActiveCamera;
+    std::vector<std::shared_ptr<ICamera>> mCameras;
+    std::shared_ptr<ICamera> mActiveCamera;
     std::atomic<bool> mRunning;
     std::unique_ptr<std::thread> mThread;
 
     // Internal method for render loop
-    void RenderLoop();
+
 };
 
 }  // namespace graphics

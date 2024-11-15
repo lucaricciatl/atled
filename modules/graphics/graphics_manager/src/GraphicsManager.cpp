@@ -39,7 +39,7 @@ std::shared_ptr<GraphicsContext> GraphicsManager::GetGraphicsContext() {
 
 void GraphicsManager::Init() {
     // Initialization logic for context and display
-    mContext->InitWindowManager(); // Initialize context with display
+    GetGraphicsContext()->InitWindowManager(); // Initialize context with display
 }
 
 void GraphicsManager::Start() {
@@ -60,16 +60,20 @@ void GraphicsManager::Start() {
     }
 }
 
+void GraphicsManager::SetCameraMng(std::shared_ptr<graphics::CameraManager> aCameraMng) {
+    mCameraManager = aCameraMng;
+}
 void GraphicsManager::Render() {
     std::lock_guard<std::mutex> lock(layersMutex);
     GetGraphicsContext()->BeginDrawing();
+    mCameraManager->BeginActiveCamera();
     for (const auto& [layerId, primitives] : layers) {
         DrawLayer(layerId);
     }
+    mCameraManager->EndActiveCamera();
     GetGraphicsContext()->EndDrawing(); // Finish the current frame
 }
 
-// Thread-related methods removed
 
 
 void GraphicsManager::AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) {

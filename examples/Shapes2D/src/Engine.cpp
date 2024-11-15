@@ -4,6 +4,8 @@
 #include "Model2DFactory.hpp"
 #include "Model3DFactory.hpp"
 #include <iostream>
+#include "CameraFactory.hpp"
+#include "CameraManager.hpp"
 #include <thread>
 #include <chrono>
 #include <cstdlib> // For rand()
@@ -18,7 +20,36 @@ bool running = true; // Flag to control the input thread
 
 // Default implementation of OnUpdate
 void Engine::OnUpdate() {
+    if (inputManager->IsKeyDown(KEY_W)) {
+        cameraManager->SetCameraTargetY(cameraManager->GetCameraTargetY() - .01f); // Move view up
+    }
+    if (inputManager->IsKeyDown(KEY_S)) {
+        cameraManager->SetCameraTargetY(cameraManager->GetCameraTargetY() + .01f); // Move view down
+    }
+    if (inputManager->IsKeyDown(KEY_A)) {
+        cameraManager->SetCameraTargetX(cameraManager->GetCameraTargetX() - .01f); // Move view left
+    }
+    if (inputManager->IsKeyDown(KEY_D)) {
+        cameraManager->SetCameraTargetX(cameraManager->GetCameraTargetX() + .01f); // Move view right
+    }
 
+    // Zoom logic
+    float mouseWheelMove = inputManager->GetMouseWheelMove();
+    if (mouseWheelMove != 0.0f) {
+        float currentZoom = cameraManager->GetCameraZoom();
+        cameraManager->SetCameraZoom(currentZoom + mouseWheelMove * 0.1f); // Adjust zoom speed with the multiplier
+    }
+
+    // Adjust mouse offset and scale dynamically
+    int offsetX = static_cast<int>(cameraManager->GetCameraTargetX());
+    int offsetY = static_cast<int>(cameraManager->GetCameraTargetY());
+    float scaleX = cameraManager->GetCameraZoom();
+    float scaleY = cameraManager->GetCameraZoom();
+
+    SetMouseOffset(offsetX, offsetY);   // Adjust mouse offset based on camera target
+    SetMouseScale(1/scaleX, 1/scaleY);     // Scale mouse position to match zoom level
+
+    // Existing model creation logic
     if (inputManager->IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         int mouseX = inputManager->GetMouseX();
         int mouseY = inputManager->GetMouseY();
@@ -35,15 +66,15 @@ void Engine::OnUpdate() {
         }
         else if (modelType == 1) { // Random Rectangle
             auto rectangle = Model2DFactory::CreateRectangle();
-            rectangle->SetUpperLeft(Coordinates2D(mouseX - 50, mouseY - 50));
-            rectangle->SetBottomRight(Coordinates2D(mouseX + 50, mouseY + 50));
+            rectangle->SetUpperLeft(Coordinates2D(mouseX - 50 , mouseY - 50));
+            rectangle->SetBottomRight(Coordinates2D(mouseX + 50 , mouseY + 50 ));
             rectangle->SetColor(randomColor);
             graphicsManager->AddRectangle(rand(), rectangle);
         }
         else if (modelType == 2) { // Random Line
             auto line = Model2DFactory::CreateLine();
-            line->SetStartPoint(Coordinates2D(mouseX, mouseY));
-            line->SetEndPoint(Coordinates2D(mouseX + 100, mouseY + 100));
+            line->SetStartPoint(Coordinates2D(mouseX , mouseY ));
+            line->SetEndPoint(Coordinates2D(mouseX + 100 , mouseY + 100));
             line->SetThickness(2 + rand() % 3);
             line->SetColor(randomColor);
             graphicsManager->AddLine(rand(), line);
@@ -57,6 +88,7 @@ void Engine::OnUpdate() {
         }
     }
 }
+
 
 // Default implementation of OnStart
 void Engine::OnStart() {
@@ -77,4 +109,5 @@ void Engine::OnShutdown() {
 void Engine::OnRender() {
     std::lock_guard<std::mutex> lock(graphicsMutex); // Lock during rendering
     graphicsManager->Render();
+    graphicsManager->Clear(BLACK);
 }

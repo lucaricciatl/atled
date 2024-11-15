@@ -10,8 +10,8 @@ CameraManager::~CameraManager() {
     Stop();
 }
 
-void CameraManager::AddCamera(std::shared_ptr<CameraBase> camera) {
-    mCameras.push_back(camera);
+void CameraManager::AddCamera(std::shared_ptr<ICamera> camera) {
+    mCameras.emplace_back(camera);
     if (!mActiveCamera) {
         mActiveCamera = camera;
     }
@@ -23,20 +23,17 @@ void CameraManager::SetActiveCamera(size_t index) {
     }
 }
 
-std::shared_ptr<CameraBase> CameraManager::GetActiveCamera() const {
+std::shared_ptr<ICamera> CameraManager::GetActiveCamera() const {
     return mActiveCamera;
 }
 
 void CameraManager::Start() {
     mRunning = true;
-    mThread = std::make_unique<std::thread>(&CameraManager::RenderLoop, this);
+
 }
 
 void CameraManager::Stop() {
     mRunning = false;
-    if (mThread && mThread->joinable()) {
-        mThread->join();
-    }
 }
 
 void CameraManager::UpdateCameras() {
@@ -47,33 +44,12 @@ void CameraManager::UpdateCameras() {
     }
 }
 
-void CameraManager::RenderActiveCamera() {
-    if (mActiveCamera) {
-        mActiveCamera->BeginCamera();
-    }
+void CameraManager::BeginActiveCamera() {
+    mActiveCamera->BeginCamera();     
 }
 
-void CameraManager::RenderLoop() {
-    while (mRunning) {
-        RenderActiveCamera();
-        std::this_thread::sleep_for(std::chrono::milliseconds(16));  // Approx. 60 FPS
-    }
-}
-
-void CameraManager::SetCameraOffsetX(float offset) {
-    if (mActiveCamera) mActiveCamera->SetOffsetX(offset);
-}
-
-void CameraManager::SetCameraOffsetY(float offset) {
-    if (mActiveCamera) mActiveCamera->SetOffsetY(offset);
-}
-
-void CameraManager::SetCameraTargetX(float target) {
-    if (mActiveCamera) mActiveCamera->SetTargetX(target);
-}
-
-void CameraManager::SetCameraTargetY(float target) {
-    if (mActiveCamera) mActiveCamera->SetTargetY(target);
+void CameraManager::EndActiveCamera() {
+    mActiveCamera->EndCamera();
 }
 
 void CameraManager::SetCameraRotation(float rotation) {
@@ -84,28 +60,65 @@ void CameraManager::SetCameraZoom(float zoom) {
     if (mActiveCamera) mActiveCamera->SetZoom(zoom);
 }
 
-float CameraManager::GetCameraOffsetX() const {
-    return mActiveCamera ? mActiveCamera->GetOffsetX() : 0.0f;
-}
-
-float CameraManager::GetCameraOffsetY() const {
-    return mActiveCamera ? mActiveCamera->GetOffsetY() : 0.0f;
-}
-
-float CameraManager::GetCameraTargetX() const {
-    return mActiveCamera ? mActiveCamera->GetTargetX() : 0.0f;
-}
-
-float CameraManager::GetCameraTargetY() const {
-    return mActiveCamera ? mActiveCamera->GetTargetY() : 0.0f;
-}
-
 float CameraManager::GetCameraRotation() const {
     return mActiveCamera ? mActiveCamera->GetRotation() : 0.0f;
 }
 
 float CameraManager::GetCameraZoom() const {
     return mActiveCamera ? mActiveCamera->GetZoom() : 1.0f;
+}
+
+void CameraManager::SetCameraTargetY(float target) {
+    if (mActiveCamera) {
+        mActiveCamera->SetTarget(Vector3{ mActiveCamera->GetTarget().x, target, mActiveCamera->GetTarget().z });
+    }
+}
+
+void CameraManager::SetCameraOffsetX(float offset) {
+    if (mActiveCamera) {
+        mActiveCamera->SetPosition(Vector3{ offset, mActiveCamera->GetPosition().y, mActiveCamera->GetPosition().z });
+    }
+}
+
+void CameraManager::SetCameraOffsetY(float offset) {
+    if (mActiveCamera) {
+        mActiveCamera->SetPosition(Vector3{ mActiveCamera->GetPosition().x, offset, mActiveCamera->GetPosition().z });
+    }
+}
+
+float CameraManager::GetCameraTargetY() const {
+    if (mActiveCamera) {
+        return mActiveCamera->GetTarget().y;
+    }
+    return 0.0f;
+}
+
+float CameraManager::GetCameraOffsetX() const {
+    if (mActiveCamera) {
+        return mActiveCamera->GetPosition().x;
+    }
+    return 0.0f;
+}
+
+float CameraManager::GetCameraOffsetY() const {
+    if (mActiveCamera) {
+        return mActiveCamera->GetPosition().y;
+    }
+    return 0.0f;
+}
+
+void CameraManager::SetCameraTargetX(float target) {
+    if (mActiveCamera) {
+        auto currentTarget = mActiveCamera->GetTarget();
+        mActiveCamera->SetTarget(Vector3{ target, currentTarget.y, currentTarget.z });
+    }
+}
+
+float CameraManager::GetCameraTargetX() const {
+    if (mActiveCamera) {
+        return mActiveCamera->GetTarget().x;  // Access the active camera's target X
+    }
+    return 0.0f;  // Return a default value if no active camera is set
 }
 
 }  // namespace graphics

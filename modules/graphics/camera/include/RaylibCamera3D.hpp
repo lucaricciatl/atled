@@ -1,29 +1,39 @@
-#ifndef CAMERA3D_HPP
-#define CAMERA3D_HPP
+#ifndef RAYLIB_CAMERA3D_HPP
+#define RAYLIB_CAMERA3D_HPP
 
-#include "CameraBase.hpp"
-#include "raylib.h"  
+#include "ICamera.hpp"
+#include "raylib.h"
 
-// Concrete class for Camera3D
-class RaylibCamera3D : public CameraBase{
+namespace graphics {
+
+class RaylibCamera3D : public ICamera {
 public:
+    RaylibCamera3D(Vector3 position = {0.0f, 0.0f, 10.0f}, Vector3 target = {0.0f, 0.0f, 0.0f},
+                   Vector3 up = {0.0f, 1.0f, 0.0f}, float fovy = 45.0f, int projection = CAMERA_PERSPECTIVE);
 
-    RaylibCamera3D(Vector3 position, Vector3 target, Vector3 up, float fovy, int projection);
-    RaylibCamera3D();
+    void BeginCamera() override;
+    void UpdateCamera() override;  
+    void EndCamera() override;
 
-    // Setters for Camera3D properties
-    void setPosition(const Vector3& position);
-    void setTarget(const Vector3& target);
-    void setUp(const Vector3& up);
-    void setFovy(float fovy);
+    void SetPosition(Vector3 position) override;
+    Vector3 GetPosition() const override;
 
-    // Getters for Camera3D properties
-    Vector3 getPosition() const;
-    Vector3 getTarget() const;
-    Vector3 getUp() const;
-    float getFovy() const;
+    void SetTarget(Vector3 target) override;
+    Vector3 GetTarget() const override;
 
-    ::Camera3D mCamera3D;
+    void SetUp(Vector3 up) override;
+    Vector3 GetUp() const override;
+
+    void SetZoom(float zoom) override;
+    float GetZoom() const override;
+
+    void SetRotation(float rotation) override;
+    float GetRotation() const override;
+
+private:
+    Camera3D mCamera;
 };
 
-#endif // CAMERA3D_HPP
+}  // namespace graphics
+
+#endif  // RAYLIB_CAMERA3D_HPP

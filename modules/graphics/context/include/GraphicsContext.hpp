@@ -1,6 +1,6 @@
 #pragma once
 #include "LayerManager.hpp"
-#include "CameraBase.hpp"
+#include "ICamera.hpp"
 #include "IWindow.hpp"
 
 namespace graphics {

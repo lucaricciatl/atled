@@ -1,6 +1,6 @@
 
 #include "GraphicsContext.hpp"
-#include "CameraBase.hpp"
+#include "ICamera.hpp"
 #include "CameraFactory.hpp"
 #include <string_view>
 #include "windowFactory.hpp"

@@ -4,6 +4,8 @@
 #include "IEngine.hpp"
 #include "InputManagerBuilder.hpp"
 #include "GraphicManagerFactory.hpp"
+#include "CameraFactory.hpp"
+#include "CameraManager.hpp"
 #include "CoreEngine.hpp"
 #include "CameraManager.hpp"
 
@@ -87,10 +89,14 @@ std::unique_ptr<T> EngineBuilder<T>::Build() {
     auto graphicsManager = GraphicsManagerFactory::CreateGraphicsManager(graphicsType);
     graphicsManager->SetConfigs(gfxConfig);
     graphicsManager->SetTargetFramerate(targetFramerate);
+    
+    auto CameraMng = std::make_shared<CameraManager>();
 
-    std::unique_ptr<CameraManager> cameraManager;
+    auto cam = CameraFactory::createCamera2D(CameraType2D::Raylib);
+    CameraMng->AddCamera(cam);
+    graphicsManager->SetCameraMng(CameraMng);
     // Create an instance of T with the configured InputManager and GraphicsManager
-    return std::make_unique<T>(std::move(inputManager), std::move(graphicsManager),std::move(cameraManager));
+    return std::make_unique<T>(std::move(inputManager), std::move(graphicsManager),std::move(CameraMng));
 }
 
 } // namespace engine

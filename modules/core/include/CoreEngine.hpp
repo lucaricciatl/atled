@@ -15,7 +15,7 @@ namespace engine {
             // Constructor with unique_ptr arguments
             CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
                 std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
-                std::unique_ptr<graphics::CameraManager> cameraMgr);
+                std::shared_ptr<graphics::CameraManager> cameraMgr);
             ~CoreEngine() override = default;
 
             void Stop() override;
@@ -33,8 +33,8 @@ namespace engine {
             void Init() override;
             void EngineLoop();
 
-            std::shared_ptr<input::InputManager> inputManager;
-            std::shared_ptr<graphics::IGraphicManager> graphicsManager;
+            std::unique_ptr<input::InputManager> inputManager;
+            std::unique_ptr<graphics::IGraphicManager> graphicsManager;
             std::shared_ptr<graphics::CameraManager> cameraManager;
 
             bool isRunning = false;

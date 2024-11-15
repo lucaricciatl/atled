@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include "GraphicsContext.hpp"
+#include "CameraManager.hpp"
 #include "IDisplay.hpp"
 #include "Sphere.hpp"
 
@@ -35,6 +36,8 @@ public:
     virtual std::shared_ptr<GraphicsContext> GetGraphicsContext() = 0;
     virtual void Init() = 0;
     virtual void Render() = 0;
+
+    virtual void SetCameraMng(std::shared_ptr<CameraManager> aCameraMng) = 0 ;
 
     // Drawing methods
     virtual void AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) = 0;

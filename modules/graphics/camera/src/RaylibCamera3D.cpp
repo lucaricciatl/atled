@@ -1,47 +1,60 @@
 #include "RaylibCamera3D.hpp"
 
-// Constructor for Camera3D
-RaylibCamera3D::RaylibCamera3D(Vector3 position, Vector3 target, Vector3 up, float fovy, int projection) {
-    mCamera3D.position = position;
-    mCamera3D.target = target;
-    mCamera3D.up = up;
-    mCamera3D.fovy = fovy;
-    mCamera3D.projection = projection;
+namespace graphics {
+
+RaylibCamera3D::RaylibCamera3D(Vector3 position, Vector3 target, Vector3 up, float fovy, int projection)
+    : mCamera{position, target, up, fovy, projection} {}
+
+void RaylibCamera3D::BeginCamera() {
+    BeginMode3D(mCamera);
 }
 
-RaylibCamera3D::RaylibCamera3D() {
+void RaylibCamera3D::UpdateCamera() {
+    // Use Raylib's UpdateCamera to update the internal mCamera
+    ::UpdateCamera(&mCamera, 0);
 }
 
-// Setters for Camera3D
-void RaylibCamera3D::setPosition(const Vector3& position) {
-    mCamera3D.position = position;
+void RaylibCamera3D::EndCamera() {
+    EndMode3D();
 }
 
-void RaylibCamera3D::setTarget(const Vector3& target) {
-    mCamera3D.target = target;
+void RaylibCamera3D::SetPosition(Vector3 position) {
+    mCamera.position = position;
+    UpdateCamera();
 }
 
-void RaylibCamera3D::setUp(const Vector3& up) {
-    mCamera3D.up = up;
+Vector3 RaylibCamera3D::GetPosition() const {
+    return mCamera.position;
 }
 
-void RaylibCamera3D::setFovy(float fovy) {
-    mCamera3D.fovy = fovy;
+void RaylibCamera3D::SetTarget(Vector3 target) {
+    mCamera.target = target;
+    UpdateCamera();
 }
 
-// Getters for Camera3D
-Vector3 RaylibCamera3D::getPosition() const {
-    return mCamera3D.position;
+Vector3 RaylibCamera3D::GetTarget() const {
+    return mCamera.target;
 }
 
-Vector3 RaylibCamera3D::getTarget() const {
-    return mCamera3D.target;
+void RaylibCamera3D::SetUp(Vector3 up) {
+    mCamera.up = up;
+    UpdateCamera();
 }
 
-Vector3 RaylibCamera3D::getUp() const {
-    return mCamera3D.up;
+Vector3 RaylibCamera3D::GetUp() const {
+    return mCamera.up;
 }
 
-float RaylibCamera3D::getFovy() const {
-    return mCamera3D.fovy;
+void RaylibCamera3D::SetZoom(float) {}
+
+float RaylibCamera3D::GetZoom() const {
+    return 1.0f;  // Not applicable for Camera3D
 }
+
+void RaylibCamera3D::SetRotation(float) {}
+
+float RaylibCamera3D::GetRotation() const {
+    return 0.0f;  // Not applicable for Camera3D
+}
+
+}  // namespace graphics

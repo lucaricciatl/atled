@@ -4,6 +4,7 @@
 #include "Model2D.hpp"
 #include "Model3D.hpp"
 #include "IGraphicManager.hpp"
+#include "CameraManager.hpp"
 #include <atomic>
 #include <mutex>
 #include <chrono>
@@ -25,8 +26,8 @@ public:
     std::shared_ptr<GraphicsContext> GetGraphicsContext() override;
     void Init() override;
     void Render() override;
-
-    // Drawing methods
+    void SetCameraMng(std::shared_ptr<graphics::CameraManager> aCameraMng);
+    // Drawing 2D methods
     void AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) override;
     void AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCircle) override;
     void AddRectangle(const int& aLayerId, std::shared_ptr<Rectangle> aRectangle) override;
@@ -37,7 +38,12 @@ public:
     void AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) override;
     void DrawLayer(const int& aLayerId) override;
 
+    // Drawing 3D methods
+
+
+    // clear methods
     void Clear(::Color aColor) override;
+
 
 protected:
     void Run(); // Thread loop function
@@ -48,10 +54,9 @@ private:
     std::shared_ptr<GraphicsContext> mContext;
     std::shared_ptr<GfxConfig> mConfigs;
     std::unique_ptr<IDisplay> mDisplay;
-
     // Storage for drawing primitives, organized by layer
     std::unordered_map<int, std::vector<std::shared_ptr<Model>>> layers;
-
+    std::shared_ptr<CameraManager> mCameraManager;
     // Synchronization
     std::mutex layersMutex;
 };
