@@ -9,6 +9,17 @@ using namespace graphics;
 
 
 
+#include "Engine.hpp"
+#include "CoreEngine.hpp"
+#include <iostream>
+#include <thread>
+#include <chrono>
+#include "NBodySimulation.hpp"
+
+using namespace graphics;
+
+
+
 // Called at the start of the engine, initializes simulation and graphics setup
 void Engine::OnStart() {
     std::cout << "Engine starting..." << std::endl;
@@ -32,18 +43,6 @@ void Engine::OnStart() {
     std::cout << "Simulation initialized with " << simulation.GetCircles().size() << " bodies." << std::endl;
 }
 
-// Updates simulation state every frame
-void Engine::OnUpdate() {
-    simulation.Update(0.02);  // Update the simulation with deltaTime
-
-    std::cout << "Simulation updated for deltaTime = " << 0.02 << std::endl;
-}
-
-// Renders the current simulation state
-void Engine::OnRender() {
-    graphicsManager->Clear(::Color(0,0,0,0));
-    graphicsManager->Render();  // Render all shapes (already added in OnStart)
-}
 
 // Clean up resources when the engine shuts down
 void Engine::OnShutdown() {
@@ -51,3 +50,47 @@ void Engine::OnShutdown() {
 
     // Perform any cleanup if needed (e.g., deallocating resources, saving state, etc.)
 }
+
+
+// Updates simulation state every frame
+void Engine::OnUpdate() {
+    // Pan the camera using arrow keys or WASD
+    if (inputManager->IsKeyDown(KEY_W)) {
+        cameraManager->SetCameraTargetY(cameraManager->GetCameraTargetY() - 1); // Move view up
+    }
+    if (inputManager->IsKeyDown(KEY_S)) {
+        cameraManager->SetCameraTargetY(cameraManager->GetCameraTargetY() + 1); // Move view down
+    }
+    if (inputManager->IsKeyDown(KEY_A)) {
+        cameraManager->SetCameraTargetX(cameraManager->GetCameraTargetX() - 1); // Move view left
+    }
+    if (inputManager->IsKeyDown(KEY_D)) {
+        cameraManager->SetCameraTargetX(cameraManager->GetCameraTargetX() + 1); // Move view right
+    }
+
+    // Zoom in/out with mouse wheel
+    float mouseWheelMove = inputManager->GetMouseWheelMove();
+    if (mouseWheelMove != 0.0f) {
+        float currentZoom = cameraManager->GetCameraZoom();
+        cameraManager->SetCameraZoom(currentZoom + mouseWheelMove * 0.1f);
+    }
+
+    // Update the simulation state
+            // Apply target-based adjustments to objects
+    float targetOffsetX = cameraManager->GetCameraTargetX();
+    float targetOffsetY = cameraManager->GetCameraTargetY();
+
+
+    simulation.Update(0.01);  // Update the simulation with deltaTime
+    std::cout << "Simulation updated for deltaTime = " << 0.02 << std::endl;
+}
+
+
+void Engine::OnRender() {
+    graphicsManager->Clear(::Color(0, 0, 0, 0));
+
+    // Render all shapes
+    graphicsManager->Render();
+
+}
+
