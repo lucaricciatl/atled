@@ -21,27 +21,54 @@ bool running = true; // Flag to control the input thread
 // Default implementation of OnUpdate
 #include <cmath> // For sin and cos
 
-void Engine::OnUpdate() {
-    static float angle = 0.0f; // Angle of rotation in radians
-    const float radius = 5.0f; // Distance from the object
-    const float rotationSpeed = 0.0001f; // Speed of rotation
+std::vector<std::shared_ptr<Cube>> cubes; // To store references to the cubes
 
-    // Update the angle to create rotation
+
+void Engine::OnUpdate() {
+    static float angle = 0.0f;           // Angle of rotation in radians for camera
+    static float colorShift = 0.0f;     // For smooth color cycling
+    const float radius = 120.0f;         // Distance from the object
+    const float rotationSpeed = 0.005f; // Speed of rotation for camera
+    const float colorSpeed = 0.5f;     // Speed of color change
+
+    // Update the angle for camera rotation
     angle += rotationSpeed;
 
-    // Calculate the new camera position based on the angle
+    // Update the color shift
+    colorShift += colorSpeed;
+
+    // Calculate the new camera position
     float x = radius * cos(angle);
     float y = radius * sin(angle);
 
-    // Set the new camera position
-    cameraManager->SetCameraPosition({x, y, 1}); // Keep Y constant for a horizontal rotation
-    cameraManager->SetCameraTarget({0, 0, -5});    // Keep the target fixed on the object
+    // Set the new camera position and target
+    cameraManager->SetCameraPosition({ x, y, 120 }); // Camera rotates around
+    cameraManager->SetCameraTarget({ 25, 25, 25 });    // Keep the target fixed on the object
+
+    // Rotate cubes and change their colors smoothly
+    float phaseOffset = 0.1f; // Offset for different color phases per cube
+    int index = 0;            // Cube index for unique phase
+
+    for (auto& cube : cubes) {
+        if (cube) {
+            // Calculate unique phase for each cube
+            float phase = colorShift + index * phaseOffset;
+
+            // Smooth color components using sine wave
+            int red = static_cast<int>((sin(phase) + 1) * 127.5);   // Range: 0-255
+            int green = static_cast<int>((sin(phase + 2.0f) + 1) * 127.5); // Offset for green
+            int blue = static_cast<int>((sin(phase + 4.0f) + 1) * 127.5);  // Offset for blue
+
+            // Set the cube color
+            cube->SetColor(Color(red, green, blue, 120));
+
+            ++index; // Increment index for unique phase per cube
+        }
+    }
 }
 
 
 
-
-// Default implementation of OnStart
 void Engine::OnStart() {
     auto ctx = graphicsManager->GetGraphicsContext();
     ctx->SetSize(900, 900);
@@ -49,17 +76,33 @@ void Engine::OnStart() {
     auto configs = graphics::GfxConfig({ FLAG_WINDOW_RESIZABLE, FLAG_VSYNC_HINT, FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT });
     graphicsManager->SetConfigs(configs);
     ctx->InitWindowManager();
+
     cameraManager->SetFovy(45);
     cameraManager->SetCameraProjection(CAMERA_PERSPECTIVE);
-    int modelType = rand() % 4; // Extend range to 4 to include 3D sphere
-    Color randomColor(rand() % 256, rand() % 256, rand() % 256, 128);
-    Color col(2, 2, 2, 255);
-    auto cube = Model3DFactory::CreateCube();
-    cube->SetCenterPos({ 0, 0,-5.0f }); // Set a default Z position
-    cube->EnableWireframe();
-    cube->SetWireframeColor(col);
+    cameraManager->SetCameraPosition({20.0f, 20.0f, 20.0f});
+    cameraManager->SetCameraTarget({10.0f, 10.0f, 10.0f});
 
-    graphicsManager->AddCube(rand(), cube);
+    Color cubeColor(50, 150, 250, 255);  // Initial color for cubes
+    Color wireframeColor(255, 255, 255, 50);  // Wireframe color
+
+    const float cubeSize = 0.9f; // Size of each small cube
+    const float spacing = 2.0f; // Space between cubes
+    const int count = 20; // Number of cubes along each dimension
+
+    for (int x = 0; x < count; ++x) {
+        for (int y = 0; y < count; ++y) {
+            for (int z = 0; z < count; ++z) {
+                auto smallCube = Model3DFactory::CreateCube();
+                smallCube->SetCenterPos({x * spacing, y * spacing, z * spacing});
+                smallCube->SetColor(cubeColor);
+                smallCube->EnableWireframe();
+                smallCube->SetWireframeColor(wireframeColor);
+
+                cubes.push_back(smallCube);  // Store the cube in the container
+                graphicsManager->AddCube(rand(), smallCube);
+            }
+        }
+    }
 }
 
 // Default implementation of OnShutdown
