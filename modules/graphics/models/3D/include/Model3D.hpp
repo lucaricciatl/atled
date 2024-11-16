@@ -9,7 +9,11 @@ class Model3D : Model{
  public:
   virtual ~Model3D() = default;
   virtual void Draw() = 0 ;
+
 };
+
+
+
 }  // namespace graphics
 #endif  // SHAPE_HPP
 

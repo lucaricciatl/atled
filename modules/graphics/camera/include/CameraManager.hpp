@@ -49,14 +49,13 @@ public:
     // Render with the active camera
     void RenderActiveCamera();
 
-    // Camera manipulation functions
+    // Camera manipulation functions 2D
     void SetCameraOffsetX(float offset);
     void SetCameraOffsetY(float offset);
     void SetCameraTargetX(float target);
     void SetCameraTargetY(float target);
     void SetCameraRotation(float rotation);
     void SetCameraZoom(float zoom);
-    void SetFovy(float aFovy);
     float GetCameraOffsetX() const;
     float GetCameraOffsetY() const;
     float GetCameraTargetX() const;
@@ -64,6 +63,11 @@ public:
     float GetCameraRotation() const;
     float GetCameraZoom() const;
 
+    // 3D
+    void SetFovy(float aFovy);
+    void SetCameraProjection(CameraProjection aProjection);
+    void SetCameraPosition(const std::vector<float>& aPosition);
+    void SetCameraTarget(const std::vector<float>& aTarget);
     void BeginActiveCamera();
 
     void EndActiveCamera();

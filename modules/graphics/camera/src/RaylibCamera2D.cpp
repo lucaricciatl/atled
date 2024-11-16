@@ -59,4 +59,5 @@ float RaylibCamera2D::GetRotation() const {
     return mCamera.rotation;
 }
 
+void RaylibCamera2D::SetCameraProjection(CameraProjection aProjection) {};
 }  // namespace graphics

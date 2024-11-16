@@ -28,6 +28,7 @@ public:
     virtual Vector3 GetUp() const = 0;  // For 3D cameras
     virtual float GetZoom() const = 0;
     virtual float GetRotation() const = 0;
+    virtual void SetCameraProjection(CameraProjection aProjection) = 0;
 };
 
 }  // namespace graphics

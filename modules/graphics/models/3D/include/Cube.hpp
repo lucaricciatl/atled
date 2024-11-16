@@ -25,6 +25,15 @@ public:
     float GetHeight() const;
     float GetLength() const;
 
+    void EnableWireframe();
+    void DisableWireframe();
+
+    // Enable wireframe rendering
+    void EnableShape();
+    void DisableShape();
+    void SetWireframeColor(Color aColor);
+    Color GetWireframeColor() const;
+
     // Setter for center position
     void SetCenterPos(const Vector3& centerPos);
     // Getter for center position
@@ -39,6 +48,9 @@ private:
     Vector3 mDimensions; // Dimensions of the cube (width, height, length)
     Vector3 mCenterPos;  // Center position of the cube
     Color mColor;        // Color of the cube
+    Color mWireframeColor; // Color of thr wireframe
+    bool WireframeIsEnabled; // 1 for the wirefram
+    bool ShapeIsEnabled; // 1 for the wirefram
 };
 
 }  // namespace graphics

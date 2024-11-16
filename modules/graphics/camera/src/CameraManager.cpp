@@ -44,6 +44,24 @@ void CameraManager::UpdateCameras() {
     }
 }
 
+void CameraManager::SetCameraPosition(const std::vector<float>& aPosition) {
+    if (aPosition.size() != 3) {
+        std::cerr << "Error: Camera position must have exactly 3 elements. Using default position." << std::endl;
+        mActiveCamera->SetPosition({ 0.0f, 0.0f, 0.0f });  // Default position
+        return;
+    }
+    mActiveCamera->SetPosition({ aPosition[0], aPosition[1], aPosition[2] });
+}
+
+void CameraManager::SetCameraTarget(const std::vector<float>& aTarget) {
+    if (aTarget.size() != 3) {
+        std::cerr << "Error: Camera target must have exactly 3 elements. Using default target." << std::endl;
+        mActiveCamera->SetTarget({ 0.0f, 0.0f, 0.0f });  // Default target
+        return;
+    }
+    mActiveCamera->SetTarget({ aTarget[0], aTarget[1], aTarget[2] });
+}
+
 void CameraManager::BeginActiveCamera() {
     mActiveCamera->BeginCamera();     
 }
@@ -125,4 +143,9 @@ float CameraManager::GetCameraTargetX() const {
     return 0.0f;  // Return a default value if no active camera is set
 }
 
+void CameraManager::SetCameraProjection(CameraProjection aProjection) {
+    if (mActiveCamera) {
+        mActiveCamera->SetCameraProjection(aProjection);
+    }
+}
 }  // namespace graphics

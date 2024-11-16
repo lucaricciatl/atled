@@ -61,4 +61,8 @@ float RaylibCamera3D::GetRotation() const {
     return 0.0f;  // Not applicable for Camera3D
 }
 
+void RaylibCamera3D::SetCameraProjection(CameraProjection aProjection) {
+    mCamera.projection = aProjection;
+};
+
 }  // namespace graphics
