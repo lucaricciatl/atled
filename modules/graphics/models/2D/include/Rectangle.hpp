@@ -22,8 +22,7 @@ class Rectangle : public Model,public Model2D {
   Rectangle(const Coordinates2D& aUpperLeft, const Coordinates2D& aBottomRight);
   Rectangle() = default;
 
-  ::Color GetColor() const;    
-  double GetRotation() const;  
+ 
   Coordinates2D GetUpperLeft() const;
   Coordinates2D GetBottomRight() const;
 
@@ -31,6 +30,9 @@ class Rectangle : public Model,public Model2D {
   void SetPosition(const Coordinates2D& position);
   void SetUpperLeft(const Coordinates2D& aUpperLeft);
   void SetBottomRight(const Coordinates2D& aBottomRight);
+
+  ::Color GetColor() const;
+  double GetRotation() const;
   void SetColor(const ::Color& color);  
   void SetRotation(double rotation);    
 

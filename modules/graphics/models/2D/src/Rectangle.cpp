@@ -5,11 +5,8 @@
 
 namespace graphics {
 
-Rectangle::Rectangle(const Coordinates2D& aUpperLeft,
-                     const Coordinates2D& aBottomRight) {
-  mUpperLeft = aUpperLeft;
-  mBottomRight = aBottomRight;
-}
+    Rectangle::Rectangle(const Coordinates2D& aUpperLeft, const Coordinates2D& aBottomRight)
+        : mUpperLeft(aUpperLeft), mBottomRight(aBottomRight) {}
 
 void Rectangle::SetUpperLeft(const Coordinates2D& aUpperLeft) {
   mUpperLeft = aUpperLeft;

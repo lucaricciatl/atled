@@ -6,34 +6,41 @@
 
 namespace graphics {
 
-class Sphere : public Model,public Model3D {
-public:
-    // Constructor with default radius
-    Sphere(float radius = 1.0f) : mRadius(radius), mCenterPos{ 0.0f, 0.0f, 0.0f }, mColor{ 255, 255, 255, 255 } {};
+    class Sphere : public Model, public Model3D {
+    public:
+        // Constructors
+        Sphere();  // Default constructor
+        Sphere(float radius, const Vector3& centerPos, int rings = 16, int slices = 16);
 
-    // Override draw function
-    void Draw() override;
+        // Override draw function
+        void Draw() override;
 
-    // Setter for radius
-    void SetRadius(float radius) { mRadius = radius; }
-    // Getter for radius
-    float GetRadius() const { return mRadius; }
+        // Setter for radius
+        void SetRadius(float radius);
+        // Getter for radius
+        float GetRadius() const;
 
-    // Setter for center position
-    void SetCenterPos(const Vector3& centerPos) { mCenterPos = centerPos; }
-    // Getter for center position
-    Vector3 GetCenterPos() const { return mCenterPos; }
+        // Setter for center position
+        void SetCenterPos(const Vector3& centerPos);
+        // Getter for center position
+        Vector3 GetCenterPos() const;
 
-    // Setter for color
-    void SetColor(const Color& color) { mColor = color; }
-    // Getter for color
-    Color GetColor() const { return mColor; }
+        // Setter for ring count
+        void SetRings(int rings);
+        // Getter for ring count
+        int GetRings() const;
 
-private:
-    float mRadius;      // Radius of the sphere
-    Vector3 mCenterPos; // Center position of the sphere
-    Color mColor;       // Color of the sphere
-};
+        // Setter for slice count
+        void SetSlices(int slices);
+        // Getter for slice count
+        int GetSlices() const;
+
+    private:
+        float mRadius;      // Radius of the sphere
+        int mRings;         // Number of rings
+        int mSlices;        // Number of slices
+        Vector3 mCenterPos; // Center position of the sphere
+    };
 
 }  // namespace graphics
 
