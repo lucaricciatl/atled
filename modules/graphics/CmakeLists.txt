@@ -9,12 +9,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Collect all paths (both files and directories) recursively
 file(GLOB HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/**/include" "${CMAKE_CURRENT_SOURCE_DIR}/**/**/include")
 
+file(GLOB HEADERFILE "${CMAKE_CURRENT_SOURCE_DIR}/**/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/**/**/*.hpp")
 # Debugging: Print the collected include directories
-message("Include directories found: ${HEADERS}")
+message("Include directories found: ${HEADERS}" ${HEADERFILE})
 
 file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(graphics STATIC ${SOURCES})
+add_library(graphics STATIC ${SOURCES}  ${HEADERFILE})
 
 
 target_include_directories(graphics PUBLIC

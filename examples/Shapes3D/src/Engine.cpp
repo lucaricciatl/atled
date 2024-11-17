@@ -11,6 +11,7 @@
 #include <cstdlib> // For rand()
 #include <mutex>
 #include "Sphere.hpp"
+#include <cmath> 
 
 using namespace graphics;
 using namespace input;
@@ -18,11 +19,9 @@ using namespace input;
 std::mutex graphicsMutex; // Mutex to protect graphicsManager access
 bool running = true; // Flag to control the input thread
 
-// Default implementation of OnUpdate
-#include <cmath> // For sin and cos
+
 
 std::vector<std::shared_ptr<Model3D>> cubes; // To store references to the cubes
-
 
 void Engine::OnUpdate() {
     static float angle = 0.0f;           // Angle of rotation in radians for camera
@@ -66,8 +65,6 @@ void Engine::OnUpdate() {
         }
     }
 }
-
-
 
 void Engine::OnStart() {
     auto ctx = graphicsManager->GetGraphicsContext();
