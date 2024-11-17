@@ -58,6 +58,7 @@ public:
     virtual void AddCylinder(const int& aLayerId, std::shared_ptr<Cylinder> aCylinder) = 0;
     virtual void AddPlane(const int& aLayerId, std::shared_ptr<Plane> aPlane) = 0;
     virtual void AddCapsule(const int& aLayerId, std::shared_ptr<Capsule> aCapsule) = 0;
+    virtual void AddShape(const int& aLayerId, std::shared_ptr<Model> aShape) = 0;
     virtual void DrawLayer(const int& aLayerId) = 0;
     virtual void Clear(::Color aColor) = 0;
 };

@@ -144,6 +144,11 @@ void GraphicsManager::Clear(::Color aColor) {
     mContext->Clear(aColor);
 }
 
+void GraphicsManager::AddShape(const int& aLayerId, std::shared_ptr<Model> aShape) {
+    std::lock_guard<std::mutex> lock(layersMutex); // Ensure thread safety
+    layers[aLayerId].push_back(aShape);           // Add the shape to the appropriate layer
+}
+
 void GraphicsManager::DrawLayer(const int& aLayerId) {
     // Check if the specified layer exists in the map
     if (layers.find(aLayerId) != layers.end()) {

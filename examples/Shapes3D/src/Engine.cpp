@@ -12,14 +12,16 @@
 #include <mutex>
 #include "Sphere.hpp"
 #include <cmath> 
+#include "GraphicsManager.hpp"
 
 using namespace graphics;
 using namespace input;
 
+
 std::mutex graphicsMutex; // Mutex to protect graphicsManager access
 bool running = true; // Flag to control the input thread
 
-std::vector<std::shared_ptr<Cube>> cubes; // To store references to the cubes
+std::vector<std::shared_ptr<Model3D>> shapes; // To store references to the cubes
 std::vector<std::shared_ptr<Line3D>> lines;  // To store references to the lines
 
 void Engine::OnUpdate() {
@@ -47,7 +49,7 @@ void Engine::OnUpdate() {
     float phaseOffset = 0.1f; // Offset for different color phases per cube
     int index = 0;            // Cube index for unique phase
 
-    for (auto& cube : cubes) {
+    for (auto& cube : shapes) {
         if (cube) {
             // Calculate unique phase for each cube
             float phase = colorShift + index * phaseOffset;
@@ -86,52 +88,116 @@ void Engine::OnStart() {
     const float spacing = 4.0f; // Space between cubes
     const int count = 10; // Number of cubes along each dimension
 
-    // Create cubes
     for (int x = 0; x < count; ++x) {
         for (int y = 0; y < count; ++y) {
             for (int z = 0; z < count; ++z) {
-                auto smallCube = Model3DFactory::CreateCube();
-                smallCube->SetCenterPos({ x * spacing, y * spacing, z * spacing });
-                smallCube->SetColor(cubeColor);
-                smallCube->EnableWireframe();
-                smallCube->SetWireframeColor(wireframeColor);
+                // Randomly decide whether to create a cube or a sphere
+                bool createCube = (rand() % 2 == 0);
 
-                cubes.push_back(smallCube);  // Store the cube in the container
-                graphicsManager->AddCube(rand(), smallCube);
+                if (createCube) {
+                    // Create a cube
+                    auto cube = Model3DFactory::CreateCube();
+                    cube->SetCenterPos({ x * spacing, y * spacing, z * spacing });
+                    cube->SetColor(cubeColor);
+                    cube->EnableWireframe();
+                    cube->SetWireframeColor(wireframeColor);
+
+                    shapes.push_back(cube);  // Store the cube in the container
+                    graphicsManager->AddShape(rand(), cube);
+                }
+                else {
+                    // Create a sphere
+                    auto sphere = Model3DFactory::CreateSphere();
+                    sphere->SetCenterPos({ x * spacing, y * spacing, z * spacing });
+                    sphere->SetRadius(0.5f * spacing); // Set radius relative to spacing
+                    sphere->SetColor(cubeColor);
+                    sphere->DisableWireframe();
+
+                    sphere->SetRadius(1);                    
+                    shapes.push_back(sphere);  // Store the cube in the container
+                    graphicsManager->AddShape(rand(), sphere);
+                }
             }
         }
     }
 
     // Connect cubes with lines
-    for (int i = 0; i < count * count * count; ++i) {
-        auto& cubeA = cubes[i];
-        Vector3 posA = cubeA->GetCenterPos();
+    for (int i = 0; i < shapes.size(); ++i) {
+        auto& shapeA = shapes[i];
 
-        // Check neighbors in all 3 dimensions and add lines
-        if ((i + 1) % count != 0) {  // Right neighbor
-            auto& cubeB = cubes[i + 1];
-            Vector3 posB = cubeB->GetCenterPos();
+        // Check if the shape is a Cube
+        if (auto cubeA = std::dynamic_pointer_cast<Cube>(shapeA)) {
+            // Process the Cube
+            Vector3 posA = cubeA->GetCenterPos();
 
-            auto line = Model3DFactory::CreateLine3D(); // Use the factory method
-            line->SetStartPos(posA);
-            line->SetEndPos(posB);
-            lines.push_back(line);
-            graphicsManager->AddLine3D(rand(), line);
+            // Example: Connect to neighboring shapes
+            if (i + 1 < shapes.size()) {
+                auto& shapeB = shapes[i + 1];
+
+                // Check if the neighbor is also a Cube
+                if (auto cubeB = std::dynamic_pointer_cast<Cube>(shapeB)) {
+                    Vector3 posB = cubeB->GetCenterPos();
+
+                    // Create a line connecting the two cubes
+                    auto line = Model3DFactory::CreateLine3D();
+                    line->SetStartPos(posA);
+                    line->SetEndPos(posB);
+
+                    lines.push_back(line);
+                    graphicsManager->AddShape(rand(), line);
+                }
+                // Check if the neighbor is also a Cube
+                if (auto cubeB = std::dynamic_pointer_cast<Sphere>(shapeB)) {
+                    Vector3 posB = cubeB->GetCenterPos();
+
+                    // Create a line connecting the two cubes
+                    auto line = Model3DFactory::CreateLine3D();
+                    line->SetStartPos(posA);
+                    line->SetEndPos(posB);
+
+                    lines.push_back(line);
+                    graphicsManager->AddShape(rand(), line);
+                }
+            }
+        }
+        else if (auto sphereA = std::dynamic_pointer_cast<Sphere>(shapeA)) {
+            // Process the Sphere
+            Vector3 posA = sphereA->GetCenterPos();
+
+            // Example: Connect to neighboring shapes
+            if (i + 1 < shapes.size()) {
+                auto& shapeB = shapes[i + 1];
+                // Check if the neighbor is also a Cube
+                if (auto cubeB = std::dynamic_pointer_cast<Cube>(shapeB)) {
+                    Vector3 posB = cubeB->GetCenterPos();
+
+                    // Create a line connecting the two cubes
+                    auto line = Model3DFactory::CreateLine3D();
+                    line->SetStartPos(posA);
+                    line->SetEndPos(posB);
+
+                    lines.push_back(line);
+                    graphicsManager->AddShape(rand(), line);
+                }
+                // Check if the neighbor is also a Cube
+                if (auto cubeB = std::dynamic_pointer_cast<Sphere>(shapeB)) {
+                    Vector3 posB = cubeB->GetCenterPos();
+
+                    // Create a line connecting the two cubes
+                    auto line = Model3DFactory::CreateLine3D();
+                    line->SetStartPos(posA);
+                    line->SetEndPos(posB);
+
+                    lines.push_back(line);
+                    graphicsManager->AddShape(rand(), line);
+                }
+            }
         }
 
-        if (i + count * count < count * count * count) {  // Front neighbor
-            auto& cubeB = cubes[i + count * count];
-            Vector3 posB = cubeB->GetCenterPos();
-
-            auto line = Model3DFactory::CreateLine3D(); // Use the factory method
-            line->SetStartPos(posA);
-            line->SetEndPos(posB);
-            lines.push_back(line);
-            graphicsManager->AddLine3D(rand(), line);
         }
     }
 
-}
+
 
 // Default implementation of OnShutdown
 void Engine::OnShutdown() {
