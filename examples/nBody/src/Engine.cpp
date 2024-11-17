@@ -9,16 +9,6 @@ using namespace graphics;
 
 
 
-#include "Engine.hpp"
-#include "CoreEngine.hpp"
-#include <iostream>
-#include <thread>
-#include <chrono>
-#include "NBodySimulation.hpp"
-
-using namespace graphics;
-
-
 
 // Called at the start of the engine, initializes simulation and graphics setup
 void Engine::OnStart() {
@@ -36,8 +26,9 @@ void Engine::OnStart() {
     simulation.InitializeBodies();
 
     // Add each circle from the simulation to the graphics manager once
-    for (const auto& circle : simulation.GetCircles()) {
-        graphicsManager->AddCircle(1, circle);  // Add to layer 1
+    for (auto& circle : simulation.GetCircles()) {
+        graphicsManager->AddShape(1, std::dynamic_pointer_cast<graphics::Model2D>(circle));  // Cast explicitly
+
     }
 
     std::cout << "Simulation initialized with " << simulation.GetCircles().size() << " bodies." << std::endl;
@@ -81,8 +72,8 @@ void Engine::OnUpdate() {
     float targetOffsetY = cameraManager->GetCameraTargetY();
 
 
-    simulation.Update(0.01);  // Update the simulation with deltaTime
-    std::cout << "Simulation updated for deltaTime = " << 0.02 << std::endl;
+    simulation.Update(0.001);  // Update the simulation with deltaTime
+    std::cout << "Simulation updated for deltaTime = " << 0.001 << std::endl;
 }
 
 

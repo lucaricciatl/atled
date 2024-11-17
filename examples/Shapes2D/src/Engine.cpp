@@ -62,14 +62,14 @@ void Engine::OnUpdate() {
             circle->SetCenter(Coordinates2D(mouseX, mouseY));
             circle->SetRadius(50 + rand() % 50);
             circle->SetColor(randomColor);
-            graphicsManager->AddCircle(rand(), circle);
+            graphicsManager->AddShape(rand(), std::dynamic_pointer_cast<graphics::Model2D>(circle));
         }
         else if (modelType == 1) { // Random Rectangle
             auto rectangle = Model2DFactory::CreateRectangle();
             rectangle->SetUpperLeft(Coordinates2D(mouseX - 50 , mouseY - 50));
             rectangle->SetBottomRight(Coordinates2D(mouseX + 50 , mouseY + 50 ));
             rectangle->SetColor(randomColor);
-            graphicsManager->AddRectangle(rand(), rectangle);
+            graphicsManager->AddShape(rand(), std::dynamic_pointer_cast<graphics::Model2D>(rectangle));
         }
         else if (modelType == 2) { // Random Line
             auto line = Model2DFactory::CreateLine();
@@ -77,7 +77,7 @@ void Engine::OnUpdate() {
             line->SetEndPoint(Coordinates2D(mouseX + 100 , mouseY + 100));
             line->SetThickness(2 + rand() % 3);
             line->SetColor(randomColor);
-            graphicsManager->AddLine(rand(), line);
+            graphicsManager->AddShape(rand(), std::dynamic_pointer_cast<graphics::Model2D>(line));
         }
     }
 }

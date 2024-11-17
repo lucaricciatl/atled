@@ -27,20 +27,6 @@ public:
     void Init() override;
     void Render() override;
     void SetCameraMng(std::shared_ptr<graphics::CameraManager> aCameraMng);
-    // Drawing 2D methods
-    void AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) override;
-    void AddCircle(const int& aLayerId, std::shared_ptr<Circle> aCircle) override;
-    void AddRectangle(const int& aLayerId, std::shared_ptr<Rectangle> aRectangle) override;
-    void AddLine(const int& aLayerId, std::shared_ptr<Line> aLine) override;
-    void AddPolyline(const int& aLayerId, std::shared_ptr<Polyline> aPolyline) override;
-    void AddTriangle(const int& aLayerId, std::shared_ptr<Triangle> aTriangle) override;
-    void AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> aPolygon) override;
-    void AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) override;
-    void AddCube(const int& aLayerId, std::shared_ptr<Cube> aCube) override;
-    void AddLine3D(const int& aLayerId, std::shared_ptr<Line3D> aLine) override;
-    void AddCylinder(const int& aLayerId, std::shared_ptr<Cylinder> aCylinder) override;
-    void AddPlane(const int& aLayerId, std::shared_ptr<Plane> aPlane) override;
-    void AddCapsule(const int& aLayerId, std::shared_ptr<Capsule> aCapsule) override;
     void AddShape(const int& aLayerId, std::shared_ptr<Model> aShape);
 
     void DrawLayer(const int& aLayerId) override;
