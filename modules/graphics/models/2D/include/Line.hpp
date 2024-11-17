@@ -20,13 +20,11 @@ class Line : public Model,public Model2D {
   Coordinates2D GetEndPoint() const;
   
   void SetThickness(double thickness);
-  void SetColor(Color& aColor);
   void Draw() override;
 
  private:
   Coordinates2D start;
   Coordinates2D end;
-  ::Color mColor;
   double mThickness;
 };
 

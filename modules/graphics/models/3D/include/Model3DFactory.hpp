@@ -3,7 +3,7 @@
 
 #include "Cube.hpp"
 #include "Sphere.hpp"
-#include "Pyramid.hpp"
+#include "Line3D.hpp"
 
 namespace graphics {
 
@@ -11,7 +11,7 @@ namespace graphics {
 enum class Model3DType {
     cube,
     sphere,
-    pyramid,
+    Line3D,
     // Add other 3D types as needed
 };
 
@@ -27,8 +27,8 @@ class Model3DFactory {
     static std::shared_ptr<Sphere> CreateSphere(float radius);
     static std::shared_ptr<Sphere> CreateSphere();
 
-    static std::shared_ptr<Pyramid> CreatePyramid(float baseWidth, float height);
-    static std::shared_ptr<Pyramid> CreatePyramid();
+    static std::shared_ptr<Line3D> CreateLine3D(Vector3 startPos, Vector3 endPos);
+    static std::shared_ptr<Line3D> CreateLine3D();
 };
 
 }  // namespace graphics

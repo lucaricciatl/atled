@@ -18,15 +18,11 @@ class Polygon : public Model,public Model2D {
   void SetPoints(const std::vector<Coordinates2D>& points);
   const std::vector<Coordinates2D>& GetPoints() const;
 
-  void SetColor(const Color& color);
-  Color GetColor() const;
-
   // Overridden Draw method
   void Draw() override;
 
  private:
   std::vector<Coordinates2D> mPoints;
-  Color mColor;
 
  protected:
   const std::vector<Triangle>  PerformTriangulation();

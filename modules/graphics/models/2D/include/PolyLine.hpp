@@ -20,9 +20,6 @@ class Polyline : public Model,public Model2D {
   void SetThickness(double thickness);
   double GetThickness() const;
 
-  void SetColor(const Color& color);
-  Color GetColor() const;
-
   // Overridden Draw method
   void Draw() override;
 

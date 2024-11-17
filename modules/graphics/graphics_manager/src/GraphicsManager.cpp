@@ -75,7 +75,10 @@ void GraphicsManager::Render() {
     GetGraphicsContext()->EndDrawing(); // Finish the current frame
 }
 
-
+void GraphicsManager::AddLine3D(const int& aLayerId, std::shared_ptr<Line3D> aLine3D) {
+std::lock_guard<std::mutex> lock(layersMutex);
+layers[aLayerId].push_back(std::static_pointer_cast<Model>(aLine3D));
+}
 
 void GraphicsManager::AddArc(const int& aLayerId, std::shared_ptr<Arc> aArc) {
     std::lock_guard<std::mutex> lock(layersMutex);

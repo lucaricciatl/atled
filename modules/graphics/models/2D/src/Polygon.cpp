@@ -5,7 +5,7 @@
 namespace graphics {
 
 Polygon::Polygon(const std::vector<Coordinates2D>& points, const Color& color)
-    : mPoints(points), mColor(color) {}
+    : mPoints(points) {}
 
 void Polygon::SetPoints(const std::vector<Coordinates2D>& points) {
   mPoints = points;
@@ -13,14 +13,6 @@ void Polygon::SetPoints(const std::vector<Coordinates2D>& points) {
 
 const std::vector<Coordinates2D>& Polygon::GetPoints() const {
   return mPoints;
-}
-
-void Polygon::SetColor(const Color& color) {
-  mColor = color;
-}
-
-Color Polygon::GetColor() const {
-  return mColor;
 }
 
 

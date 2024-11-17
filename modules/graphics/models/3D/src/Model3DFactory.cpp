@@ -8,8 +8,8 @@ namespace graphics {
             return std::static_pointer_cast<Model3D>(std::make_shared<Cube>());
         case Model3DType::sphere:
             return std::static_pointer_cast<Model3D>(std::make_shared<Sphere>());
-        case Model3DType::pyramid:
-            return std::static_pointer_cast<Model3D>(std::make_shared<Pyramid>());
+        case Model3DType::Line3D:
+            return std::static_pointer_cast<Model3D>(std::make_shared<Line3D>());
         default:
             return nullptr;
         }
@@ -23,8 +23,8 @@ namespace graphics {
         return std::make_shared<Sphere>();
     }
 
-    std::shared_ptr<Pyramid> Model3DFactory::CreatePyramid() {
-        return std::make_shared<Pyramid>();
+    std::shared_ptr<Line3D> Model3DFactory::CreateLine3D() {
+        return std::make_shared<Line3D>();
     }
 
 }  // namespace graphics

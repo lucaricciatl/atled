@@ -21,14 +21,12 @@ class Arc : public Model, public Model2D {
   void SetStartAngle(double aStartAngle);
   void SetEndAngle(double aEndAngle);
   void SetThickness(double thickness);
-  void SetColor(Color& aColor);
   void Draw() override;
 
 
  private:
   int ComputePointsNumber();
   Coordinates2D center;
-  ::Color mColor;
   double radius;
   double mStartAngle;
   double mEndAngle;

@@ -15,8 +15,6 @@ void Circle::SetCenter(const Coordinates2D& aCenter) {
   mCenter = aCenter;
 }
 
-void Circle::SetColor(Color aColor) { mColor = aColor; }
-
 void Circle::SetRadius(const float& aRadius) { mRadius = aRadius; }
 
 void Circle::Draw(){

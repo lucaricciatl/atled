@@ -15,8 +15,7 @@ class Rectangle : public Model,public Model2D {
  private:
   Coordinates2D mUpperLeft;    
   Coordinates2D mBottomRight; 
-  ::Color mColor;
-  double mRotation;
+
 
  public:
   Rectangle(const Coordinates2D& aUpperLeft, const Coordinates2D& aBottomRight);
@@ -30,11 +29,6 @@ class Rectangle : public Model,public Model2D {
   void SetPosition(const Coordinates2D& position);
   void SetUpperLeft(const Coordinates2D& aUpperLeft);
   void SetBottomRight(const Coordinates2D& aBottomRight);
-
-  ::Color GetColor() const;
-  double GetRotation() const;
-  void SetColor(const ::Color& color);  
-  void SetRotation(double rotation);    
 
   void Draw() override;
 };

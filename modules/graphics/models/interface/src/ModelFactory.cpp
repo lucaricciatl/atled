@@ -34,7 +34,7 @@ namespace graphics {
         case ModelType::sphere:
             return std::dynamic_pointer_cast<Model>(Model3DFactory::CreateSphere());
         case ModelType::pyramid:
-            return std::dynamic_pointer_cast<Model>(Model3DFactory::CreatePyramid());
+            return std::dynamic_pointer_cast<Model>(Model3DFactory::CreateLine3D());
 
         default:
             return nullptr;

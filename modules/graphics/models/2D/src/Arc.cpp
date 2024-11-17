@@ -14,7 +14,6 @@ Arc::Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
       radius(aRadius),
       mStartAngle(aStartAngle),
       mEndAngle(aEndAngle),
-      mColor(aColor) ,
       mThickess(thickness){
   assert(radius > 0 && "Radius must be greater than 0.");
 }
@@ -33,8 +32,6 @@ void Arc::SetRadius(double aRadius) {
   assert(aRadius > 0 && "Radius must be greater than 0.");
   radius = aRadius;
 }
-
-void Arc::SetColor(glwp::Color& aColor){ mColor = aColor; }
 
 // Getters
 Coordinates2D Arc::GetCenter() const { return center; }

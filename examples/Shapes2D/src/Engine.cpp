@@ -79,13 +79,6 @@ void Engine::OnUpdate() {
             line->SetColor(randomColor);
             graphicsManager->AddLine(rand(), line);
         }
-        else { // Random Sphere (3D)
-            auto sphere = Model3DFactory::CreateSphere();
-            sphere->SetCenterPos({ static_cast<float>(mouseX), static_cast<float>(mouseY), -2.0f }); // Set a default Z position
-            sphere->SetRadius(20.0f + rand() % 30); // Random radius between 20 and 50
-            sphere->SetColor(randomColor);
-            graphicsManager->AddSphere(rand(), sphere);
-        }
     }
 }
 

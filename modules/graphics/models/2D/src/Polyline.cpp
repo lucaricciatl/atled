@@ -21,14 +21,6 @@ double Polyline::GetThickness() const {
   return mThickness;
 }
 
-void Polyline::SetColor(const Color& color) {
-  mColor = color;
-}
-
-Color Polyline::GetColor() const {
-  return mColor;
-}
-
 void Polyline::Draw() {
   // Draw each segment between consecutive points
   for (size_t i = 0; i < mPoints.size() - 1; ++i) {

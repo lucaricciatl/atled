@@ -39,13 +39,10 @@ void Rectangle::SetPosition(const Coordinates2D& position) {
     mBottomRight.y = mUpperLeft.y + height;
 }
 
-void Rectangle::SetColor(const ::Color& color) { mColor = color; }
-void Rectangle::SetRotation(double rotation) { mRotation = rotation; }
 Coordinates2D Rectangle::GetUpperLeft() const { return mUpperLeft; }
 
 Coordinates2D Rectangle::GetBottomRight() const { return mBottomRight; }
-::Color Rectangle::GetColor() const { return mColor; }
-double Rectangle::GetRotation() const { return mRotation; }
+
 void Rectangle::Draw() {
   float width = mBottomRight.x - mUpperLeft.x;
   float height = mBottomRight.y - mUpperLeft.y;

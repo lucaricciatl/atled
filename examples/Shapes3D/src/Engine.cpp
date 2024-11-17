@@ -19,16 +19,15 @@ using namespace input;
 std::mutex graphicsMutex; // Mutex to protect graphicsManager access
 bool running = true; // Flag to control the input thread
 
-
-
-std::vector<std::shared_ptr<Model3D>> cubes; // To store references to the cubes
+std::vector<std::shared_ptr<Cube>> cubes; // To store references to the cubes
+std::vector<std::shared_ptr<Line3D>> lines;  // To store references to the lines
 
 void Engine::OnUpdate() {
     static float angle = 0.0f;           // Angle of rotation in radians for camera
     static float colorShift = 10.0f;     // For smooth color cycling
     const float radius = 120.0f;         // Distance from the object
-    const float rotationSpeed = 0.005f; // Speed of rotation for camera
-    const float colorSpeed = 0.1f;     // Speed of color change
+    const float rotationSpeed = 0.005f;  // Speed of rotation for camera
+    const float colorSpeed = 0.1f;       // Speed of color change
 
     // Update the angle for camera rotation
     angle += rotationSpeed;
@@ -76,21 +75,23 @@ void Engine::OnStart() {
 
     cameraManager->SetFovy(45);
     cameraManager->SetCameraProjection(CAMERA_PERSPECTIVE);
-    cameraManager->SetCameraPosition({20.0f, 20.0f, 20.0f});
-    cameraManager->SetCameraTarget({10.0f, 10.0f, 10.0f});
+    cameraManager->SetCameraPosition({ 20.0f, 20.0f, 20.0f });
+    cameraManager->SetCameraTarget({ 10.0f, 10.0f, 10.0f });
 
     Color cubeColor(50, 150, 250, 255);  // Initial color for cubes
     Color wireframeColor(255, 255, 255, 50);  // Wireframe color
+    Color lineColor(255, 255, 255, 100);  // Line color
 
     const float cubeSize = 0.9f; // Size of each small cube
-    const float spacing = 2.0f; // Space between cubes
-    const int count = 20; // Number of cubes along each dimension
+    const float spacing = 4.0f; // Space between cubes
+    const int count = 10; // Number of cubes along each dimension
 
+    // Create cubes
     for (int x = 0; x < count; ++x) {
         for (int y = 0; y < count; ++y) {
             for (int z = 0; z < count; ++z) {
                 auto smallCube = Model3DFactory::CreateCube();
-                smallCube->SetCenterPos({x * spacing, y * spacing, z * spacing});
+                smallCube->SetCenterPos({ x * spacing, y * spacing, z * spacing });
                 smallCube->SetColor(cubeColor);
                 smallCube->EnableWireframe();
                 smallCube->SetWireframeColor(wireframeColor);
@@ -100,6 +101,47 @@ void Engine::OnStart() {
             }
         }
     }
+
+    // Connect cubes with lines
+    for (int i = 0; i < count * count * count; ++i) {
+        auto& cubeA = cubes[i];
+        Vector3 posA = cubeA->GetCenterPos();
+
+        // Check neighbors in all 3 dimensions and add lines
+        if ((i + 1) % count != 0) {  // Right neighbor
+            auto& cubeB = cubes[i + 1];
+            Vector3 posB = cubeB->GetCenterPos();
+
+            auto line = Model3DFactory::CreateLine3D(); // Use the factory method
+            line->SetStartPos(posA);
+            line->SetEndPos(posB);
+            lines.push_back(line);
+            graphicsManager->AddLine3D(rand(), line);
+        }
+
+        if (i + count < count * count) {  // Top neighbor
+            auto& cubeB = cubes[i + count];
+            Vector3 posB = cubeB->GetCenterPos();
+
+            auto line = Model3DFactory::CreateLine3D(); // Use the factory method
+            line->SetStartPos(posA);
+            line->SetEndPos(posB);
+            lines.push_back(line);
+            graphicsManager->AddLine3D(rand(), line);
+        }
+
+        if (i + count * count < count * count * count) {  // Front neighbor
+            auto& cubeB = cubes[i + count * count];
+            Vector3 posB = cubeB->GetCenterPos();
+
+            auto line = Model3DFactory::CreateLine3D(); // Use the factory method
+            line->SetStartPos(posA);
+            line->SetEndPos(posB);
+            lines.push_back(line);
+            graphicsManager->AddLine3D(rand(), line);
+        }
+    }
+
 }
 
 // Default implementation of OnShutdown

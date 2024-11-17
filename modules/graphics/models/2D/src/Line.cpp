@@ -4,7 +4,7 @@ namespace graphics {
 
 Line::Line(Coordinates2D aStart, Coordinates2D aEnd, double thickness,
            const Color& aColor)
-    : start(aStart), end(aEnd), mThickness(thickness), mColor(aColor) {}
+    : start(aStart), end(aEnd), mThickness(thickness) {}
 
 void Line::SetStartPoint(const Coordinates2D& aStart) { start = aStart; }
 
@@ -16,7 +16,6 @@ Coordinates2D Line::GetEndPoint() const { return end; }
 
 void Line::SetThickness(double thickness) { mThickness = thickness; }
 
-void Line::SetColor(Color& aColor) { mColor = aColor; }
 
 void Line::Draw() {
   Vector2 startPos = {static_cast<float>(start.x), static_cast<float>(start.y)};
