@@ -125,6 +125,21 @@ void GraphicsManager::AddPolygon(const int& aLayerId, std::shared_ptr<Polygon> a
     layers[aLayerId].push_back(std::static_pointer_cast<Model>(aPolygon));
 }
 
+void GraphicsManager::AddCylinder(const int& aLayerId, std::shared_ptr<Cylinder> aCylinder) {
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aCylinder));
+}
+
+void GraphicsManager::AddPlane(const int& aLayerId, std::shared_ptr<Plane> aPlane) {
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aPlane));
+}
+
+void GraphicsManager::AddCapsule(const int& aLayerId, std::shared_ptr<Capsule> aCapsule) {
+    std::lock_guard<std::mutex> lock(layersMutex);
+    layers[aLayerId].push_back(std::static_pointer_cast<Model>(aCapsule));
+}
+
 void GraphicsManager::Clear(::Color aColor) {
     mContext->Clear(aColor);
 }

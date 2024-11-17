@@ -8,7 +8,11 @@
 #include "IDisplay.hpp"
 #include "Sphere.hpp"
 #include "Cube.hpp"
+#include "Capsule.hpp"
+#include "Cylinder.hpp"
+#include "Plane.hpp"
 #include "Line3D.hpp"
+
 namespace graphics {
 
 struct GfxConfig {
@@ -51,6 +55,9 @@ public:
     virtual void AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) = 0;
     virtual void AddCube(const int& aLayerId, std::shared_ptr<Cube> aCube) = 0;
     virtual void AddLine3D(const int& aLayerId, std::shared_ptr<Line3D> aLine) = 0;
+    virtual void AddCylinder(const int& aLayerId, std::shared_ptr<Cylinder> aCylinder) = 0;
+    virtual void AddPlane(const int& aLayerId, std::shared_ptr<Plane> aPlane) = 0;
+    virtual void AddCapsule(const int& aLayerId, std::shared_ptr<Capsule> aCapsule) = 0;
     virtual void DrawLayer(const int& aLayerId) = 0;
     virtual void Clear(::Color aColor) = 0;
 };

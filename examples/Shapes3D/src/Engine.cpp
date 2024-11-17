@@ -119,17 +119,6 @@ void Engine::OnStart() {
             graphicsManager->AddLine3D(rand(), line);
         }
 
-        if (i + count < count * count) {  // Top neighbor
-            auto& cubeB = cubes[i + count];
-            Vector3 posB = cubeB->GetCenterPos();
-
-            auto line = Model3DFactory::CreateLine3D(); // Use the factory method
-            line->SetStartPos(posA);
-            line->SetEndPos(posB);
-            lines.push_back(line);
-            graphicsManager->AddLine3D(rand(), line);
-        }
-
         if (i + count * count < count * count * count) {  // Front neighbor
             auto& cubeB = cubes[i + count * count];
             Vector3 posB = cubeB->GetCenterPos();

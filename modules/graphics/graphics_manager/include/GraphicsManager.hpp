@@ -38,6 +38,9 @@ public:
     void AddSphere(const int& aLayerId, std::shared_ptr<Sphere> aSphere) override;
     void AddCube(const int& aLayerId, std::shared_ptr<Cube> aCube) override;
     void AddLine3D(const int& aLayerId, std::shared_ptr<Line3D> aLine) override;
+void AddCylinder(const int& aLayerId, std::shared_ptr<Cylinder> aCylinder) override;
+void AddPlane(const int& aLayerId, std::shared_ptr<Plane> aPlane) override;
+void AddCapsule(const int& aLayerId, std::shared_ptr<Capsule> aCapsule) override;
 
     void DrawLayer(const int& aLayerId) override;
 
