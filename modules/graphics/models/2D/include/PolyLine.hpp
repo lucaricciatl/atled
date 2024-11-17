@@ -6,7 +6,7 @@
 
 namespace graphics {
 
-class Polyline : public Model {
+class Polyline : public Model,public Model2D {
  public:
   // Constructor with parameters
   Polyline(const std::vector<Coordinates2D>& points, double thickness, const Color& color);

@@ -27,7 +27,7 @@ enum class Model2DType {
 
 class Model2DFactory {
  public:
-  static std::shared_ptr<Model> CreateModel2D(const Model2DType aType);
+  static std::shared_ptr<Model2D> CreateModel2D(const Model2DType aType);
 
   static std::shared_ptr<Circle> CreateCircle(const std::vector<double>& center,
                                               double radius);

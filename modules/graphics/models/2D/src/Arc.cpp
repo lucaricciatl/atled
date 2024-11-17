@@ -9,7 +9,7 @@ namespace graphics {
 // Constructor
 Arc::Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
          double aEndAngle, double thickness, const glwp::Color& aColor)
-    : Model(),
+    : Model2D(),
       center(aCenter),
       radius(aRadius),
       mStartAngle(aStartAngle),

@@ -6,7 +6,7 @@
 
 namespace graphics {
 
-class Triangle : public Model{
+class Triangle : public Model,public Model2D {
  public:
   // Constructor with parameters
   Triangle(const Coordinates2D& point1, const Coordinates2D& point2, const Coordinates2D& point3, const Color& color);

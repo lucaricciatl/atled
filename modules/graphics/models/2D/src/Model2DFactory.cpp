@@ -8,25 +8,25 @@
 
 namespace graphics {
 
-std::shared_ptr<Model> Model2DFactory::CreateModel2D(
-    const Model2DType aType) {
-  switch (aType) {
-    case Model2DType::arc:
-      return CreateArc();
-    case Model2DType::circle:
-      return CreateCircle();
-    case Model2DType::rectangle:
-      return CreateRectangle();
-    case Model2DType::line:  
-      return CreateLine();
-    case Model2DType::polyline:
-      return CreatePolyline();
-    case Model2DType::triangle:
-      return CreateTriangle();
-    default:
-      return nullptr;
-  }
-}
+    std::shared_ptr<Model2D> Model2DFactory::CreateModel2D(const Model2DType aType) {
+        switch (aType) {
+        case Model2DType::arc:
+            return std::static_pointer_cast<Model2D>(CreateArc());
+        case Model2DType::circle:
+            return std::static_pointer_cast<Model2D>(CreateCircle());
+        case Model2DType::rectangle:
+            return std::static_pointer_cast<Model2D>(CreateRectangle());
+        case Model2DType::line:
+            return std::static_pointer_cast<Model2D>(CreateLine());
+        case Model2DType::polyline:
+            return std::static_pointer_cast<Model2D>(CreatePolyline());
+        case Model2DType::triangle:
+            return std::static_pointer_cast<Model2D>(CreateTriangle());
+        default:
+            return nullptr;
+        }
+    }
+
 
 // Factory method to create a Circle
 std::shared_ptr<Circle> CreateCircle(const std::vector<double>& center,

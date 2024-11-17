@@ -9,7 +9,7 @@
 
 namespace graphics {
 
-class Line : public Model {
+class Line : public Model,public Model2D {
  public:
   Line(Coordinates2D aStart, Coordinates2D aEnd, double thickness, const Color& aColor);
   Line() = default;

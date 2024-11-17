@@ -8,7 +8,7 @@
 
 namespace graphics {
 
-class RegularPolygon : public Model{
+class RegularPolygon : public Model2D {
 public:
     // Constructor
     RegularPolygon(const Coordinates2D& aCenter, int sides, double sideLength, double radius);

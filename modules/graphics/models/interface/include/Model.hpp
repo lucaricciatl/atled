@@ -14,6 +14,7 @@ public:
 
     // Pure virtual function for drawing
     virtual void Draw() = 0;
+
 };
 
 }  // namespace graphics

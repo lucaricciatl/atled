@@ -21,15 +21,15 @@ bool running = true; // Flag to control the input thread
 // Default implementation of OnUpdate
 #include <cmath> // For sin and cos
 
-std::vector<std::shared_ptr<Cube>> cubes; // To store references to the cubes
+std::vector<std::shared_ptr<Model3D>> cubes; // To store references to the cubes
 
 
 void Engine::OnUpdate() {
     static float angle = 0.0f;           // Angle of rotation in radians for camera
-    static float colorShift = 0.0f;     // For smooth color cycling
+    static float colorShift = 10.0f;     // For smooth color cycling
     const float radius = 120.0f;         // Distance from the object
     const float rotationSpeed = 0.005f; // Speed of rotation for camera
-    const float colorSpeed = 0.5f;     // Speed of color change
+    const float colorSpeed = 0.1f;     // Speed of color change
 
     // Update the angle for camera rotation
     angle += rotationSpeed;

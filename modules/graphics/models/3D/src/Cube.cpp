@@ -3,7 +3,7 @@
 namespace graphics {
 
 	Cube::Cube(float width, float height, float length)
-		: mDimensions{ width, height, length }, mCenterPos{ 0.0f, 0.0f, 0.0f }, mColor{ 255, 255, 255, 255 }, WireframeIsEnabled{ true }, ShapeIsEnabled{ true } {}
+		: mDimensions{ width, height, length }, mCenterPos{ 0.0f, 0.0f, 0.0f } {}
 
 	void Cube::Draw() {
 		// Use raylib's DrawCube function to render the cube
@@ -51,42 +51,6 @@ namespace graphics {
 		return mCenterPos;
 	}
 
-	// Setter for color
-	void Cube::SetColor(const Color& color) {
-		mColor = color;
-	}
 
-	// Getter for color
-	Color Cube::GetColor() const {
-		return mColor;
-	}
 
-	Color Cube::GetWireframeColor() const {
-		return mWireframeColor;
-	}
-
-	// Enable wireframe rendering
-	void Cube::EnableWireframe() {
-		WireframeIsEnabled = true;
-	}
-
-	// Disable wireframe rendering
-	void Cube::DisableWireframe() {
-		WireframeIsEnabled = false;
-	}
-
-	// Enable wireframe rendering
-	void Cube::EnableShape() {
-		ShapeIsEnabled = true;
-	}
-
-	// Disable wireframe rendering
-	void Cube::DisableShape() {
-		ShapeIsEnabled = false;
-	}
-
-	// Set wireframe color
-	void Cube::SetWireframeColor(Color aColor) {
-		mWireframeColor = aColor;
-	}
 }  // namespace graphics

@@ -18,10 +18,10 @@ enum class Model3DType {
 class Model3DFactory {
  public:
     // Factory method to create a 3D model based on the specified type
-    static std::shared_ptr<Model> CreateModel3D(const Model3DType aType);
+    static std::shared_ptr<Model3D> CreateModel3D(const Model3DType aType);
 
     // Specific factory methods for each 3D model type
-    static std::shared_ptr<Cube> CreateCube(float sideLength);
+    static  std::shared_ptr<Cube> CreateCube(float sideLength);
     static std::shared_ptr<Cube> CreateCube();
 
     static std::shared_ptr<Sphere> CreateSphere(float radius);

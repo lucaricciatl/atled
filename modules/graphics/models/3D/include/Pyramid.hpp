@@ -8,7 +8,7 @@
 
 namespace graphics {
 
-class Pyramid : public Model {
+class Pyramid : public Model3D {
 public:
     Pyramid(float baseWidth = 1.0f, float height = 1.0f)
         : mBaseWidth(baseWidth), mHeight(height) {}

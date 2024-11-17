@@ -6,10 +6,10 @@
 
 namespace graphics {
 
-class Sphere : public Model{
+class Sphere : public Model,public Model3D {
 public:
     // Constructor with default radius
-    Sphere(float radius = 1.0f) : mRadius(radius), mCenterPos{0.0f, 0.0f, 0.0f}, mColor{255, 255, 255, 255} {}
+    Sphere(float radius = 1.0f) : mRadius(radius), mCenterPos{ 0.0f, 0.0f, 0.0f }, mColor{ 255, 255, 255, 255 } {};
 
     // Override draw function
     void Draw() override;
