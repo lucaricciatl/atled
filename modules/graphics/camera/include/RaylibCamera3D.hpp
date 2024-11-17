@@ -33,6 +33,7 @@ public:
     void SetFovy(float aFovy) override;
     void SetCameraProjection(CameraProjection aProjection) override;
 
+
 private:
     Camera3D mCamera;
 };

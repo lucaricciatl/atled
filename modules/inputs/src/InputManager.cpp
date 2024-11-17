@@ -98,6 +98,13 @@ bool InputManager::IsMouseButtonUp(int button) const {
     return mouseInput->IsButtonUp(button);
 }
 
+float InputManager::GetMouseDeltaX() const {
+    return mouseInput->GetMouseDelta().x;
+}
+float InputManager::GetMouseDeltaY() const {
+    return mouseInput->GetMouseDelta().y;
+}
+
 int InputManager::GetMouseX() const {
     return mouseInput->GetMouseX();
 }

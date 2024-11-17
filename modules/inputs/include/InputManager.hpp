@@ -46,6 +46,9 @@ public:
     bool IsMouseButtonReleased(int button) const;
     bool IsMouseButtonUp(int button) const;
 
+    float GetMouseDeltaX() const;
+    float GetMouseDeltaY() const;
+
     int GetMouseX() const;
     int GetMouseY() const;
     MousePosition GetMousePosition() const;

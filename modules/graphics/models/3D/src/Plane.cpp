@@ -14,6 +14,7 @@ Plane::Plane(const Vector3& centerPos, const Vector2& size, const Color& color)
 // Override draw method
 void Plane::Draw() {
     ::DrawPlane(mCenterPos, mSize, mColor);
+     DrawGrid(mSize.x, 1);
 }
 
 // Setter for center position

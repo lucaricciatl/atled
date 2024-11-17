@@ -68,6 +68,8 @@ public:
     void SetCameraProjection(CameraProjection aProjection);
     void SetCameraPosition(const std::vector<float>& aPosition);
     void SetCameraTarget(const std::vector<float>& aTarget);
+    Vector3 GetCameraPosition() const;
+    Vector3 GetCameraTarget() const;
     void BeginActiveCamera();
 
     void EndActiveCamera();

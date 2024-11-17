@@ -62,6 +62,13 @@ void CameraManager::SetCameraTarget(const std::vector<float>& aTarget) {
     mActiveCamera->SetTarget({ aTarget[0], aTarget[1], aTarget[2] });
 }
 
+Vector3 CameraManager::GetCameraPosition() const {
+    return mActiveCamera->GetPosition();
+}
+
+Vector3 CameraManager::GetCameraTarget() const {
+    return mActiveCamera->GetTarget();
+}
 void CameraManager::BeginActiveCamera() {
     mActiveCamera->BeginCamera();     
 }
