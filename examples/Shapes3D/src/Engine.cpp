@@ -71,7 +71,7 @@ void Engine::OnStart() {
     auto ctx = graphicsManager->GetGraphicsContext();
     ctx->SetSize(900, 900);
     ctx->SetTitle("Window");
-    auto configs = graphics::GfxConfig({ FLAG_WINDOW_RESIZABLE, FLAG_VSYNC_HINT, FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT });
+    auto configs = graphics::GraphicsConfig({ FLAG_WINDOW_RESIZABLE, FLAG_VSYNC_HINT, FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT });
     graphicsManager->SetConfigs(configs);
     ctx->InitWindowManager();
 

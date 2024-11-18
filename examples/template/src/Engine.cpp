@@ -27,7 +27,7 @@ std::vector<std::shared_ptr<Line3D>> lines;  // To store references to the lines
 
 // Camera control parameters
 float cameraSpeed = 0.1f;   // Movement speed
-float mouseSensitivity = 0.03f;
+float mouseSensitivity = 0.1f;
 float zoomSpeed = 1.5f;
 
 void Engine::OnUpdate() {
@@ -71,13 +71,10 @@ void Engine::OnUpdate() {
         // Handle mouse input for camera rotation
         float mouseDeltaX = inputManager->GetMouseDeltaX() * mouseSensitivity;
         float mouseDeltaY = inputManager->GetMouseDeltaY() * mouseSensitivity;
-        // Reset mouse position to the center
 
-        
         // Rotate the camera target around the position
         Matrix rotationMatrixX = MatrixRotateY(mouseDeltaX * DEG2RAD);
         Matrix rotationMatrixY = MatrixRotateX(mouseDeltaY * DEG2RAD);
-
         Vector3 offset = Vector3Subtract(cameraTarget, cameraPos);
         offset = Vector3Transform(offset, rotationMatrixX);
         offset = Vector3Transform(offset, rotationMatrixY);
@@ -98,9 +95,9 @@ void Engine::OnUpdate() {
 
 void Engine::OnStart() {
     auto ctx = graphicsManager->GetGraphicsContext();
-    ctx->SetSize(1900, 1200);
+    ctx->SetSize(800, 800);
     ctx->SetTitle("3D Scene with Plane and Axes");
-    auto configs = GraphicsConfig({ FLAG_FULLSCREEN_MODE, FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT });
+    auto configs = GraphicsConfig({ FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT });
     graphicsManager->SetConfigs(configs);
     graphicsManager->Init();
 
@@ -108,7 +105,9 @@ void Engine::OnStart() {
     float height = graphicsManager->GetGraphicsContext()->GetHeight();
     float centerX = width / 2;
     float centerY = height / 2;
-    inputManager->SetMouseOffset(centerX, centerY);
+    inputManager->SetMousePosition(centerX, centerY);
+    inputManager->SetMouseOffset(0, 0);
+    inputManager->DisableCursor();
     inputManager->HideCursor();
     cameraManager->SetFovy(45);
     cameraManager->SetCameraProjection(CAMERA_PERSPECTIVE);
