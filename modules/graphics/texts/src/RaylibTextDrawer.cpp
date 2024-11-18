@@ -2,6 +2,10 @@
 
 #include "RaylibTextDrawer.hpp"
 
+namespace graphics {
+RaylibTextDrawer::~RaylibTextDrawer() {
+  // Destructor implementation (if necessary)
+}
 // Implement the DrawFPS function
 void RaylibTextDrawer::DrawFPS(int posX, int posY) {
     ::DrawFPS(posX, posY);  // Call Raylib's DrawFPS function
@@ -30,4 +34,6 @@ void RaylibTextDrawer::DrawTextCodepoint(Font font, int codepoint, Vector2 posit
 // Implement the DrawTextCodepoints function
 void RaylibTextDrawer::DrawTextCodepoints(Font font, const int* codepoints, int codepointCount, Vector2 position, float fontSize, float spacing, Color tint) {
     ::DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint);  // Call Raylib's DrawTextCodepoints function
+}
+
 }

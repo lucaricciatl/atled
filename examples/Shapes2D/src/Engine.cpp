@@ -11,6 +11,8 @@
 #include <cstdlib> // For rand()
 #include <mutex>
 #include "Sphere.hpp"
+#include "ITextDrawer.hpp"
+#include "RaylibtextDrawer.hpp"
 
 using namespace graphics;
 using namespace input;
@@ -91,6 +93,7 @@ void Engine::OnStart() {
     auto configs = graphics::GfxConfig({ FLAG_WINDOW_RESIZABLE, FLAG_VSYNC_HINT, FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT });
     graphicsManager->SetConfigs(configs);
     ctx->InitWindowManager();
+
 }
 
 // Default implementation of OnShutdown
@@ -102,5 +105,7 @@ void Engine::OnShutdown() {
 void Engine::OnRender() {
     std::lock_guard<std::mutex> lock(graphicsMutex); // Lock during rendering
     graphicsManager->Render();
+    RaylibTextDrawer td;
+    td.DrawText("HI :)", 400, 400, 20, Color{255, 160, 120, 255});
     graphicsManager->Clear(BLACK);
 }

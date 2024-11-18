@@ -3,6 +3,8 @@
 
 #include "raylib.h"
 
+namespace graphics {
+
 // Abstract class for font loading and unloading operations
 class IFontLoader {
 public:
@@ -43,4 +45,5 @@ public:
     virtual bool ExportFontAsCode(Font font, const char* fileName) const = 0;
 };
 
+}
 #endif // FONTLOADER_HPP

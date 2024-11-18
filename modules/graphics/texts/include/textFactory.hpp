@@ -4,6 +4,7 @@
 #include "ITextDrawer.hpp"
 #include "RaylibTextDrawer.hpp"
 
+namespace graphics {
 // Factory class to create instances of TextDrawer
 class TextDrawerFactory {
 public:
@@ -11,4 +12,5 @@ public:
     static ITextDrawer* CreateTextDrawer();
 };
 
+}
 #endif // TEXTDRAWERFACTORY_HPP

@@ -1,5 +1,6 @@
 #include "RaylibFontLoader.hpp"
 
+namespace graphics {
 // Implement GetFontDefault using Raylib's GetFontDefault function
 Font RaylibFontLoader::GetFontDefault() const {
     return ::GetFontDefault();
@@ -53,4 +54,6 @@ void RaylibFontLoader::UnloadFont(Font font) const {
 // Implement ExportFontAsCode using Raylib's ExportFontAsCode function
 bool RaylibFontLoader::ExportFontAsCode(Font font, const char* fileName) const {
     return ::ExportFontAsCode(font, fileName);
+}
+
 }

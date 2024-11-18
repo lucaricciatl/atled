@@ -4,6 +4,8 @@
 #include "IFontLoader.hpp"
 #include "raylib.h"
 
+namespace graphics {
+
 // Concrete class implementing FontLoader using Raylib's font functions
 class RaylibFontLoader : public IFontLoader {
 public:
@@ -41,4 +43,5 @@ public:
     bool ExportFontAsCode(Font font, const char* fileName) const override;
 };
 
+}
 #endif // RAYLIBFONTLOADER_HPP

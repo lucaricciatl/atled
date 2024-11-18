@@ -5,6 +5,8 @@
 #include "RaylibFontLoader.hpp"
 #include <memory>  // For std::unique_ptr
 #include <string>
+
+namespace graphics{
 // Factory class to create instances of FontLoader
 class FontLoaderFactory {
 public:
@@ -15,4 +17,5 @@ static std::unique_ptr<IFontLoader> CreateFontLoader(const std::string& type);
 
 };
 
+}
 #endif // FONTLOADERFACTORY_HPP
