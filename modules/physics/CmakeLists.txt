@@ -1,14 +1,27 @@
-
 # Create a library from the submodule's source files
 add_library(physics
-    ./src/rigidbody.cpp
+    ./body/src/rigidbody.cpp
+    ./space3D/src/Frame.cpp
+    ./space3D/src/Quaternion.cpp
 )
 
-# Specify include directories for the submodule
+# Specify include directories for the physics target
 target_include_directories(physics PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/body/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/space3D/include
 )
 
-set_target_properties(physics PROPERTIES FOLDER "modules")
-target_link_libraries(physics PRIVATE math)
-target_include_directories(physics PRIVATE ${CMAKE_SOURCE_DIR}/modules/math/include)
+# Set properties for the physics target
+set_target_properties(physics PROPERTIES 
+    FOLDER "modules"
+    CXX_STANDARD 17                # Ensure C++17 is used
+    CXX_STANDARD_REQUIRED ON       # Enforce C++17
+)
+
+# Link the library with other dependencies if needed
+# target_link_libraries(physics PUBLIC other_library)
+
+# Optionally define any required preprocessor definitions
+target_compile_definitions(physics PUBLIC
+    PHYSICS_MODULE_ENABLED=1        # Example definition
+)

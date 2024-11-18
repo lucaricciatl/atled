@@ -6,7 +6,7 @@
 
 namespace engine {
     void CoreEngine::pollInput() {
-        while (true) {
+        while (isRunning) {
             inputManager->Update(); // Poll inputs
         }
     }

@@ -27,7 +27,7 @@ std::vector<std::shared_ptr<Line3D>> lines;  // To store references to the lines
 
 // Camera control parameters
 float cameraSpeed = 0.1f;   // Movement speed
-float mouseSensitivity = 0.3f;
+float mouseSensitivity = 0.03f;
 float zoomSpeed = 1.5f;
 
 void Engine::OnUpdate() {
@@ -36,6 +36,7 @@ void Engine::OnUpdate() {
     Vector3 cameraTarget = cameraManager->GetCameraTarget();
     Vector3 forward = Vector3Normalize(Vector3Subtract(cameraTarget, cameraPos)); // Forward vector
     Vector3 right = Vector3Normalize(Vector3CrossProduct(forward, { 0.0f, 1.0f, 0.0f })); // Right vector
+
 
     if (inputManager->IsKeyDown(KEY_W)) { // Move forward
         cameraPos = Vector3Add(cameraPos, Vector3Scale(forward, cameraSpeed));
@@ -62,27 +63,37 @@ void Engine::OnUpdate() {
         cameraTarget.y += cameraSpeed;
     }
 
-    // Handle mouse input for camera rotation
-    float mouseDeltaX = inputManager->GetMouseDeltaX() * mouseSensitivity;
-    float mouseDeltaY = inputManager->GetMouseDeltaY() * mouseSensitivity;
+    if (inputManager->IsKeyDown(KEY_ESCAPE)) {
+        Shutdown();
+    }
 
-    // Rotate the camera target around the position
-    Matrix rotationMatrixX = MatrixRotateY(-mouseDeltaX * DEG2RAD);
-    Matrix rotationMatrixY = MatrixRotateX(-mouseDeltaY * DEG2RAD);
+    if (IsCursorOnScreen()) {
+        // Handle mouse input for camera rotation
+        float mouseDeltaX = inputManager->GetMouseDeltaX() * mouseSensitivity;
+        float mouseDeltaY = inputManager->GetMouseDeltaY() * mouseSensitivity;
+        // Reset mouse position to the center
 
-    Vector3 offset = Vector3Subtract(cameraTarget, cameraPos);
-    offset = Vector3Transform(offset, rotationMatrixX);
-    offset = Vector3Transform(offset, rotationMatrixY);
-    cameraTarget = Vector3Add(cameraPos, offset);
+        
+        // Rotate the camera target around the position
+        Matrix rotationMatrixX = MatrixRotateY(mouseDeltaX * DEG2RAD);
+        Matrix rotationMatrixY = MatrixRotateX(mouseDeltaY * DEG2RAD);
 
-    // Handle mouse wheel for zooming
-    float mouseWheel = inputManager->GetMouseWheelMove();
-    Vector3 zoom = Vector3Scale(forward, mouseWheel * zoomSpeed);
-    cameraPos = Vector3Add(cameraPos, zoom);
+        Vector3 offset = Vector3Subtract(cameraTarget, cameraPos);
+        offset = Vector3Transform(offset, rotationMatrixX);
+        offset = Vector3Transform(offset, rotationMatrixY);
+        cameraTarget = Vector3Add(cameraPos, offset);
 
-    // Update the camera position and target
-    cameraManager->SetCameraPosition({cameraPos.x, cameraPos.y, cameraPos.z});
-    cameraManager->SetCameraTarget({cameraTarget.x, cameraTarget.y, cameraTarget.z});
+        // Handle mouse wheel for zooming
+        float mouseWheel = inputManager->GetMouseWheelMove();
+        Vector3 zoom = Vector3Scale(forward, mouseWheel * zoomSpeed);
+        cameraPos = Vector3Add(cameraPos, zoom);
+
+        // Update the camera position and target
+        cameraManager->SetCameraPosition({ cameraPos.x, cameraPos.y, cameraPos.z });
+        cameraManager->SetCameraTarget({ cameraTarget.x, cameraTarget.y, cameraTarget.z });
+    }
+
+
 }
 
 void Engine::OnStart() {
@@ -93,6 +104,12 @@ void Engine::OnStart() {
     graphicsManager->SetConfigs(configs);
     ctx->InitWindowManager();
 
+    float width = graphicsManager->GetGraphicsContext()->GetWidth();
+    float height = graphicsManager->GetGraphicsContext()->GetHeight();
+    float centerX = width / 2;
+    float centerY = height / 2;
+    inputManager->SetMouseOffset(centerX, centerY);
+    inputManager->HideCursor();
     cameraManager->SetFovy(45);
     cameraManager->SetCameraProjection(CAMERA_PERSPECTIVE);
     cameraManager->SetCameraPosition({ 50.0f, 50.0f, 150.0f });
