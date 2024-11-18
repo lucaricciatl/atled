@@ -24,7 +24,7 @@ public:
     EngineBuilder& SetMouseType(MouseType type);
     EngineBuilder& SetGraphicsType(GraphicsType type);
     EngineBuilder& SetCameraType(CameraType type);
-    EngineBuilder& SetGraphicsConfig(const GfxConfig& config);
+    EngineBuilder& SetGraphicsConfig(const GraphicsConfig& config);
     EngineBuilder& SetTargetFramerate(unsigned int frameRate);
     EngineBuilder& SetWorldType(WorldType type);
 
@@ -37,7 +37,7 @@ private:
     GraphicsType graphicsType = GraphicsType::Invalid;
     CameraType cameraType = CameraType::Invalid;
     WorldType worldType = WorldType::World2D;
-    GfxConfig gfxConfig;                              // Default config
+    GraphicsConfig gfxConfig;                              // Default config
     unsigned int targetFramerate = 60;                // Default frame rate
 };
 
@@ -74,7 +74,7 @@ EngineBuilder<T>& EngineBuilder<T>::SetWorldType(WorldType type) {
 }
 
 template <typename T>
-EngineBuilder<T>& EngineBuilder<T>::SetGraphicsConfig(const GfxConfig& config) {
+EngineBuilder<T>& EngineBuilder<T>::SetGraphicsConfig(const GraphicsConfig& config) {
     gfxConfig = config;
     return *this;
 }

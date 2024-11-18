@@ -12,30 +12,15 @@
 #include "Cylinder.hpp"
 #include "Plane.hpp"
 #include "Line3D.hpp"
-
+#include "GraphicsConfig.hpp"
 namespace graphics {
 
-struct GfxConfig {
-    // Static default flag
-    static constexpr ConfigFlags defaultFlags = FLAG_VSYNC_HINT;
-
-    // Vector to store window configuration flags
-    std::vector<ConfigFlags> WindowConfig;
-
-    // Constructor with default flags
-    GfxConfig() {
-        WindowConfig.push_back(defaultFlags);  // Initialize with the default flag
-    }
-
-    // Constructor to allow custom flags
-    GfxConfig(std::vector<ConfigFlags> customFlags) : WindowConfig(customFlags) {}
-};
 
 class IGraphicManager {
 public:
     virtual ~IGraphicManager() = default;
 
-    virtual void SetConfigs(const GfxConfig& gfxConfigs) = 0;
+    virtual void SetConfigs(const GraphicsConfig& gfxConfigs) = 0;
     virtual void Start() = 0;
     virtual void SetTargetFramerate(unsigned int frameRate) = 0;
     virtual std::shared_ptr<GraphicsContext> GetGraphicsContext() = 0;

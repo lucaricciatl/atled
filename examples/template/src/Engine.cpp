@@ -100,9 +100,9 @@ void Engine::OnStart() {
     auto ctx = graphicsManager->GetGraphicsContext();
     ctx->SetSize(1900, 1200);
     ctx->SetTitle("3D Scene with Plane and Axes");
-    auto configs = graphics::GfxConfig({ FLAG_FULLSCREEN_MODE, FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT });
+    auto configs = GraphicsConfig({ FLAG_FULLSCREEN_MODE, FLAG_WINDOW_HIGHDPI, FLAG_MSAA_4X_HINT });
     graphicsManager->SetConfigs(configs);
-    ctx->InitWindowManager();
+    graphicsManager->Init();
 
     float width = graphicsManager->GetGraphicsContext()->GetWidth();
     float height = graphicsManager->GetGraphicsContext()->GetHeight();

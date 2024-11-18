@@ -2,20 +2,20 @@
 #include "LayerManager.hpp"
 #include "ICamera.hpp"
 #include "IWindow.hpp"
+#include "GraphicsConfig.hpp"
 
 namespace graphics {
 class GraphicsContext {
  public:
   GraphicsContext();
   GraphicsContext(int aWindowWidth, int aWindowHeight, const char* aWindowTitle,
-                  std::vector<::ConfigFlags> flags); 
+                    std::shared_ptr<GraphicsConfig> flags);
   GraphicsContext(int aWindowWidth, int aWindowHeight,
                   const char* aWindowTitle);
   ~GraphicsContext();
   // init
   void InitWindowManager();
-  void InitWindowManager(std::vector<::ConfigFlags> flags);
-  void InitWindowManager(::ConfigFlags flags);
+  void SetFlags(std::shared_ptr<GraphicsConfig> flags);
 
   // set
   void SetFlag(::ConfigFlags flag);

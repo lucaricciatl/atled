@@ -20,7 +20,7 @@ public:
     GraphicsManager();
     ~GraphicsManager() override;
 
-    void SetConfigs(const GfxConfig& gfxConfigs) override;
+    void SetConfigs(const GraphicsConfig& gfxConfigs) override;
     void Start() override;
     void SetTargetFramerate(unsigned int frameRate) override;
     std::shared_ptr<GraphicsContext> GetGraphicsContext() override;
@@ -45,7 +45,7 @@ private:
     int mFrameRate;
     std::unique_ptr<std::thread> mThread;
     std::shared_ptr<GraphicsContext> mContext;
-    std::shared_ptr<GfxConfig> mConfigs;
+    std::shared_ptr<GraphicsConfig> mConfigs;
     std::unique_ptr<IDisplay> mDisplay;
     // Storage for drawing primitives, organized by layer
     std::unordered_map<int, std::vector<std::shared_ptr<Model>>> layers;

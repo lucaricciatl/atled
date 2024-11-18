@@ -17,7 +17,7 @@ namespace graphics {
 GraphicsManager::GraphicsManager()
     : mFrameRate(60),
       mContext(std::make_shared<GraphicsContext>()),
-      mConfigs(std::make_shared<GfxConfig>()),
+      mConfigs(std::make_shared<GraphicsConfig>()),
       mDisplay(std::make_unique<RaylibDisplay>()) // Instantiate with RaylibDisplay (or another display backend)
 {
 }
@@ -26,8 +26,9 @@ GraphicsManager::~GraphicsManager() {
     // No need to call Stop() as threading is removed
 }
 
-void GraphicsManager::SetConfigs(const GfxConfig& gfxConfigs) {
-    *mConfigs = gfxConfigs;
+void GraphicsManager::SetConfigs(const GraphicsConfig& gfxConfigs) {
+    mConfigs = std::make_shared<GraphicsConfig>(gfxConfigs);
+    GetGraphicsContext()->SetFlags(mConfigs);
 }
 
 void GraphicsManager::SetTargetFramerate(unsigned int frameRate) {
