@@ -1,7 +1,8 @@
 #include "PhysicsComponent.hpp"
+#include "Object.hpp"
 
-PhysicsComponent::PhysicsComponent(GameObject* owner)
-    : Component(owner), physicsBody() {
+PhysicsComponent::PhysicsComponent(Object* owner)
+    : Component(owner) {
     // Inizializzazione del corpo fisico
 }
 
@@ -10,6 +11,4 @@ void PhysicsComponent::OnStart() {
 }
 
 void PhysicsComponent::OnUpdate(float deltaTime) {
-    // Aggiornamento della fisica
-    physicsBody.Update(deltaTime);
 }

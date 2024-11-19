@@ -5,12 +5,12 @@
 #include <memory>
 #include "Component.hpp"
 
-class GameObject {
+class Object {
 public:
     int id;
     std::vector<std::shared_ptr<Component>> components;
 
-    GameObject(int id);
+    Object(int id);
 
     template<typename T>
     std::shared_ptr<T> GetComponent();
@@ -22,6 +22,6 @@ public:
     void OnDraw();
 };
 
-#include "GameObject.inl" // Implementazioni dei template
+
 
 #endif // GAMEOBJECT_HPP

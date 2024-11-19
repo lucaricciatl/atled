@@ -1,6 +1,11 @@
 # Create a library from the submodule's source files
 add_library(core
-    .engine/src/CoreEngine.cpp
+    ./engine/src/CoreEngine.cpp
+    ./object/src/Object.cpp
+    ./components/src/Component.cpp
+    ./components/src/GraphicComponent.cpp
+    ./components/src/PhysicsComponent.cpp
+    ./components/src/ScriptComponent.cpp
 )
 
 target_link_libraries(core PUBLIC inputs graphics)
@@ -8,6 +13,8 @@ target_link_libraries(core PUBLIC inputs graphics)
 # Specify include directories for the submodule
 target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/components/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/object/include
 )
 
 set_target_properties(core PROPERTIES FOLDER "modules")

@@ -1,13 +1,13 @@
 #ifndef COMPONENT_HPP
 #define COMPONENT_HPP
 
-class GameObject; // Forward declaration
+class Object; // Forward declaration
 
 class Component {
 public:
-    GameObject* owner;
+    Object* owner;
 
-    Component(GameObject* owner) : owner(owner) {}
+    Component(Object* owner) : owner(owner) {}
     virtual ~Component() = default;
 
     virtual void OnStart() {}
