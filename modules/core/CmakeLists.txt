@@ -1,7 +1,7 @@
 # Create a library from the submodule's source files
 add_library(core
     ./engine/src/CoreEngine.cpp
-    ./engine/src/NewEngine.cpp
+    ./engine/src/AtledEngine.cpp
     ./components/src/Component.cpp
     ./components/src/GraphicComponent.cpp
     ./components/src/PhysicsComponent.cpp

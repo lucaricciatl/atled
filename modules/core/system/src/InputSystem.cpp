@@ -12,14 +12,6 @@ InputSystem::InputSystem(input::InputManager* inputMgr, EventBus* eventBus)
 
 void InputSystem::Start() {
     isRunning = true;
-
-    // Create a thread to run the Update logic
-    updateThread = std::thread([this]() {
-        while (isRunning) {
-            float deltaTime = GetDeltaTime();
-            Update(deltaTime);
-        }
-        });
 }
 
 void InputSystem::Init() {
@@ -35,28 +27,7 @@ void InputSystem::Stop() {
 }
 
 void InputSystem::Update(float deltaTime) {
-    // Update the InputManager to process current input states
-    inputManager->Update();
 
-    // Get the list of keys that changed state this frame
-    std::queue<int> keysChanged = inputManager->GetPressedKeys();
-
-    // Process each key in the queue
-    while (!keysChanged.empty()) {
-        int key = keysChanged.front();
-        keysChanged.pop(); // Remove the processed key from the queue
-
-        bool pressed = inputManager->IsKeyPressed(key);
-        bool released = inputManager->IsKeyReleased(key);
-        bool down = inputManager->IsKeyDown(key);
-        bool up = inputManager->IsKeyUp(key);
-
-        // Only generate events for meaningful changes
-        if (pressed || released) {
-            InputEvent event(static_cast<Key>(key), pressed, released, down, up);
-            eventBus->Publish(event);
-        }
-    }
 }
 
 float InputSystem::GetDeltaTime() {

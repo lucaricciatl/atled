@@ -10,5 +10,5 @@ void RenderSystem::Init() {
 }
 
 void RenderSystem::Update(float deltaTime) {
-
+    graphicsManager->Render();
 }

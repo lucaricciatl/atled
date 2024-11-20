@@ -5,10 +5,9 @@
 #include <vector>
 #include <ServiceProvider.hpp>
 
-class NewEngine {
+class AtledEngine {
 public:
-   NewEngine(ServiceProvider 
-	    serviceProvider);
+   AtledEngine();
 
   void Init();
   void Start();

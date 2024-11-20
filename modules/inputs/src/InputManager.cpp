@@ -1,9 +1,8 @@
 #include "InputManager.hpp"
-
+#include "iostream"
 namespace input {
 
 InputManager::InputManager(KeyboardType keyboardType, MouseType mouseType) {
-    // Create keyboard and mouse inputs based on the specified types
     keyboardInput = KeyboardFactory::CreateKeyboardInput();
     mouseInput = MouseFactory::CreateMouse();
 }
@@ -13,7 +12,6 @@ InputManager::~InputManager() {
 }
 
 InputManager::InputManager() {
-    // Create keyboard and mouse inputs based on the specified types
     keyboardInput = KeyboardFactory::CreateKeyboardInput();
     mouseInput = MouseFactory::CreateMouse();
 };

@@ -42,7 +42,7 @@ protected:
     void Run(); // Thread loop function
 
 private:
-    int mFrameRate;
+    int mFrameRate = 60;
     std::unique_ptr<std::thread> mThread;
     std::shared_ptr<GraphicsContext> mContext;
     std::shared_ptr<GraphicsConfig> mConfigs;
