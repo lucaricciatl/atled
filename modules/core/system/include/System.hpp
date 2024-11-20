@@ -8,7 +8,7 @@ class System {
 public:
   virtual ~System() = default;
   virtual void Init() {}
-  virtual void Update(float deltaTime) {}
+  virtual void Update(float deltaTime) {};
   virtual void Shutdown() {}
 };
 

@@ -8,6 +8,8 @@
 #include "IMouse.hpp"
 #include "MouseFactory.hpp"
 #include "KeyboardFactory.hpp"
+#include "queue"
+
 namespace input {
     
 
@@ -32,6 +34,7 @@ public:
     bool IsKeyUp(int key) const;
     int GetKeyPressed() const;
     int GetCharPressed() const;
+    std::queue<int> GetPressedKeys();
 
     // Mouse functions
     void ShowCursor() const;
@@ -64,6 +67,8 @@ public:
 private:
     std::unique_ptr<IKeyboard> keyboardInput;
     std::unique_ptr<IMouse> mouseInput;
+    void UpdateKeyStates();
+
 };
 
 } // namespace input

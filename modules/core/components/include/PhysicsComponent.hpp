@@ -5,11 +5,10 @@
 
 class PhysicsComponent : public Component {
 public:
+  PhysicsComponent(Entity *owner);
 
-    PhysicsComponent(Object* owner);
-
-    void OnStart() override;
-    void OnUpdate(float deltaTime) override;
+  void OnStart() override;
+  void OnUpdate(float deltaTime) override;
 };
 
 #endif // PHYSICSCOMPONENT_HPP

@@ -5,12 +5,11 @@
 
 class ScriptComponent : public Component {
 public:
+  ScriptComponent(Entity *owner);
 
-    ScriptComponent(Object* owner);
-
-    void OnStart() override;
-    void OnUpdate(float deltaTime) override;
-    void OnDraw() override;
+  void OnStart() override;
+  void OnUpdate(float deltaTime) override;
+  void OnDraw() override;
 };
 
 #endif // SCRIPTCOMPONENT_HPP

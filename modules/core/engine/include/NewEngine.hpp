@@ -1,10 +1,14 @@
+#include <Entity.hpp>
+#include <EventBus.hpp>
 #include <memory>
+#include <System.hpp>
 #include <vector>
+#include <ServiceProvider.hpp>
 
-namespace engine {
 class NewEngine {
 public:
-  NewEngine();
+   NewEngine(ServiceProvider 
+	    serviceProvider);
 
   void Init();
   void Start();
@@ -23,8 +27,8 @@ public:
 
 private:
   bool isRunning = false;
+  ServiceProvider serviceProvider;
   std::vector<std::unique_ptr<System>> systems;
   std::vector<std::shared_ptr<Entity>> entities;
   EventBus eventBus;
 };
-} // namespace engine

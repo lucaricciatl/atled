@@ -3,10 +3,9 @@
 
 #include "Component.hpp"
 
-
 class GraphicsComponent : public Component {
 public:
-  GraphicsComponent(Object *owner);
+  GraphicsComponent(Entity *owner);
 
   void OnDraw() override;
 };

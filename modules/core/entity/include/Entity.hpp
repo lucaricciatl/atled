@@ -1,3 +1,6 @@
+#ifndef ENTITY_HPP
+#define ENTITY_HPP
+
 #include <memory>
 #include <typeindex>
 #include <unordered_map>
@@ -15,3 +18,5 @@ public:
 private:
   std::unordered_map<std::type_index, std::shared_ptr<void>> components;
 };
+
+#endif // ENTITY_HPP

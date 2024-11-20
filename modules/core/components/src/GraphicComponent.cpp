@@ -1,7 +1,6 @@
 #include "GraphicsComponent.hpp"
-#include "Object.hpp"
 
-GraphicsComponent::GraphicsComponent(Object* owner)
+GraphicsComponent::GraphicsComponent(Entity* owner)
     : Component(owner) {
     // Inizializzazione grafica
 }

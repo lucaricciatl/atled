@@ -12,7 +12,11 @@ InputManager::~InputManager() {
     Shutdown();
 }
 
-InputManager::InputManager() {};
+InputManager::InputManager() {
+    // Create keyboard and mouse inputs based on the specified types
+    keyboardInput = KeyboardFactory::CreateKeyboardInput();
+    mouseInput = MouseFactory::CreateMouse();
+};
 
 void InputManager::Init() {
     keyboardInput->Start();
@@ -26,6 +30,10 @@ void InputManager::Shutdown() {
 
 void InputManager::Update() {
     keyboardInput->Update();
+}
+
+std::queue<int>  InputManager::GetPressedKeys() {
+    return keyboardInput->GetPressedKeys();
 }
 
 // Keyboard functions

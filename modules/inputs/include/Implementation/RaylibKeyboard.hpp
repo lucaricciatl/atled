@@ -26,6 +26,7 @@ public:
     bool IsKeyUp(int key) override;
     int GetKeyPressed() override;
     int GetCharPressed() override;
+    std::queue<int> GetPressedKeys() override;
 
 private:
     void ProcessingThread();

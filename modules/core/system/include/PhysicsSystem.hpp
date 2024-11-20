@@ -1,11 +1,12 @@
 #ifndef PHYSICSSYSTEM_HPP
 #define PHYSICSSYSTEM_HPP
 
-#include "Components.hpp"
+#include "Component.hpp"
 #include "EventBus.hpp"
 #include "System.hpp"
 #include <memory>
 #include <vector>
+#include <Entity.hpp>
 
 class PhysicsSystem : public System {
 public:
@@ -19,3 +20,5 @@ private:
   // references
   std::vector<std::weak_ptr<Entity>> entitiesWithPhysics;
 };
+
+#endif // RENDERSYSTEM_HPP

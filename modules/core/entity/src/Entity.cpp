@@ -1,3 +1,5 @@
+#include <Entity.hpp>
+
 template <typename ComponentType, typename... Args>
 void Entity::AddComponent(Args &&... args) {
   components[typeid(ComponentType)] =

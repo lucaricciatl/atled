@@ -1,14 +1,12 @@
 #include "PhysicsComponent.hpp"
-#include "Object.hpp"
+#include "Entity.hpp"
 
-PhysicsComponent::PhysicsComponent(Object* owner)
-    : Component(owner) {
-    // Inizializzazione del corpo fisico
+PhysicsComponent::PhysicsComponent(Entity *owner) : Component(owner) {
+  // Inizializzazione del corpo fisico
 }
 
 void PhysicsComponent::OnStart() {
-    // Codice di inizializzazione
+  // Codice di inizializzazione
 }
 
-void PhysicsComponent::OnUpdate(float deltaTime) {
-}
+void PhysicsComponent::OnUpdate(float deltaTime) {}

@@ -1,20 +1,30 @@
 # Create a library from the submodule's source files
 add_library(core
     ./engine/src/CoreEngine.cpp
-    ./object/src/Object.cpp
+    ./engine/src/NewEngine.cpp
     ./components/src/Component.cpp
     ./components/src/GraphicComponent.cpp
     ./components/src/PhysicsComponent.cpp
     ./components/src/ScriptComponent.cpp
+    ./events/src/EventBus.cpp
+    ./provider/src/ServiceProvider.cpp
+    ./system/src/PhysicsSystem.cpp
+    ./system/src/RenderSystem.cpp
+    ./system/src/InputSystem.cpp
 )
 
+# Link inputs and graphics libraries
 target_link_libraries(core PUBLIC inputs graphics)
 
 # Specify include directories for the submodule
 target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/include
     ${CMAKE_CURRENT_SOURCE_DIR}/components/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/object/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/entity/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/events/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/provider/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/system/include
 )
 
+# Organize target in the IDE
 set_target_properties(core PROPERTIES FOLDER "modules")

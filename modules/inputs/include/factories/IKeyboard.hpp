@@ -1,6 +1,6 @@
 #ifndef KEYBOARDINPUTINTERFACE_HPP
 #define KEYBOARDINPUTINTERFACE_HPP
-
+#include "queue"
 namespace input {
 enum class KeyboardType{
     Invalid,
@@ -23,6 +23,8 @@ public:
     virtual bool IsKeyUp(int key) = 0;
     virtual int GetKeyPressed() = 0;
     virtual int GetCharPressed() = 0;
+    virtual std::queue<int> GetPressedKeys() = 0;
+
 };
 
 } // namespace input
