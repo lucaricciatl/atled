@@ -4,8 +4,7 @@
 #include <cmath>
 #include <stdexcept>
 
-namespace Math3D {
-
+namespace math{
 // Constructors
 Quaternion::Quaternion() : w(0), x(0), y(0), z(0) {}
 
@@ -113,4 +112,16 @@ std::ostream& operator<<(std::ostream& os, const Quaternion& q) {
     return os;
 }
 
-} // namespace Math3D
+Quaternion Quaternion::fromAxisAngle(double angle, const double axis[3]) {
+    double halfAngle = angle * 0.5;
+    double sinHalfAngle = std::sin(halfAngle);
+
+    return Quaternion(
+        std::cos(halfAngle),
+        axis[0] * sinHalfAngle,
+        axis[1] * sinHalfAngle,
+        axis[2] * sinHalfAngle
+    );
+}
+
+} 

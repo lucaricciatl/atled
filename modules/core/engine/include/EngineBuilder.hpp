@@ -14,6 +14,10 @@ using namespace graphics;
 
 namespace engine {
 
+enum class EngineImplementation{
+    Raylib
+};
+
 template <typename T>
 class EngineBuilder {
 public:
@@ -27,7 +31,8 @@ public:
     EngineBuilder& SetGraphicsConfig(const GraphicsConfig& config);
     EngineBuilder& SetTargetFramerate(unsigned int frameRate);
     EngineBuilder& SetWorldType(WorldType type);
-
+    EngineBuilder& SetDefaultImplementation();
+    EngineBuilder& SetImplementation(EngineImplementation impl);
     // Build method to create an instance of the specified engine type
     std::unique_ptr<T> Build();
 
@@ -82,6 +87,28 @@ EngineBuilder<T>& EngineBuilder<T>::SetGraphicsConfig(const GraphicsConfig& conf
 template <typename T>
 EngineBuilder<T>& EngineBuilder<T>::SetTargetFramerate(unsigned int frameRate) {
     targetFramerate = frameRate;
+    return *this;
+}
+
+template <typename T>
+EngineBuilder<T>& EngineBuilder<T>::SetDefaultImplementation() {
+    return SetKeyboardType(input::KeyboardType::Raylib)
+        .SetMouseType(input::MouseType::Raylib)
+        .SetGraphicsType(graphics::GraphicsType::Raylib)
+        .SetWorldType(graphics::WorldType::World3D)
+        .SetTargetFramerate(60);
+    return *this;
+}
+
+template <typename T>
+EngineBuilder<T>& EngineBuilder<T>::SetImplementation(EngineImplementation impl) {
+    if (impl == EngineImplementation::Raylib) {
+        return SetKeyboardType(input::KeyboardType::Raylib)
+            .SetMouseType(input::MouseType::Raylib)
+            .SetGraphicsType(graphics::GraphicsType::Raylib)
+            .SetWorldType(graphics::WorldType::World3D)
+            .SetTargetFramerate(60);
+    };
     return *this;
 }
 

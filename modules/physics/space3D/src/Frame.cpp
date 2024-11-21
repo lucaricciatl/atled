@@ -1,95 +1,83 @@
-// Frame.cpp
-
 #include "Frame.hpp"
-#include <iostream>
-#include <cmath>
 
-namespace Math3D {
+namespace physics{
 
 // Constructors
-Frame::Frame() : x(0), y(0), z(0), orientation(1, 0, 0, 0) {}
+Frame::Frame() : position(), orientation(1.0, 0.0, 0.0, 0.0) {}
 
-Frame::Frame(double x, double y, double z, const Quaternion& orientation)
-    : x(x), y(y), z(z), orientation(orientation.normalized()) {}
+Frame::Frame(const Position& position, const math::Quaternion& orientation)
+    : position(position), orientation(orientation.normalized()) {}
+
+Frame::Frame(double x, double y, double z, const math::Quaternion& orientation)
+    : position(x, y, z), orientation(orientation.normalized()) {}
 
 Frame::Frame(const Frame& other)
-    : x(other.x), y(other.y), z(other.z), orientation(other.orientation) {}
+    : position(other.position), orientation(other.orientation) {}
 
-// Destructor
 Frame::~Frame() {}
 
-// Assignment operator
 Frame& Frame::operator=(const Frame& other) {
     if (this != &other) {
-        x = other.x;
-        y = other.y;
-        z = other.z;
+        position = other.position;
         orientation = other.orientation;
     }
     return *this;
 }
 
 // Accessors
-double Frame::getX() const { return x; }
-double Frame::getY() const { return y; }
-double Frame::getZ() const { return z; }
-Quaternion Frame::getOrientation() const { return orientation; }
+const Position& Frame::getPosition() const { return position; }
+math::Quaternion Frame::getOrientation() const { return orientation; }
 
 // Mutators
-void Frame::setPosition(double x, double y, double z) {
-    this->x = x;
-    this->y = y;
-    this->z = z;
+void Frame::setPosition(const Position& position) {
+    this->position = position;
 }
 
-void Frame::setOrientation(const Quaternion& orientation) {
+void Frame::setOrientation(const math::Quaternion& orientation) {
     this->orientation = orientation.normalized();
 }
 
 // Frame operations
 void Frame::translate(double dx, double dy, double dz) {
-    x += dx;
-    y += dy;
-    z += dz;
+    position.translate(dx, dy, dz);
 }
 
-void Frame::rotate(const Quaternion& rotation) {
-    orientation = rotation.normalized() * orientation;
+void Frame::rotate(const math::Quaternion& rotation) {
+    orientation = (rotation * orientation).normalized();
 }
 
 // Transformation methods
 void Frame::transformPoint(double& px, double& py, double& pz) const {
-    // Rotate point
-    Quaternion point(0, px, py, pz);
-    Quaternion rotated = orientation * point * orientation.conjugate();
+    // Apply rotation using the orientation quaternion
+    math::Quaternion point(0, px, py, pz);
+    math::Quaternion rotatedPoint = orientation * point * orientation.conjugate();
 
-    // Translate point
-    px = rotated.getX() + x;
-    py = rotated.getY() + y;
-    pz = rotated.getZ() + z;
+    // Apply translation
+    px = rotatedPoint.getX() + position.getX();
+    py = rotatedPoint.getY() + position.getY();
+    pz = rotatedPoint.getZ() + position.getZ();
 }
 
 void Frame::inverseTransformPoint(double& px, double& py, double& pz) const {
-    // Translate point
-    double tx = px - x;
-    double ty = py - y;
-    double tz = pz - z;
+    // Reverse translation
+    px -= position.getX();
+    py -= position.getY();
+    pz -= position.getZ();
 
-    // Inverse rotate point
-    Quaternion point(0, tx, ty, tz);
-    Quaternion rotated = orientation.conjugate() * point * orientation;
+    // Reverse rotation using the conjugate of the orientation quaternion
+    math::Quaternion point(0, px, py, pz);
+    math::Quaternion rotatedPoint = orientation.conjugate() * point * orientation;
 
-    // Update point
-    px = rotated.getX();
-    py = rotated.getY();
-    pz = rotated.getZ();
+    px = rotatedPoint.getX();
+    py = rotatedPoint.getY();
+    pz = rotatedPoint.getZ();
 }
 
-// Stream insertion operator
+// Friend function for stream insertion
 std::ostream& operator<<(std::ostream& os, const Frame& frame) {
-    os << "Position: (" << frame.x << ", " << frame.y << ", " << frame.z << "), "
-       << "Orientation: " << frame.orientation;
+    os << "Frame(Position: [" << frame.position.getX() << ", " << frame.position.getY() << ", " 
+       << frame.position.getZ() << "], Orientation: " << frame.orientation << ")";
     return os;
 }
 
-} // namespace Math3D
+} // namespace physics

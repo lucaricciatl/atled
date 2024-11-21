@@ -1,23 +1,21 @@
-// Frame.hpp
-
 #ifndef FRAME_HPP
 #define FRAME_HPP
-
+#include "Position.hpp"
 #include "Quaternion.hpp"
+#include <ostream>
+namespace physics{
 
-namespace Math3D {
 
 class Frame {
 private:
-    // Position components
-    double x, y, z;
-    // Orientation quaternion
-    Quaternion orientation;
+    Position position;      // Translational component
+    math::Quaternion orientation; // Rotational component
 
 public:
     // Constructors
     Frame();
-    Frame(double x, double y, double z, const Quaternion& orientation);
+    Frame(const Position& position, const math::Quaternion& orientation);
+    Frame(double x, double y, double z, const math::Quaternion& orientation);
     Frame(const Frame& other);
 
     // Destructor
@@ -27,18 +25,16 @@ public:
     Frame& operator=(const Frame& other);
 
     // Accessors
-    double getX() const;
-    double getY() const;
-    double getZ() const;
-    Quaternion getOrientation() const;
+    const Position& getPosition() const;
+    math::Quaternion getOrientation() const;
 
     // Mutators
-    void setPosition(double x, double y, double z);
-    void setOrientation(const Quaternion& orientation);
+    void setPosition(const Position& position);
+    void setOrientation(const math::Quaternion& orientation);
 
     // Frame operations
     void translate(double dx, double dy, double dz);
-    void rotate(const Quaternion& rotation);
+    void rotate(const math::Quaternion& rotation);
 
     // Transformation methods
     void transformPoint(double& px, double& py, double& pz) const;
@@ -48,6 +44,6 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Frame& frame);
 };
 
-} // namespace Math3D
+}
 
 #endif // FRAME_HPP

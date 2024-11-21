@@ -3,9 +3,8 @@ add_library(core
     ./engine/src/CoreEngine.cpp
     ./engine/src/AtledEngine.cpp
     ./components/src/Component.cpp
-    ./components/src/GraphicComponent.cpp
-    ./components/src/PhysicsComponent.cpp
-    ./components/src/ScriptComponent.cpp
+    ./components/src/PositionComponent.cpp
+    ./components/src/FrameComponent.cpp
     ./events/src/EventBus.cpp
     ./provider/src/ServiceProvider.cpp
     ./system/src/PhysicsSystem.cpp
@@ -14,7 +13,7 @@ add_library(core
 )
 
 # Link inputs and graphics libraries
-target_link_libraries(core PUBLIC inputs graphics)
+target_link_libraries(core PUBLIC inputs graphics physics)
 
 # Specify include directories for the submodule
 target_include_directories(core PUBLIC
@@ -24,6 +23,8 @@ target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/events/include
     ${CMAKE_CURRENT_SOURCE_DIR}/provider/include
     ${CMAKE_CURRENT_SOURCE_DIR}/system/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../physics/Space3D/include
+    
 )
 
 # Organize target in the IDE

@@ -59,9 +59,10 @@ void RaylibKeyboard::Update() {
         {
             std::lock_guard<std::mutex> lockCharQueue(charQueueMutex);
             charQueue.push(charPressed);
+            std::cout << charPressed << std::endl;
         }
         charPressed =::GetCharPressed();
-        std::cout << charPressed << std::endl;
+
     }
 
 }

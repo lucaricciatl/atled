@@ -7,7 +7,10 @@
 
 class AtledEngine {
 public:
-   AtledEngine();
+   AtledEngine(std::unique_ptr<input::InputManager> inputMgr,
+       std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
+       std::shared_ptr<graphics::CameraManager> cameraMgr
+       );
 
   void Init();
   void Start();
