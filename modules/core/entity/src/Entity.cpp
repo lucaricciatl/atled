@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <functional>
 
+
 // Constructor
 Entity::Entity() {};
 
@@ -30,6 +31,10 @@ void Entity::Update(double deltaTime) {
                 child->Update(deltaTime); // Recursively update child entities
             }
         }
+};
+
+void Entity::SetServiceProvider(std::shared_ptr<ServiceProvider> aServiceProvider) {
+
 };
 
 // Set the parent entity

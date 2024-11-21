@@ -7,7 +7,7 @@
 #include <functional>
 #include <Component.hpp>
 #include <typeindex>
-
+#include <ServiceProvider.hpp>
 class Component;
 
 
@@ -23,6 +23,8 @@ public:
 
     
     void Update(double deltaTime);
+
+    void SetServiceProvider(std::shared_ptr<ServiceProvider> aServiceProvider);
 
     // Parent-Child Management
     void SetParent(Entity* newParent);
@@ -51,6 +53,7 @@ protected:
     virtual void OnChildAdded(Entity* child);
     virtual void OnChildRemoved(Entity* child);
     std::unordered_map<std::type_index, std::shared_ptr<Component>> components;
+    std::shared_ptr<ServiceProvider> mServiceProvider;
 
 };
 
