@@ -1,69 +1,55 @@
-# Create a library from the submodule's source files
-add_library(graphics
-    src/GraphicsContext.cpp
-    src/GraphicsManager.cpp
-    src/Polyline3D.cpp
-    src/Polygon2DImpl.cpp
-    src/LayerManager.cpp
-    src/BuffersManager.cpp
-    src/TriangleBuffer2D.cpp
-    src/PolygonBuffer2D.cpp
-    src/Layer.cpp
-    src/Pixel.cpp
-    src/rectangle.cpp 
-    src/RegularPolygon.cpp 
-    src/Circle.cpp 
-    src/Polygon.cpp 
-    src/Arc.cpp
-    src/Model2D.cpp
-    src/Model2DFactory.cpp
-    src/Rectangle.cpp
-    src/Line.cpp
-    src/Polyline.cpp 
-    src/Triangle.cpp
-    src/Triangulation.cpp
+
+cmake_minimum_required(VERSION 3.10)
+
+project(graphics)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# Collect all paths (both files and directories) recursively
+file(GLOB HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/**/include" "${CMAKE_CURRENT_SOURCE_DIR}/**/**/include")
+
+file(GLOB HEADERFILE "${CMAKE_CURRENT_SOURCE_DIR}/**/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/**/**/*.hpp")
+# Debugging: Print the collected include directories
+message("Include directories found: ${HEADERS}" ${HEADERFILE})
+
+file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
+add_library(graphics STATIC ${SOURCES} )
+
+
+target_include_directories(graphics PUBLIC
+    ${INCLUDE_DIRS}
 )
 
-add_subdirectory(graphicsImpl)
+
 # Link gfx to the graphics library
-target_link_libraries(graphics PUBLIC graphicsImpl)
-target_link_libraries(graphics PUBLIC common)
+target_link_libraries(graphics PUBLIC common external)
 
 # Specify include directories for the submodule
 target_include_directories(graphics PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${gfx_SOURCE_DIR}/include
-)
-
-target_include_directories(graphics PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/private
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/buffers
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/context
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/graphics
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/layers
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/camera 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Models
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/utils
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${HEADERS}
     ${CMAKE_CURRENT_SOURCE_DIR}/../common/include
 )
+
+
 
 set_target_properties(graphics PROPERTIES FOLDER "modules")
 
 
-# Specify the directory containing your shaders
+
+set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
+
+
+file(GLOB SHADER_FILES ${SHADER_DIR}/*)
+
+
 set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
 
 # Collect all shader files
 file(GLOB SHADER_FILES ${SHADER_DIR}/*)
 
-# Specify the directory containing your shaders
-set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
 
-# Collect all shader files
-file(GLOB SHADER_FILES ${SHADER_DIR}/*)
-
-# Ensure the resources/shaders directory is created in the Debug directory
 add_custom_command(
     TARGET graphics POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E make_directory

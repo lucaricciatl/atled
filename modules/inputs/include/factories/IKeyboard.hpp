@@ -1,13 +1,13 @@
 #ifndef KEYBOARDINPUTINTERFACE_HPP
 #define KEYBOARDINPUTINTERFACE_HPP
-
+#include "queue"
 namespace input {
-enum class KeyboardType{Raylib};
+enum class KeyboardType{
+    Invalid,
+    Raylib};
 
 class IKeyboard {
 public:
-    virtual ~IKeyboard() = default;
-
     // Start and stop the processing thread
     virtual void Start() = 0;
     virtual void Stop() = 0;
@@ -23,6 +23,8 @@ public:
     virtual bool IsKeyUp(int key) = 0;
     virtual int GetKeyPressed() = 0;
     virtual int GetCharPressed() = 0;
+    virtual std::queue<int> GetPressedKeys() = 0;
+
 };
 
 } // namespace input

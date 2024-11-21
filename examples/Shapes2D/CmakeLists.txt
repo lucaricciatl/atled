@@ -2,18 +2,18 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Project name
-project(shapes2D)
+project(Shapes2D)
 
 # Add the source files
 set(SOURCES
-    src/drawing2D.cpp
-    src/graphicsImpl.cpp
+    src/main.cpp
+    src/Engine.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_include_directories(shapes2D PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(Shapes2D PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC atled)
 
-set_target_properties(shapes2D PROPERTIES FOLDER "examples")
+set_target_properties(Shapes2D PROPERTIES FOLDER "examples")

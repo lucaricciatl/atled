@@ -3,7 +3,10 @@
 
 namespace input {
 
-enum class MouseType{Raylib};
+enum class MouseType{ 
+	Invalid,
+	Raylib
+};
 
 struct MousePosition {
   int x;
@@ -12,8 +15,6 @@ struct MousePosition {
 
 class IMouse {
 public:
-  virtual ~IMouse() = default;
-
   // Cursor control functions
   virtual void ShowCursor() = 0;
   virtual void HideCursor() = 0;

@@ -6,10 +6,6 @@ namespace input {
 
 RaylibMouse::RaylibMouse() : running(false) {}
 
-RaylibMouse::~RaylibMouse() {
-  Stop();  // Ensure the thread is stopped when the object is destroyed
-}
-
 // Cursor control functions
 void RaylibMouse::ShowCursor() { ::ShowCursor(); }
 void RaylibMouse::HideCursor() { ::HideCursor(); }
@@ -82,8 +78,8 @@ void RaylibMouse::Run() {
   while (running) {
     // Example: log RaylibMouse position every frame
     MousePosition pos = GetMousePosition();
-    //std::cout << "RaylibMouse Position: (" << pos.x << ", " << pos.y << ")"
-    //          << std::endl;
+    std::cout << "RaylibMouse Position: (" << pos.x << ", " << pos.y << ")"
+              << std::endl;
 
     // Sleep to avoid overwhelming the CPU
     std::this_thread::sleep_for(std::chrono::milliseconds(100));

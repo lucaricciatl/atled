@@ -1,18 +1,22 @@
 #include "InputManager.hpp"
-
+#include "iostream"
 namespace input {
 
 InputManager::InputManager(KeyboardType keyboardType, MouseType mouseType) {
-    // Create keyboard and mouse inputs based on the specified types
-    keyboardInput = KeyboardInputFactory::CreateKeyboardInput(keyboardType);
-    mouseInput = MouseFactory::CreateMouse(mouseType);
+    keyboardInput = KeyboardFactory::CreateKeyboardInput();
+    mouseInput = MouseFactory::CreateMouse();
 }
 
 InputManager::~InputManager() {
     Shutdown();
 }
 
-void InputManager::Initialize() {
+InputManager::InputManager() {
+    keyboardInput = KeyboardFactory::CreateKeyboardInput();
+    mouseInput = MouseFactory::CreateMouse();
+};
+
+void InputManager::Init() {
     keyboardInput->Start();
     mouseInput->Start();
 }
@@ -24,6 +28,10 @@ void InputManager::Shutdown() {
 
 void InputManager::Update() {
     keyboardInput->Update();
+}
+
+std::queue<int>  InputManager::GetPressedKeys() {
+    return keyboardInput->GetPressedKeys();
 }
 
 // Keyboard functions
@@ -94,6 +102,13 @@ bool InputManager::IsMouseButtonReleased(int button) const {
 
 bool InputManager::IsMouseButtonUp(int button) const {
     return mouseInput->IsButtonUp(button);
+}
+
+float InputManager::GetMouseDeltaX() const {
+    return mouseInput->GetMouseDelta().x;
+}
+float InputManager::GetMouseDeltaY() const {
+    return mouseInput->GetMouseDelta().y;
 }
 
 int InputManager::GetMouseX() const {

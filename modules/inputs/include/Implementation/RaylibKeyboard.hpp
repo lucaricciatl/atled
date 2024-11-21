@@ -13,7 +13,6 @@ namespace input {
 class RaylibKeyboard : public IKeyboard {
 public:
     RaylibKeyboard();
-    ~RaylibKeyboard() override;
 
     // Override functions from the interface
     void Start() override;
@@ -27,6 +26,7 @@ public:
     bool IsKeyUp(int key) override;
     int GetKeyPressed() override;
     int GetCharPressed() override;
+    std::queue<int> GetPressedKeys() override;
 
 private:
     void ProcessingThread();

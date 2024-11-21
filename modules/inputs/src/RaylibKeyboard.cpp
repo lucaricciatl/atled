@@ -8,12 +8,8 @@ namespace input{
 RaylibKeyboard::RaylibKeyboard() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false) {
 }
 
-RaylibKeyboard::~RaylibKeyboard() {
-    Stop();
-}
-
 void RaylibKeyboard::Start() {
-    if (!running.load()) {
+    if (running == false) {
         running = true;
         processingThread = std::thread(&RaylibKeyboard::ProcessingThread, this);
     }
@@ -30,7 +26,6 @@ void RaylibKeyboard::Stop() {
 
 void RaylibKeyboard::Update() {
     // This method must be called from the main thread
-
     // Update prevKeyStates
     {
         std::lock_guard<std::mutex> lockState(keyStateMutex);
@@ -66,28 +61,16 @@ void RaylibKeyboard::Update() {
             charQueue.push(charPressed);
         }
         charPressed =::GetCharPressed();
+        std::cout << charPressed << std::endl;
     }
 
 }
 
 void RaylibKeyboard::ProcessingThread() {
-  while (running.load()) {
-    // Process queued characters
-    Update();
-    int character;
-    while (true) {
-      {
-        std::lock_guard<std::mutex> lock(charQueueMutex);
-        if (charQueue.empty()) {
-          break;
-        }
-        character = charQueue.front();
-        charQueue.pop();
-      }
-      // Print the character
-      std::cout << static_cast<char>(character) << std::flush;
+    while (running) {
+        // Lock key state mutex to safely update key states
+        Update();
     }
-  }
 }
 
 bool RaylibKeyboard::IsKeyPressed(int key) {
@@ -142,6 +125,11 @@ int RaylibKeyboard::GetCharPressed() {
         return character;
     }
     return 0;
+}
+
+std::queue<int> RaylibKeyboard::GetPressedKeys() {
+    std::lock_guard<std::mutex> lock(keyQueueMutex);
+    return keyQueue; // Return a copy of the queue
 }
 
 }
