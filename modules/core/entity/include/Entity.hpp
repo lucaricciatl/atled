@@ -1,22 +1,37 @@
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
+#include <vector>
 #include <memory>
-#include <typeindex>
-#include <unordered_map>
+#include <algorithm>
+#include <functional>
 
 class Entity {
-public:
-  template <typename ComponentType, typename... Args>
-  void AddComponent(Args &&... args);
-
-  template <typename ComponentType> bool HasComponent() const;
-
-  template <typename ComponentType>
-  std::shared_ptr<ComponentType> GetComponent();
-
 private:
-  std::unordered_map<std::type_index, std::shared_ptr<void>> components;
+    Entity* parent = nullptr; // Pointer to the parent entity
+    std::vector<Entity*> children; // List of child entities
+
+public:
+    // Constructor and Destructor
+    Entity();
+    virtual ~Entity();
+
+    // Parent-Child Management
+    void SetParent(Entity* newParent);
+    Entity* GetParent() const;
+
+    void AddChild(Entity* child);
+    void RemoveChild(Entity* child);
+    const std::vector<Entity*>& GetChildren() const;
+
+    // Hierarchy Traversal
+    void TraverseHierarchy(const std::function<void(Entity*)>& callback);
+
+protected:
+    // Event hooks (override in derived classes if needed)
+    virtual void OnParentChanged(Entity* oldParent, Entity* newParent);
+    virtual void OnChildAdded(Entity* child);
+    virtual void OnChildRemoved(Entity* child);
 };
 
 #endif // ENTITY_HPP
