@@ -14,7 +14,9 @@ public:
 
   void Init();
   void Start();
-  void Update(float deltaTime);
+  void Update(double deltatime);
+  void UpdateSystems(float deltaTime);
+  void UpdateEntities(double deltaTime);
   void Shutdown();
 
   // Managing entities

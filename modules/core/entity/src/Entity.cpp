@@ -16,6 +16,22 @@ Entity::~Entity() {
     }
 }
 
+void Entity::Update(double deltaTime) {
+        // Update all components
+        for (auto& [type, component] : components) {
+            if (component) {
+                component->Update(deltaTime); // Call the component's Update method
+            }
+        }
+
+        // Optionally update children entities
+        for (auto* child : children) {
+            if (child) {
+                child->Update(deltaTime); // Recursively update child entities
+            }
+        }
+};
+
 // Set the parent entity
 void Entity::SetParent(Entity* newParent) {
     if (newParent == this) {

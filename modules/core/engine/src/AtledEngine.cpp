@@ -8,6 +8,7 @@
 #include "RenderSystem.hpp"
 #include "CameraFactory.hpp"
 #include "ServiceProvider.hpp"
+#include <FrameComponent.hpp>
 
 AtledEngine::AtledEngine(std::unique_ptr<input::InputManager> inputMgr,
 	std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
@@ -55,7 +56,7 @@ void AtledEngine::Start() {
 	Shutdown();
 }
 
-void AtledEngine::Update(float deltaTime) {
+void AtledEngine::UpdateSystems(float deltaTime) {
 	for (auto& system : systems) {
 		system->Update(deltaTime);
 	}
@@ -84,4 +85,21 @@ void AtledEngine::AddSystem(std::unique_ptr<System> system) {
 
 EventBus* AtledEngine::GetEventBus() {
 	return &eventBus;
+}
+
+// Update all entities
+void AtledEngine::UpdateEntities(double deltaTime) {
+	for (auto& entity : entities) {
+		// update only if the entity does not have a parent,
+		// the child entity are updated in cascade to they're 
+		// parents
+		if (entity->GetParent() != nullptr) {
+			entity->Update(deltaTime);
+		}
+	}
+}
+
+void AtledEngine::Update(double deltatime) {
+	UpdateSystems(deltatime);
+	UpdateEntities(deltatime);
 }

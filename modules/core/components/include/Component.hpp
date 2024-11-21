@@ -11,6 +11,8 @@ public:
 
   Component(Entity *owner) : owner(owner) {}
   virtual ~Component() = default;
+
+  virtual void Update(double deltatime) {};
 };
 
 #endif // COMPONENT_HPP

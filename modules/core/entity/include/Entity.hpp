@@ -21,6 +21,9 @@ public:
     Entity();
     virtual ~Entity();
 
+    
+    void Update(double deltaTime);
+
     // Parent-Child Management
     void SetParent(Entity* newParent);
     Entity* GetParent() const;
