@@ -3,6 +3,8 @@
 
 #include "Entity.hpp"
 
+class Entity; // Forward declaration of Entity
+
 class Component {
 public:
   Entity *owner;

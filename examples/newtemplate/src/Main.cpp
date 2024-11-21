@@ -21,12 +21,11 @@ int main() {
     // Add a FrameComponent to the entity
     physics::Position defaultPosition(0.0, 0.0, 0.0);
     math::Quaternion defaultOrientation(1.0, 0.0, 0.0, 0.0);
-    auto frameComponent = std::make_shared<FrameComponent>(
-        entity.get(),
-        defaultPosition, // Initial position (x, y, z)
-        defaultOrientation // Initial orientation
-    );
 
+    entity->AddComponent<FrameComponent>(
+        defaultPosition,    // Initial position
+        defaultOrientation  // Initial orientation
+    );
     // Start the engine (game loop begins)
     coreEngine->Start();
 
