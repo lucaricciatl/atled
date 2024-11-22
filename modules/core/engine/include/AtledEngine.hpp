@@ -7,11 +7,16 @@
 
 class AtledEngine {
 public:
-   AtledEngine();
+   AtledEngine(std::unique_ptr<input::InputManager> inputMgr,
+       std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
+       std::shared_ptr<graphics::CameraManager> cameraMgr
+       );
 
   void Init();
   void Start();
-  void Update(float deltaTime);
+  void Update(double deltatime);
+  void UpdateSystems(float deltaTime);
+  void UpdateEntities(double deltaTime);
   void Shutdown();
 
   // Managing entities

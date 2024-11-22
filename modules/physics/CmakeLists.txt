@@ -2,6 +2,7 @@
 add_library(physics
     ./body/src/rigidbody.cpp
     ./space3D/src/Frame.cpp
+    ./space3D/src/Position.Cpp
     ./space3D/src/Quaternion.cpp
 )
 

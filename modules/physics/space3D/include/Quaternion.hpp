@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-namespace Math3D {
+namespace math{
 
 class Quaternion {
 private:
@@ -54,8 +54,9 @@ public:
 
     // Friend functions for stream insertion
     friend std::ostream& operator<<(std::ostream& os, const Quaternion& q);
+
+    static Quaternion fromAxisAngle(double angle, const double axis[3]);
 };
 
-} // namespace Math3D
-
+} // namespace physics
 #endif // QUATERNION_HPP

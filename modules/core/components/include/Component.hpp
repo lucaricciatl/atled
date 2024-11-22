@@ -3,6 +3,8 @@
 
 #include "Entity.hpp"
 
+class Entity; // Forward declaration of Entity
+
 class Component {
 public:
   Entity *owner;
@@ -10,9 +12,7 @@ public:
   Component(Entity *owner) : owner(owner) {}
   virtual ~Component() = default;
 
-  virtual void OnStart() {}
-  virtual void OnUpdate(float deltaTime) {}
-  virtual void OnDraw() {}
+  virtual void Update(double deltatime) {};
 };
 
 #endif // COMPONENT_HPP
