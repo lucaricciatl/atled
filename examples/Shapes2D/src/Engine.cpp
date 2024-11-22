@@ -13,6 +13,8 @@
 #include "Sphere.hpp"
 #include "ITextDrawer.hpp"
 #include "RaylibtextDrawer.hpp"
+#include "Model2D.hpp"
+#include "Model2DFactory.hpp"
 
 using namespace graphics;
 using namespace input;

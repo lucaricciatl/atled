@@ -8,8 +8,9 @@
 #include "Model2DFactory.hpp"
 #include "Model2D.hpp"
 #include "GraphicsContext.hpp"
-#include "PolyLine2D.hpp"
-#include "PolygonBuffer2D.hpp"
+#include <vector>
+#include "glwp.hpp"
+#include "Point2D.hpp"
 #include "Cube.hpp"
 
 namespace graphics {

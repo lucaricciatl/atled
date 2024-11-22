@@ -2,8 +2,8 @@
 #define SHAPE_HPP
 
 #include <iostream>
-#include <PolygonBuffer2D.hpp>
-#include "PointBuffer2D.hpp"
+#include "glwp.hpp"
+#include "Point2D.hpp"
 #include "Model.hpp"
 
 namespace graphics {
