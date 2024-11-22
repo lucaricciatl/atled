@@ -13,13 +13,13 @@ class Model2D : public  Model{
   virtual ~Model2D() = default;
   virtual void Draw() = 0 ;
 
-  ::Color GetColor() const;
+  raylib::Color GetColor() const;
   double GetRotation() const;
-  void SetColor(const ::Color& color);
+  void SetColor(const raylib::Color& color);
   void SetRotation(double rotation);
 
 protected:
-  ::Color mColor;
+	raylib::Color mColor;
   double mRotation;
 };
 }  // namespace graphics

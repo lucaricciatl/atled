@@ -33,7 +33,7 @@ void RaylibKeyboard::Update() {
 
     // Update keyStatesBuffer with the current keyboard state
     for (int key = 0; key < 512; ++key) {
-        keyStatesBuffer[key] = ::IsKeyDown(key);
+        keyStatesBuffer[key] = raylib::IsKeyDown(key);
     }
 
     // Update keyStates
@@ -43,24 +43,24 @@ void RaylibKeyboard::Update() {
     }
 
     // Get key presses and add to queue
-    int keyPressed =::GetKeyPressed();
+    int keyPressed = raylib::GetKeyPressed();
     while (keyPressed != 0) {
         {
             std::lock_guard<std::mutex> lockQueue(keyQueueMutex);
             keyQueue.push(keyPressed);
         }
-        keyPressed =::GetKeyPressed();
+        keyPressed = raylib::GetKeyPressed();
     }
 
     // Get char presses and add to queue
-    int charPressed =::GetCharPressed();
+    int charPressed = raylib::GetCharPressed();
     while (charPressed != 0) {
         {
             std::lock_guard<std::mutex> lockCharQueue(charQueueMutex);
             charQueue.push(charPressed);
             std::cout << charPressed << std::endl;
         }
-        charPressed =::GetCharPressed();
+        charPressed = raylib::GetCharPressed();
 
     }
 

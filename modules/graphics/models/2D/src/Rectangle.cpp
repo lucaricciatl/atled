@@ -57,7 +57,7 @@ void Rectangle::Draw() {
 
   Vector2 origin = {(rect.width / 2), (rect.height / 2)};
 
-  DrawRectanglePro(rect, origin, mRotation, mColor);
+   raylib::DrawRectanglePro(rect, origin, mRotation, mColor);
 }
 
 }  // namespace graphics

@@ -9,7 +9,7 @@
 #include "Plane.hpp"
 
 namespace graphics {
-
+using namespace raylib;
 // Enum for types of 3D models
 enum class Model3DType {
     cube,

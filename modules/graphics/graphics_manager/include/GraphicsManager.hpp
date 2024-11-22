@@ -35,7 +35,7 @@ public:
 
 
     // clear methods
-    void Clear(::Color aColor) override;
+    void Clear(raylib::Color aColor) override;
 
 
 protected:

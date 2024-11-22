@@ -31,7 +31,7 @@ public:
 
     virtual void AddShape(const int& aLayerId, std::shared_ptr<Model> aShape) = 0;
     virtual void DrawLayer(const int& aLayerId) = 0;
-    virtual void Clear(::Color aColor) = 0;
+    virtual void Clear(raylib::Color aColor) = 0;
 };
 
 } // namespace graphics

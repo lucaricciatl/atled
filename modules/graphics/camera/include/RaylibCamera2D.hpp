@@ -5,6 +5,7 @@
 #include "raylib.hpp"
 
 namespace graphics {
+using namespace raylib;
 
 class RaylibCamera2D : public ICamera {
 public:
@@ -30,7 +31,7 @@ public:
     float GetRotation() const override;
 
     void SetFovy(float aFovy) override;
-    void SetCameraProjection(CameraProjection aProjection) override;
+    void SetCameraProjection(raylib::CameraProjection aProjection) override;
 
 private:
     Camera2D mCamera;

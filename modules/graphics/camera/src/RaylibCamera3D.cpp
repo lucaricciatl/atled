@@ -6,16 +6,16 @@ RaylibCamera3D::RaylibCamera3D(Vector3 position, Vector3 target, Vector3 up, flo
     : mCamera{position, target, up, fovy, projection} {}
 
 void RaylibCamera3D::BeginCamera() {
-    BeginMode3D(mCamera);
+    raylib::BeginMode3D(mCamera);
 }
 
 void RaylibCamera3D::UpdateCamera() {
     // Use Raylib's UpdateCamera to update the internal mCamera
-    ::UpdateCamera(&mCamera, 0);
+    raylib::UpdateCamera(&mCamera, 0);
 }
 
 void RaylibCamera3D::EndCamera() {
-    EndMode3D();
+    raylib::EndMode3D();
 }
 
 void RaylibCamera3D::SetFovy(float aFovy) {

@@ -27,8 +27,8 @@ public:
     virtual void Minimize(void) = 0;
     virtual void Restore(void) = 0;
 
-    virtual void SetIcon(Image image) = 0;
-    virtual void SetIcons(Image *images, int count) = 0;
+    virtual void SetIcon(raylib::Image image) = 0;
+    virtual void SetIcons(raylib::Image *images, int count) = 0;
     virtual void SetTitle(const char *title) = 0;
     virtual void SetPosition(int x, int y) = 0;
     virtual void SetMonitor(int monitor) = 0;

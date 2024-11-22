@@ -50,8 +50,8 @@ void Engine::OnUpdate() {
     float scaleX = cameraManager->GetCameraZoom();
     float scaleY = cameraManager->GetCameraZoom();
 
-    SetMouseOffset(offsetX, offsetY);   // Adjust mouse offset based on camera target
-    SetMouseScale(1/scaleX, 1/scaleY);     // Scale mouse position to match zoom level
+    raylib::SetMouseOffset(offsetX, offsetY);   // Adjust mouse offset based on camera target
+    raylib::SetMouseScale(1/scaleX, 1/scaleY);     // Scale mouse position to match zoom level
 
     // Existing model creation logic
     if (inputManager->IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {

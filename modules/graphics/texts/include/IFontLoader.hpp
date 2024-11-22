@@ -21,7 +21,7 @@ public:
     virtual raylib::Font LoadFontEx(const char* fileName, int fontSize, int* codepoints, int codepointCount) const = 0;
 
     // Pure virtual function to load a font from an image
-    virtual raylib::Font LoadFontFromImage(Image image, Color key, int firstChar) const = 0;
+    virtual raylib::Font LoadFontFromImage(raylib::Image image, raylib::Color key, int firstChar) const = 0;
 
     // Pure virtual function to load a font from memory
     virtual raylib::Font LoadFontFromMemory(const char* fileType, const unsigned char* fileData, int dataSize, int fontSize, int* codepoints, int codepointCount) const = 0;
@@ -30,13 +30,13 @@ public:
     virtual bool IsFontReady(raylib::Font font) const = 0;
 
     // Pure virtual function to load font data for further use
-    virtual GlyphInfo* LoadFontData(const unsigned char* fileData, int dataSize, int fontSize, int* codepoints, int codepointCount, int type) const = 0;
+    virtual raylib::GlyphInfo* LoadFontData(const unsigned char* fileData, int dataSize, int fontSize, int* codepoints, int codepointCount, int type) const = 0;
 
     // Pure virtual function to generate an image font atlas using glyph information
-    virtual Image GenImageFontAtlas(const GlyphInfo* glyphs, Rectangle** glyphRecs, int glyphCount, int fontSize, int padding, int packMethod) const = 0;
+    virtual raylib::Image GenImageFontAtlas(const raylib::GlyphInfo* glyphs, raylib::Rectangle** glyphRecs, int glyphCount, int fontSize, int padding, int packMethod) const = 0;
 
     // Pure virtual function to unload font glyph information
-    virtual void UnloadFontData(GlyphInfo* glyphs, int glyphCount) const = 0;
+    virtual void UnloadFontData(raylib::GlyphInfo* glyphs, int glyphCount) const = 0;
 
     // Pure virtual function to unload a font from GPU memory
     virtual void UnloadFont(raylib::Font font) const = 0;

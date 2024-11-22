@@ -26,7 +26,7 @@ void Triangle::Draw() {
   Vector2 v2 = { static_cast<float>(mPoints[1].x), static_cast<float>(mPoints[1].y) };
   Vector2 v3 = { static_cast<float>(mPoints[2].x), static_cast<float>(mPoints[2].y) };
 
-  DrawTriangle(v1, v2, v3, mColor);
+   raylib::DrawTriangle(v1, v2, v3, mColor);
 }
 
 }  // namespace graphics

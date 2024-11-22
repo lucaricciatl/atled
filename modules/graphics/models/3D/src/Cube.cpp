@@ -8,10 +8,10 @@ namespace graphics {
 	void Cube::Draw() {
 		// Use raylib's DrawCube function to render the cube
 		if (ShapeIsEnabled) {
-			::DrawCube(mCenterPos, mDimensions.x, mDimensions.y, mDimensions.z, mColor);
+			raylib::DrawCube(mCenterPos, mDimensions.x, mDimensions.y, mDimensions.z, mColor);
 		}
 		if (WireframeIsEnabled) {
-			::DrawCubeWires(mCenterPos, mDimensions.x, mDimensions.y, mDimensions.z, mWireframeColor);
+			raylib::DrawCubeWires(mCenterPos, mDimensions.x, mDimensions.y, mDimensions.z, mWireframeColor);
 		}
 	}
 

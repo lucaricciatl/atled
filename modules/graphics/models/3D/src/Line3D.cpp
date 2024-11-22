@@ -13,7 +13,7 @@ Line3D::Line3D(const Vector3& start, const Vector3& end, const Color& color)
 
 // Override the draw function
 void Line3D::Draw() {
-    DrawLine3D(mStartPos, mEndPos, mColor);
+    raylib::DrawLine3D(mStartPos, mEndPos, mColor);
 }
 
 // Setters

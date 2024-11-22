@@ -1,137 +1,133 @@
 #include "RaylibWindow.hpp"
 
-namespace raylib{
-    
-
 
 RaylibWindow::RaylibWindow() {
 }
 
 RaylibWindow::~RaylibWindow() {
-    ::CloseWindow();  // Calls the underlying raylib function to close the window
+    raylib::CloseWindow();  // Calls the underlying raylib function to close the window
 }
 
 void RaylibWindow::InitWindow(int width, int height, const char *title) {
-    ::InitWindow(width, height, title);  // Calls Raylib's InitWindow
+    raylib::InitWindow(width, height, title);  // Calls Raylib's InitWindow
 }
 
 void RaylibWindow::CloseWindow() {
-    return ::CloseWindow();
+    return raylib::CloseWindow();
 }
 
 bool RaylibWindow::ShouldClose() const {
-    return ::WindowShouldClose();
+    return raylib::WindowShouldClose();
 }
 
 bool RaylibWindow::IsReady() const {
-    return ::IsWindowReady();
+    return raylib::IsWindowReady();
 }
 
 bool RaylibWindow::IsFullscreen() const {
-    return ::IsWindowFullscreen();
+    return raylib::IsWindowFullscreen();
 }
 
 bool RaylibWindow::IsHidden() const {
-    return ::IsWindowHidden();
+    return raylib::IsWindowHidden();
 }
 
 bool RaylibWindow::IsMinimized() const {
-    return ::IsWindowMinimized();
+    return raylib::IsWindowMinimized();
 }
 
 bool RaylibWindow::IsMaximized() const {
-    return ::IsWindowMaximized();
+    return raylib::IsWindowMaximized();
 }
 
 bool RaylibWindow::IsFocused() const {
-    return ::IsWindowFocused();
+    return raylib::IsWindowFocused();
 }
 
 bool RaylibWindow::IsResized() const {
-    return ::IsWindowResized();
+    return raylib::IsWindowResized();
 }
 
 bool RaylibWindow::IsState(unsigned int flag) const {
-    return ::IsWindowState(flag);
+    return raylib::IsWindowState(flag);
 }
 
 void RaylibWindow::SetState(unsigned int flags) {
-    ::SetWindowState(flags);
+    raylib::SetWindowState(flags);
 }
 
 void RaylibWindow::ClearState(unsigned int flags) {
-    ::ClearWindowState(flags);
+    raylib::ClearWindowState(flags);
 }
 
 void RaylibWindow::ToggleFullscreen() {
-    ::ToggleFullscreen();
+    raylib::ToggleFullscreen();
 }
 
 void RaylibWindow::Maximize() {
-    ::MaximizeWindow();
+    raylib::MaximizeWindow();
 }
 
 void RaylibWindow::Minimize() {
-    ::MinimizeWindow();
+    raylib::MinimizeWindow();
 }
 
 void RaylibWindow::Restore() {
-    ::RestoreWindow();
+    raylib::RestoreWindow();
 }
 
 void RaylibWindow::SetIcon(Image image) {
-    ::SetWindowIcon(image);
+    raylib::SetWindowIcon(image);
 }
 
 void RaylibWindow::SetIcons(Image *images, int count) {
-    ::SetWindowIcons(images, count);
+    raylib::SetWindowIcons(images, count);
 }
 
 void RaylibWindow::SetTitle(const char *title) {
-    ::SetWindowTitle(title);
+    raylib::SetWindowTitle(title);
 }
 
 void RaylibWindow::SetPosition(int x, int y) {
-    ::SetWindowPosition(x, y);
+    raylib::SetWindowPosition(x, y);
 }
 
 void RaylibWindow::SetMonitor(int monitor) {
-    ::SetWindowMonitor(monitor);
+    raylib::SetWindowMonitor(monitor);
 }
 
 void RaylibWindow::SetMinSize(int width, int height) {
-    ::SetWindowMinSize(width, height);
+    raylib::SetWindowMinSize(width, height);
 }
 
 void RaylibWindow::SetMaxSize(int width, int height) {
-    ::SetWindowMaxSize(width, height);
+    raylib::SetWindowMaxSize(width, height);
 }
 
 void RaylibWindow::SetSize(int width, int height) {
-    ::SetWindowSize(width, height);
+    raylib::SetWindowSize(width, height);
 }
 
 void RaylibWindow::SetOpacity(float opacity) {
-    ::SetWindowOpacity(opacity);
+    raylib::SetWindowOpacity(opacity);
 }
 
 void RaylibWindow::Focus() {
-    ::SetWindowFocused();
+    raylib::SetWindowFocused();
 }
 
 void RaylibWindow::SetClipboardText(const char *text) {
-    ::SetClipboardText(text);
+    raylib::SetClipboardText(text);
 }
 
 const char *RaylibWindow::GetClipboardText() const {
-    return ::GetClipboardText();
+    return raylib::GetClipboardText();
 }
 
 void RaylibWindow::EnableEventWaiting() {
-    ::EnableEventWaiting();
+    raylib::EnableEventWaiting();
 }
 
 void RaylibWindow::DisableEventWaiting() {
-    ::DisableEventWaiting();
-}
+    raylib::DisableEventWaiting();
 }

@@ -7,7 +7,7 @@
 
 namespace {
 // Rename raylib struct to avoid conflicts
-typedef ::Rectangle RectangleStruct;
+typedef raylib::Rectangle RectangleStruct;
 }  // namespace
 namespace graphics {
 

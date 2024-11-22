@@ -68,7 +68,7 @@ void Engine::OnUpdate() {
         Shutdown();
     }
 
-    if (IsCursorOnScreen()) {
+    if (raylib::IsCursorOnScreen()) {
         // Handle mouse input for camera rotation
         float mouseDeltaX = inputManager->GetMouseDeltaX() * mouseSensitivity;
         float mouseDeltaY = inputManager->GetMouseDeltaY() * mouseSensitivity;

@@ -21,7 +21,7 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 # Used as public API to be included into other projects
-set(raylib_public_headers
+set(raylib_public_headers 
     raylib.h
     rlgl.h
     raymath.h
@@ -76,7 +76,7 @@ if (${PLATFORM} MATCHES "Web")
 endif()
 
 set_target_properties(raylib PROPERTIES
-                      PUBLIC_HEADER "${raylib_public_headers}"
+                      PRIVATE_HEADER "${raylib_public_headers}"
                       VERSION ${PROJECT_VERSION}
                       SOVERSION ${API_VERSION}
                       )

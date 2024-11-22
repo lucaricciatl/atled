@@ -11,7 +11,7 @@
 #   raylib_LDFLAGS - The linker flags needed with raylib
 #   raylib_DEFINITIONS - Compiler switches required for using raylib
 
-if (NOT TARGET raylib)
+if (NOT TARGET )
     set(XPREFIX PC_RAYLIB)
 
     find_package(PkgConfig QUIET)

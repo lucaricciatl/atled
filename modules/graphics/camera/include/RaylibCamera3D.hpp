@@ -5,7 +5,7 @@
 #include "raylib.hpp"
 
 namespace graphics {
-
+using namespace raylib;
 class RaylibCamera3D : public ICamera {
 public:
     RaylibCamera3D(Vector3 position = {0.0f, 0.0f, 10.0f}, Vector3 target = {0.0f, 0.0f, 0.0f},

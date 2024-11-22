@@ -5,7 +5,7 @@
 #include "raylib.hpp"  // Assuming raylib is used for Vector3 and Color types
 
 namespace graphics {
-
+using namespace raylib;
 class Cube : public Model, public Model3D {
 public:
     

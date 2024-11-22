@@ -78,7 +78,7 @@ void GraphicsManager::Render() {
 }
 
 
-void GraphicsManager::Clear(::Color aColor) {
+void GraphicsManager::Clear(raylib::Color aColor) {
     mContext->Clear(aColor);
 }
 

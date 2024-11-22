@@ -7,6 +7,7 @@
 namespace graphics {
 
 // Concrete class implementing FontLoader using Raylib's font functions
+
 class RaylibFontLoader : public IFontLoader {
 public:
     // Implement GetFontDefault using Raylib's GetFontDefault function

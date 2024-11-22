@@ -17,7 +17,7 @@ public:
     void Unload() override;
 
 private:
-    Shader shader;
+    raylib::Shader shader;
     bool isLoaded;
 };
 

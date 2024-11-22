@@ -5,7 +5,7 @@
 #include "raylib.hpp"  // For Vector3 and Color types
 
 namespace graphics {
-
+using namespace raylib;
 class Capsule : public Model,public Model3D {
 public:
     // Constructors

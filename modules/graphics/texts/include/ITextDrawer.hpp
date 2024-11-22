@@ -17,28 +17,28 @@ public:
 
   // Pure virtual function to draw text using the default font
   virtual void DrawText(const char *text, int posX, int posY, int fontSize,
-                        Color color) = 0;
+      raylib::Color color) = 0;
 
   // Pure virtual function to draw text with custom font and additional
   // parameters
-  virtual void DrawTextEx(Font font, const char *text, Vector2 position,
-                          float fontSize, float spacing, Color tint) = 0;
+  virtual void DrawTextEx(raylib::Font font, const char *text, raylib::Vector2 position,
+                          float fontSize, float spacing, raylib::Color tint) = 0;
 
   // Pure virtual function to draw text with advanced options such as rotation
   // and origin
-  virtual void DrawTextPro(Font font, const char *text, Vector2 position,
-                           Vector2 origin, float rotation, float fontSize,
-                           float spacing, Color tint) = 0;
+  virtual void DrawTextPro(raylib::Font font, const char *text, raylib::Vector2 position,
+      raylib::Vector2 origin, float rotation, float fontSize,
+                           float spacing, raylib::Color tint) = 0;
 
   // Pure virtual function to draw a single character (codepoint)
-  virtual void DrawTextCodepoint(Font font, int codepoint, Vector2 position,
-                                 float fontSize, Color tint) = 0;
+  virtual void DrawTextCodepoint(raylib::Font font, int codepoint, raylib::Vector2 position,
+                                 float fontSize, raylib::Color tint) = 0;
 
   // Pure virtual function to draw multiple characters (codepoints)
-  virtual void DrawTextCodepoints(Font font, const int *codepoints,
-                                  int codepointCount, Vector2 position,
+  virtual void DrawTextCodepoints(raylib::Font font, const int *codepoints,
+                                  int codepointCount, raylib::Vector2 position,
                                   float fontSize, float spacing,
-                                  Color tint) = 0;
+      raylib::Color tint) = 0;
 };
 
 }

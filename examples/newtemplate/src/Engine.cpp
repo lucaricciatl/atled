@@ -14,7 +14,6 @@
 #include <cmath> 
 #include "GraphicsManager.hpp"
 #include "Plane.hpp"
-#include <raymath.h>
 
 using namespace graphics;
 using namespace input;

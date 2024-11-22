@@ -5,7 +5,7 @@
 #include "Model.hpp"
 
 namespace graphics {
-
+using namespace raylib;
 class Model3D : public Model{
  public:
   virtual ~Model3D() = default;
