@@ -1,6 +1,5 @@
 #include "RaylibKeyboard.hpp"
-#include "glwp.hpp"
-#include "raylib.h"
+#include "raylib.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -34,7 +33,7 @@ void RaylibKeyboard::Update() {
 
     // Update keyStatesBuffer with the current keyboard state
     for (int key = 0; key < 512; ++key) {
-        keyStatesBuffer[key] =::IsKeyDown(key);
+        keyStatesBuffer[key] = ::IsKeyDown(key);
     }
 
     // Update keyStates

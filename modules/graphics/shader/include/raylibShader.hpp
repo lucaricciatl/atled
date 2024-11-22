@@ -2,7 +2,7 @@
 #define RAYLIBSHADER_HPP
 
 #include "IShader.hpp"
-#include "raylib.h"
+#include "raylib.hpp"
 
 class RaylibShader : public IShader {
 public:

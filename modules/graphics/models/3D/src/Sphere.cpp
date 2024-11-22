@@ -1,5 +1,5 @@
 #include "Sphere.hpp"
-#include "raylib.h"
+#include "raylib.hpp"
 
 namespace graphics {
     // Setters

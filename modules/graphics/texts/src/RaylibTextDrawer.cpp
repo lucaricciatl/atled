@@ -1,5 +1,4 @@
-#include "raylib.h"
-
+#include "raylib.hpp"
 #include "RaylibTextDrawer.hpp"
 
 namespace graphics {

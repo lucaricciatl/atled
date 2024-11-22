@@ -2,7 +2,7 @@
 #define LINE3D_HPP
 
 #include "Model3D.hpp"
-#include "raylib.h"  // For Vector3 and DrawLine3D
+#include "raylib.hpp"  // For Vector3 and DrawLine3D
 
 namespace graphics {
 

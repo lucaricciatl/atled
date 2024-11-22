@@ -2,7 +2,7 @@
 #define RAYLIB_CAMERA3D_HPP
 
 #include "ICamera.hpp"
-#include "raylib.h"
+#include "raylib.hpp"
 
 namespace graphics {
 

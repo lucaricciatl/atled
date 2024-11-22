@@ -5,7 +5,7 @@
 #include "WindowFactory.hpp"
 #include "RaylibCamera2D.hpp"
 #include "RaylibCamera3D.hpp"
-#include "glwp.hpp"
+#include "raylib.hpp"
 #include "GraphicsConfig.hpp"
 
 namespace {

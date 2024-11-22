@@ -2,7 +2,7 @@
 #define RAYLIBTEXTDRAWER_HPP
 
 #include "ITextDrawer.hpp"
-#include "raylib.h"  // Raylib includes
+#include "raylib.hpp"  // Raylib includes
 
 namespace graphics {
 

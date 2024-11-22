@@ -1,5 +1,5 @@
 #include "Arc.hpp"
-#include "glwp.hpp"
+#include "raylib.hpp"
 #include <cassert>  // For assert
 #include <cmath>    // For M_PI
 #include <numbers>  // C++20 feature
@@ -8,7 +8,7 @@ namespace graphics {
 
 // Constructor
 Arc::Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
-         double aEndAngle, double thickness, const glwp::Color& aColor)
+         double aEndAngle, double thickness, const raylib::Color& aColor)
     : Model2D(),
       center(aCenter),
       radius(aRadius),

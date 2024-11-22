@@ -2,7 +2,7 @@
 #define RAYLIBFONTLOADER_HPP
 
 #include "IFontLoader.hpp"
-#include "raylib.h"
+#include "raylib.hpp"
 
 namespace graphics {
 

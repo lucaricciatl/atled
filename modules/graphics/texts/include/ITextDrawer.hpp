@@ -2,7 +2,7 @@
 #define TEXTDRAWER_HPP
 
 // Include the necessary headers for Color, Font, and Vector2 (adjust as needed)
-#include "raylib.h"  // Assuming raylib is the library used for rendering
+#include "raylib.hpp"  // Assuming raylib is the library used for rendering
 
 namespace graphics {
 

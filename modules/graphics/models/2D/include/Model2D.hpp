@@ -2,7 +2,7 @@
 #define SHAPE_HPP
 
 #include <iostream>
-#include "glwp.hpp"
+#include "raylib.hpp"
 #include "Point2D.hpp"
 #include "Model.hpp"
 

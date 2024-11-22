@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <memory>  // For std::unique_ptr
-#include "raylib.h"  // Assuming you're using Raylib for Vector2, Vector3
+#include "raylib.hpp"  // Assuming you're using Raylib for Vector2, Vector3
 #include "ICamera.hpp"
 
 namespace graphics {

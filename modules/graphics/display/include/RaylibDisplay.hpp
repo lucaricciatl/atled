@@ -2,7 +2,7 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include "raylib.h"  // Include raylib for window management functions
+#include "raylib.hpp"  // Include raylib for window management functions
 #include "IDisplay.hpp"
 
 class RaylibDisplay : public IDisplay {

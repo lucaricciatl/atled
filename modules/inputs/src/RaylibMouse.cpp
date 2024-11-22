@@ -1,8 +1,10 @@
 #include "RaylibMouse.hpp"
-#include "glwp.hpp"
+#include "raylib.hpp"
 #include <iostream>
 
 namespace input {
+
+using namespace raylib;
 
 RaylibMouse::RaylibMouse() : running(false) {}
 

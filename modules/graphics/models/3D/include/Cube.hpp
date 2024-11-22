@@ -2,7 +2,7 @@
 #define CUBE_HPP
 
 #include "Model3D.hpp"
-#include "raylib.h"  // Assuming raylib is used for Vector3 and Color types
+#include "raylib.hpp"  // Assuming raylib is used for Vector3 and Color types
 
 namespace graphics {
 

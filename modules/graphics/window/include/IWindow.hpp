@@ -1,7 +1,7 @@
 #ifndef IWINDOW_HPP
 #define IWINDOW_HPP
 
-#include "raylib.h"  // Assuming you're using Raylib or a similar library
+#include "raylib.hpp"  // Assuming you're using Raylib or a similar library
 
 class IWindow {
 public:

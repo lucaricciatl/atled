@@ -9,7 +9,7 @@
 #include "Model2D.hpp"
 #include "GraphicsContext.hpp"
 #include <vector>
-#include "glwp.hpp"
+#include "raylib.hpp"
 #include "Point2D.hpp"
 #include "Cube.hpp"
 

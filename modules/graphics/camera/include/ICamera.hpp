@@ -1,7 +1,7 @@
 #ifndef ICAMERA_HPP
 #define ICAMERA_HPP
 
-#include "raylib.h"
+#include "raylib.hpp"
 
 namespace graphics {
 

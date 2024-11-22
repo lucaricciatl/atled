@@ -2,7 +2,7 @@
 #define CYLINDER_HPP
 
 #include "Model3D.hpp"
-#include "raylib.h"  // For Vector3 and Color types
+#include "raylib.hpp"  // For Vector3 and Color types
 
 namespace graphics {
 

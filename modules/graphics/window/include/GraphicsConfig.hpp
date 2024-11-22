@@ -1,6 +1,6 @@
 
 #pragma once
-#include "Raylib.h"
+#include "Raylib.hpp"
 
 namespace graphics{
 

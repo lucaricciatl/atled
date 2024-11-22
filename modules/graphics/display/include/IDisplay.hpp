@@ -1,7 +1,7 @@
 #ifndef IDISPLAY_HPP
 #define IDISPLAY_HPP
 
-#include <raylib.h>  // Assuming you're using Raylib for Vector2 and other window functions
+#include <raylib.hpp>  // Assuming you're using Raylib for Vector2 and other window functions
 
 class IDisplay {
 public:
