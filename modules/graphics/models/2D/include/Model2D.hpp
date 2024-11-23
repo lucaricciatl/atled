@@ -9,7 +9,7 @@
 namespace graphics {
 	using namespace raylib;
 
-class Model2D : public virtual Model{
+class Model2D : public Model{
  public:
   virtual ~Model2D() = default;
   virtual void Draw() = 0 ;

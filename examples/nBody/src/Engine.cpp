@@ -25,8 +25,8 @@ void Engine::OnStart() {
 
   // Add each circle from the simulation to the graphics manager once
   for (auto &circle : simulation.GetCircles()) {
-    graphicsManager->AddShape(1, std::dynamic_pointer_cast<graphics::Model>(
-                                     circle)); // Cast explicitly
+    graphicsManager->AddShape(1, 
+                                     circle); // Cast explicitly
   }
 
   std::cout << "Simulation initialized with " << simulation.GetCircles().size()
