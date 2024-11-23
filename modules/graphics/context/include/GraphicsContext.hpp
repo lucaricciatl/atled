@@ -1,9 +1,8 @@
 #pragma once
-#include "LayerManager.hpp"
 #include "ICamera.hpp"
 #include "IWindow.hpp"
 #include "GraphicsConfig.hpp"
-
+#include <memory>
 namespace graphics {
 class GraphicsContext {
  public:

@@ -1,5 +1,3 @@
-
-
 # Define the library name based on the directory
 get_filename_component(LIB_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
@@ -22,7 +20,6 @@ target_include_directories(${LIB_NAME} PUBLIC
 target_link_libraries(${LIB_NAME} PUBLIC 
     raylibcpp                                 # Link the raylib library
 )
-
 # Optionally link this library with other dependencies
 # target_link_libraries(${LIB_NAME} <other_dependencies>)
 

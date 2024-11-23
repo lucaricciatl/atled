@@ -1,5 +1,3 @@
-
-
 # Define the library name based on the directory
 get_filename_component(LIB_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
@@ -16,17 +14,21 @@ add_library(${LIB_NAME} ${SOURCES})
 target_include_directories(${LIB_NAME} PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/include   # Include local project headers
     ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
+    ${CONTEXT_INCLUDE_DIR}
+    ${DISPLAY_INCLUDE_DIR}
 )
 
 # Link libraries for this target
 target_link_libraries(${LIB_NAME} PUBLIC 
-    raylibcpp                                 # Link the raylib library
+    raylibcpp           
+    context                      # Link the raylib library
+    display
 )
-
 # Optionally link this library with other dependencies
 # target_link_libraries(${LIB_NAME} <other_dependencies>)
 
 # Add to the main graphics library if needed
+# target_link_libraries(graphics ${LIB_NAME})
 # Define include and library directories based on the library name
 set(${LIB_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)  # Path to include directory
 set(${LIB_NAME}_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)          # Path to library directory

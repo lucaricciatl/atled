@@ -29,8 +29,6 @@ class Model2DFactory {
  public:
   static std::shared_ptr<Model2D> CreateModel2D(const Model2DType aType);
 
-  static std::shared_ptr<Circle> CreateCircle(const std::vector<double>& center,
-                                              double radius);
   static std::shared_ptr<Circle> CreateCircle();
 
   static std::shared_ptr<Arc> CreateArc(const std::vector<double>& center,

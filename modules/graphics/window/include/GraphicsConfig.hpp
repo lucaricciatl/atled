@@ -1,7 +1,7 @@
 
 #pragma once
 #include "Raylib.hpp"
-
+#include <vector>
 namespace graphics{
 
 struct GraphicsConfig {

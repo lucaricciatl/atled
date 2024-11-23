@@ -7,19 +7,20 @@
 #include "Model.hpp"
 
 namespace graphics {
+	using namespace raylib;
 
-class Model2D : public  Model{
+class Model2D : public virtual Model{
  public:
   virtual ~Model2D() = default;
   virtual void Draw() = 0 ;
 
-  raylib::Color GetColor() const;
+  Color GetColor() const;
   double GetRotation() const;
-  void SetColor(const raylib::Color& color);
+  void SetColor(const Color& color);
   void SetRotation(double rotation);
 
 protected:
-	raylib::Color mColor;
+  Color mColor;
   double mRotation;
 };
 }  // namespace graphics

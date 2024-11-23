@@ -1,41 +1,44 @@
-# Add raylib as a subdirectory
-add_subdirectory(raylib)
+# Set raylib folder and library path globally
+set(RAYLIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/raylib)  # Adjust to the correct path
+set(RAYLIB_INCLUDE_DIR ${RAYLIB_DIR}/src)          # Path to raylib include files
+set(RAYLIB_LIB_DIR ${RAYLIB_DIR}/lib)              # Path to raylib library files
 
-# Create the raylibwrapper library with raylib.cpp implementation
-add_library(raylibwrapper ./include/raylib.cpp)
+# Add raylib as a subdirectory
+add_subdirectory(${RAYLIB_DIR})
+
+# Create the raylibcpp library with raylib.cpp implementation
+add_library(raylibcpp ./include/raylib.cpp)
 
 # Alias for easier referencing
-add_library(raylibwrapper::raylibwrapper ALIAS raylibwrapper)
+add_library(raylibcpp::raylibcpp ALIAS raylibcpp)
 
-# Link raylib to raylibwrapper
-target_link_libraries(raylibwrapper PRIVATE raylib)
+# Link raylib to raylibcpp
+target_link_libraries(raylibcpp PRIVATE raylib)
 
-# Include directories for raylibwrapper
+# Include directories for raylibcpp
 # Include raylib.h privately and raylib_wrapper.hpp publicly
-target_include_directories(raylibwrapper
+target_include_directories(raylibcpp
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/raylib/src  # Private include for raylib.h
+        ${RAYLIB_INCLUDE_DIR}  # Private include for raylib.h
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include     # Public include for raylib_wrapper.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include  # Public include for raylib_wrapper.hpp
 )
-
 
 # Create an interface library for external
 add_library(external INTERFACE)
 
-# Link raylibwrapper to external
-target_link_libraries(external INTERFACE raylibwrapper)
+# Link raylibcpp to external
+target_link_libraries(external INTERFACE raylibcpp)
 
 # Include directories for external
 target_include_directories(external INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include         # Expose raylib.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include  # Expose raylib_wrapper.hpp
 )
 
 # Set properties for the external library
 set_target_properties(external PROPERTIES
     FOLDER "modules/external"
 )
-
 
 
 ## Organize raylib and other targets under a unified folder structure

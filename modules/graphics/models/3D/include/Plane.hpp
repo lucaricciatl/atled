@@ -6,7 +6,7 @@
 
 namespace graphics {
 
-class Plane : public Model,public Model3D {
+class Plane : public Model3D {
 public:
     // Constructors
     Plane();

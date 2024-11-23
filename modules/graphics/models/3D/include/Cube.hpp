@@ -6,7 +6,7 @@
 
 namespace graphics {
 using namespace raylib;
-class Cube : public Model, public Model3D {
+class Cube : public Model3D {
 public:
     
     // Constructor with default dimensions

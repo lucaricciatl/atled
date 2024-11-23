@@ -6,7 +6,7 @@
 
 namespace graphics {
 using namespace raylib;
-class Cylinder :public Model, public Model3D {
+class Cylinder : public Model3D {
 public:
     // Constructors
     Cylinder();

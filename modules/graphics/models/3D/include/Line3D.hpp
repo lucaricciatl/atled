@@ -6,7 +6,7 @@
 
 namespace graphics {
 
-    class Line3D : public Model,public Model3D {
+    class Line3D : public Model3D {
     public:
         // Constructors
         Line3D();

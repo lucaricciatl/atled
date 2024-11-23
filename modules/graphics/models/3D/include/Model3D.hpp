@@ -6,7 +6,7 @@
 
 namespace graphics {
 using namespace raylib;
-class Model3D : public Model{
+class Model3D : public virtual Model{
  public:
   virtual ~Model3D() = default;
   virtual void Draw() = 0 ;

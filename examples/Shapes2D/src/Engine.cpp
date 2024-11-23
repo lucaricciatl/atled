@@ -1,8 +1,6 @@
 #include "engine.hpp"
 #include "CoreEngine.hpp"
 #include "InputManager.hpp"
-#include "Model2DFactory.hpp"
-#include "Model3DFactory.hpp"
 #include <iostream>
 #include "CameraFactory.hpp"
 #include "CameraManager.hpp"
@@ -13,9 +11,10 @@
 #include "Sphere.hpp"
 #include "ITextDrawer.hpp"
 #include "RaylibtextDrawer.hpp"
-#include "Model2D.hpp"
 #include "Model2DFactory.hpp"
+#include "Model3DFactory.hpp"
 
+#include <memory>
 using namespace graphics;
 using namespace input;
 
@@ -62,27 +61,10 @@ void Engine::OnUpdate() {
 
         std::lock_guard<std::mutex> lock(graphicsMutex); // Lock graphicsManager for thread-safe access
         if (modelType == 0) { // Random Circle
-            auto circle = Model2DFactory::CreateCircle();
-            circle->SetCenter(Coordinates2D(mouseX, mouseY));
-            circle->SetRadius(50 + rand() % 50);
-            circle->SetColor(randomColor);
-            graphicsManager->AddShape(rand(), std::dynamic_pointer_cast<graphics::Model2D>(circle));
+            auto circle = Model3DFactory::CreateSphere();
+            graphicsManager->AddShape(rand(), circle);
         }
-        else if (modelType == 1) { // Random Rectangle
-            auto rectangle = Model2DFactory::CreateRectangle();
-            rectangle->SetUpperLeft(Coordinates2D(mouseX - 50 , mouseY - 50));
-            rectangle->SetBottomRight(Coordinates2D(mouseX + 50 , mouseY + 50 ));
-            rectangle->SetColor(randomColor);
-            graphicsManager->AddShape(rand(), std::dynamic_pointer_cast<graphics::Model2D>(rectangle));
-        }
-        else if (modelType == 2) { // Random Line
-            auto line = Model2DFactory::CreateLine();
-            line->SetStartPoint(Coordinates2D(mouseX , mouseY ));
-            line->SetEndPoint(Coordinates2D(mouseX + 100 , mouseY + 100));
-            line->SetThickness(2 + rand() % 3);
-            line->SetColor(randomColor);
-            graphicsManager->AddShape(rand(), std::dynamic_pointer_cast<graphics::Model2D>(line));
-        }
+
     }
 }
 

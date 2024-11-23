@@ -13,6 +13,7 @@
 #include "Plane.hpp"
 #include "Line3D.hpp"
 #include "GraphicsConfig.hpp"
+
 namespace graphics {
 
 

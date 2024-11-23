@@ -6,7 +6,7 @@
 
 namespace graphics {
 
-    class Sphere : public Model, public Model3D {
+    class Sphere : public Model3D {
     public:
         // Constructors
         Sphere();  // Default constructor

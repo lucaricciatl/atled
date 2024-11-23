@@ -3,6 +3,10 @@
 #include <cassert> 
 
 
+namespace {
+    // Rename raylib struct to avoid conflicts
+    typedef raylib::Rectangle RectangleStruct;
+}  // namespace
 namespace graphics {
 
     Rectangle::Rectangle(const Coordinates2D& aUpperLeft, const Coordinates2D& aBottomRight)
