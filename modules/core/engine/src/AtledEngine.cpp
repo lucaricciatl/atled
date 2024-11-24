@@ -10,7 +10,8 @@
 #include <FrameComponent.hpp>
 #include <ResourcesSystem.hpp>
 
-AtledEngine::AtledEngine(std::unique_ptr<input::InputManager> inputMgr,
+AtledEngine::AtledEngine(
+	std::unique_ptr<input::InputManager> inputMgr,
 	std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
 	std::shared_ptr<graphics::CameraManager> cameraMgr,
     std::shared_ptr<resources::ResourceManager> resMgr

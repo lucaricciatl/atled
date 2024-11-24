@@ -10,6 +10,7 @@
 #include "CoreEngine.hpp"
 #include "IResourceManager.hpp"
 #include "ResourceManagerBuilder.hpp"
+
 using namespace input;
 using namespace graphics;
 using namespace resources;
@@ -170,6 +171,7 @@ std::unique_ptr<T> EngineBuilder<T>::Build() {
         std::move(resourceManager)
     );
 }
+
 
 
 } // namespace engine
