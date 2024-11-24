@@ -6,6 +6,9 @@
 #include <unordered_map>
 #include <memory>
 #include <string>
+#include "Resouce.hpp"
+
+namespace resources {
 
 /**
  * @brief A concrete implementation of the IResourceManager interface.
@@ -41,4 +44,5 @@ private:
     std::unordered_map<ResourceType, LoaderFunc> loaders; ///< Map of resource loaders.
 };
 
+}
 #endif // RESOURCE_MANAGER_HPP

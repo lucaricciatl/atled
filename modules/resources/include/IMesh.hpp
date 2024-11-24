@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 
+namespace resources {
+
 class IMesh {
 public:
     virtual ~IMesh() = default;
@@ -27,4 +29,5 @@ public:
     // Other mesh-related methods
 };
 
+}
 #endif // IMESH_HPP

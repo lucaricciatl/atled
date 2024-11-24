@@ -3,6 +3,8 @@
 
 #include <string>
 
+namespace resources {
+
 class ITexture {
 public:
     virtual ~ITexture() = default;

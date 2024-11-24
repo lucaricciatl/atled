@@ -3,7 +3,7 @@
 
 #include "raylib.hpp"
 
-namespace graphics {
+namespace resources {
 
 // Abstract class for font loading and unloading operations
 class IFontLoader {

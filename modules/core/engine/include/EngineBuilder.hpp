@@ -1,20 +1,22 @@
 #pragma once
 
 #include <memory>
+#include <iostream>
 #include "IEngine.hpp"
 #include "InputManagerBuilder.hpp"
 #include "GraphicManagerFactory.hpp"
 #include "CameraFactory.hpp"
 #include "CameraManager.hpp"
 #include "CoreEngine.hpp"
-#include "CameraManager.hpp"
-
+#include "IResourceManager.hpp"
+#include "ResourceManagerBuilder.hpp"
 using namespace input;
 using namespace graphics;
+using namespace resources;
 
 namespace engine {
 
-enum class EngineImplementation{
+enum class EngineImplementation {
     Raylib
 };
 
@@ -30,20 +32,24 @@ public:
     EngineBuilder& SetCameraType(CameraType type);
     EngineBuilder& SetGraphicsConfig(const GraphicsConfig& config);
     EngineBuilder& SetTargetFramerate(unsigned int frameRate);
-    EngineBuilder& SetWorldType(WorldType type);
+    EngineBuilder& SetResourceManagerType(ResourceManagerType type);
+    EngineBuilder &SetWorldType(WorldType type);
     EngineBuilder& SetDefaultImplementation();
     EngineBuilder& SetImplementation(EngineImplementation impl);
+
     // Build method to create an instance of the specified engine type
     std::unique_ptr<T> Build();
 
 private:
-    KeyboardType keyboardType = KeyboardType::Invalid; // Default type
-    MouseType mouseType = MouseType::Invalid;          // Default type
+    KeyboardType keyboardType = KeyboardType::Invalid;
+    MouseType mouseType = MouseType::Invalid;
     GraphicsType graphicsType = GraphicsType::Invalid;
     CameraType cameraType = CameraType::Invalid;
     WorldType worldType = WorldType::World2D;
-    GraphicsConfig gfxConfig;                              // Default config
-    unsigned int targetFramerate = 60;                // Default frame rate
+    ResourceManagerType resourceManagerType  = ResourceManagerType::Default;
+    GraphicsConfig gfxConfig;
+    unsigned int targetFramerate = 60;
+
 };
 
 // Implementation of the template methods
@@ -91,24 +97,31 @@ EngineBuilder<T>& EngineBuilder<T>::SetTargetFramerate(unsigned int frameRate) {
 }
 
 template <typename T>
-EngineBuilder<T>& EngineBuilder<T>::SetDefaultImplementation() {
-    return SetKeyboardType(input::KeyboardType::Raylib)
-        .SetMouseType(input::MouseType::Raylib)
-        .SetGraphicsType(graphics::GraphicsType::Raylib)
-        .SetWorldType(graphics::WorldType::World3D)
-        .SetTargetFramerate(60);
+EngineBuilder<T>& EngineBuilder<T>::SetResourceManagerType(ResourceManagerType type) {
+    resourceManagerType = type;
     return *this;
+}
+
+template <typename T>
+EngineBuilder<T>& EngineBuilder<T>::SetDefaultImplementation() {
+    return SetKeyboardType(KeyboardType::Raylib)
+        .SetMouseType(MouseType::Raylib)
+        .SetGraphicsType(GraphicsType::Raylib)
+        .SetWorldType(WorldType::World3D)
+        .SetResourceManagerType(ResourceManagerType::Default)
+        .SetTargetFramerate(60);
 }
 
 template <typename T>
 EngineBuilder<T>& EngineBuilder<T>::SetImplementation(EngineImplementation impl) {
     if (impl == EngineImplementation::Raylib) {
-        return SetKeyboardType(input::KeyboardType::Raylib)
-            .SetMouseType(input::MouseType::Raylib)
-            .SetGraphicsType(graphics::GraphicsType::Raylib)
-            .SetWorldType(graphics::WorldType::World3D)
+        return SetKeyboardType(KeyboardType::Raylib)
+            .SetMouseType(MouseType::Raylib)
+            .SetGraphicsType(GraphicsType::Raylib)
+            .SetWorldType(WorldType::World3D)
+            .SetResourceManagerType(ResourceManagerType::Default)
             .SetTargetFramerate(60);
-    };
+    }
     return *this;
 }
 
@@ -120,37 +133,43 @@ std::unique_ptr<T> EngineBuilder<T>::Build() {
                 .SetMouseType(mouseType);
     auto inputManager = inputBuilder.Build();
 
-    // Create GraphicsManager using GraphicsManagerFactory
+    // Build GraphicsManager using GraphicsManagerFactory
     auto graphicsManager = GraphicsManagerFactory::CreateGraphicsManager(graphicsType);
     graphicsManager->SetConfigs(gfxConfig);
     graphicsManager->SetTargetFramerate(targetFramerate);
-    
-    auto CameraMng = std::make_shared<CameraManager>();
 
-if (worldType == WorldType::World2D) {
-    // Create and add a 2D camera
-    auto cam = CameraFactory::createCamera2D(CameraType2D::Raylib);
-    CameraMng->AddCamera(cam);
-    CameraMng->SetActiveCamera(0);  // Set the newly added camera as active
-    std::cout << "Initialized 2D Camera" << std::endl;
+    // Build ResourceManager using ResourceManagerBuilder
+    ResourceManagerBuilder resourceBuilder;
+    resourceBuilder.SetType(resourceManagerType);
+    auto resourceManager = resourceBuilder.Build();
+
+    // Configure CameraManager
+    auto cameraManager = std::make_shared<CameraManager>();
+    if (worldType == WorldType::World2D) {
+        auto cam = CameraFactory::createCamera2D(CameraType2D::Raylib);
+        cameraManager->AddCamera(cam);
+        cameraManager->SetActiveCamera(0);
+        std::cout << "Initialized 2D Camera" << std::endl;
+    } else if (worldType == WorldType::World3D) {
+        auto cam = CameraFactory::createCamera3D(CameraType3D::Raylib);
+        cameraManager->AddCamera(cam);
+        cameraManager->SetActiveCamera(0);
+        std::cout << "Initialized 3D Camera" << std::endl;
+    } else {
+        throw std::runtime_error("Unsupported world type specified!");
+    }
+
+    // Associate CameraManager with GraphicsManager
+    graphicsManager->SetCameraMng(cameraManager);
+
+    // Create and return the engine instance
+    return std::make_unique<T>(
+        std::move(inputManager), 
+        std::move(graphicsManager), 
+        std::move(cameraManager), 
+        std::move(resourceManager)
+    );
 }
-else if (worldType == WorldType::World3D) {
-    // Create and add a 3D camera
-    auto cam = CameraFactory::createCamera3D(CameraType3D::Raylib);
-    CameraMng->AddCamera(cam);
-    CameraMng->SetActiveCamera(0);  // Set the newly added camera as active
-    std::cout << "Initialized 3D Camera" << std::endl;
-}
-else {
-    std::cerr << "Error: Unsupported world type!" << std::endl;
-}
 
-
-    graphicsManager->SetCameraMng(CameraMng);
-
-
-    // Create an instance of T with the configured InputManager and GraphicsManager
-    return std::make_unique<T>(std::move(inputManager), std::move(graphicsManager),std::move(CameraMng));
-}
 
 } // namespace engine

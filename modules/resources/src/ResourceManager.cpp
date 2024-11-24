@@ -1,5 +1,8 @@
 #include "ResourceManager.hpp"
+#include "Resouce.hpp"
 #include <stdexcept>
+
+using namespace resources;
 
 ResourceManager::ResourceManager() = default;
 

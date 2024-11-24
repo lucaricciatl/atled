@@ -5,6 +5,20 @@
 #include <memory>
 #include <stdexcept>
 
+namespace resources {
+
+/**
+ * @brief Enum class representing resource types.
+ */
+enum class ResourceType {
+    Mesh,
+    Texture,
+    Material,
+    Shader,
+    Audio,
+    Unknown
+};
+
 /**
  * @brief Resource class template to handle different resource types (e.g., IMesh, ITexture, IMaterial).
  * 
@@ -76,5 +90,7 @@ public:
 private:
     std::shared_ptr<T> resource; ///< Shared pointer to the underlying resource.
 };
+
+}
 
 #endif // RESOURCE_HPP

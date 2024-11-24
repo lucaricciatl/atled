@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 
+namespace resources {
+
 class ITexture;
 
 class IMaterial {
@@ -30,4 +32,5 @@ public:
     // Other material-related methods
 };
 
+}
 #endif // IMATERIAL_HPP

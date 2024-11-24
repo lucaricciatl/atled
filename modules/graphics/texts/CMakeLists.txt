@@ -22,7 +22,6 @@ target_link_libraries(${LIB_NAME} PUBLIC
     raylibcpp                                 # Link the raylib library
 )
 
-
 set_target_properties(${LIB_NAME} PROPERTIES FOLDER "modules/graphics")
 # Optionally link this library with other dependencies
 # target_link_libraries(${LIB_NAME} <other_dependencies>)
