@@ -14,6 +14,7 @@ add_library(${LIB_NAME} ${SOURCES})
 
 # Include directories for this library
 target_include_directories(${LIB_NAME} PUBLIC 
+${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
     ${CMAKE_CURRENT_SOURCE_DIR}/include   # Include local project headers
     ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
 )

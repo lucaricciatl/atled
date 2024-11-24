@@ -21,15 +21,6 @@ target_link_libraries(graphics INTERFACE camera context display graphics_manager
 set_target_properties(graphics PROPERTIES FOLDER "modules")
 
 
-
-
-
-
-
-
-
-
-
 #set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
 #file(GLOB SHADER_FILES ${SHADER_DIR}/*)
 #set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
