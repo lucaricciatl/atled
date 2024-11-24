@@ -18,14 +18,9 @@ int main() {
     // Create an entity and add components
     auto entity = coreEngine->CreateEntity();
 
-    // Add a FrameComponent to the entity
-    physics::Position defaultPosition(0.0, 0.0, 0.0);
-    math::Quaternion defaultOrientation(1.0, 0.0, 0.0, 0.0);
 
-    entity->AddComponent<FrameComponent>(
-        defaultPosition,    // Initial position
-        defaultOrientation  // Initial orientation
-    );
+
+
     // Start the engine (game loop begins)
     coreEngine->Start();
 
