@@ -33,3 +33,6 @@ target_link_libraries(${LIB_NAME} PUBLIC
 # Define include and library directories based on the library name
 set(${LIB_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)  # Path to include directory
 set(${LIB_NAME}_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)          # Path to library directory
+
+
+set_target_properties(${LIB_NAME} PROPERTIES FOLDER "modules/graphics")

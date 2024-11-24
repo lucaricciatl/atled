@@ -1,6 +1,9 @@
 #include "Entity.hpp"
 #include <stdexcept>
 #include <functional>
+#include <Position.hpp>
+#include <Quaternion.hpp>
+#include <FrameComponent.hpp>
 
 
 // Constructor
@@ -114,4 +117,22 @@ void Entity::OnChildAdded(Entity* child) {
 // Hook: Called when a child is removed
 void Entity::OnChildRemoved(Entity* child) {
     // Override to implement custom behavior
+}
+
+void Entity::SetDefaultState() {
+    // Default position and orientation
+    physics::Position defaultPosition(0.0, 0.0, 0.0);
+    math::Quaternion defaultOrientation(1.0, 0.0, 0.0, 0.0);
+
+    // If the entity has a parent, use its position and orientation
+    if (parent) {
+        auto parentFrame = parent->GetComponent<FrameComponent>();
+        if (parentFrame) {
+            defaultPosition = parentFrame->GetPosition();
+            defaultOrientation = parentFrame->GetOrientation();
+        }
+    }
+
+    // Add a default FrameComponent to the entity
+    AddComponent<FrameComponent>(defaultPosition, defaultOrientation);
 }

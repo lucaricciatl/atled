@@ -40,7 +40,20 @@ set_target_properties(external PROPERTIES
     FOLDER "modules/external"
 )
 
+# Set properties for the external library
+set_target_properties(raylibcpp PROPERTIES
+    FOLDER "modules/external"
+)
 
+# Set properties for the external library
+set_target_properties(raylib PROPERTIES
+    FOLDER "modules/external"
+)
+
+# Set properties for the external library
+set_target_properties(uninstall PROPERTIES
+    FOLDER "modules/external"
+)
 ## Organize raylib and other targets under a unified folder structure
 #set_target_properties(raylib PROPERTIES FOLDER "modules/external/raylib")
 #

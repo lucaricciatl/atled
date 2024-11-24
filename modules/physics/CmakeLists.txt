@@ -26,3 +26,7 @@ set_target_properties(physics PROPERTIES
 target_compile_definitions(physics PUBLIC
     PHYSICS_MODULE_ENABLED=1        # Example definition
 )
+
+add_subdirectory(units)
+
+set_target_properties(physics PROPERTIES FOLDER "modules/physycs")
