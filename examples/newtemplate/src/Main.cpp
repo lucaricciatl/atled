@@ -6,6 +6,8 @@
 #include "FrameComponent.hpp" // Include the FrameComponent
 #include <memory>
 #include "EventBus.hpp"
+#include "ShapeComponent.hpp"
+#include <Circle.hpp>
 
 int main() {
     // Create the engine
@@ -17,7 +19,7 @@ int main() {
 
     // Create an entity and add components
     auto entity = coreEngine->CreateEntity();
-
+    entity->AddComponent<ShapeComponent>();
 
 
 
