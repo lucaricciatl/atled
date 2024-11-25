@@ -2,7 +2,7 @@
 #define RAYLIBMOUSE_HPP
 
 #include "IMouse.hpp"
-#include "raylib.h"
+#include "raylib.hpp"
 #include <atomic>
 #include <thread>
 

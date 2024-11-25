@@ -3,6 +3,10 @@
 #include <cassert> 
 
 
+namespace {
+    // Rename raylib struct to avoid conflicts
+    typedef raylib::Rectangle RectangleStruct;
+}  // namespace
 namespace graphics {
 
     Rectangle::Rectangle(const Coordinates2D& aUpperLeft, const Coordinates2D& aBottomRight)
@@ -57,7 +61,7 @@ void Rectangle::Draw() {
 
   Vector2 origin = {(rect.width / 2), (rect.height / 2)};
 
-  DrawRectanglePro(rect, origin, mRotation, mColor);
+   raylib::DrawRectanglePro(rect, origin, mRotation, mColor);
 }
 
 }  // namespace graphics

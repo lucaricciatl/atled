@@ -1,6 +1,5 @@
 #include "Polygon.hpp"
 #include "Triangle.hpp"
-#include "Triangulation.hpp"
 
 namespace graphics {
 

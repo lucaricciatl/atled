@@ -7,15 +7,18 @@
 #include <memory>
 #include <functional>
 #include <vector>
+#include <ResourceManager.hpp>
 namespace engine {
 
 
         class CoreEngine : public IEngine {
         public:
             // Constructor with unique_ptr arguments
-            CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
+            CoreEngine(
+                std::unique_ptr<input::InputManager> inputMgr,
                 std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
-                std::shared_ptr<graphics::CameraManager> cameraMgr);
+                std::shared_ptr<graphics::CameraManager> cameraMgr,
+                std::shared_ptr<resources::ResourceManager> resMgr);
             ~CoreEngine() override = default;
 
             void Stop() override;

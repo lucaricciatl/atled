@@ -1,9 +1,8 @@
 #pragma once
-#include "LayerManager.hpp"
 #include "ICamera.hpp"
 #include "IWindow.hpp"
 #include "GraphicsConfig.hpp"
-
+#include <memory>
 namespace graphics {
 class GraphicsContext {
  public:
@@ -18,11 +17,11 @@ class GraphicsContext {
   void SetFlags(std::shared_ptr<GraphicsConfig> flags);
 
   // set
-  void SetFlag(::ConfigFlags flag);
+  void SetFlag(raylib::ConfigFlags flag);
   void SetTitle(const char* title);
   void SetSize(int width, int height);
   // unset 
-  void UnsetFlag(::ConfigFlags flag);
+  void UnsetFlag(raylib::ConfigFlags flag);
   // get
   int GetWidth() const;
   int GetHeight() const;
@@ -30,7 +29,7 @@ class GraphicsContext {
   void SetTargetFPS(int fps);
   void BeginDrawing() const;
   void EndDrawing() const ;
-  void Clear(::Color aColor);
+  void Clear(raylib::Color aColor);
   bool isReady;
 
  private:

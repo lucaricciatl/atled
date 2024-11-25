@@ -6,7 +6,7 @@
 
 namespace graphics {
 
-class Circle:public Model, public Model2D {
+class Circle: public Model2D {
 private:
     Coordinates2D mCenter;       
     float mRadius;               
@@ -20,6 +20,8 @@ public:
     void SetCenter(const Coordinates2D& aCenter);
 
     void Draw() override ;
+
+
 };
 
 }

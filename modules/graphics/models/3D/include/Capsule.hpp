@@ -2,11 +2,11 @@
 #define CAPSULE_HPP
 
 #include "Model3D.hpp"
-#include "raylib.h"  // For Vector3 and Color types
+#include "raylib.hpp"  // For Vector3 and Color types
 
 namespace graphics {
-
-class Capsule : public Model,public Model3D {
+using namespace raylib;
+class Capsule : public Model3D {
 public:
     // Constructors
     Capsule();

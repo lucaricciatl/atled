@@ -2,11 +2,11 @@
 #define PLANE_HPP
 
 #include "Model3D.hpp"
-#include "raylib.h"  // For Vector3, Vector2, and Color types
+#include "raylib.hpp"  // For Vector3, Vector2, and Color types
 
 namespace graphics {
 
-class Plane : public Model,public Model3D {
+class Plane : public Model3D {
 public:
     // Constructors
     Plane();

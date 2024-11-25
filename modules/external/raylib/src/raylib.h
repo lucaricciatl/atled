@@ -89,6 +89,7 @@
 // Function specifiers in case library is build/used as a shared library
 // NOTE: Microsoft specifiers to tell compiler that symbols are imported/exported from a .dll
 // NOTE: visibility("default") attribute makes symbols "visible" when compiled with -fvisibility=hidden
+
 #if defined(_WIN32)
     #if defined(__TINYC__)
         #define __declspec(x) __attribute__((x))
@@ -105,7 +106,7 @@
 #endif
 
 #ifndef RLAPI
-    #define RLAPI       // Functions defined as 'extern' by default (implicit specifiers)
+    #define RLAPI      // Functions defined as 'extern' by default (implicit specifiers)
 #endif
 
 //----------------------------------------------------------------------------------

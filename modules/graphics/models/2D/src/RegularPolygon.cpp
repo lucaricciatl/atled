@@ -1,5 +1,5 @@
 #include "RegularPolygon.hpp"
-#include "raylib.h"
+#include "raylib.hpp"
 #include <cassert>  // For assert
 
 
@@ -43,7 +43,7 @@ void RegularPolygon::Draw() {
     Color polygonColor = { 255, 0, 0, 255 };  // Red color with full opacity
 
     // Call the DrawPoly function from raylib
-    DrawPoly(centerVector, sides, static_cast<float>(radius), 0.0f, polygonColor);
+     raylib::DrawPoly(centerVector, sides, static_cast<float>(radius), 0.0f, polygonColor);
 }
 
 

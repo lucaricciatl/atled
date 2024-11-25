@@ -25,12 +25,12 @@ public:
     Frame& operator=(const Frame& other);
 
     // Accessors
-    const Position& getPosition() const;
-    math::Quaternion getOrientation() const;
+    const Position& GetPosition() const;
+    math::Quaternion GetOrientation() const;
 
     // Mutators
-    void setPosition(const Position& position);
-    void setOrientation(const math::Quaternion& orientation);
+    void SetPosition(const Position& position);
+    void SetOrientation(const math::Quaternion& orientation);
 
     // Frame operations
     void translate(double dx, double dy, double dz);

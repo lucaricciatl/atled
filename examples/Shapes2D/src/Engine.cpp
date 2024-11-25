@@ -13,6 +13,8 @@
 #include "Sphere.hpp"
 #include "ITextDrawer.hpp"
 #include "RaylibtextDrawer.hpp"
+#include "Model2D.hpp"
+#include "Model2DFactory.hpp"
 
 using namespace graphics;
 using namespace input;
@@ -48,8 +50,8 @@ void Engine::OnUpdate() {
     float scaleX = cameraManager->GetCameraZoom();
     float scaleY = cameraManager->GetCameraZoom();
 
-    SetMouseOffset(offsetX, offsetY);   // Adjust mouse offset based on camera target
-    SetMouseScale(1/scaleX, 1/scaleY);     // Scale mouse position to match zoom level
+    raylib::SetMouseOffset(offsetX, offsetY);   // Adjust mouse offset based on camera target
+    raylib::SetMouseScale(1/scaleX, 1/scaleY);     // Scale mouse position to match zoom level
 
     // Existing model creation logic
     if (inputManager->IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
@@ -64,14 +66,14 @@ void Engine::OnUpdate() {
             circle->SetCenter(Coordinates2D(mouseX, mouseY));
             circle->SetRadius(50 + rand() % 50);
             circle->SetColor(randomColor);
-            graphicsManager->AddShape(rand(), std::dynamic_pointer_cast<graphics::Model2D>(circle));
+            graphicsManager->AddShape(rand(), circle);
         }
         else if (modelType == 1) { // Random Rectangle
             auto rectangle = Model2DFactory::CreateRectangle();
             rectangle->SetUpperLeft(Coordinates2D(mouseX - 50 , mouseY - 50));
             rectangle->SetBottomRight(Coordinates2D(mouseX + 50 , mouseY + 50 ));
             rectangle->SetColor(randomColor);
-            graphicsManager->AddShape(rand(), std::dynamic_pointer_cast<graphics::Model2D>(rectangle));
+            graphicsManager->AddShape(rand(), rectangle);
         }
         else if (modelType == 2) { // Random Line
             auto line = Model2DFactory::CreateLine();
@@ -79,7 +81,7 @@ void Engine::OnUpdate() {
             line->SetEndPoint(Coordinates2D(mouseX + 100 , mouseY + 100));
             line->SetThickness(2 + rand() % 3);
             line->SetColor(randomColor);
-            graphicsManager->AddShape(rand(), std::dynamic_pointer_cast<graphics::Model2D>(line));
+            graphicsManager->AddShape(rand(), line);
         }
     }
 }

@@ -2,6 +2,7 @@
 #include "CoreEngine.hpp"
 #include <iostream>
 #include <memory>
+#include <ResourceManager.hpp>
 
 
 namespace engine {
@@ -11,10 +12,14 @@ namespace engine {
         }
     }
 
-        CoreEngine::CoreEngine(std::unique_ptr<input::InputManager> inputMgr,
+        CoreEngine::CoreEngine(
+            std::unique_ptr<input::InputManager> inputMgr,
             std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
-            std::shared_ptr<graphics::CameraManager> cameraMgr)
-            : inputManager(std::move(inputMgr)), graphicsManager(std::move(graphicsMgr)), cameraManager(std::move(cameraMgr)) {}
+            std::shared_ptr<graphics::CameraManager> cameraMgr,
+            std::shared_ptr<resources::ResourceManager> resMgr)
+            : inputManager(std::move(inputMgr)), 
+              graphicsManager(std::move(graphicsMgr)), 
+              cameraManager(std::move(cameraMgr)) {}
 
         void CoreEngine::Init() {
             inputManager->Init(); // Initialize input manager

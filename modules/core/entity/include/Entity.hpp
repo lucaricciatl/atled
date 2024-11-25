@@ -25,7 +25,7 @@ public:
     void Update(double deltaTime);
 
     void SetServiceProvider(std::shared_ptr<ServiceProvider> aServiceProvider);
-
+    void SetDefaultState();
     // Parent-Child Management
     void SetParent(Entity* newParent);
     Entity* GetParent() const;

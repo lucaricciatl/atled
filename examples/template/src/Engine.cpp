@@ -14,7 +14,8 @@
 #include <cmath> 
 #include "GraphicsManager.hpp"
 #include "Plane.hpp"
-#include <raymath.h>
+#include <raylib.hpp>
+#include "../../../modules/external/raylib/src/raymath.h"
 
 using namespace graphics;
 using namespace input;
@@ -67,7 +68,7 @@ void Engine::OnUpdate() {
         Shutdown();
     }
 
-    if (IsCursorOnScreen()) {
+    if (raylib::IsCursorOnScreen()) {
         // Handle mouse input for camera rotation
         float mouseDeltaX = inputManager->GetMouseDeltaX() * mouseSensitivity;
         float mouseDeltaY = inputManager->GetMouseDeltaY() * mouseSensitivity;

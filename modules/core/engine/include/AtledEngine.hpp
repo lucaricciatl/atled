@@ -4,12 +4,14 @@
 #include <System.hpp>
 #include <vector>
 #include <ServiceProvider.hpp>
+#include <ResourceManager.hpp>
 
 class AtledEngine {
 public:
    AtledEngine(std::unique_ptr<input::InputManager> inputMgr,
        std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
-       std::shared_ptr<graphics::CameraManager> cameraMgr
+       std::shared_ptr<graphics::CameraManager> cameraMgr,
+       std::shared_ptr<resources::ResourceManager> resMgr
        );
 
   void Init();

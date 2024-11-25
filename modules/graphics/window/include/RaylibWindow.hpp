@@ -1,10 +1,9 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
-#include "raylib.h"  // Include raylib (or another library) for window management functions
+#include "raylib.hpp"  // Include raylib (or another library) for window management functions
 #include "IWindow.hpp"
 
-namespace raylib{
 class RaylibWindow : public IWindow {
 public:
     // Constructor and Destructor
@@ -50,5 +49,5 @@ public:
     void EnableEventWaiting(void);
     void DisableEventWaiting(void);
 };
-}
+
 #endif // WINDOW_HPP

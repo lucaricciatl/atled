@@ -2,7 +2,7 @@
 #define RAYLIBSHADER_HPP
 
 #include "IShader.hpp"
-#include "raylib.h"
+#include "raylib.hpp"
 
 class RaylibShader : public IShader {
 public:
@@ -17,7 +17,7 @@ public:
     void Unload() override;
 
 private:
-    Shader shader;
+    raylib::Shader shader;
     bool isLoaded;
 };
 

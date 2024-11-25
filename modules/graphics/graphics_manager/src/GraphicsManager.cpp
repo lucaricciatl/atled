@@ -8,8 +8,9 @@
 #include "Model2DFactory.hpp"
 #include "Model2D.hpp"
 #include "GraphicsContext.hpp"
-#include "PolyLine2D.hpp"
-#include "PolygonBuffer2D.hpp"
+#include <vector>
+#include "raylib.hpp"
+#include "Point2D.hpp"
 #include "Cube.hpp"
 
 namespace graphics {
@@ -77,7 +78,7 @@ void GraphicsManager::Render() {
 }
 
 
-void GraphicsManager::Clear(::Color aColor) {
+void GraphicsManager::Clear(raylib::Color aColor) {
     mContext->Clear(aColor);
 }
 

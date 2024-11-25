@@ -25,15 +25,15 @@ Frame& Frame::operator=(const Frame& other) {
 }
 
 // Accessors
-const Position& Frame::getPosition() const { return position; }
-math::Quaternion Frame::getOrientation() const { return orientation; }
+const Position& Frame::GetPosition() const { return position; }
+math::Quaternion Frame::GetOrientation() const { return orientation; }
 
 // Mutators
-void Frame::setPosition(const Position& position) {
+void Frame::SetPosition(const Position& position) {
     this->position = position;
 }
 
-void Frame::setOrientation(const math::Quaternion& orientation) {
+void Frame::SetOrientation(const math::Quaternion& orientation) {
     this->orientation = orientation.normalized();
 }
 

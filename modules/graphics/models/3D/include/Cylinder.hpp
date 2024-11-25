@@ -2,11 +2,11 @@
 #define CYLINDER_HPP
 
 #include "Model3D.hpp"
-#include "raylib.h"  // For Vector3 and Color types
+#include "raylib.hpp"  // For Vector3 and Color types
 
 namespace graphics {
-
-class Cylinder :public Model, public Model3D {
+using namespace raylib;
+class Cylinder : public Model3D {
 public:
     // Constructors
     Cylinder();

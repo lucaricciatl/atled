@@ -1,6 +1,7 @@
 #include "CameraManager.hpp"
 #include <chrono>
 #include <thread>
+#include <iostream>
 
 namespace graphics {
 

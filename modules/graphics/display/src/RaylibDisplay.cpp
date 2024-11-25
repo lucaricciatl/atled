@@ -16,61 +16,61 @@ void* RaylibDisplay::GetHandle(void) {
 }
 
 int RaylibDisplay::GetScreenWidth(void) {
-    return GetScreenWidth();
+    return raylib::GetScreenWidth();
 }
 
 int RaylibDisplay::GetScreenHeight(void) {
-    return GetScreenHeight();
+    return raylib::GetScreenHeight();
 }
 
 int RaylibDisplay::GetRenderWidth(void) {
-    return GetRenderWidth();
+    return raylib::GetRenderWidth();
 }
 
 int RaylibDisplay::GetRenderHeight(void) {
-    return GetRenderHeight();
+    return raylib::GetRenderHeight();
 }
 
 int RaylibDisplay::GetMonitorCount(void) {
-    return GetMonitorCount();
+    return raylib::GetMonitorCount();
 }
 
 int RaylibDisplay::GetCurrentMonitor(void) {
-    return GetCurrentMonitor();
+    return raylib::GetCurrentMonitor();
 }
 
-Vector2 RaylibDisplay::GetMonitorPosition(int monitor) {
-    return GetMonitorPosition(monitor);
+raylib::Vector2 RaylibDisplay::GetMonitorPosition(int monitor) {
+    return raylib::GetMonitorPosition(monitor);
 }
 
 int RaylibDisplay::GetMonitorWidth(int monitor) {
-    return GetMonitorWidth(monitor);
+    return raylib::GetMonitorWidth(monitor);
 }
 
 int RaylibDisplay::GetMonitorHeight(int monitor) {
-    return GetMonitorHeight(monitor);
+    return raylib::GetMonitorHeight(monitor);
 }
 
 int RaylibDisplay::GetMonitorPhysicalWidth(int monitor) {
-    return GetMonitorPhysicalWidth(monitor);
+    return raylib::GetMonitorPhysicalWidth(monitor);
 }
 
 int RaylibDisplay::GetMonitorPhysicalHeight(int monitor) {
-    return GetMonitorPhysicalHeight(monitor);
+    return raylib::GetMonitorPhysicalHeight(monitor);
 }
 
 int RaylibDisplay::GetMonitorRefreshRate(int monitor) {
-    return GetMonitorRefreshRate(monitor);
+    return raylib::GetMonitorRefreshRate(monitor);
 }
 
-Vector2 RaylibDisplay::GetPosition(void) {
-    return GetWindowPosition();
+raylib::Vector2 RaylibDisplay::GetPosition(void) {
+    return raylib::GetWindowPosition();
 }
 
-Vector2 RaylibDisplay::GetScaleDPI(void) {
-    return GetWindowScaleDPI();
+raylib::Vector2 RaylibDisplay::GetScaleDPI(void) {
+    return raylib::GetWindowScaleDPI();
 }
 
 const char* RaylibDisplay::GetMonitorName(int monitor) {
-    return GetMonitorName(monitor);
+    return raylib::GetMonitorName(monitor);
 }

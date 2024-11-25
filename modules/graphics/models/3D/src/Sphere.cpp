@@ -1,5 +1,5 @@
 #include "Sphere.hpp"
-#include "raylib.h"
+#include "raylib.hpp"
 
 namespace graphics {
     // Setters
@@ -62,11 +62,11 @@ void Sphere::Draw() {
     // Call to Raylib's DrawSphere function to render the sphere
     if (ShapeIsEnabled) {
 
-    DrawSphereEx(mCenterPos, mRadius, mRings , mSlices, mColor);
+    raylib::DrawSphereEx(mCenterPos, mRadius, mRings , mSlices, mColor);
     }
     if (WireframeIsEnabled) {
 
-    DrawSphereWires(mCenterPos, mRadius, mRings, mSlices, mColor);
+    raylib::DrawSphereWires(mCenterPos, mRadius, mRings, mSlices, mColor);
     }
 }
 

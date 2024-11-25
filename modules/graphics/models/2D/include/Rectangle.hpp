@@ -5,13 +5,9 @@
 
 #include "Model2D.hpp"
 
-namespace {
-// Rename raylib struct to avoid conflicts
-typedef ::Rectangle RectangleStruct;
-}  // namespace
 namespace graphics {
 
-class Rectangle : public Model,public Model2D {
+class Rectangle : public Model2D {
  private:
   Coordinates2D mUpperLeft;    
   Coordinates2D mBottomRight; 

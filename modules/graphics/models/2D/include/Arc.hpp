@@ -9,7 +9,7 @@
 
 namespace graphics {
 
-class Arc : public Model, public Model2D {
+class Arc : public Model2D {
  public:
   Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
       double aEndAngle, double thickness, const Color& aColor);

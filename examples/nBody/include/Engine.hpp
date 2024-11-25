@@ -5,6 +5,9 @@
 #include "InputManager.hpp"            // Include the full definition of InputManager
 #include "IGraphicManager.hpp"          // Include the full definition of IGraphicManager
 #include "NBodySimulation.hpp"
+#include "EngineBuilder.hpp"
+#include "CoreEngine.hpp"
+
 
 class Engine : public engine::CoreEngine {
 public:

@@ -3,75 +3,53 @@ cmake_minimum_required(VERSION 3.10)
 
 project(graphics)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Collect all paths (both files and directories) recursively
-file(GLOB HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/**/include" "${CMAKE_CURRENT_SOURCE_DIR}/**/**/include")
-
-file(GLOB HEADERFILE "${CMAKE_CURRENT_SOURCE_DIR}/**/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/**/**/*.hpp")
-# Debugging: Print the collected include directories
-message("Include directories found: ${HEADERS}" ${HEADERFILE})
-
-file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
-
-add_library(graphics STATIC ${SOURCES} )
+add_library(graphics INTERFACE)
 
 
-target_include_directories(graphics PUBLIC
-    ${INCLUDE_DIRS}
-)
+add_subdirectory(camera)
+add_subdirectory(context)
+add_subdirectory(display)
+add_subdirectory(graphics_manager)
+add_subdirectory(models)
+add_subdirectory(shader)
+add_subdirectory(texts)
+add_subdirectory(window)
 
-
-# Link gfx to the graphics library
-target_link_libraries(graphics PUBLIC common external)
-
-# Specify include directories for the submodule
-target_include_directories(graphics PUBLIC
-    ${HEADERS}
-    ${CMAKE_CURRENT_SOURCE_DIR}/../common/include
-)
-
-
+target_link_libraries(graphics INTERFACE camera context display graphics_manager models shader texts window)
 
 set_target_properties(graphics PROPERTIES FOLDER "modules")
 
 
-
-set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
-
-
-file(GLOB SHADER_FILES ${SHADER_DIR}/*)
-
-
-set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
-
-# Collect all shader files
-file(GLOB SHADER_FILES ${SHADER_DIR}/*)
-
-
-add_custom_command(
-    TARGET graphics POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory
-        ../../Debug/resources/shaders
-    COMMENT "Creating resources/shaders directory in Debug directory"
-)
-
-# Collect all shader files
-file(GLOB SHADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*)
-
-# Copy shader files to the resources/shaders folder after building the graphics target
-foreach(SHADER_FILE ${SHADER_FILES})
-    get_filename_component(SHADER_NAME ${SHADER_FILE} NAME)
-
-    # Debug: Print the name and source path of the shader
-    message(STATUS "Copying shader file: ${SHADER_FILE} as ${SHADER_NAME}")
-
-    add_custom_command(
-        TARGET graphics POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            ${SHADER_FILE}
-            $<TARGET_FILE_DIR:graphics>../../../../Debug/resources/shaders/${SHADER_NAME}
-        COMMENT "Copying shader: ${SHADER_NAME} to $<TARGET_FILE_DIR:graphics>/resources/shaders"
-    )
-endforeach()
+#set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
+#file(GLOB SHADER_FILES ${SHADER_DIR}/*)
+#set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
+## Collect all shader files
+#file(GLOB SHADER_FILES ${SHADER_DIR}/*)
+#
+#
+#add_custom_command(
+#    TARGET graphics POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E make_directory
+#        ../../Debug/resources/shaders
+#    COMMENT "Creating resources/shaders directory in Debug directory"
+#)
+#
+## Collect all shader files
+#file(GLOB SHADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/shaders/*)
+#
+## Copy shader files to the resources/shaders folder after building the graphics target
+#foreach(SHADER_FILE ${SHADER_FILES})
+#    get_filename_component(SHADER_NAME ${SHADER_FILE} NAME)
+#
+#    # Debug: Print the name and source path of the shader
+#    message(STATUS "Copying shader file: ${SHADER_FILE} as ${SHADER_NAME}")
+#
+#    add_custom_command(
+#        TARGET graphics POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+#            ${SHADER_FILE}
+#            $<TARGET_FILE_DIR:graphics>../../../../Debug/resources/shaders/${SHADER_NAME}
+#        COMMENT "Copying shader: ${SHADER_NAME} to $<TARGET_FILE_DIR:graphics>/resources/shaders"
+#    )
+#endforeach()

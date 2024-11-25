@@ -7,7 +7,7 @@
 
 namespace graphics {
 
-class Polygon : public Model,public Model2D {
+class Polygon : public Model2D {
  public:
   // Constructor with parameters
   Polygon(const std::vector<Coordinates2D>& points, const Color& color);

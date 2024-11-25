@@ -2,11 +2,11 @@
 #define CUBE_HPP
 
 #include "Model3D.hpp"
-#include "raylib.h"  // Assuming raylib is used for Vector3 and Color types
+#include "raylib.hpp"  // Assuming raylib is used for Vector3 and Color types
 
 namespace graphics {
-
-class Cube : public Model, public Model3D {
+using namespace raylib;
+class Cube : public Model3D {
 public:
     
     // Constructor with default dimensions

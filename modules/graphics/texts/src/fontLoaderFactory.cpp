@@ -2,7 +2,6 @@
 #include <string>
 
 #include <memory>  // For std::unique_ptr
-
 namespace graphics {
 
 static std::unique_ptr<IFontLoader> CreateFontLoader(const std::string& type) {

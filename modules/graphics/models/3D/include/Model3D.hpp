@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Model.hpp"
+#include "raylib.hpp"
 
 namespace graphics {
 
@@ -18,20 +19,20 @@ class Model3D : public Model{
   // Enable wireframe rendering
   void EnableShape();
   void DisableShape();
-  void SetWireframeColor(Color aColor);
-  Color GetWireframeColor() const;
+  void SetWireframeColor(raylib::Color aColor);
+  raylib::Color GetWireframeColor() const;
   // Setter for color
-  void SetColor(const Color& color);
+  void SetColor(const raylib::Color& color);
 
   // Getter for color
-  Color GetColor() const;
+  raylib::Color GetColor() const;
 
 
 protected:
   bool WireframeIsEnabled;    // 1 for the wirefram
   bool ShapeIsEnabled;        // 1 for the wirefram
-  Color mWireframeColor;      // Color of thr wireframe
-  Color mColor;
+  raylib::Color mWireframeColor;      // Color of thr wireframe
+  raylib::Color mColor;
 };
 
 

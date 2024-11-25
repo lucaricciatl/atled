@@ -2,11 +2,11 @@
 #define SPHERE_HPP
 
 #include "Model3D.hpp"
-#include "raylib.h"  // Assuming raylib is used for the Vector3 and Color types
+#include "raylib.hpp"  // Assuming raylib is used for the Vector3 and Color types
 
 namespace graphics {
 
-    class Sphere : public Model, public Model3D {
+    class Sphere : public Model3D {
     public:
         // Constructors
         Sphere();  // Default constructor

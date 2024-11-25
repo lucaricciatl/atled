@@ -1,8 +1,6 @@
 #ifndef MODEL_HPP
 #define MODEL_HPP
 
-#include "Model2D.hpp"
-#include "Model3D.hpp"
 
 
 namespace graphics {
