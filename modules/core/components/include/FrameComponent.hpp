@@ -11,9 +11,9 @@ using Position = physics::Position;
 class FrameComponent : public Frame, public Component {
 public:
     // Constructors
-    FrameComponent(Entity* owner);
-    FrameComponent(Entity* owner, const Position& position, const math::Quaternion& orientation);
-    FrameComponent(Entity* owner, const Frame& frame);
+    FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider>);
+    FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider>, const Position& position, const math::Quaternion& orientation);
+    FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider>, const Frame& frame);
 
     // Destructor
     ~FrameComponent() override;

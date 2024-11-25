@@ -4,23 +4,24 @@
 #include "Entity.hpp"
 #include "Model.hpp"
 #include <ModelFactory.hpp>
+#include <random>
 
 using namespace graphics;
 
     class ShapeComponent : public Component {
     public:
         // Constructor
-        explicit ShapeComponent(Entity* entity)
-            : Component(entity), mModel(nullptr) {}
+        explicit ShapeComponent(Entity* entity, std::shared_ptr<ServiceProvider> serviceProvider)
+            : Component(entity), mModel(nullptr) {
+            graphicsManager = serviceProvider->GetGraphicManager();
+        }
 
         // Destructor
         virtual ~ShapeComponent() {}
 
         // Update function
         void Update(double deltaTime) override {
-            if (mModel) {
 
-            }
         }
 
         // Mutator for the model with construction logic
@@ -28,11 +29,11 @@ using namespace graphics;
         void SetModel(graphics::ModelType type, Args&&... args) {
             // Use the ModelFactory to create the model
             mModel = ModelFactory::CreateModel(type);
-
-            // Perform additional logic if necessary
+            graphicsManager->AddShape(1,mModel);
         }
 
     private:
-        std::unique_ptr<graphics::Model> mModel; // The model instance managed as a polymorphic type
+        std::shared_ptr<graphics::Model> mModel; // The model instance managed as a polymorphic type
+        std::shared_ptr<graphics::IGraphicManager> graphicsManager;
     };
 

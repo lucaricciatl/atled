@@ -1,5 +1,12 @@
 #include "ServiceProvider.hpp"
 
+// Constructor
+ServiceProvider::ServiceProvider() = default;
+
+// Destructor
+ServiceProvider::~ServiceProvider() = default;
+
+// Provide methods
 void ServiceProvider::Provide(std::shared_ptr<input::InputManager> inputMgr) {
     inputManager = std::move(inputMgr);
 }
@@ -16,6 +23,7 @@ void ServiceProvider::Provide(std::shared_ptr<resources::ResourceManager> resour
     resourceManager = std::move(resourceMgr);
 }
 
+// Getter methods
 std::shared_ptr<input::InputManager> ServiceProvider::GetInputManager() const {
     return inputManager;
 }

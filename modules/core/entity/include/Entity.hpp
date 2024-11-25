@@ -63,9 +63,8 @@ template <typename ComponentType, typename... Args>
 void Entity::AddComponent(Args&&... args) {
     static_assert(std::is_base_of<Component, ComponentType>::value,
         "ComponentType must derive from Component");
-
     // Automatically pass `this` (the owning entity) to the component constructor
-    auto component = std::make_shared<ComponentType>(this, std::forward<Args>(args)...);
+    auto component = std::make_shared<ComponentType>(this , mServiceProvider,std::forward<Args>(args)...);
     components[typeid(ComponentType)] = component;
 }
 

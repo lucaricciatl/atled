@@ -4,15 +4,15 @@ using Frame = physics::Frame;
 using Position = physics::Position;
 
 // Constructor with owner only
-FrameComponent::FrameComponent(Entity* owner) 
+FrameComponent::FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider>)
     : Frame(), Component(owner) {}
 
 // Constructor with owner, position, and orientation
-FrameComponent::FrameComponent(Entity* owner, const Position& position, const math::Quaternion& orientation) 
+FrameComponent::FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider>, const Position& position, const math::Quaternion& orientation)
     : Frame(position, orientation), Component(owner) {}
 
 // Constructor with owner and a Frame object
-FrameComponent::FrameComponent(Entity* owner, const Frame& frame) 
+FrameComponent::FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider>, const Frame& frame)
     : Frame(frame), Component(owner) {}
 
 // Destructor

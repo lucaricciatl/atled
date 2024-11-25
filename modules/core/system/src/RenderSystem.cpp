@@ -2,7 +2,6 @@
 
 RenderSystem::RenderSystem(graphics::IGraphicManager *graphicsMgr)
     : graphicsManager(graphicsMgr) {
-    graphicsMgr->Init();
 }
 
 void RenderSystem::Init() {

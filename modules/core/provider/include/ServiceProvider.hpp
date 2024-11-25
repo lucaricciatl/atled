@@ -9,6 +9,9 @@
 
 class ServiceProvider {
 public:
+    ServiceProvider();                     // Constructor declaration
+    ~ServiceProvider();                    // Destructor declaration
+
     // Provide shared pointers to the service provider
     void Provide(std::shared_ptr<input::InputManager> inputMgr);
     void Provide(std::shared_ptr<graphics::IGraphicManager> graphicsMgr);

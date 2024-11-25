@@ -37,7 +37,7 @@ void Entity::Update(double deltaTime) {
 };
 
 void Entity::SetServiceProvider(std::shared_ptr<ServiceProvider> aServiceProvider) {
-
+    mServiceProvider = aServiceProvider;
 };
 
 // Set the parent entity

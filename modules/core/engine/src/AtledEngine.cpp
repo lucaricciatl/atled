@@ -14,9 +14,9 @@ AtledEngine::AtledEngine(
 	std::unique_ptr<input::InputManager> inputMgr,
 	std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
 	std::shared_ptr<graphics::CameraManager> cameraMgr,
-    std::shared_ptr<resources::ResourceManager> resMgr
-
-	) {
+    std::shared_ptr<resources::ResourceManager> resMgr)
+	:serviceProvider(std::make_shared<ServiceProvider>())
+	{
 	// Convert unique_ptr to shared_ptr
 	auto sharedInputMgr = std::shared_ptr<input::InputManager>(std::move(inputMgr));
 	auto sharedGraphicsMgr = std::shared_ptr<graphics::IGraphicManager>(std::move(graphicsMgr));
@@ -24,10 +24,10 @@ AtledEngine::AtledEngine(
 	auto sharedResourcesMgr = std::shared_ptr<resources::ResourceManager>(std::move(resMgr));
 
 	// Provide shared pointers to the service provider
-	serviceProvider.Provide(sharedInputMgr);
-	serviceProvider.Provide(sharedGraphicsMgr);
-	serviceProvider.Provide(sharedCameraMgr);
-	serviceProvider.Provide(sharedResourcesMgr);
+	serviceProvider->Provide(sharedInputMgr);
+	serviceProvider->Provide(sharedGraphicsMgr);
+	serviceProvider->Provide(sharedCameraMgr);
+	serviceProvider->Provide(sharedResourcesMgr);
 
 	// Add systems using shared pointers
 	AddSystem(std::make_unique<InputSystem>(sharedInputMgr.get(), GetEventBus()));
@@ -76,7 +76,7 @@ void AtledEngine::Shutdown() {
 
 std::shared_ptr<Entity> AtledEngine::CreateEntity() {
 	auto entity = std::make_shared<Entity>();
-	entity->SetServiceProvider(std::make_shared<ServiceProvider>(serviceProvider));
+	entity->SetServiceProvider(serviceProvider);
 
     // Set the default state of the entity
     entity->SetDefaultState();

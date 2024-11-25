@@ -33,7 +33,7 @@ public:
 
 private:
   bool isRunning = false;
-  ServiceProvider serviceProvider;
+  std::shared_ptr<ServiceProvider> serviceProvider;
   std::vector<std::unique_ptr<System>> systems;
   std::vector<std::shared_ptr<Entity>> entities;
   EventBus eventBus;

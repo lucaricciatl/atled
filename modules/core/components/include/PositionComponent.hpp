@@ -9,9 +9,9 @@ using Position = physics::Position;
 class PositionComponent : public Position, public Component {
 public:
     // Constructors
-    PositionComponent(Entity* owner);
-    PositionComponent(Entity* owner, double x, double y, double z);
-    PositionComponent(Entity* owner, const Position& position);
+    PositionComponent(Entity* owner, std::shared_ptr<ServiceProvider>);
+    PositionComponent(Entity* owner, std::shared_ptr<ServiceProvider> ,double x, double y, double z);
+    PositionComponent(Entity* owner, std::shared_ptr<ServiceProvider> ,const Position& position);
 
     // Destructor
     ~PositionComponent() override;

@@ -2,6 +2,7 @@
 #define COMPONENT_HPP
 
 #include "Entity.hpp"
+#include "ServiceProvider.hpp"
 
 class Entity; // Forward declaration of Entity
 
