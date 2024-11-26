@@ -8,7 +8,9 @@
 #include <unordered_map>
 #include <functional>
 #include <cassert> // For runtime checks (optional)
+#include <Frame.hpp>
 
+using namespace physics;
 // Forward declaration of Component
 class Component;
 
@@ -29,7 +31,7 @@ public:
     // Constructor and Destructor
     Entity();
     virtual ~Entity();
-
+    std::shared_ptr<Frame> GetFrame() { return mFrame; };
     void Update(double deltaTime);
     void SetServiceProvider(std::shared_ptr<ServiceProvider> aServiceProvider);
     void SetDefaultState();
@@ -60,6 +62,7 @@ protected:
     virtual void OnParentChanged(Entity* oldParent, Entity* newParent);
     virtual void OnChildAdded(Entity* child);
     virtual void OnChildRemoved(Entity* child);
+    std::shared_ptr<Frame> mFrame;
 };
 
 // Definitions of template methods

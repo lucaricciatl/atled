@@ -14,6 +14,7 @@ using namespace graphics;
         explicit ShapeComponent(Entity* entity, std::shared_ptr<ServiceProvider> serviceProvider)
             : Component(entity), mModel(nullptr) {
             graphicsManager = serviceProvider->GetGraphicManager();
+            mFrame = entity->GetFrame();
         }
 
         // Destructor
@@ -35,5 +36,6 @@ using namespace graphics;
     private:
         std::shared_ptr<graphics::Model> mModel; // The model instance managed as a polymorphic type
         std::shared_ptr<graphics::IGraphicManager> graphicsManager;
+        std::shared_ptr<physics::Frame> mFrame;
     };
 

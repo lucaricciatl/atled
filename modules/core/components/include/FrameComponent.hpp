@@ -18,8 +18,6 @@ public:
     // Destructor
     ~FrameComponent() override;
 
-
-
     std::shared_ptr<Frame> frame;
 };
 
