@@ -31,6 +31,7 @@ using namespace graphics;
             // Use the ModelFactory to create the model
             mModel = ModelFactory::CreateModel<ModelClass>();
             graphicsManager->AddShape(1,mModel);
+
         }
 
     private:

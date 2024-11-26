@@ -6,6 +6,7 @@
 
 namespace graphics {
 using namespace raylib;
+
 class Cube : public Model3D {
 public:
     
