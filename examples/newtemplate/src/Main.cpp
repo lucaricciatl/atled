@@ -21,8 +21,7 @@ int main() {
     auto entity = coreEngine->CreateEntity();
     entity->AddComponent<ShapeComponent>();
     auto shape = entity->GetComponent<ShapeComponent>();
-    shape->SetModel(ModelType::cube);
-
+    shape->SetModel<Cube>();
     // Start the engine (game loop begins)
     coreEngine->Start();
 

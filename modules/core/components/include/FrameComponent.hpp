@@ -8,19 +8,19 @@ using Frame = physics::Frame;
 using Position = physics::Position;
 
 
-class FrameComponent : public Frame, public Component {
+class FrameComponent : public Component {
 public:
     // Constructors
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider>);
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider>, const Position& position, const math::Quaternion& orientation);
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider>, const Frame& frame);
-
+    std::shared_ptr<Frame> GetFrame(){return frame;};
     // Destructor
     ~FrameComponent() override;
 
-    // Additional functionality
-    void translate(double dx, double dy, double dz);
-    void rotate(const math::Quaternion& rotation);
+
+
+    std::shared_ptr<Frame> frame;
 };
 
 #endif // FRAME_COMPONENT_HPP

@@ -5,9 +5,10 @@
 #include <Quaternion.hpp>
 #include <FrameComponent.hpp>
 
-
 // Constructor
-Entity::Entity() {};
+Entity::Entity() {
+    SetDefaultState();
+};
 
 // Destructor
 Entity::~Entity() {
@@ -126,7 +127,7 @@ void Entity::SetDefaultState() {
 
     // If the entity has a parent, use its position and orientation
     if (parent) {
-        auto parentFrame = parent->GetComponent<FrameComponent>();
+        auto parentFrame = parent->GetComponent<FrameComponent>()->GetFrame();
         if (parentFrame) {
             defaultPosition = parentFrame->GetPosition();
             defaultOrientation = parentFrame->GetOrientation();

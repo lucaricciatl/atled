@@ -25,10 +25,10 @@ using namespace graphics;
         }
 
         // Mutator for the model with construction logic
-        template <typename... Args>
-        void SetModel(graphics::ModelType type, Args&&... args) {
+        template <typename ModelClass, typename ... Args>
+        void SetModel(Args&&... args) {
             // Use the ModelFactory to create the model
-            mModel = ModelFactory::CreateModel(type);
+            mModel = ModelFactory::CreateModel<ModelClass>();
             graphicsManager->AddShape(1,mModel);
         }
 

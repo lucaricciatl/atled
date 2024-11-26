@@ -25,9 +25,32 @@ namespace graphics {
         sphere,
         pyramid,
     };
+
 class ModelFactory : public Model2DFactory, public Model3DFactory {
 public:
-	static std::shared_ptr<Model> CreateModel(ModelType modeltype);
+    template <typename ModelClass>
+    static std::shared_ptr<ModelClass> CreateModel() {
+        if constexpr (std::is_same_v<ModelClass, Circle>)
+            return Model2DFactory::CreateCircle();
+        else if constexpr (std::is_same_v<ModelClass, Arc>)
+            return Model2DFactory::CreateArc();
+        else if constexpr (std::is_same_v<ModelClass, Rectangle>)
+            return Model2DFactory::CreateRectangle();
+        else if constexpr (std::is_same_v<ModelClass, Line>)
+            return Model2DFactory::CreateLine();
+        else if constexpr (std::is_same_v<ModelClass, Polyline>)
+            return Model2DFactory::CreatePolyline();
+        else if constexpr (std::is_same_v<ModelClass, Triangle>)
+            return Model2DFactory::CreateTriangle();
+        else if constexpr (std::is_same_v<ModelClass, Polygon>)
+            return Model2DFactory::CreatePolygon();
+        else if constexpr (std::is_same_v<ModelClass, Cube>)
+            return Model3DFactory::CreateCube();
+        else if constexpr (std::is_same_v<ModelClass, Sphere>)
+            return Model3DFactory::CreateSphere();
+        else
+            static_assert(std::is_base_of_v<Model, ModelClass>, "Invalid ModelClass type provided.");
+    }
 };
 
 }  // namespace graphics
