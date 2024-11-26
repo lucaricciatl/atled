@@ -5,6 +5,7 @@ add_library(core
     ./components/src/Component.cpp
     ./components/src/PositionComponent.cpp
     ./components/src/FrameComponent.cpp
+    ./components/src/ControllerComponent.cpp
     ./events/src/EventBus.cpp
     ./provider/src/ServiceProvider.cpp
     ./entity/src/Entity.cpp
@@ -12,6 +13,7 @@ add_library(core
     ./system/src/RenderSystem.cpp
     ./system/src/InputSystem.cpp
     ./system/src/ResourcesSystem.cpp
+    ./actions/src/Bindings.cpp
 )
 
 # Link inputs and graphics libraries
@@ -20,6 +22,7 @@ target_link_libraries(core PUBLIC inputs graphics physics resources)
 # Specify include directories for the submodule
 target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/actions/include
     ${CMAKE_CURRENT_SOURCE_DIR}/components/include
     ${CMAKE_CURRENT_SOURCE_DIR}/entity/include
     ${CMAKE_CURRENT_SOURCE_DIR}/events/include

@@ -15,6 +15,9 @@ void InputSystem::Start() {
 }
 
 void InputSystem::Init() {
+    for (int key = 0; key <= 255; ++key) { // Adjust the range as needed
+        previousKeyStates[key] = false;
+    }
     inputManager->Init();
     Start();
 }
@@ -27,8 +30,32 @@ void InputSystem::Stop() {
 }
 
 void InputSystem::Update(float deltaTime) {
+    // Update the input manager (if necessary)
+    inputManager->Update();
 
+    // Iterate through all possible key codes
+    for (int key = 0; key <= 255; ++key) { // Adjust the range as needed
+        bool isCurrentlyDown = inputManager->IsKeyDown(key);
+        bool wasPreviouslyDown = previousKeyStates[key];
+
+        bool pressed = !wasPreviouslyDown && isCurrentlyDown;
+        bool released = wasPreviouslyDown && !isCurrentlyDown;
+        bool down = isCurrentlyDown;
+        bool up = !isCurrentlyDown;
+
+        if (pressed || released) {
+            // Map integer key code to Key enum
+            Key keyEnum = static_cast<Key>(key);
+            if (keyEnum == Key::KEY_NULL) continue;
+
+            InputEvent event(keyEnum, pressed, released, down, up);
+            eventBus->Publish(event);
+        }
+
+        previousKeyStates[key] = isCurrentlyDown;
+    }
 }
+
 
 float InputSystem::GetDeltaTime() {
     static auto lastTime = std::chrono::high_resolution_clock::now();

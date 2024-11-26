@@ -22,7 +22,7 @@ private:
 
 	input::InputManager* inputManager; // Pointer to the input manager
 	EventBus* eventBus;                // Pointer to the event bus
-
+	std::unordered_map<int, bool> previousKeyStates;
 	std::atomic<bool> isRunning;    // Atomic flag to control thread execution
 	std::thread updateThread;       // Thread for running the update logic
 };

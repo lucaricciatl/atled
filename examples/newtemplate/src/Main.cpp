@@ -8,6 +8,9 @@
 #include "EventBus.hpp"
 #include "ShapeComponent.hpp"
 #include <Circle.hpp>
+#include <Action.hpp>
+#include <Bindings.hpp>
+#include <FrameController.hpp>
 
 int main() {
     // Create the engine
@@ -22,6 +25,18 @@ int main() {
     entity->AddComponent<ShapeComponent>();
     auto shape = entity->GetComponent<ShapeComponent>();
     shape->SetModel<Cube>();
+
+    auto inputBindings = std::make_shared<Bindings>();
+
+    inputBindings->BindKeyToAction(Key::KEY_W, Action::MoveForward);
+    inputBindings->BindKeyToAction(Key::KEY_S, Action::MoveBackward);
+    inputBindings->BindKeyToAction(Key::KEY_A, Action::MoveLeft);
+    inputBindings->BindKeyToAction(Key::KEY_D, Action::MoveRight);
+
+
+    entity->AddComponent<FrameController>();
+
+
     // Start the engine (game loop begins)
     coreEngine->Start();
 
