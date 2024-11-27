@@ -24,8 +24,8 @@ double Polyline::GetThickness() const {
 void Polyline::Draw() {
   // Draw each segment between consecutive points
   for (size_t i = 0; i < mPoints.size() - 1; ++i) {
-    Vector2 startPos = { static_cast<float>(mPoints[i].x), static_cast<float>(mPoints[i].y) };
-    Vector2 endPos = { static_cast<float>(mPoints[i + 1].x), static_cast<float>(mPoints[i + 1].y) };
+    Vector2 startPos = ComputeGlobalPosition(mPoints[0]);
+    Vector2 endPos = ComputeGlobalPosition(mPoints[1]);
      raylib::DrawLineEx(startPos, endPos, static_cast<float>(mThickness), mColor);
   }
 }

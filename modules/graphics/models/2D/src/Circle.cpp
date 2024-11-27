@@ -18,7 +18,6 @@ void Circle::SetCenter(const Coordinates2D& aCenter) {
 void Circle::SetRadius(const float& aRadius) { mRadius = aRadius; }
 
 void Circle::Draw(){
-  Vector2 center = { mCenter.x, mCenter.y };
-   raylib::DrawCircleV(center, mRadius, mColor);
+   raylib::DrawCircleV(ComputeGlobalPosition(mCenter), mRadius, mColor);
 }
 }

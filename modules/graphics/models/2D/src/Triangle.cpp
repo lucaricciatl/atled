@@ -22,9 +22,9 @@ void Triangle::SetColor(const Color& color) {
 }
 
 void Triangle::Draw() {
-  Vector2 v1 = { static_cast<float>(mPoints[0].x), static_cast<float>(mPoints[0].y) };
-  Vector2 v2 = { static_cast<float>(mPoints[1].x), static_cast<float>(mPoints[1].y) };
-  Vector2 v3 = { static_cast<float>(mPoints[2].x), static_cast<float>(mPoints[2].y) };
+  Vector2 v1 = ComputeGlobalPosition(mPoints[0]) ;
+  Vector2 v2 = ComputeGlobalPosition(mPoints[1]) ;
+  Vector2 v3 = ComputeGlobalPosition(mPoints[2]) ;
 
   raylib::DrawTriangle(v1, v2, v3, mColor);
 }

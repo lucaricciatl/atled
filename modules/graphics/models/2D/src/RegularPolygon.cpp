@@ -37,13 +37,12 @@ void RegularPolygon::setRadius(double r) {
 // Drawing the polygon (basic example using trigonometry)
 void RegularPolygon::Draw() {
  // Convert Coordinates2D center to raylib's Vector2 type
-    Vector2 centerVector = { static_cast<float>(center.x), static_cast<float>(center.y) };
 
     // Define the polygon's color (assuming a default color here, or pass it via parameters)
     Color polygonColor = { 255, 0, 0, 255 };  // Red color with full opacity
 
     // Call the DrawPoly function from raylib
-     raylib::DrawPoly(centerVector, sides, static_cast<float>(radius), 0.0f, polygonColor);
+     raylib::DrawPoly(ComputeGlobalPosition(center), sides, static_cast<float>(radius), 0.0f, mColor);
 }
 
 

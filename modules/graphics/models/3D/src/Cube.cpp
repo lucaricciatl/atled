@@ -7,15 +7,14 @@ namespace graphics {
 		: mDimensions{ width, height, length }, mCenterPos{ 0.0f, 0.0f, 0.0f } {}
 
 	void Cube::Draw() {
-		// Use raylib's DrawCube function to render the cube
+
+		auto gPos = ComputeGlobalPosition(mCenterPos);
 		if (ShapeIsEnabled) {
-			auto framepos = frame->GetPosition();
-			Vector3 center = {mCenterPos.x+framepos->getX(),mCenterPos.y+framepos->getY(),mCenterPos.z+framepos->getZ()};
-			
-			raylib::DrawCube(center, mDimensions.x, mDimensions.y, mDimensions.z, mColor);
+
+			raylib::DrawCube(gPos, mDimensions.x, mDimensions.y, mDimensions.z, mColor);
 		}
 		if (WireframeIsEnabled) {
-			raylib::DrawCubeWires(mCenterPos, mDimensions.x, mDimensions.y, mDimensions.z, mWireframeColor);
+			raylib::DrawCubeWires(gPos, mDimensions.x, mDimensions.y, mDimensions.z, mWireframeColor);
 		}
 	}
 

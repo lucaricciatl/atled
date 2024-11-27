@@ -16,7 +16,10 @@ Cylinder::Cylinder(const Vector3& startPos, const Vector3& endPos, float startRa
 
 // Override draw method
 void Cylinder::Draw() {
-    raylib::DrawCylinderWiresEx(mStartPos, mEndPos, mStartRadius, mEndRadius, mSides, mColor);
+    auto gPosStart = ComputeGlobalPosition(mStartPos);
+    auto gPosEnd = ComputeGlobalPosition(mEndPos);
+
+    raylib::DrawCylinderWiresEx(gPosStart, gPosEnd, mStartRadius, mEndRadius, mSides, mColor);
 }
 
 // Setter for start position

@@ -14,7 +14,7 @@ public:
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider);
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, const Position& position, const math::Quaternion& orientation);
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, const Frame& frame);
-    std::shared_ptr<Frame> GetFrame(){return frame;};
+    std::shared_ptr<Frame> GetFrame() const { return frame; };
     // Destructor
     ~FrameComponent() override;
 

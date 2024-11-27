@@ -47,21 +47,30 @@ Coordinates2D Rectangle::GetUpperLeft() const { return mUpperLeft; }
 
 Coordinates2D Rectangle::GetBottomRight() const { return mBottomRight; }
 
+
 void Rectangle::Draw() {
-  float width = mBottomRight.x - mUpperLeft.x;
-  float height = mBottomRight.y - mUpperLeft.y;
+    // Transform the upper-left and bottom-right corners to global positions
+    Vector2 globalUpperLeft = ComputeGlobalPosition(mUpperLeft);
+    Vector2 globalBottomRight = ComputeGlobalPosition(mBottomRight);
 
-  // Ensure the width and height are positive
-  if (width < 0 || height < 0) {
-    // Handle invalid rectangle dimensions (maybe a warning or adjusting to 0)
-    return;
-  }
+    // Calculate the width and height in global space
+    float width = globalBottomRight.x - globalUpperLeft.x;
+    float height = globalBottomRight.y - globalUpperLeft.y;
 
-  RectangleStruct rect = {mUpperLeft.x, mUpperLeft.y, width, height};
+    // Ensure the width and height are positive
+    if (width < 0 || height < 0) {
+        // Handle invalid rectangle dimensions (e.g., log a warning or skip drawing)
+        return;
+    }
 
-  Vector2 origin = {(rect.width / 2), (rect.height / 2)};
+    // Define the rectangle in global space
+    RectangleStruct rect = { globalUpperLeft.x, globalUpperLeft.y, width, height };
 
-   raylib::DrawRectanglePro(rect, origin, mRotation, mColor);
+    // Calculate the origin for rotation (center of the rectangle)
+    Vector2 origin = { (rect.width / 2.0f), (rect.height / 2.0f) };
+
+    // Draw the rectangle with transformed global position
+    raylib::DrawRectanglePro(rect, origin, mRotation, mColor);
 }
 
 }  // namespace graphics

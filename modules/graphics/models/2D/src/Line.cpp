@@ -18,9 +18,9 @@ void Line::SetThickness(double thickness) { mThickness = thickness; }
 
 
 void Line::Draw() {
-  Vector2 startPos = {static_cast<float>(start.x), static_cast<float>(start.y)};
-  Vector2 endPos = {static_cast<float>(end.x), static_cast<float>(end.y)};
-   raylib::DrawLineEx(startPos, endPos, static_cast<float>(mThickness), mColor);
+   auto gStart = ComputeGlobalPosition(start);
+   auto gEnd = ComputeGlobalPosition(end);
+   raylib::DrawLineEx(gStart, gEnd, static_cast<float>(mThickness), mColor);
 }
 
 }  // namespace graphics

@@ -109,17 +109,6 @@ void Engine::OnStart() {
 
           shapes.push_back(cube); // Store the cube in the container
           graphicsManager->AddShape(rand(), cube);
-        } else {
-          // Create a sphere
-          auto sphere = Model3DFactory::CreateSphere();
-          sphere->SetCenterPos({x * spacing, y * spacing, z * spacing});
-          sphere->SetRadius(0.5f * spacing); // Set radius relative to spacing
-          sphere->SetColor(cubeColor);
-          sphere->DisableWireframe();
-
-          sphere->SetRadius(1);
-          shapes.push_back(sphere); // Store the cube in the container
-          graphicsManager->AddShape(rand(), sphere);
         }
       }
     }

@@ -25,6 +25,7 @@ void Polygon::Draw() {
 
 const std::vector<Triangle> Polygon::PerformTriangulation() {
   // Create a Triangulation object and perform the triangulation
+
   Triangulation triangulation(mPoints, mColor);
   
   // Get the resulting triangles

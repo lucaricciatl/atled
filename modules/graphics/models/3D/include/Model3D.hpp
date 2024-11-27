@@ -10,8 +10,7 @@ namespace graphics {
 class Model3D : public Model{
  public:
   virtual ~Model3D() = default;
-  virtual void Draw() = 0 ;
-
+  virtual void Draw() = 0;
 
   void EnableWireframe();
   void DisableWireframe();
@@ -29,10 +28,21 @@ class Model3D : public Model{
 
 
 protected:
+
+	Vector3 ComputeGlobalPosition(Vector3 aPosition) {
+		auto framepos = frame->GetPosition();
+		Vector3 globalPosition = {
+			(float)framepos->getX() + aPosition.x,
+			(float)framepos->getY() + aPosition.y,
+			(float)framepos->getZ() + aPosition.z
+		};
+		return globalPosition;
+	};
+
   bool WireframeIsEnabled;    // 1 for the wirefram
   bool ShapeIsEnabled;        // 1 for the wirefram
-  raylib::Color mWireframeColor;      // Color of thr wireframe
-  raylib::Color mColor;
+  raylib::Color mWireframeColor = Color(128, 128, 128, 128);      // Color of thr wireframe
+  raylib::Color mColor = Color(64, 64, 64, 64);
 };
 
 

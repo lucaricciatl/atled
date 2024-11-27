@@ -16,7 +16,9 @@ Capsule::Capsule(const Vector3& startPos, const Vector3& endPos, float radius, i
 
 // Override draw method
 void Capsule::Draw() {
-    raylib::DrawCapsule(mStartPos, mEndPos, mRadius, mSlices, mRings, mColor);
+    auto gStartPos = ComputeGlobalPosition(mStartPos);
+    auto gEndPos = ComputeGlobalPosition(mEndPos);
+    raylib::DrawCapsule(gStartPos, gEndPos, mRadius, mSlices, mRings, mColor);
 }
 
 // Setter for start position

@@ -120,29 +120,4 @@ void Entity::OnChildRemoved(Entity* child) {
     // Override to implement custom behavior
 }
 
-void Entity::SetDefaultState() {
-    // Default position and orientation
-    auto defaultPosition = std::make_shared<physics::Position>(0.0, 0.0, 0.0);
-    math::Quaternion defaultOrientation(1.0, 0.0, 0.0, 0.0);
-
-    std::shared_ptr<physics::Frame> defaultFrame = std::make_shared<physics::Frame>(defaultPosition, defaultOrientation);
-
-    // Check if the entity has a parent and inherit its frame
-    if (parent) {
-        auto parentFrameComponent = parent->GetComponent<FrameComponent>();
-        if (parentFrameComponent) {
-            auto parentFrame = parentFrameComponent->GetFrame();
-            if (parentFrame) {
-                // Share the parent's frame directly
-                defaultFrame = parentFrame;
-            }
-        }
-    }
-
-    // Add or update the FrameComponent with the shared Frame
-    auto frameComponent = GetComponent<FrameComponent>();
-        AddComponent<FrameComponent>(defaultFrame);
-    
-}
-
 

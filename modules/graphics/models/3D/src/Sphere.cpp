@@ -61,12 +61,12 @@ namespace graphics {
 void Sphere::Draw() {
     // Call to Raylib's DrawSphere function to render the sphere
     if (ShapeIsEnabled) {
-
-    raylib::DrawSphereEx(mCenterPos, mRadius, mRings , mSlices, mColor);
+        
+    raylib::DrawSphereEx(ComputeGlobalPosition(mCenterPos), mRadius, mRings , mSlices, mColor);
     }
     if (WireframeIsEnabled) {
 
-    raylib::DrawSphereWires(mCenterPos, mRadius, mRings, mSlices, mColor);
+    raylib::DrawSphereWires(ComputeGlobalPosition(mCenterPos), mRadius, mRings, mSlices, mColor);
     }
 }
 

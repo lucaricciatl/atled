@@ -20,6 +20,14 @@ class Model2D : public Model{
   void SetRotation(double rotation);
 
 protected:
+	Vector2 ComputeGlobalPosition(Coordinates2D aPosition) {
+		auto framepos = frame->GetPosition();
+		Vector2 globalPosition = {
+			(float)framepos->getX() + aPosition.x,
+			(float)framepos->getY() + aPosition.y,
+		};
+		return globalPosition;
+	};
   Color mColor;
   double mRotation;
 };
