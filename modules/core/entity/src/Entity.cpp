@@ -6,8 +6,8 @@
 #include <FrameComponent.hpp>
 
 // Constructor
-Entity::Entity() {
-    SetDefaultState();
+Entity::Entity() : mFrame(std::make_shared<Frame>()) {
+    
 };
 
 // Destructor
@@ -122,18 +122,27 @@ void Entity::OnChildRemoved(Entity* child) {
 
 void Entity::SetDefaultState() {
     // Default position and orientation
-    physics::Position defaultPosition(0.0, 0.0, 0.0);
+    auto defaultPosition = std::make_shared<physics::Position>(0.0, 0.0, 0.0);
     math::Quaternion defaultOrientation(1.0, 0.0, 0.0, 0.0);
 
-    // If the entity has a parent, use its position and orientation
+    std::shared_ptr<physics::Frame> defaultFrame = std::make_shared<physics::Frame>(defaultPosition, defaultOrientation);
+
+    // Check if the entity has a parent and inherit its frame
     if (parent) {
-        auto parentFrame = parent->GetComponent<FrameComponent>()->GetFrame();
-        if (parentFrame) {
-            defaultPosition = parentFrame->GetPosition();
-            defaultOrientation = parentFrame->GetOrientation();
+        auto parentFrameComponent = parent->GetComponent<FrameComponent>();
+        if (parentFrameComponent) {
+            auto parentFrame = parentFrameComponent->GetFrame();
+            if (parentFrame) {
+                // Share the parent's frame directly
+                defaultFrame = parentFrame;
+            }
         }
     }
 
-    // Add a default FrameComponent to the entity
-    AddComponent<FrameComponent>(defaultPosition, defaultOrientation);
+    // Add or update the FrameComponent with the shared Frame
+    auto frameComponent = GetComponent<FrameComponent>();
+        AddComponent<FrameComponent>(defaultFrame);
+    
 }
+
+

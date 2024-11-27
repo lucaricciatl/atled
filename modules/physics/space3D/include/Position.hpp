@@ -11,13 +11,9 @@ public:
     // Constructors
     Position();
     Position(double x, double y, double z);
-    Position(const Position& other);
 
     // Destructor
     ~Position();
-
-    // Assignment operator
-    Position& operator=(const Position& other);
 
     // Getters
     double getX() const;

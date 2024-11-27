@@ -77,6 +77,7 @@ void AtledEngine::Shutdown() {
 std::shared_ptr<Entity> AtledEngine::CreateEntity() {
 	auto entity = std::make_shared<Entity>();
 	entity->SetServiceProvider(serviceProvider);
+	entity->AddComponent<FrameComponent>();
 	entities.push_back(entity);
 	return entity;
 }

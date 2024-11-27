@@ -1,49 +1,50 @@
 #ifndef FRAME_HPP
 #define FRAME_HPP
-#include "Position.hpp"
-#include "Quaternion.hpp"
-#include <ostream>
-namespace physics{
 
+#include <memory>
+#include <iostream>
+#include "Position.hpp"      // Include the Position class
+#include "Quaternion.hpp"    // Include the Quaternion class
 
-class Frame {
-private:
-    Position position;      // Translational component
-    math::Quaternion orientation; // Rotational component
+namespace physics {
 
-public:
-    // Constructors
-    Frame();
-    Frame(const Position& position, const math::Quaternion& orientation);
-    Frame(double x, double y, double z, const math::Quaternion& orientation);
-    Frame(const Frame& other);
+    class Frame {
+    public:
+        // Constructors
+        Frame();
+        Frame(const std::shared_ptr<Position>& position, const math::Quaternion& orientation);
+        Frame(double x, double y, double z, const math::Quaternion& orientation);
+        Frame(const Frame& other);
+        ~Frame();
 
-    // Destructor
-    ~Frame();
+        // Assignment operator
+        Frame& operator=(const Frame& other);
 
-    // Assignment operator
-    Frame& operator=(const Frame& other);
+        // Accessors
+        std::shared_ptr<Position> GetPosition() const;
+        math::Quaternion GetOrientation() const;
 
-    // Accessors
-    const Position& GetPosition() const;
-    math::Quaternion GetOrientation() const;
+        // Mutators
+        void SetPosition(const std::shared_ptr<Position>& position);
+        void SetPosition(double x, double y, double z);
+        void SetOrientation(const math::Quaternion& orientation);
 
-    // Mutators
-    void SetPosition(const Position& position);
-    void SetOrientation(const math::Quaternion& orientation);
+        // Frame operations
+        void translate(double dx, double dy, double dz);
+        void rotate(const math::Quaternion& rotation);
 
-    // Frame operations
-    void translate(double dx, double dy, double dz);
-    void rotate(const math::Quaternion& rotation);
+        // Transformation methods
+        void transformPoint(double& px, double& py, double& pz) const;
+        void inverseTransformPoint(double& px, double& py, double& pz) const;
 
-    // Transformation methods
-    void transformPoint(double& px, double& py, double& pz) const;
-    void inverseTransformPoint(double& px, double& py, double& pz) const;
+        // Friend function for stream insertion
+        friend std::ostream& operator<<(std::ostream& os, const Frame& frame);
 
-    // Friend functions for stream insertion
-    friend std::ostream& operator<<(std::ostream& os, const Frame& frame);
-};
+    private:
+        std::shared_ptr<Position> position;
+        math::Quaternion orientation;
+    };
 
-}
+} // namespace physics
 
 #endif // FRAME_HPP

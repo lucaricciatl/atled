@@ -2,6 +2,7 @@
 #define MODEL_HPP
 
 #include <memory>
+#include <Frame.hpp>
 
 namespace graphics {
 
@@ -14,11 +15,12 @@ public:
     // Pure virtual function for drawing
     virtual void Draw() = 0;
 
-    void SetFrame() {
-
+    void SetFrame(std::shared_ptr<physics::Frame> aFrame) {
+        frame = aFrame;
     }
 
 protected:
+    std::shared_ptr<physics::Frame> frame;
 
 };
 

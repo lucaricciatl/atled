@@ -8,21 +8,8 @@ Position::Position() : x(0.0), y(0.0), z(0.0) {}
 // Parameterized constructor
 Position::Position(double x, double y, double z) : x(x), y(y), z(z) {}
 
-// Copy constructor
-Position::Position(const Position& other) : x(other.x), y(other.y), z(other.z) {}
-
 // Destructor
 Position::~Position() {}
-
-// Assignment operator
-Position& Position::operator=(const Position& other) {
-    if (this != &other) {
-        x = other.x;
-        y = other.y;
-        z = other.z;
-    }
-    return *this;
-}
 
 // Getters
 double Position::getX() const {

@@ -33,6 +33,7 @@ target_include_directories(${LIB_NAME} PUBLIC
     ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
     ${COMMON_INCLUDE_DIR}                 # Include raylib headers
     ${GRAPHICS_MANAGER_INCLUDE_DIR}
+    ${PHYSICS_MANAGER_INCLUDE_DIR}
 )
 
 # Link libraries for this target
@@ -40,6 +41,7 @@ target_link_libraries(${LIB_NAME} PUBLIC
     raylibcpp                                 # Link the raylib library
     common
     graphics_manager
+    physics
 )
 
 

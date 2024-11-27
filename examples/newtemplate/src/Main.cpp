@@ -22,7 +22,9 @@ int main() {
 
     // Create an entity and add components
     auto entity = coreEngine->CreateEntity();
+    entity->GetComponent<FrameComponent>()->GetFrame()->SetPosition(834, 343, 897);
     entity->AddComponent<ShapeComponent>();
+
     auto shape = entity->GetComponent<ShapeComponent>();
     shape->SetModel<Cube>();
 

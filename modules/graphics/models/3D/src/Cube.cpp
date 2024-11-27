@@ -1,4 +1,5 @@
 #include "Cube.hpp"
+using namespace raylib;
 
 namespace graphics {
 
@@ -8,7 +9,10 @@ namespace graphics {
 	void Cube::Draw() {
 		// Use raylib's DrawCube function to render the cube
 		if (ShapeIsEnabled) {
-			raylib::DrawCube(mCenterPos, mDimensions.x, mDimensions.y, mDimensions.z, mColor);
+			auto framepos = frame->GetPosition();
+			Vector3 center = {mCenterPos.x+framepos->getX(),mCenterPos.y+framepos->getY(),mCenterPos.z+framepos->getZ()};
+			
+			raylib::DrawCube(center, mDimensions.x, mDimensions.y, mDimensions.z, mColor);
 		}
 		if (WireframeIsEnabled) {
 			raylib::DrawCubeWires(mCenterPos, mDimensions.x, mDimensions.y, mDimensions.z, mWireframeColor);
