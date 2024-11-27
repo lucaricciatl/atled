@@ -14,7 +14,7 @@ using namespace graphics;
         explicit ShapeComponent(Entity* entity, std::shared_ptr<ServiceProvider> serviceProvider)
             : Component(entity), mModel(nullptr) {
             graphicsManager = serviceProvider->GetGraphicManager();
-            mFrame = entity->GetFrame();
+            mFrame = entity->GetComponent<FrameComponent>()->GetFrame();
         }
 
         // Destructor
