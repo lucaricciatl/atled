@@ -73,8 +73,10 @@ void GraphicsManager::Render() {
     for (const auto& [layerId, primitives] : layers) {
         DrawLayer(layerId);
     }
+    Clear(BLACK);
     mCameraManager->EndActiveCamera();
     GetGraphicsContext()->EndDrawing(); // Finish the current frame
+
 }
 
 

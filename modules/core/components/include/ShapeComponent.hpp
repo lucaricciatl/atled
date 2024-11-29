@@ -5,6 +5,7 @@
 #include "Model.hpp"
 #include <ModelFactory.hpp>
 #include <random>
+#include <FrameComponent.hpp>
 
 using namespace graphics;
 
@@ -32,9 +33,12 @@ using namespace graphics;
             mModel = ModelFactory::CreateModel<ModelClass>();
             mModel->SetFrame(mFrame);
             graphicsManager->AddShape(1,mModel);
-
         }
-
+        template <typename ModelClass, typename ... Args>
+        std::shared_ptr<ModelClass> GetModel(Args&&... args) {
+            // Use the ModelFactory to create the model
+            return std::dynamic_pointer_cast<ModelClass>(mModel);
+        }
     private:
         std::shared_ptr<graphics::Model> mModel; // The model instance managed as a polymorphic type
         std::shared_ptr<graphics::IGraphicManager> graphicsManager;

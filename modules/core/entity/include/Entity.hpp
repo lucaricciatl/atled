@@ -49,7 +49,7 @@ public:
 
     // Component Management
     template <typename ComponentType, typename... Args>
-    void AddComponent(Args&&... args);
+    std::shared_ptr<ComponentType> AddComponent(Args&&... args);
 
     template <typename ComponentType>
     void RemoveComponent();
@@ -68,13 +68,14 @@ protected:
 // Definitions of template methods
 
 template <typename ComponentType, typename... Args>
-void Entity::AddComponent(Args&&... args) {
+std::shared_ptr<ComponentType> Entity::AddComponent(Args&&... args) {
     static_assert(std::is_base_of<Component, ComponentType>::value,
         "ComponentType must derive from Component");
 
     // Create and store the component, passing `this` and any additional arguments
     auto component = std::make_shared<ComponentType>(this, mServiceProvider , std::forward<Args>(args)...);
     components[typeid(ComponentType)] = component;
+    return component;
 }
 
 template <typename ComponentType>

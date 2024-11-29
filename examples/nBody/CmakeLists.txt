@@ -7,7 +7,6 @@ project(NBody)
 # Add the source files
 set(SOURCES
     src/main.cpp
-    src/Engine.cpp
     src/NBodySimulation.cpp
 )
 

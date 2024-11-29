@@ -1,40 +1,26 @@
-#pragma once
-
-
-#include "Model2DFactory.hpp"
-#include "Point2D.hpp"
-#include <vector>
-#include <memory>
-#include <cmath>
-#include <ctime>
-
-
-struct Body {
-    Coordinates2D position;
-    Coordinates2D velocity;
-    float mass;
-    Color color;
-
-    Body(const Coordinates2D& pos, const Coordinates2D& vel, float m, const Color& col)
-        : position(pos), velocity(vel), mass(m), color(col) {}
-};
-
+#include <Point2D.hpp>
+#include <Entity.hpp>
 class NBodySimulation {
 public:
-    NBodySimulation(int numBodies = 1000);
+    // Constructor accepting entities
+    NBodySimulation(std::vector<std::shared_ptr<Entity>> entities);
 
-    void InitializeBodies();
+    // Update method to apply physics
     void Update(float dt);
-    std::vector<std::shared_ptr<graphics::Circle>>& GetCircles();
 
 private:
-    std::vector<Body> bodies;
-    std::vector<std::shared_ptr<graphics::Circle>> circles;
+    struct BodyData {
+        Coordinates2D velocity;
+        float mass;
+    };
 
-    const float G = 6.67430e-11f;          // Gravitational constant
-    const float distanceTolerance = 30.0f; // Minimum distance to avoid division by zero
-    const float damping = 0.9999;           // Damping factor for velocity
+    std::vector<std::shared_ptr<Entity>> entities;
+    std::vector<BodyData> bodies;
 
-    float Distance(const Coordinates2D& a, const Coordinates2D& b) const;
-    Coordinates2D CalculateGravitationalForce(const Body& a, const Body& b) const;
+    constexpr static float G = 6.67430e-11f;
+    constexpr static float damping = 0.999f;
+
+    Coordinates2D CalculateGravitationalForce(const Coordinates2D& pos1, float mass1,
+        const Coordinates2D& pos2, float mass2) const;
+    void InitializeBodyData(); // Internal method to initialize velocity and mass
 };
