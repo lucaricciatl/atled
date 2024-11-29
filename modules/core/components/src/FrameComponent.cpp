@@ -18,8 +18,6 @@ FrameComponent::FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> s
 // Destructor
 FrameComponent::~FrameComponent() {}
 
-#include "FrameComponent.hpp"
-
 // Set position
 void FrameComponent::SetPosition(float x, float y, float z) {
     if (frame) {

@@ -34,6 +34,7 @@ using namespace graphics;
             mModel->SetFrame(mFrame);
             graphicsManager->AddShape(1,mModel);
         }
+
         template <typename ModelClass, typename ... Args>
         std::shared_ptr<ModelClass> GetModel(Args&&... args) {
             // Use the ModelFactory to create the model

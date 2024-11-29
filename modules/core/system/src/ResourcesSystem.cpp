@@ -2,32 +2,37 @@
 #include <iostream> // For debug/logging purposes
 
 ResourceSystem::ResourceSystem(ResourceManager* resourceMgr)
-    : resourceManager(std::move(resourceMgr)) {}
+    : resourceManager(std::shared_ptr<ResourceManager>(resourceMgr)) {}
 
 void ResourceSystem::Init() {
-    // Initialize the ResourceSystem
-    std::cout << "ResourceSystem initialized." << std::endl;
+    // Initialize system (e.g., load default search paths if required)
 }
 
 void ResourceSystem::Update(float deltaTime) {
-    // Periodic updates related to resources (e.g., cleanup or async loading)
-
+    // Update logic, if any, for the resource system
 }
 
 void ResourceSystem::Shutdown() {
-    // Free all resources and prepare for system shutdown
-    std::cout << "ResourceSystem shutting down..." << std::endl;
-    resourceManager->UnloadAll();
+    // Cleanup resources and shutdown
 }
 
-void ResourceSystem::LoadResource(const std::string& resourceName, const std::string& ResourcePath) {
-    // Delegate resource loading to ResourceManager
-    std::cout << "Loading resource: " << resourceName << std::endl;
-
+void ResourceSystem::LoadResource(const std::string& resourceName, const std::string& resourcePath) {
+    // Logic to load the resource
 }
 
 void ResourceSystem::UnloadResource(const std::string& resourceName) {
-    // Delegate resource unloading to ResourceManager
-    std::cout << "Unloading resource: " << resourceName << std::endl;
-
+    // Logic to unload the resource
 }
+
+void ResourceSystem::AddSearchPath(const std::string& path) {
+    searchPaths.push_back(path);
+}
+
+void ResourceSystem::RemoveSearchPath(const std::string& path) {
+    searchPaths.erase(std::remove(searchPaths.begin(), searchPaths.end(), path), searchPaths.end());
+}
+
+const std::vector<std::string>& ResourceSystem::GetSearchPaths() const {
+    return searchPaths;
+}
+
