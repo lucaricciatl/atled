@@ -8,25 +8,6 @@
 
 namespace graphics {
 
-std::shared_ptr<Model3D> Model3DFactory::CreateModel3D(const Model3DType aType) {
-    switch (aType) {
-        case Model3DType::cube:
-            return CreateCube();
-        case Model3DType::sphere:
-            return CreateSphere();
-        case Model3DType::line3D:
-            return CreateLine3D();
-        case Model3DType::cylinder:
-            return CreateCylinder();
-        case Model3DType::plane:
-            return CreatePlane();
-        case Model3DType::capsule:
-            return CreateCapsule();
-        default:
-            return nullptr;
-    }
-}
-
 std::shared_ptr<Cube> Model3DFactory::CreateCube(float sideLength) {
     auto cube = std::make_shared<Cube>();
     cube->SetWidth(sideLength);
@@ -95,6 +76,11 @@ std::shared_ptr<Capsule> Model3DFactory::CreateCapsule(Vector3 startPos, Vector3
 
 std::shared_ptr<Capsule> Model3DFactory::CreateCapsule() {
     return std::make_shared<Capsule>();
+}
+
+std::shared_ptr<Mesh3D> Model3DFactory::CreateMesh()
+{
+    return std::make_shared<Mesh3D>();
 }
 
 

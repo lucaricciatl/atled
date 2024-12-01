@@ -17,11 +17,12 @@ struct Vertex {
     Vector2 texCoords; // Texture coordinates
 };
 
-class Mesh : public Model3D {
+class Mesh3D : public Model3D {
 public:
     // Constructor
-    Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
-    ~Mesh();
+    Mesh3D();
+    Mesh3D(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+    ~Mesh3D();
 
     // Getters
     const std::vector<Vertex>& GetVertices() const;
