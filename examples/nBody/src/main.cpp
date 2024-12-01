@@ -29,8 +29,8 @@ int main() {
     // Random number generator setup
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<float> distX(0.0f, 900.0f); // Range for X positions
-    std::uniform_real_distribution<float> distY(0.0f, 900.0f); // Range for Y positions
+    std::uniform_real_distribution<float> distX(0.0f, 200.0f); // Range for X positions
+    std::uniform_real_distribution<float> distY(0.0f, 200.0f); // Range for Y positions
     std::uniform_real_distribution<float> distMass(1.0e12f, 1.0e14f); // Range for masses
     std::uniform_int_distribution<int> distColor(0, 255); // Range for RGB color values
 
@@ -38,7 +38,7 @@ int main() {
     std::vector<std::shared_ptr<Entity>> entities;
 
     // Generate 50 entities with random positions and appearance
-    for (int i = 0; i < 50; ++i) {
+    for (int i = 0; i < 100; ++i) {
         auto entity = coreEngine->CreateEntity();
 
         // Add FrameComponent
@@ -53,8 +53,8 @@ int main() {
             shapeComponent->SetModel<Circle>();
             auto circle = shapeComponent->GetModel<Circle>();
             if (circle) {
-                circle->SetRadius(5.0f); // Set a fixed radius for all entities
-                circle->SetColor(Color(distColor(gen), distColor(gen), distColor(gen), 255)); // Set random color
+                circle->SetRadius(2.0f); // Set a fixed radius for all entities
+                circle->SetColor(Color(distColor(gen), distColor(gen), distColor(gen), 155)); // Set random color
             }
         }
 
@@ -81,7 +81,6 @@ int main() {
                 std::lock_guard<std::mutex> lock(entityMutex); // Protect shared resources
                 simulation.Update(0.016f); // Update simulation with a fixed timestep (16ms)
             }
-            std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Limit update rate
         }
         });
 
