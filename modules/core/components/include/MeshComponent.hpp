@@ -27,7 +27,6 @@ using namespace graphics;
         // Mutator for the model with construction logic
         void Init() {
             auto mModel = ModelFactory::CreateModel<Mesh3D>();
-
             mModel->SetMesh();
             graphicsManager->AddShape(1, mModel);
 

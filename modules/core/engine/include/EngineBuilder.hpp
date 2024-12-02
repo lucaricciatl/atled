@@ -156,6 +156,13 @@ std::unique_ptr<T> EngineBuilder<T>::Build() {
         cameraManager->AddCamera(cam);
         cameraManager->SetActiveCamera(0);
 
+        cam->SetPosition({ 5.0f, 5.0f, 5.0f }); // Camera position
+        cam->SetTarget({ 0.0f, 0.0f, 0.0f });   // Camera looking at point
+        cam->SetUp({ 0.0f, 1.0f, 0.0f });       // Camera up vector
+        cam->SetFovy(45.0f);                        // Field of view Y
+        cam->SetCameraProjection(CAMERA_PERSPECTIVE);         // Perspective projection
+        
+
         std::cout << "Initialized 3D Camera" << std::endl;
     } else {
         throw std::runtime_error("Unsupported world type specified!");

@@ -26,8 +26,7 @@ int main() {
         .Build();
 
     auto entity = coreEngine->CreateEntity();
-    auto shape = entity->AddComponent<MeshComponent>();
-
+    auto mc = entity->AddComponent<MeshComponent>();
 
 
     // Run the engine in the main thread

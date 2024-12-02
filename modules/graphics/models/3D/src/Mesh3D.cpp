@@ -31,16 +31,17 @@ const std::vector<unsigned int>& Mesh3D::GetIndices() const {
 
 // Private method to set up GPU buffers
 void Mesh3D::Draw() {
-    DrawModel(mModel, Vector3{ -5,-5,-5 }, 2.0f, WHITE);
-    DrawModel(mModel, Vector3{ 5,-5,-5 }, 2.0f, WHITE);
-    DrawModel(mModel, Vector3{ -5,5,-5 }, 2.0f, WHITE);
-    DrawModel(mModel, Vector3{ -5,5,5 }, 2.0f, WHITE);
-    ::DrawGrid(10, 1.0);
+
+
+    DrawModel(mModel, Vector3{ 0,0,0 }, 1.0f, RED);
+    ::DrawGrid(4, 1.0);
 }
 
 void Mesh3D::SetMesh() {
-    Mesh mesh = GenMeshCube(2.0f, 2.0f, 2.0f);
-    this->mModel = LoadModelFromMesh(mesh);
+
+    mModel = LoadModelFromMesh(::GenMeshCube(2, 2, 2));
+    mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].color = RED;
+
 };
 
 }
