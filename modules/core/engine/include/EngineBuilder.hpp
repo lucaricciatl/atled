@@ -155,6 +155,7 @@ std::unique_ptr<T> EngineBuilder<T>::Build() {
         auto cam = CameraFactory::createCamera3D(CameraType3D::Raylib);
         cameraManager->AddCamera(cam);
         cameraManager->SetActiveCamera(0);
+
         std::cout << "Initialized 3D Camera" << std::endl;
     } else {
         throw std::runtime_error("Unsupported world type specified!");

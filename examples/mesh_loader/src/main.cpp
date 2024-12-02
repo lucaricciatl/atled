@@ -10,6 +10,7 @@
 #include <mutex>
 #include <EngineBuilder.hpp>
 #include "Mesh3D.hpp"
+#include <MeshComponent.hpp>
 
 int main() {
     // Engine setup
@@ -20,17 +21,21 @@ int main() {
         .SetMouseType(input::MouseType::Raylib)
         .SetGraphicsType(graphics::GraphicsType::Raylib)
         .SetCameraType(graphics::CameraType::Raylib)
-        .SetWorldType(graphics::WorldType::World2D)
+        .SetWorldType(graphics::WorldType::World3D)
         .SetTargetFramerate(60) // Set frame rate suitable for the game speed
         .Build();
 
     auto entity = coreEngine->CreateEntity();
-    auto shape = entity->AddComponent<ShapeComponent>();
-    shape->SetModel<Mesh3D>();
+    auto shape = entity->AddComponent<MeshComponent>();
+
 
 
     // Run the engine in the main thread
     coreEngine->Start();
+
+
+
+
     coreEngine->Shutdown();
 
     return 0;

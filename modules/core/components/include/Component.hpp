@@ -2,20 +2,23 @@
 #define COMPONENT_HPP
 
 #include "Entity.hpp"
-#include "ServiceProvider.hpp"
+
 
 class Entity; // Forward declaration of Entity
 
 class Component {
 public:
-  Entity *owner;
+    Entity* owner;
 
-  Component(Entity* owner) : owner(owner) {}
+    Component(Entity* owner = nullptr) : owner(owner) {}
 
-  virtual ~Component() = default;
+    virtual ~Component() = default;
 
-  virtual void Update(double deltatime) {};
+    // Update method for the component
+    virtual void Update(double deltatime) {};
 
+    // Init method for the component
+    virtual void Init() {};
 };
 
 #endif // COMPONENT_HPP

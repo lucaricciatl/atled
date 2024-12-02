@@ -19,13 +19,9 @@ public:
     void Shutdown() override;
 
     // Methods for resource management
-    void LoadResource(const std::string& resourceName, const std::string& resourcePath);
-    void UnloadResource(const std::string& resourceName);
+    void LoadResources();
+    void UnloadResources();
 
-    // Methods for managing resource search paths
-    void AddSearchPath(const std::string& path);
-    void RemoveSearchPath(const std::string& path);
-    const std::vector<std::string>& GetSearchPaths() const;
 
 private:
     std::shared_ptr<ResourceManager> resourceManager;

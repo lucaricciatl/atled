@@ -2,6 +2,7 @@
 #define RAYLIB_WRAPPER_HPP
 
 #include "../raylib/src/raylib.h"
+#include <string>
 
 
 namespace raylib {
@@ -1115,7 +1116,12 @@ namespace raylib {
         ::DrawTextCodepoints(font, codepoints, codepointCount, position, fontSize, spacing, tint);
     }
     void UpdateCamera(Camera *camera, int mode){::UpdateCamera(camera, mode);};      // Update camera position for selected mode
-void EnableEventWaiting(void){EnableEventWaiting();};                              // Enable waiting for events on EndDrawing(), no automatic event polling
+    
+    void EnableEventWaiting(void){::EnableEventWaiting();};                              // Enable waiting for events on EndDrawing(), no automatic event polling
+
+    Model LoadModel(const std::string& path) {
+        return ::LoadModel(path.c_str());
+    }
 
 } // namespace raylib
 

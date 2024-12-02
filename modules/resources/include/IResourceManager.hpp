@@ -17,14 +17,15 @@ class IResourceManager {
 public:
     virtual ~IResourceManager() = default;
 
-    virtual std::shared_ptr<void> Load(ResourceType type, const std::string& fileName) = 0;
+    virtual void Load(std::string aPath) = 0;
 
-    virtual void Unload(ResourceType type, const std::string& fileName) = 0;
+    virtual void Unload() = 0;
 
-    virtual bool IsLoaded(ResourceType type, const std::string& fileName) const = 0;
+    virtual bool IsLoaded() = 0;
 
     virtual void UnloadAll() = 0;
 };
+
 
 }
 #endif // IRESOURCE_MANAGER_HPP

@@ -36,7 +36,20 @@ void Entity::Update(double deltaTime) {
             }
         }
 };
+void Entity::Init() {
+    for (auto& [type, component] : components) {
+        if (component) {
+            component->Init(); // Correctly calls DerivedComponent1::Init()
+        }
+    }
 
+    // Initialize child entities
+    for (Entity* child : children) {
+        if (child) {
+            child->Init();
+        }
+    }
+}
 void Entity::SetServiceProvider(std::shared_ptr<ServiceProvider> aServiceProvider) {
     mServiceProvider = aServiceProvider;
 };

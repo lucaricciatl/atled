@@ -43,6 +43,14 @@ std::shared_ptr<GraphicsContext> GraphicsManager::GetGraphicsContext() {
 void GraphicsManager::Init() {
     // Initialization logic for context and display
     GetGraphicsContext()->InitWindowManager(); // Initialize context with display
+    auto camera= mCameraManager->GetActiveCamera();
+    camera->SetPosition({ 5.0f, 5.0f, 5.0f }); // Camera position
+    camera->SetTarget({ 0.0f, 0.5f, 0.0f });   // Camera looking at point
+    camera->SetUp({ 0.0f, 1.0f, 0.0f });       // Camera up vector
+    camera->SetFovy(45.0f);         // Field of view Y
+    camera->SetCameraProjection( CAMERA_PERSPECTIVE); // Perspective projection
+    camera->BeginCamera();
+    
 }
 
 void GraphicsManager::Start() {

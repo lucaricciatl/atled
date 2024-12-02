@@ -30,12 +30,12 @@ private:
 public:
     // Constructor and Destructor
     Entity();
+    void Init();
     virtual ~Entity();
     std::shared_ptr<Frame> GetFrame() { return mFrame; };
     void Update(double deltaTime);
     void SetServiceProvider(std::shared_ptr<ServiceProvider> aServiceProvider);
     void SetDefaultState();
-
     // Parent-Child Management
     void SetParent(Entity* newParent);
     Entity* GetParent() const;
@@ -65,7 +65,7 @@ protected:
     std::shared_ptr<Frame> mFrame;
 };
 
-// Definitions of template methods
+
 
 template <typename ComponentType, typename... Args>
 std::shared_ptr<ComponentType> Entity::AddComponent(Args&&... args) {

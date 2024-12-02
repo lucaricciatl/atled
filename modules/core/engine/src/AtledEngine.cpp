@@ -41,6 +41,11 @@ void AtledEngine::Init() {
 	for (auto& system : systems) {
 		system->Init();
 	}
+	for (const auto& entity : entities) {
+		if (entity->GetParent() == nullptr) {
+			entity->Init();
+		}
+	}
 }
 
 void AtledEngine::Start() {

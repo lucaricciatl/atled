@@ -28,11 +28,15 @@ public:
     const std::vector<Vertex>& GetVertices() const;
     const std::vector<unsigned int>& GetIndices() const;
     void Draw();
+    void SetMesh();
+
 private:
     // Vertex and index data
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
-
+    raylib::Model mModel; 
 };
+
+
 }
 #endif // MESH_HPP

@@ -1,4 +1,5 @@
 #include "../raylib/src/raylib.h"
+#include "string"
 #ifdef _WIN32
 #define EXPORT __declspec(dllexport)
 #else
@@ -14,7 +15,7 @@ typedef Color Color;  // Using the fully qualified type from raylib
 
 typedef Shader Shader;
 typedef Vector2 Vector2;
-
+typedef Model Model;
 typedef Vector3 Vector3;
 
 typedef Font Font ;
@@ -324,10 +325,11 @@ Image GenImageFontAtlas(const GlyphInfo* glyphs, Rectangle** glyphRecs, int glyp
 void UnloadFontData(GlyphInfo* glyphs, int glyphCount);
 void UnloadFont(Font font);
 bool ExportFontAsCode(Font font, const char* fileName);
-   void DrawFPS(int posX, int posY);
-    void DrawText(const char* text, int posX, int posY, int fontSize, Color color);
-    void DrawTextEx(Font font, const char* text, Vector2 position, float fontSize, float spacing, Color tint);
-    void DrawTextPro(Font font, const char* text, Vector2 position, Vector2 origin, float rotation, float fontSize, float spacing, Color tint);
-    void DrawTextCodepoint(Font font, int codepoint, Vector2 position, float fontSize, Color tint);
-    void DrawTextCodepoints(Font font, const int* codepoints, int codepointCount, Vector2 position, float fontSize, float spacing, Color tint);
+void DrawFPS(int posX, int posY);
+void DrawText(const char* text, int posX, int posY, int fontSize, Color color);
+void DrawTextEx(Font font, const char* text, Vector2 position, float fontSize, float spacing, Color tint);
+void DrawTextPro(Font font, const char* text, Vector2 position, Vector2 origin, float rotation, float fontSize, float spacing, Color tint);
+void DrawTextCodepoint(Font font, int codepoint, Vector2 position, float fontSize, Color tint);
+void DrawTextCodepoints(Font font, const int* codepoints, int codepointCount, Vector2 position, float fontSize, float spacing, Color tint);
+Model LoadModel(const std::string& path);                                                // Load model from files (meshes and materials)
 }
