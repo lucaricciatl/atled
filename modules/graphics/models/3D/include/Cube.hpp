@@ -27,8 +27,7 @@ public:
     float GetHeight() const;
     float GetLength() const;
 
-
-
+    void UpdateMesh();
     // Setter for center position
     void SetCenterPos(const Vector3& centerPos);
     // Getter for center position
@@ -38,7 +37,7 @@ public:
 private:
     Vector3 mDimensions;        // Dimensions of the cube (width, height, length)
     Vector3 mCenterPos;         // Center position of the cube
-
+    ::Model mModel;
 
 };
 

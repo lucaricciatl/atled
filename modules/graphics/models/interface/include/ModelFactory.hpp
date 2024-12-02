@@ -48,8 +48,6 @@ public:
             return Model3DFactory::CreateCube();
         else if constexpr (std::is_same_v<ModelClass, Sphere>)
             return Model3DFactory::CreateSphere();
-        else if constexpr (std::is_same_v<ModelClass, Mesh3D>)
-            return Model3DFactory::CreateMesh();
         else
             static_assert(std::is_base_of_v<Model, ModelClass>, "Invalid ModelClass type provided.");
     }

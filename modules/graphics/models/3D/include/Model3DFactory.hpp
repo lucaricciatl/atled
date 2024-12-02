@@ -7,7 +7,7 @@
 #include "Capsule.hpp"
 #include "Cylinder.hpp"
 #include "Plane.hpp"
-#include "Mesh3D.hpp"
+
 namespace graphics {
 using namespace raylib;
 
@@ -35,7 +35,6 @@ public:
     static std::shared_ptr<Capsule> CreateCapsule(Vector3 startPos, Vector3 endPos, float radius);
     static std::shared_ptr<Capsule> CreateCapsule();
 
-    static std::shared_ptr<Mesh3D> CreateMesh();
 };
 
 }  // namespace graphics

@@ -78,10 +78,7 @@ std::shared_ptr<Capsule> Model3DFactory::CreateCapsule() {
     return std::make_shared<Capsule>();
 }
 
-std::shared_ptr<Mesh3D> Model3DFactory::CreateMesh()
-{
-    return std::make_shared<Mesh3D>();
-}
+
 
 
 }  // namespace graphics

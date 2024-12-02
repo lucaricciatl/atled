@@ -34,13 +34,15 @@ AtledEngine::AtledEngine(
 	AddSystem(std::make_unique<PhysicsSystem>(GetEventBus()));
 	AddSystem(std::make_unique<RenderSystem>(sharedGraphicsMgr.get()));
 	AddSystem(std::make_unique<ResourceSystem>(sharedResourcesMgr.get()));
+
+	for (auto& system : systems) {
+		system->Init();
+	}
 }
 
 
 void AtledEngine::Init() {
-	for (auto& system : systems) {
-		system->Init();
-	}
+
 	for (const auto& entity : entities) {
 		if (entity->GetParent() == nullptr) {
 			entity->Init();
