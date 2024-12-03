@@ -15,8 +15,6 @@ namespace graphics {
         // Override draw function
         void Draw() override;
 
-
-
         // Setter for radius
         void SetRadius(float radius);
         // Getter for radius

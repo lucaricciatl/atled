@@ -8,7 +8,6 @@
 #include "IDisplay.hpp"
 #include "Sphere.hpp"
 #include "Cube.hpp"
-#include "Capsule.hpp"
 #include "Cylinder.hpp"
 #include "Plane.hpp"
 #include "Line3D.hpp"

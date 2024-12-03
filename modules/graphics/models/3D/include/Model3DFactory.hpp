@@ -4,7 +4,6 @@
 #include "Cube.hpp"
 #include "Sphere.hpp"
 #include "Line3D.hpp"
-#include "Capsule.hpp"
 #include "Cylinder.hpp"
 #include "Plane.hpp"
 

@@ -4,7 +4,6 @@
 #include "Line3D.hpp"
 #include "Cylinder.hpp"
 #include "Plane.hpp"
-#include "Capsule.hpp"
 
 namespace graphics {
 
