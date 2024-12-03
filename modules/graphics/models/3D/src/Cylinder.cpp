@@ -2,74 +2,66 @@
 
 namespace graphics {
 
-// Default constructor
-Cylinder::Cylinder()
-    : mStartPos({0.0f, 0.0f, 0.0f}),
-      mEndPos({0.0f, 1.0f, 0.0f}),
-      mStartRadius(0.5f),
-      mEndRadius(0.5f),
-      mSides(16) {}
+    Cylinder::Cylinder()
+        : mPos({0.0f, 0.0f, 0.0f}),
+          mHeight(1.0f),
+          mRadius(0.5f),
+          mSides(64),
+          mColor(WHITE) {
+        UpdateMesh();
+    }
 
-// Parameterized constructor
-Cylinder::Cylinder(const Vector3& startPos, const Vector3& endPos, float startRadius, float endRadius, int sides)
-    : mStartPos(startPos), mEndPos(endPos), mStartRadius(startRadius), mEndRadius(endRadius), mSides(sides) {}
+    Cylinder::Cylinder(const Vector3& aPos, float aRadius, float height,int sides,Color aColor)
+        : mPos(aPos), mRadius(aRadius), mSides(sides),mHeight(height), mColor(aColor) {
+        UpdateMesh();
+    }
 
-// Override draw method
-void Cylinder::Draw() {
-    auto gPosStart = ComputeGlobalPosition(mStartPos);
-    auto gPosEnd = ComputeGlobalPosition(mEndPos);
+    void Cylinder::Draw() {
+        auto gPos = ComputeGlobalPosition(mPos);
 
-    raylib::DrawCylinderWiresEx(gPosStart, gPosEnd, mStartRadius, mEndRadius, mSides, mColor);
+
+        if (ShapeIsEnabled) {
+                DrawModel(mModel, gPos, 1.0f, WHITE);
+        }
+
+    }
+
+    void Cylinder::SetPos(const Vector3& aPos) {
+        mPos = aPos;
+        UpdateMesh();
+    }
+
+
+    void Cylinder::SetRadius(float aRadius) {
+        mRadius = aRadius;
+        UpdateMesh();
+    }
+
+    void Cylinder::SetSides(int sides) {
+        mSides = sides;
+        UpdateMesh();
+    }
+
+    float Cylinder::GetRadius() const {
+        return mRadius;
+    }
+
+    int Cylinder::GetSides() const {
+        return mSides;
+    }
+
+void Cylinder::UpdateMesh() {
+    // Clean up the old model to prevent memory leaks
+    if (mModel.meshCount > 0) {
+        UnloadModel(mModel);
+    }
+
+    // Generate a new mesh for the cylinder and load it into mModel
+    Mesh cylinderMesh = GenMeshCylinder(mRadius, mHeight, mSides);
+    mModel = LoadModelFromMesh(cylinderMesh);
+
+    // Set the material color
+    mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].color = mColor;
 }
 
-// Setter for start position
-void Cylinder::SetStartPos(const Vector3& startPos) {
-    mStartPos = startPos;
-}
-
-// Setter for end position
-void Cylinder::SetEndPos(const Vector3& endPos) {
-    mEndPos = endPos;
-}
-
-// Setter for start radius
-void Cylinder::SetStartRadius(float startRadius) {
-    mStartRadius = startRadius;
-}
-
-// Setter for end radius
-void Cylinder::SetEndRadius(float endRadius) {
-    mEndRadius = endRadius;
-}
-
-// Setter for sides
-void Cylinder::SetSides(int sides) {
-    mSides = sides;
-}
-
-// Getter for start position
-Vector3 Cylinder::GetStartPos() const {
-    return mStartPos;
-}
-
-// Getter for end position
-Vector3 Cylinder::GetEndPos() const {
-    return mEndPos;
-}
-
-// Getter for start radius
-float Cylinder::GetStartRadius() const {
-    return mStartRadius;
-}
-
-// Getter for end radius
-float Cylinder::GetEndRadius() const {
-    return mEndRadius;
-}
-
-// Getter for sides
-int Cylinder::GetSides() const {
-    return mSides;
-}
-
-}  // namespace graphics
+} // namespace graphics

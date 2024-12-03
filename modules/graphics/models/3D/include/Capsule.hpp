@@ -29,7 +29,9 @@ public:
     int GetSlices() const;
     int GetRings() const;
 
+
 private:
+
     Vector3 mStartPos;  // Start position of the capsule
     Vector3 mEndPos;    // End position of the capsule
     float mRadius;      // Radius of the capsule

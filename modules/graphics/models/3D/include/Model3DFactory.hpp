@@ -26,14 +26,10 @@ public:
     static std::shared_ptr<Line3D> CreateLine3D(Vector3 startPos, Vector3 endPos);
     static std::shared_ptr<Line3D> CreateLine3D();
 
-    static std::shared_ptr<Cylinder> CreateCylinder(float startRadius, float endRadius, Vector3 startPos, Vector3 endPos);
     static std::shared_ptr<Cylinder> CreateCylinder();
 
-    static std::shared_ptr<Plane> CreatePlane(Vector3 centerPos, Vector2 size);
     static std::shared_ptr<Plane> CreatePlane();
 
-    static std::shared_ptr<Capsule> CreateCapsule(Vector3 startPos, Vector3 endPos, float radius);
-    static std::shared_ptr<Capsule> CreateCapsule();
 
 };
 

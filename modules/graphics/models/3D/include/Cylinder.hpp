@@ -10,31 +10,33 @@ class Cylinder : public Model3D {
 public:
     // Constructors
     Cylinder();
-    Cylinder(const Vector3& startPos, const Vector3& endPos, float startRadius, float endRadius, int sides);
+    Cylinder(const Vector3 &aPos, float aRadius,float height, int sides,Color aColor);
 
     // Override draw function
     void Draw() override;
 
     // Setters
-    void SetStartPos(const Vector3& startPos);
-    void SetEndPos(const Vector3& endPos);
-    void SetStartRadius(float startRadius);
-    void SetEndRadius(float endRadius);
+    void SetPos(const Vector3& startPos);
+    void SetRadius(float radius);
+
     void SetSides(int sides);
 
     // Getters
-    Vector3 GetStartPos() const;
-    Vector3 GetEndPos() const;
-    float GetStartRadius() const;
-    float GetEndRadius() const;
+    Vector3 GetPos() const;
+    float GetRadius() const;
+
     int GetSides() const;
 
+
 private:
-    Vector3 mStartPos;    // Start position of the cylinder base
-    Vector3 mEndPos;      // End position of the cylinder top
-    float mStartRadius;   // Radius of the cylinder base
-    float mEndRadius;     // Radius of the cylinder top
+
+    void UpdateMesh();
+    Color mColor;
+    float mHeight;
+    Vector3 mPos;    // Start position of the cylinder base
+    float mRadius;     // Radius of the cylinder top
     int mSides;           // Number of sides for the cylinder
+    ::Model mModel;
 };
 
 }  // namespace graphics

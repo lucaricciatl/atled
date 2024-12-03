@@ -2,16 +2,42 @@
 #include "raylib.hpp"
 
 namespace graphics {
-    // Setters
+
+    Sphere::Sphere()
+        : mRadius(1.0f), 
+          mRings(16), 
+          mSlices(16), 
+          mCenterPos({0.0f, 0.0f, 0.0f}),
+          mColor(WHITE) { // Initialize color to white
+        UpdateMesh();
+    }
+
+    Sphere::Sphere(float radius, const Vector3& centerPos, int rings, int slices, Color mColor)
+        : mRadius(radius), 
+          mRings(rings), 
+          mSlices(slices), 
+          mCenterPos(centerPos),
+          mColor(WHITE) { // Initialize color to white
+        if (radius <= 0) {
+            throw std::invalid_argument("Sphere radius must be positive.");
+        }
+        if (rings < 3 || slices < 3) {
+            throw std::invalid_argument("Rings and slices must be at least 3.");
+        }
+        UpdateMesh();
+    }
+
     void Sphere::SetRadius(float radius) {
         if (radius <= 0) {
             throw std::invalid_argument("Sphere radius must be positive.");
         }
         mRadius = radius;
+        UpdateMesh();
     }
 
     void Sphere::SetCenterPos(const Vector3& centerPos) {
         mCenterPos = centerPos;
+        UpdateMesh();
     }
 
     void Sphere::SetRings(int rings) {
@@ -19,6 +45,7 @@ namespace graphics {
             throw std::invalid_argument("Rings must be at least 3.");
         }
         mRings = rings;
+        UpdateMesh();
     }
 
     void Sphere::SetSlices(int slices) {
@@ -26,9 +53,9 @@ namespace graphics {
             throw std::invalid_argument("Slices must be at least 3.");
         }
         mSlices = slices;
+        UpdateMesh();
     }
 
-    // Getters
     float Sphere::GetRadius() const {
         return mRadius;
     }
@@ -44,31 +71,27 @@ namespace graphics {
     int Sphere::GetSlices() const {
         return mSlices;
     }
-    // Default constructor
-    Sphere::Sphere()
-        : mRadius(1.0f), mRings(16), mSlices(16), mCenterPos({ 0.0f, 0.0f, 0.0f }) {}
 
-    // Parameterized constructor
-    Sphere::Sphere(float radius, const Vector3& centerPos, int rings, int slices)
-        : mRadius(radius), mRings(rings), mSlices(slices), mCenterPos(centerPos) {
-        if (radius <= 0) {
-            throw std::invalid_argument("Sphere radius must be positive.");
-        }
-        if (rings < 3 || slices < 3) {
-            throw std::invalid_argument("Rings and slices must be at least 3.");
+    void Sphere::Draw() {
+        auto gPos = ComputeGlobalPosition(mCenterPos);
+
+        if (ShapeIsEnabled) {
+            DrawModel(mModel, gPos, 1.0f, mColor);
         }
     }
-void Sphere::Draw() {
-    // Call to Raylib's DrawSphere function to render the sphere
-    if (ShapeIsEnabled) {
-        
-    raylib::DrawSphereEx(ComputeGlobalPosition(mCenterPos), mRadius, mRings , mSlices, mColor);
+
+    void Sphere::UpdateMesh() {
+        // Clean up the old model to prevent memory leaks
+        if (mModel.meshCount > 0) {
+            UnloadModel(mModel);
+        }
+
+        // Generate a new mesh for the sphere and load it into mModel
+        Mesh sphereMesh = GenMeshSphere(mRadius, mSlices, mRings);
+        mModel = LoadModelFromMesh(sphereMesh);
+
+        // Set the material color
+        mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].color = mColor;
     }
-    if (WireframeIsEnabled) {
 
-    raylib::DrawSphereWires(ComputeGlobalPosition(mCenterPos), mRadius, mRings, mSlices, mColor);
-    }
-}
-
-
-}  // namespace graphics
+} // namespace graphics

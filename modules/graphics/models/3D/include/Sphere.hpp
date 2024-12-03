@@ -10,10 +10,12 @@ namespace graphics {
     public:
         // Constructors
         Sphere();  // Default constructor
-        Sphere(float radius, const Vector3& centerPos, int rings = 16, int slices = 16);
+        Sphere(float radius, const Vector3 &centerPos, int rings, int slices, Color mColor);
 
         // Override draw function
         void Draw() override;
+
+
 
         // Setter for radius
         void SetRadius(float radius);
@@ -36,6 +38,11 @@ namespace graphics {
         int GetSlices() const;
 
     private:
+        void UpdateMesh();
+
+        
+        Color mColor;
+        ::Model mModel;
         float mRadius;      // Radius of the sphere
         int mRings;         // Number of rings
         int mSlices;        // Number of slices
