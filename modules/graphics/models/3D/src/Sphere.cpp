@@ -72,13 +72,52 @@ namespace graphics {
         return mSlices;
     }
 
-    void Sphere::Draw() {
-        auto gPos = ComputeGlobalPosition(mCenterPos);
+void Sphere::Draw() {
+    auto gPos = ComputeGlobalPosition(mCenterPos);
 
-        if (ShapeIsEnabled) {
-            DrawModel(mModel, gPos, 1.0f, mColor);
-        }
+    if (ShapeIsEnabled) {
+        // Create and load a simple shader dynamically
+        Shader shader = LoadShaderFromMemory(
+            R"(
+            #version 330
+            layout (location = 0) in vec3 vertexPosition;
+            layout (location = 1) in vec3 vertexNormal;
+            uniform mat4 mvp;
+            out vec3 fragNormal;
+            void main() {
+                fragNormal = vertexNormal;
+                gl_Position = mvp * vec4(vertexPosition, 1.0);
+            }
+            )",
+            R"(
+            #version 330
+            in vec3 fragNormal;
+            uniform vec3 lightColor;
+            out vec4 fragColor;
+            void main() {
+                vec3 norm = normalize(fragNormal);
+                vec3 lightDir = normalize(vec3(0.0, 1.0, 1.0)); // Fixed light direction
+                float diff = max(dot(norm, lightDir), 0.0);
+                fragColor = vec4(diff * lightColor, 1.0);
+            }
+            )"
+        );
+
+        // Set shader values dynamically
+        Vector3 lightColor = {1.0f, 1.0f, 1.0f};
+        SetShaderValue(shader, GetShaderLocation(shader, "lightColor"), &lightColor, SHADER_UNIFORM_VEC3);
+
+        // Assign the shader to the model's material
+        mModel.materials[0].shader = shader;
+
+        // Draw the model with the custom shader
+        DrawModel(mModel, gPos, 1.0f, mColor);
+
+        // Unload shader after use to avoid memory leaks (not recommended for real-time use)
+        UnloadShader(shader);
     }
+}
+
 
     void Sphere::UpdateMesh() {
         // Clean up the old model to prevent memory leaks

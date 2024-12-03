@@ -21,7 +21,6 @@ struct GraphicsConfig {
         }
     }
 
-
     // Constructor to allow custom flags
     GraphicsConfig(std::vector<ConfigFlags> customFlags) : WindowConfig(customFlags) {}
 };

@@ -64,7 +64,7 @@ public:
     }
 
 private:
-    std::shared_ptr<graphics::Model> mModel; // The model instance managed as a polymorphic type
+    std::shared_ptr<graphics::Model> mModel;
     std::shared_ptr<graphics::IGraphicManager> graphicsManager;
     std::shared_ptr<physics::Frame> mFrame;
 };
