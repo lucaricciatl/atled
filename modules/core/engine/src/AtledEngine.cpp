@@ -108,7 +108,7 @@ void AtledEngine::UpdateEntities(double deltaTime) {
 		// update only if the entity does not have a parent,
 		// the child entity are updated in cascade to they're 
 		// parents
-		if (entity->GetParent() != nullptr) {
+		if (entity->GetParent() == nullptr) {
 			entity->Update(deltaTime);
 		}
 	}

@@ -77,26 +77,29 @@ void Sphere::Draw() {
 
     if (ShapeIsEnabled) {
         // Create and load a simple shader dynamically
-        std::cout << "Current Working Directory: " << std::filesystem::current_path() << std::endl;
+        //std::cout << "Current Working Directory: " << std::filesystem::current_path() << std::endl;
 
-        Shader basicShader = LoadShader(
-            "C:/Users/atled/source/repos/atled/assets/shaders/basic.vs",
-            "C:/Users/atled/source/repos/atled/assets/shaders/basic.fs"
-        );
+        //Shader basicShader = LoadShader(
+        //    "C:/Users/atled/source/repos/atled/assets/shaders/basic.vs",
+        //    "C:/Users/atled/source/repos/atled/assets/shaders/basic.fs"
+        //);
 
 
-        // Set shader values dynamically
-        Vector3 lightColor = { 1.0f, 1.0f, 0.0f };
-        SetShaderValue(basicShader, GetShaderLocation(basicShader, "lightColor"), &lightColor, SHADER_UNIFORM_VEC3);
+        // Set the framebuffer size in the shader
+        Vector2 screenSize = { 800.0f, 450.0f }; // Update to match your screen resolution
+        //SetShaderValue(basicShader, GetShaderLocation(basicShader, "size"), &screenSize, SHADER_UNIFORM_VEC2);
+        float samples = 5.0f;    // Pixels per axis for blur
+        float quality = 2.5f;    // Glow spread size factor
 
-        // Assign the shader to the model's material
-        mModel.materials[0].shader = basicShader;
-
-        // Draw the model with the custom shader
-        DrawModel(mModel, gPos, 1.0f, mColor);
-
+        //SetShaderValue(basicShader, GetShaderLocation(basicShader, "samples"), &samples, SHADER_UNIFORM_FLOAT);
+        //SetShaderValue(basicShader, GetShaderLocation(basicShader, "quality"), &quality, SHADER_UNIFORM_FLOAT);
+        Texture2D texture = LoadTexture("C:/Users/atled/source/repos/atled/assets/textures/p.png");
+        mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
+        // Assign the shader to the 3D model
+        //mModel.materials[0].shader = basicShader;
+        DrawModel(mModel, gPos, 1.0f, WHITE);
         // Unload shader after use to avoid memory leaks (not recommended for real-time use)
-        UnloadShader(basicShader);
+        //UnloadShader(basicShader);
     }
 }
 

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <mutex>
 #include <EngineBuilder.hpp>
+#include <FreeCameraComponent.hpp>
 
 int main() {
     // Engine setup
@@ -24,9 +25,12 @@ int main() {
         .Build();
 
     auto entity = coreEngine->CreateEntity();
+
     auto mc = entity->AddComponent<ShapeComponent>();
     mc->SetModel<Sphere>();
     // Run the engine in the main thread
+    auto entitycam = coreEngine->CreateEntity();
+    entitycam->AddComponent<FreeCameraComponent>();
     coreEngine->Start();
 
     coreEngine->Shutdown();
