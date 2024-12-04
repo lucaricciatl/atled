@@ -93,8 +93,8 @@ void Sphere::Draw() {
 
         //SetShaderValue(basicShader, GetShaderLocation(basicShader, "samples"), &samples, SHADER_UNIFORM_FLOAT);
         //SetShaderValue(basicShader, GetShaderLocation(basicShader, "quality"), &quality, SHADER_UNIFORM_FLOAT);
-        Texture2D texture = LoadTexture("C:/Users/atled/source/repos/atled/assets/textures/p.png");
-        mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
+        //Texture2D texture = LoadTexture("C:/Users/atled/source/repos/atled/assets/textures/p.png");
+        //mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
         // Assign the shader to the 3D model
         //mModel.materials[0].shader = basicShader;
         DrawModel(mModel, gPos, 1.0f, WHITE);

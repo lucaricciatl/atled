@@ -37,10 +37,10 @@ void FreeCameraComponent::Update(double deltaTime) {
         cameraTarget.y += cameraSpeed;
     }
 
-    if (raylib::IsCursorOnScreen()) {
+    if (raylib::IsCursorOnScreen() && IsMouseButtonDown(1)) {
         // Handle mouse input for camera rotation
-        float mouseDeltaX = mInputManager->GetMouseDeltaX() * mouseSensitivity;
-        float mouseDeltaY = mInputManager->GetMouseDeltaY() * mouseSensitivity;
+        float mouseDeltaX = -mInputManager->GetMouseDeltaX() * mouseSensitivity;
+        float mouseDeltaY = -mInputManager->GetMouseDeltaY() * mouseSensitivity;
 
         // Rotate the camera target around the position
         Matrix rotationMatrixX = MatrixRotateY(mouseDeltaX * DEG2RAD);
@@ -55,8 +55,8 @@ void FreeCameraComponent::Update(double deltaTime) {
         Vector3 zoom = Vector3Scale(forward, mouseWheel * zoomSpeed);
         cameraPos = Vector3Add(cameraPos, zoom);
 
-        // Update the camera position and target
-        mCameraManager->SetCameraPosition({ cameraPos.x, cameraPos.y, cameraPos.z });
-        mCameraManager->SetCameraTarget({ cameraTarget.x, cameraTarget.y, cameraTarget.z });
     }
+    // Update the camera position and target
+    mCameraManager->SetCameraPosition({ cameraPos.x, cameraPos.y, cameraPos.z });
+    mCameraManager->SetCameraTarget({ cameraTarget.x, cameraTarget.y, cameraTarget.z });
 };
