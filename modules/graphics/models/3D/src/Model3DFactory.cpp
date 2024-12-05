@@ -19,9 +19,8 @@ std::shared_ptr<Cube> Model3DFactory::CreateCube() {
     return std::make_shared<Cube>();
 }
 
-std::shared_ptr<Sphere> Model3DFactory::CreateSphere(float radius) {
-    auto sphere = std::make_shared<Sphere>();
-    sphere->SetRadius(radius);
+std::shared_ptr<Sphere> Model3DFactory::CreateSphere(float radius, const raylib::Vector3& centerPos, int rings, int slices, raylib::Color mColor) {
+    auto sphere = std::make_shared<Sphere>(radius,centerPos, rings, slices, mColor);
     return sphere;
 }
 
@@ -46,6 +45,10 @@ std::shared_ptr<Cylinder> Model3DFactory::CreateCylinder() {
 
 std::shared_ptr<Plane> Model3DFactory::CreatePlane() {
     return std::make_shared<Plane>();;
+}
+
+std::shared_ptr<Plane> Model3DFactory::CreatePlane(const raylib::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& color) {
+    return std::make_shared<Plane>(centerPos, size, color);
 }
 
 }  // namespace graphics

@@ -13,12 +13,12 @@ namespace graphics {
         UpdateMesh();
     }
 
-    Sphere::Sphere(float radius, const raylib::Vector3& centerPos, int rings, int slices, raylib::Color mColor)
+    Sphere::Sphere(float radius, const raylib::Vector3& centerPos, int rings, int slices, raylib::Color aColor)
         : mRadius(radius), 
           mRings(rings), 
           mSlices(slices), 
           mCenterPos(centerPos),
-          mColor(raylib::WHITE) { // Initialize color to white
+          mColor(aColor) { // Initialize color to white
         if (radius <= 0) {
             throw std::invalid_argument("Sphere radius must be positive.");
         }

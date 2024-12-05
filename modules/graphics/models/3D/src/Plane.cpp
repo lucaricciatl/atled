@@ -3,29 +3,35 @@
 namespace graphics {
 
 // Default constructor
-Plane::Plane()
-    : mCenterPos({0.0f, 0.0f, 0.0f}),
-      mSize({10.0f, 10.0f}) {}
+    Plane::Plane()
+        : mCenterPos({ 0.0f, 0.0f, 0.0f }),
+        mSize({ 10.0f, 10.0f }),
+        mColor(raylib::Color(255, 255, 255, 205)) {
+        UpdateMesh();
+    };
 
 // Parameterized constructor
 Plane::Plane(const raylib::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& color)
-    : mCenterPos(centerPos), mSize(size){}
+    : mCenterPos(centerPos), mSize(size){
+    UpdateMesh();
+}
 
 // Override draw method
 void Plane::Draw() {
-    auto gPos = ComputeGlobalPosition(mCenterPos);
-    raylib::DrawPlane(gPos, mSize, mColor);
-    raylib::DrawGrid(mSize.x, 1);
+    auto gPos = ComputeGlobalPosition(mCenterPos);    
+    raylib::DrawModel(mModel, gPos, 1.0f, mColor);
 }
 
 // Setter for center position
 void Plane::SetCenterPos(const raylib::Vector3& centerPos) {
     mCenterPos = centerPos;
+    UpdateMesh();
 }
 
 // Setter for size
 void Plane::SetSize(const raylib::Vector2& size) {
     mSize = size;
+    UpdateMesh();
 }
 
 // Getter for center position
@@ -36,6 +42,20 @@ raylib::Vector3 Plane::GetCenterPos() const {
 // Getter for size
 raylib::Vector2 Plane::GetSize() const {
     return mSize;
+}
+
+void Plane::UpdateMesh() {
+    // Clean up the old model to prevent memory leaks
+    if (mModel.meshCount > 0) {
+        UnloadModel(mModel);
+    }
+
+    // Generate a new mesh for the sphere and load it into mModel
+    raylib::Mesh PlaneMesh = raylib::GenMeshPlane(mSize.x, mSize.y, 100, 100);
+    mModel = raylib::LoadModelFromMesh(PlaneMesh);
+
+    // Set the material color
+    mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
 }
 
 }  // namespace graphics
