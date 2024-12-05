@@ -12,10 +12,10 @@ namespace graphics {
     void Cube::Draw() {
         auto gPos = ComputeGlobalPosition(mCenterPos);
         if (ShapeIsEnabled) {
-            DrawModel(mModel, gPos, 1.0f, WHITE);
+            raylib::DrawModel(mModel, gPos, 1.0f, WHITE);
         }
         if (WireframeIsEnabled) {
-            ::DrawCubeWires(gPos, mDimensions.x, mDimensions.y, mDimensions.z, mWireframeColor);
+            raylib::DrawCubeWires(gPos, mDimensions.x, mDimensions.y, mDimensions.z, mWireframeColor);
         }
     }
 
@@ -65,11 +65,11 @@ namespace graphics {
         }
 
         // Generate a new mesh and load it into mModel
-        Mesh cubeMesh = GenMeshCube(mDimensions.x, mDimensions.y, mDimensions.z);
-        mModel = LoadModelFromMesh(cubeMesh);
+        Mesh cubeMesh = raylib::GenMeshCube(mDimensions.x, mDimensions.y, mDimensions.z);
+        mModel = raylib::LoadModelFromMesh(cubeMesh);
 
         // Set the material color
-        mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].color = mColor;
+        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
     }
 
 }

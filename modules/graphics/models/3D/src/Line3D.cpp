@@ -8,32 +8,32 @@ Line3D::Line3D()
       mEndPos({1.0f, 1.0f, 1.0f}) {}
 
 // Parameterized constructor
-Line3D::Line3D(const Vector3& start, const Vector3& end, const Color& color)
+Line3D::Line3D(const raylib::Vector3& start, const raylib::Vector3& end, const raylib::Color& color)
     : mStartPos(start), mEndPos(end) {}
 
 // Override the draw function
 void Line3D::Draw() {
         
-    DrawLine3D(ComputeGlobalPosition(mStartPos)
+    raylib::DrawLine3D(ComputeGlobalPosition(mStartPos)
         , ComputeGlobalPosition(mEndPos), mColor);
 }
 
 // Setters
-void Line3D::SetStartPos(const Vector3& start) {
+void Line3D::SetStartPos(const raylib::Vector3& start) {
     mStartPos = start;
 }
 
-void Line3D::SetEndPos(const Vector3& end) {
+void Line3D::SetEndPos(const raylib::Vector3& end) {
     mEndPos = end;
 }
 
 
 // Getters
-Vector3 Line3D::GetStartPos() const {
+raylib::Vector3 Line3D::GetStartPos() const {
     return mStartPos;
 }
 
-Vector3 Line3D::GetEndPos() const {
+raylib::Vector3 Line3D::GetEndPos() const {
     return mEndPos;
 }
 

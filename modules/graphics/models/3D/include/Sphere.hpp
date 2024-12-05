@@ -10,7 +10,7 @@ namespace graphics {
     public:
         // Constructors
         Sphere();  // Default constructor
-        Sphere(float radius, const Vector3 &centerPos, int rings, int slices, Color mColor);
+        Sphere(float radius, const raylib::Vector3 &centerPos, int rings, int slices, raylib::Color mColor);
 
         // Override draw function
         void Draw() override;
@@ -21,9 +21,9 @@ namespace graphics {
         float GetRadius() const;
 
         // Setter for center position
-        void SetCenterPos(const Vector3& centerPos);
+        void SetCenterPos(const raylib::Vector3& centerPos);
         // Getter for center position
-        Vector3 GetCenterPos() const;
+        raylib::Vector3 GetCenterPos() const;
 
         // Setter for ring count
         void SetRings(int rings);
@@ -39,12 +39,12 @@ namespace graphics {
         void UpdateMesh();
 
         
-        Color mColor;
-        ::Model mModel;
+        raylib::Color mColor;
+        raylib::Model mModel;
         float mRadius;      // Radius of the sphere
         int mRings;         // Number of rings
         int mSlices;        // Number of slices
-        Vector3 mCenterPos; // Center position of the sphere
+        raylib::Vector3 mCenterPos; // Center position of the sphere
     };
 
 }  // namespace graphics

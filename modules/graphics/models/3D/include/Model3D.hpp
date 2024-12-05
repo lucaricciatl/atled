@@ -29,9 +29,9 @@ class Model3D : public Model{
 
 protected:
 
-	Vector3 ComputeGlobalPosition(Vector3 aPosition) {
+	raylib::Vector3 ComputeGlobalPosition(raylib::Vector3 aPosition) {
 		auto framepos = frame->GetPosition();
-		Vector3 globalPosition = {
+		raylib::Vector3 globalPosition = {
 			(float)framepos->getX() + aPosition.x,
 			(float)framepos->getY() + aPosition.y,
 			(float)framepos->getZ() + aPosition.z
@@ -41,8 +41,8 @@ protected:
 
   bool WireframeIsEnabled;    // 1 for the wirefram
   bool ShapeIsEnabled;        // 1 for the wirefram
-  raylib::Color mWireframeColor = Color(128, 128, 128, 128);      // Color of thr wireframe
-  raylib::Color mColor = Color(64, 64, 64, 64);
+  raylib::Color mWireframeColor = raylib::Color(128, 128, 128, 128);      // Color of thr wireframe
+  raylib::Color mColor = raylib::Color(64, 64, 64, 64);
 };
 
 

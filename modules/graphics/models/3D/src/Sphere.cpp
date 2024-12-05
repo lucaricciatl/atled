@@ -1,6 +1,7 @@
 #include "Sphere.hpp"
 #include "raylib.hpp"
 #include "filesystem"
+
 namespace graphics {
 
     Sphere::Sphere()
@@ -8,16 +9,16 @@ namespace graphics {
           mRings(16), 
           mSlices(16), 
           mCenterPos({0.0f, 0.0f, 0.0f}),
-          mColor(WHITE) { // Initialize color to white
+          mColor(raylib::WHITE) { // Initialize color to white
         UpdateMesh();
     }
 
-    Sphere::Sphere(float radius, const Vector3& centerPos, int rings, int slices, Color mColor)
+    Sphere::Sphere(float radius, const raylib::Vector3& centerPos, int rings, int slices, raylib::Color mColor)
         : mRadius(radius), 
           mRings(rings), 
           mSlices(slices), 
           mCenterPos(centerPos),
-          mColor(WHITE) { // Initialize color to white
+          mColor(raylib::WHITE) { // Initialize color to white
         if (radius <= 0) {
             throw std::invalid_argument("Sphere radius must be positive.");
         }
@@ -35,7 +36,7 @@ namespace graphics {
         UpdateMesh();
     }
 
-    void Sphere::SetCenterPos(const Vector3& centerPos) {
+    void Sphere::SetCenterPos(const raylib::Vector3& centerPos) {
         mCenterPos = centerPos;
         UpdateMesh();
     }
@@ -60,7 +61,7 @@ namespace graphics {
         return mRadius;
     }
 
-    Vector3 Sphere::GetCenterPos() const {
+    raylib::Vector3 Sphere::GetCenterPos() const {
         return mCenterPos;
     }
 
@@ -86,7 +87,7 @@ void Sphere::Draw() {
 
 
         // Set the framebuffer size in the shader
-        Vector2 screenSize = { 800.0f, 450.0f }; // Update to match your screen resolution
+        raylib::Vector2 screenSize = { 800.0f, 450.0f }; // Update to match your screen resolution
         //SetShaderValue(basicShader, GetShaderLocation(basicShader, "size"), &screenSize, SHADER_UNIFORM_VEC2);
         float samples = 5.0f;    // Pixels per axis for blur
         float quality = 2.5f;    // Glow spread size factor
@@ -97,7 +98,7 @@ void Sphere::Draw() {
         //mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = texture;
         // Assign the shader to the 3D model
         //mModel.materials[0].shader = basicShader;
-        DrawModel(mModel, gPos, 1.0f, WHITE);
+        raylib::DrawModel(mModel, gPos, 1.0f, raylib::WHITE);
         // Unload shader after use to avoid memory leaks (not recommended for real-time use)
         //UnloadShader(basicShader);
     }
@@ -110,11 +111,11 @@ void Sphere::Draw() {
         }
 
         // Generate a new mesh for the sphere and load it into mModel
-        Mesh sphereMesh = GenMeshSphere(mRadius, mSlices, mRings);
-        mModel = LoadModelFromMesh(sphereMesh);
+        raylib::Mesh sphereMesh = raylib::GenMeshSphere(mRadius, mSlices, mRings);
+        mModel = raylib::LoadModelFromMesh(sphereMesh);
 
         // Set the material color
-        mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].color = mColor;
+        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
     }
 
 } // namespace graphics

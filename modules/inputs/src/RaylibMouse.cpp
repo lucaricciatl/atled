@@ -9,53 +9,53 @@ using namespace raylib;
 RaylibMouse::RaylibMouse() : running(false) {}
 
 // Cursor control functions
-void RaylibMouse::ShowCursor() { ::ShowCursor(); }
-void RaylibMouse::HideCursor() { ::HideCursor(); }
-bool RaylibMouse::IsCursorHidden() const { return ::IsCursorHidden(); }
-void RaylibMouse::EnableCursor() { ::EnableCursor(); }
-void RaylibMouse::DisableCursor() { ::DisableCursor(); }
-bool RaylibMouse::IsCursorOnScreen() const { return ::IsCursorOnScreen(); }
+void RaylibMouse::ShowCursor() { raylib::ShowCursor(); }
+void RaylibMouse::HideCursor() { raylib::HideCursor(); }
+bool RaylibMouse::IsCursorHidden() const { return raylib::IsCursorHidden(); }
+void RaylibMouse::EnableCursor() { raylib::EnableCursor(); }
+void RaylibMouse::DisableCursor() { raylib::DisableCursor(); }
+bool RaylibMouse::IsCursorOnScreen() const { return raylib::IsCursorOnScreen(); }
 
 // RaylibMouse button functions
 bool RaylibMouse::IsButtonPressed(int button) const {
-  return ::IsMouseButtonPressed(button);
+  return raylib::IsMouseButtonPressed(button);
 }
 bool RaylibMouse::IsButtonDown(int button) const {
-  return ::IsMouseButtonDown(button);
+  return raylib::IsMouseButtonDown(button);
 }
 bool RaylibMouse::IsButtonReleased(int button) const {
-  return ::IsMouseButtonReleased(button);
+  return raylib::IsMouseButtonReleased(button);
 }
-bool RaylibMouse::IsButtonUp(int button) const { return ::IsMouseButtonUp(button); }
+bool RaylibMouse::IsButtonUp(int button) const { return raylib::IsMouseButtonUp(button); }
 
 // RaylibMouse position functions
-int RaylibMouse::GetMouseX() const { return ::GetMouseX(); }
-int RaylibMouse::GetMouseY() const { return ::GetMouseY(); }
+int RaylibMouse::GetMouseX() const { return raylib::GetMouseX(); }
+int RaylibMouse::GetMouseY() const { return raylib::GetMouseY(); }
 MousePosition RaylibMouse::GetMousePosition() const {
-  Vector2 pos = ::GetMousePosition();
+  Vector2 pos = raylib::GetMousePosition();
   return {static_cast<int>(pos.x), static_cast<int>(pos.y)};
 }
 MousePosition RaylibMouse::GetMouseDelta() const {
-  Vector2 delta = ::GetMouseDelta();
+  Vector2 delta = raylib::GetMouseDelta();
   return {static_cast<int>(delta.x), static_cast<int>(delta.y)};
 }
-void RaylibMouse::SetMousePosition(int x, int y) { ::SetMousePosition(x, y); }
+void RaylibMouse::SetMousePosition(int x, int y) { raylib::SetMousePosition(x, y); }
 void RaylibMouse::SetMouseOffset(int offsetX, int offsetY) {
-  ::SetMouseOffset(offsetX, offsetY);
+  raylib::SetMouseOffset(offsetX, offsetY);
 }
 void RaylibMouse::SetMouseScale(float scaleX, float scaleY) {
-  ::SetMouseScale(scaleX, scaleY);
+  raylib::SetMouseScale(scaleX, scaleY);
 }
 
 // RaylibMouse wheel functions
-float RaylibMouse::GetMouseWheelMove() const { return ::GetMouseWheelMove(); }
+float RaylibMouse::GetMouseWheelMove() const { return raylib::GetMouseWheelMove(); }
 MousePosition RaylibMouse::GetMouseWheelMoveV() const {
-  Vector2 move = ::GetMouseWheelMoveV();
+  Vector2 move = raylib::GetMouseWheelMoveV();
   return {static_cast<int>(move.x), static_cast<int>(move.y)};
 }
 
 // RaylibMouse cursor functions
-void RaylibMouse::SetMouseCursor(int cursor) { ::SetMouseCursor(cursor); }
+void RaylibMouse::SetMouseCursor(int cursor) { raylib::SetMouseCursor(cursor); }
 
 // Start the RaylibMouse thread
 void RaylibMouse::Start() {

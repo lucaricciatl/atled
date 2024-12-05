@@ -9,14 +9,14 @@ RaylibShader::~RaylibShader() {
 }
 
 bool RaylibShader::LoadFromFiles(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) {
-    shader = LoadShader(vertexShaderPath.c_str(), fragmentShaderPath.c_str());
-    isLoaded = IsShaderReady(shader);
+    shader = raylib::LoadShader(vertexShaderPath.c_str(), fragmentShaderPath.c_str());
+    isLoaded = raylib::IsShaderReady(shader);
     return isLoaded;
 }
 
 bool RaylibShader::LoadFromMemory(const std::string& vertexShaderCode, const std::string& fragmentShaderCode) {
-    shader = LoadShaderFromMemory(vertexShaderCode.c_str(), fragmentShaderCode.c_str());
-    isLoaded = IsShaderReady(shader);
+    shader = raylib::LoadShaderFromMemory(vertexShaderCode.c_str(), fragmentShaderCode.c_str());
+    isLoaded = raylib::IsShaderReady(shader);
     return isLoaded;
 }
 

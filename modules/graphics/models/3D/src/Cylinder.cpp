@@ -21,7 +21,7 @@ namespace graphics {
 
 
         if (ShapeIsEnabled) {
-                DrawModel(mModel, gPos, 1.0f, WHITE);
+                raylib::DrawModel(mModel, gPos, 1.0f, WHITE);
         }
 
     }
@@ -57,11 +57,11 @@ void Cylinder::UpdateMesh() {
     }
 
     // Generate a new mesh for the cylinder and load it into mModel
-    Mesh cylinderMesh = GenMeshCylinder(mRadius, mHeight, mSides);
-    mModel = LoadModelFromMesh(cylinderMesh);
+    Mesh cylinderMesh = raylib::GenMeshCylinder(mRadius, mHeight, mSides);
+    mModel = raylib::LoadModelFromMesh(cylinderMesh);
 
     // Set the material color
-    mModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].color = mColor;
+    mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
 }
 
 } // namespace graphics

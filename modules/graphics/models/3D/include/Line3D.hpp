@@ -10,23 +10,23 @@ namespace graphics {
     public:
         // Constructors
         Line3D();
-        Line3D(const Vector3& start, const Vector3& end, const Color& color = WHITE);
+        Line3D(const raylib::Vector3& start, const raylib::Vector3& end, const raylib::Color& color = raylib::WHITE);
 
         // Override the draw function
         void Draw() override;
 
         // Setters
-        void SetStartPos(const Vector3& start);
-        void SetEndPos(const Vector3& end);
+        void SetStartPos(const raylib::Vector3& start);
+        void SetEndPos(const raylib::Vector3& end);
 
         // Getters
-        Vector3 GetStartPos() const;
-        Vector3 GetEndPos() const;
+        raylib::Vector3 GetStartPos() const;
+        raylib::Vector3 GetEndPos() const;
 
 
     private:
-        Vector3 mStartPos;  // Starting position of the line
-        Vector3 mEndPos;    // Ending position of the line
+        raylib::Vector3 mStartPos;  // Starting position of the line
+        raylib::Vector3 mEndPos;    // Ending position of the line
 
     };
 

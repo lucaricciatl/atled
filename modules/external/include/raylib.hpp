@@ -1,30 +1,28 @@
-#include "../raylib/src/raylib.h"
+
 #include "string"
+
 #ifdef _WIN32
 #define EXPORT __declspec(dllexport)
 #else
 #define EXPORT __attribute__((visibility("default")))
 #endif
+#include "../raylib/src/raylib.h"
 
 namespace raylib{
-
+using namespace raylib;
 typedef GlyphInfo GlyphInfo;
 typedef ConfigFlags ConfigFlags;
-
 typedef Color Color;  // Using the fully qualified type from raylib
-
 typedef Shader Shader;
 typedef Vector2 Vector2;
 typedef Model Model;
 typedef Vector3 Vector3;
-
 typedef Font Font ;
-
 typedef Image Image;
-
+typedef Mesh Mesh;
 typedef CameraProjection CameraProjection;
-
 typedef Rectangle Rectangle;
+typedef MaterialMapIndex MaterialMapIndex;
 // Some Basic Colors
 // NOTE: Custom raylib color palette for amazing visuals on WHITE background
 #define GFX_LIGHTGRAY  { 200, 200, 200, 255 }   // Light Gray
@@ -48,13 +46,52 @@ typedef Rectangle Rectangle;
 #define GFX_BEIGE      { 211, 176, 131, 255 }   // Beige
 #define GFX_BROWN      { 127, 106, 79, 255 }    // Brown
 #define GFX_DARKBROWN  { 76, 63, 47, 255 }      // Dark Brown
-
 #define GFX_WHITE      { 255, 255, 255, 255 }   // White
 #define GFX_BLACK      { 0, 0, 0, 255 }         // Black
 #define GFX_BLANK      { 0, 0, 0, 0 }           // Blank (Transparent)
 #define GFX_MAGENTA    { 255, 0, 255, 255 }     // Magenta
 #define GFX_RAYWHITE   { 245, 245, 245, 255 }   // My own White
 
+
+// Draw a model (with texture if set)
+void DrawModelSimple(Model model, Vector3 position, float scale, Color tint);
+
+// Draw a model with extended parameters
+void DrawModelExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
+
+// Draw a model wires (with texture if set)
+void DrawModelWiresSimple(Model model, Vector3 position, float scale, Color tint);
+
+// Draw a model wires (with texture if set) with extended parameters
+void DrawModelWiresExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
+
+// Draw a model as points
+void DrawModelPointsSimple(Model model, Vector3 position, float scale, Color tint);
+
+// Draw a model as points with extended parameters
+void DrawModelPointsExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
+
+void DrawModel(Model model, Vector3 position, float scale, Color tint);
+// Draw bounding box (wires)
+void DrawBoundingBoxWires(BoundingBox box, Color color);
+
+// Draw a billboard texture
+void DrawBillboardTexture(Camera camera, Texture2D texture, Vector3 position, float scale, Color tint);
+
+// Draw a billboard texture defined by source
+void DrawBillboardTextureRec(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector2 size, Color tint);
+
+// Draw a billboard texture defined by source and rotation
+void DrawBillboardTexturePro(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint);
+
+// Load shader from files and bind default locations
+Shader LoadShaderFiles(const char *vsFileName, const char *fsFileName);
+
+// Load shader from code strings and bind default locations
+Shader LoadShaderMemory(const char *vsCode, const char *fsCode);
+
+// Check if a shader is ready
+bool CheckShaderReady(Shader shader);
 
 void EnableEventWaiting(void);                              // Enable waiting for events on EndDrawing(), no automatic event polling
 void DisableEventWaiting(void);                             // Disable waiting for events on EndDrawing(), automatic events polling
@@ -332,4 +369,44 @@ void DrawTextPro(Font font, const char* text, Vector2 position, Vector2 origin, 
 void DrawTextCodepoint(Font font, int codepoint, Vector2 position, float fontSize, Color tint);
 void DrawTextCodepoints(Font font, const int* codepoints, int codepointCount, Vector2 position, float fontSize, float spacing, Color tint);
 Model LoadModel(const std::string& path);                                                // Load model from files (meshes and materials)
+
+// Mesh generation function wrappers
+
+// Generate polygonal mesh
+Mesh GenMeshPolygon(int sides, float radius);
+// Generate plane mesh (with subdivisions)
+Mesh GenMeshPlane(float width, float length, int resX, int resZ);
+// Generate cuboid mesh
+Mesh GenMeshCube(float width, float height, float length);
+
+// Generate sphere mesh
+Mesh GenMeshSphere(float radius, int rings, int slices);
+
+// Generate half-sphere mesh
+Mesh GenMeshHemiSphere(float radius, int rings, int slices);
+// Generate cylinder mesh
+Mesh GenMeshCylinder(float radius, float height, int slices) ;
+
+// Generate cone/pyramid mesh
+Mesh GenMeshCone(float radius, float height, int slices);
+
+// Generate torus mesh
+Mesh GenMeshTorus(float radius, float size, int radSeg, int sides);
+// Generate trefoil knot mesh
+Mesh GenMeshKnot(float radius, float size, int radSeg, int sides) ;
+
+// Generate heightmap mesh from image data
+Mesh GenMeshHeightmap(Image heightmap, Vector3 size);
+// Generate cubes-based map mesh from image data
+Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize);
+Model LoadModelFromMesh(Mesh mesh);
+// Load shader from files and bind default locations
+Shader LoadShader(const char *vsFileName, const char *fsFileName) ;
+
+// Load shader from code strings and bind default locations
+Shader LoadShaderFromMemory(const char *vsCode, const char *fsCode); 
+
+// Check if a shader is ready
+bool IsShaderReady(Shader shader);
+
 }

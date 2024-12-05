@@ -10,19 +10,19 @@ class Cylinder : public Model3D {
 public:
     // Constructors
     Cylinder();
-    Cylinder(const Vector3 &aPos, float aRadius,float height, int sides,Color aColor);
+    Cylinder(const raylib::Vector3 &aPos, float aRadius,float height, int sides,raylib::Color aColor);
 
     // Override draw function
     void Draw() override;
 
     // Setters
-    void SetPos(const Vector3& startPos);
+    void SetPos(const raylib::Vector3& startPos);
     void SetRadius(float radius);
 
     void SetSides(int sides);
 
     // Getters
-    Vector3 GetPos() const;
+    raylib::Vector3 GetPos() const;
     float GetRadius() const;
 
     int GetSides() const;
@@ -31,12 +31,12 @@ public:
 private:
 
     void UpdateMesh();
-    Color mColor;
+    raylib::Color mColor;
     float mHeight;
-    Vector3 mPos;    // Start position of the cylinder base
+    raylib::Vector3 mPos;    // Start position of the cylinder base
     float mRadius;     // Radius of the cylinder top
     int mSides;           // Number of sides for the cylinder
-    ::Model mModel;
+    raylib::Model mModel;
 };
 
 }  // namespace graphics

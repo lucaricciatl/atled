@@ -1,11 +1,108 @@
-#ifndef RAYLIB_WRAPPER_HPP
-#define RAYLIB_WRAPPER_HPP
 
 #include "../raylib/src/raylib.h"
 #include <string>
 
 
 namespace raylib {
+
+
+// Some Basic Colors
+// NOTE: Custom raylib color palette for amazing visuals on WHITE background
+#define GFX_LIGHTGRAY  { 200, 200, 200, 255 }   // Light Gray
+#define GFX_GRAY       { 130, 130, 130, 255 }   // Gray
+#define GFX_DARKGRAY   { 80, 80, 80, 255 }      // Dark Gray
+#define GFX_YELLOW     { 253, 249, 0, 255 }     // Yellow
+#define GFX_GOLD       { 255, 203, 0, 255 }     // Gold
+#define GFX_ORANGE     { 255, 161, 0, 255 }     // Orange
+#define GFX_PINK       { 255, 109, 194, 255 }   // Pink
+#define GFX_RED        { 230, 41, 55, 255 }     // Red
+#define GFX_MAROON     { 190, 33, 55, 255 }     // Maroon
+#define GFX_GREEN      { 0, 228, 48, 255 }      // Green
+#define GFX_LIME       { 0, 158, 47, 255 }      // Lime
+#define GFX_DARKGREEN  { 0, 117, 44, 255 }      // Dark Green
+#define GFX_SKYBLUE    { 102, 191, 255, 255 }   // Sky Blue
+#define GFX_BLUE       { 0, 121, 241, 255 }     // Blue
+#define GFX_DARKBLUE   { 0, 82, 172, 255 }      // Dark Blue
+#define GFX_PURPLE     { 200, 122, 255, 255 }   // Purple
+#define GFX_VIOLET     { 135, 60, 190, 255 }    // Violet
+#define GFX_DARKPURPLE { 112, 31, 126, 255 }    // Dark Purple
+#define GFX_BEIGE      { 211, 176, 131, 255 }   // Beige
+#define GFX_BROWN      { 127, 106, 79, 255 }    // Brown
+#define GFX_DARKBROWN  { 76, 63, 47, 255 }      // Dark Brown
+#define GFX_WHITE      { 255, 255, 255, 255 }   // White
+#define GFX_BLACK      { 0, 0, 0, 255 }         // Black
+#define GFX_BLANK      { 0, 0, 0, 0 }           // Blank (Transparent)
+#define GFX_MAGENTA    { 255, 0, 255, 255 }     // Magenta
+#define GFX_RAYWHITE   { 245, 245, 245, 255 }   // My own White
+
+// Draw a model (with texture if set)
+void DrawModelSimple(Model model, Vector3 position, float scale, Color tint) {
+    ::DrawModel(model, position, scale, tint);
+}
+
+// Draw a model with extended parameters
+void DrawModelExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint) {
+    ::DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint);
+}
+
+// Draw a model wires (with texture if set)
+void DrawModelWiresSimple(Model model, Vector3 position, float scale, Color tint) {
+    ::DrawModelWires(model, position, scale, tint);
+}
+
+// Draw a model wires (with texture if set) with extended parameters
+void DrawModelWiresExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint) {
+    ::DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint);
+}
+
+// Draw a model as points
+void DrawModelPointsSimple(Model model, Vector3 position, float scale, Color tint) {
+    ::DrawModelPoints(model, position, scale, tint);
+}
+
+// Draw a model as points with extended parameters
+void DrawModelPointsExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint) {
+    ::DrawModelPointsEx(model, position, rotationAxis, rotationAngle, scale, tint);
+}
+
+// Draw bounding box (wires)
+void DrawBoundingBoxWires(BoundingBox box, Color color) {
+    ::DrawBoundingBox(box, color);
+}
+
+// Load shader from files and bind default locations
+Shader LoadShader(const char *vsFileName, const char *fsFileName) {
+    return ::LoadShader(vsFileName, fsFileName);
+}
+
+// Load shader from code strings and bind default locations
+Shader LoadShaderFromMemory(const char *vsCode, const char *fsCode) {
+    return ::LoadShaderFromMemory(vsCode, fsCode);
+}
+
+// Check if a shader is ready
+bool IsShaderReady(Shader shader) {
+    return ::IsShaderReady(shader);
+}
+// Draw a billboard texture
+void DrawBillboardTexture(Camera camera, Texture2D texture, Vector3 position, float scale, Color tint) {
+    ::DrawBillboard(camera, texture, position, scale, tint);
+}
+
+// Draw a billboard texture defined by source
+void DrawBillboardTextureRec(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector2 size, Color tint) {
+    ::DrawBillboardRec(camera, texture, source, position, size, tint);
+}
+
+// Draw a billboard texture defined by source and rotation
+void DrawBillboardTexturePro(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint) {
+    ::DrawBillboardPro(camera, texture, source, position, up, size, origin, rotation, tint);
+}
+
+void DrawModel(Model model, Vector3 position, float scale, Color tint){return ::DrawModel(model, position, scale, tint);               // Draw a model (with texture if set)
+};               // Draw a model (with texture if set)
+
+
     Font GetFontDefault() {
         return ::GetFontDefault();
     }
@@ -409,12 +506,6 @@ namespace raylib {
         return ::IsCursorOnScreen();
     }
 
-} // namespace raylib
-
-
-
-namespace raylib {
-
     // Keyboard Input Functions
 
     // Check if a key has been pressed once
@@ -516,12 +607,6 @@ namespace raylib {
         ::SetGamepadVibration(gamepad, leftMotor, rightMotor);
     }
 
-} // namespace raylib
-
-
-
-namespace raylib {
-
     // Check collision between two rectangles
     bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2) {
         return ::CheckCollisionRecs(rec1, rec2);
@@ -576,12 +661,6 @@ namespace raylib {
     Rectangle GetCollisionRec(Rectangle rec1, Rectangle rec2) {
         return ::GetCollisionRec(rec1, rec2);
     }
-
-} // namespace raylib
-
-
-
-namespace raylib {
 
     // Draw spline: Linear, minimum 2 points
     void DrawSplineLinear(const Vector2 *points, int pointCount, float thick, Color color) {
@@ -657,12 +736,6 @@ namespace raylib {
     Vector2 GetSplinePointBezierCubic(Vector2 p1, Vector2 c2, Vector2 c3, Vector2 p4, float t) {
         return ::GetSplinePointBezierCubic(p1, c2, c3, p4, t);
     }
-
-} // namespace raylib
-
-
-
-namespace raylib {
 
     // Draw a color-filled rectangle
     void DrawRectangleRec(Rectangle rec, Color color) {
@@ -748,12 +821,6 @@ namespace raylib {
     void DrawPolyLinesEx(Vector2 center, int sides, float radius, float rotation, float lineThick, Color color) {
         ::DrawPolyLinesEx(center, sides, radius, rotation, lineThick, color);
     }
-
-} // namespace raylib
-
-
-
-namespace raylib {
 
     // Set texture and rectangle to be used on shapes drawing
     void SetShapesTexture(Texture2D texture, Rectangle source) {
@@ -1017,11 +1084,6 @@ namespace raylib {
         ::DrawGrid(slices, spacing);
     }
 
-} // namespace raylib
-
-
-
-namespace raylib {
 
     // Takes a screenshot of current screen (filename extension defines format)
     void TakeScreenshot(const char *fileName) {
@@ -1122,8 +1184,67 @@ namespace raylib {
     Model LoadModel(const std::string& path) {
         return ::LoadModel(path.c_str());
     }
+    // Mesh generation function wrappers
+
+Model LoadModelFromMesh(Mesh mesh){
+    return ::LoadModelFromMesh(mesh);
+    };
+
+// Generate polygonal mesh
+Mesh GenMeshPoly(int sides, float radius) {
+    return ::GenMeshPoly(sides, radius);
+}
+
+// Generate plane mesh (with subdivisions)
+Mesh GenMeshPlane(float width, float length, int resX, int resZ) {
+    return ::GenMeshPlane(width, length, resX, resZ);
+}
+
+// Generate cuboid mesh
+Mesh GenMeshCube(float width, float height, float length) {
+    return ::GenMeshCube(width, height, length);
+}
+
+// Generate sphere mesh
+Mesh GenMeshSphere(float radius, int rings, int slices) {
+    return ::GenMeshSphere(radius, rings, slices);
+}
+
+// Generate half-sphere mesh
+Mesh GenMeshHemiSphere(float radius, int rings, int slices) {
+    return ::GenMeshHemiSphere(radius, rings, slices);
+}
+
+// Generate cylinder mesh
+Mesh GenMeshCylinder(float radius, float height, int slices) {
+    return ::GenMeshCylinder(radius, height, slices);
+}
+
+// Generate cone/pyramid mesh
+Mesh GenMeshCone(float radius, float height, int slices) {
+    return ::GenMeshCone(radius, height, slices);
+}
+
+// Generate torus mesh
+Mesh GenMeshTorus(float radius, float size, int radSeg, int sides) {
+    return ::GenMeshTorus(radius, size, radSeg, sides);
+}
+
+// Generate trefoil knot mesh
+Mesh GenMeshKnot(float radius, float size, int radSeg, int sides) {
+    return ::GenMeshKnot(radius, size, radSeg, sides);
+}
+
+// Generate heightmap mesh from image data
+Mesh GenMeshHeightmap(Image heightmap, Vector3 size) {
+    return ::GenMeshHeightmap(heightmap, size);
+}
+
+// Generate cubes-based map mesh from image data
+Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize) {
+    return ::GenMeshCubicmap(cubicmap, cubeSize);
+}
+
 
 } // namespace raylib
 
-
-#endif // RAYLIB_WRAPPER_HPP

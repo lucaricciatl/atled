@@ -35,9 +35,9 @@ public:
 
 
 private:
-    Vector3 mDimensions;        // Dimensions of the cube (width, height, length)
-    Vector3 mCenterPos;         // Center position of the cube
-    ::Model mModel;
+    raylib::Vector3 mDimensions;        // Dimensions of the cube (width, height, length)
+    raylib::Vector3 mCenterPos;         // Center position of the cube
+    raylib::Model mModel;
 
 };
 

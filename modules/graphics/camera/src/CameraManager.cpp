@@ -63,11 +63,11 @@ void CameraManager::SetCameraTarget(const std::vector<float>& aTarget) {
     mActiveCamera->SetTarget({ aTarget[0], aTarget[1], aTarget[2] });
 }
 
-Vector3 CameraManager::GetCameraPosition() const {
+raylib::Vector3 CameraManager::GetCameraPosition() const {
     return mActiveCamera->GetPosition();
 }
 
-Vector3 CameraManager::GetCameraTarget() const {
+raylib::Vector3 CameraManager::GetCameraTarget() const {
     return mActiveCamera->GetTarget();
 }
 void CameraManager::BeginActiveCamera() {
@@ -96,19 +96,19 @@ float CameraManager::GetCameraZoom() const {
 
 void CameraManager::SetCameraTargetY(float target) {
     if (mActiveCamera) {
-        mActiveCamera->SetTarget(Vector3{ mActiveCamera->GetTarget().x, target, mActiveCamera->GetTarget().z });
+        mActiveCamera->SetTarget(raylib::Vector3{ mActiveCamera->GetTarget().x, target, mActiveCamera->GetTarget().z });
     }
 }
 
 void CameraManager::SetCameraOffsetX(float offset) {
     if (mActiveCamera) {
-        mActiveCamera->SetPosition(Vector3{ offset, mActiveCamera->GetPosition().y, mActiveCamera->GetPosition().z });
+        mActiveCamera->SetPosition(raylib::Vector3{ offset, mActiveCamera->GetPosition().y, mActiveCamera->GetPosition().z });
     }
 }
 
 void CameraManager::SetCameraOffsetY(float offset) {
     if (mActiveCamera) {
-        mActiveCamera->SetPosition(Vector3{ mActiveCamera->GetPosition().x, offset, mActiveCamera->GetPosition().z });
+        mActiveCamera->SetPosition(raylib::Vector3{ mActiveCamera->GetPosition().x, offset, mActiveCamera->GetPosition().z });
     }
 }
 
@@ -140,7 +140,7 @@ float CameraManager::GetCameraOffsetY() const {
 void CameraManager::SetCameraTargetX(float target) {
     if (mActiveCamera) {
         auto currentTarget = mActiveCamera->GetTarget();
-        mActiveCamera->SetTarget(Vector3{ target, currentTarget.y, currentTarget.z });
+        mActiveCamera->SetTarget(raylib::Vector3{ target, currentTarget.y, currentTarget.z });
     }
 }
 
@@ -151,7 +151,7 @@ float CameraManager::GetCameraTargetX() const {
     return 0.0f;  // Return a default value if no active camera is set
 }
 
-void CameraManager::SetCameraProjection(CameraProjection aProjection) {
+void CameraManager::SetCameraProjection(raylib::CameraProjection aProjection) {
     if (mActiveCamera) {
         mActiveCamera->SetCameraProjection(aProjection);
     }

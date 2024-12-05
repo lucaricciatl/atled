@@ -65,11 +65,11 @@ public:
 
     // 3D
     void SetFovy(float aFovy);
-    void SetCameraProjection(CameraProjection aProjection);
+    void SetCameraProjection(raylib::CameraProjection aProjection);
     void SetCameraPosition(const std::vector<float>& aPosition);
     void SetCameraTarget(const std::vector<float>& aTarget);
-    Vector3 GetCameraPosition() const;
-    Vector3 GetCameraTarget() const;
+    raylib::Vector3 GetCameraPosition() const;
+    raylib::Vector3 GetCameraTarget() const;
     void BeginActiveCamera();
 
     void EndActiveCamera();

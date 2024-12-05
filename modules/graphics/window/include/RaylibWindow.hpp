@@ -30,8 +30,8 @@ public:
     void Minimize(void);
     void Restore(void);
 
-    void SetIcon(Image image);
-    void SetIcons(Image *images, int count);
+    void SetIcon(raylib::Image image);
+    void SetIcons(raylib::Image *images, int count);
     void SetTitle(const char *title);
     void SetPosition(int x, int y);
     void SetMonitor(int monitor);

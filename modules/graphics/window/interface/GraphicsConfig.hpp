@@ -6,23 +6,23 @@ namespace graphics{
 
 struct GraphicsConfig {
     // Static default flag
-    const std::vector<ConfigFlags> defaultFlags = {
-        FLAG_VSYNC_HINT,
-        FLAG_MSAA_4X_HINT,
-        FLAG_WINDOW_HIGHDPI,
-        FLAG_WINDOW_RESIZABLE
+    const std::vector<raylib::ConfigFlags> defaultFlags = {
+        raylib::ConfigFlags::FLAG_VSYNC_HINT,
+        raylib::ConfigFlags::FLAG_MSAA_4X_HINT,
+        raylib::ConfigFlags::FLAG_WINDOW_HIGHDPI,
+        raylib::ConfigFlags::FLAG_WINDOW_RESIZABLE
     };
     // Vector to store window configuration flags
-    std::vector<ConfigFlags> WindowConfig;
+    std::vector<raylib::ConfigFlags> WindowConfig;
 
     GraphicsConfig() {
-        for (const ConfigFlags& config : defaultFlags) {
+        for (const raylib::ConfigFlags& config : defaultFlags) {
             WindowConfig.push_back(config);  // Initialize with the default flag
         }
     }
 
     // Constructor to allow custom flags
-    GraphicsConfig(std::vector<ConfigFlags> customFlags) : WindowConfig(customFlags) {}
+    GraphicsConfig(std::vector<raylib::ConfigFlags> customFlags) : WindowConfig(customFlags) {}
 };
 
 }

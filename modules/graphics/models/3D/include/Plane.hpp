@@ -10,22 +10,22 @@ class Plane : public Model3D {
 public:
     // Constructors
     Plane();
-    Plane(const Vector3& centerPos, const Vector2& size, const Color& color);
+    Plane(const raylib::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& color);
 
     // Override draw function
     void Draw() override;
 
     // Setters
-    void SetCenterPos(const Vector3& centerPos);
-    void SetSize(const Vector2& size);
+    void SetCenterPos(const raylib::Vector3& centerPos);
+    void SetSize(const raylib::Vector2& size);
 
     // Getters
-    Vector3 GetCenterPos() const;
-    Vector2 GetSize() const;
+    raylib::Vector3 GetCenterPos() const;
+    raylib::Vector2 GetSize() const;
 
 private:
-    Vector3 mCenterPos; // Center position of the plane
-    Vector2 mSize;      // Size of the plane
+    raylib::Vector3 mCenterPos; // Center position of the plane
+    raylib::Vector2 mSize;      // Size of the plane
 };
 
 }  // namespace graphics

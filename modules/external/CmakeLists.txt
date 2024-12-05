@@ -7,31 +7,32 @@ set(RAYLIB_LIB_DIR ${RAYLIB_DIR}/lib)              # Path to raylib library file
 add_subdirectory(${RAYLIB_DIR})
 
 # Create the raylibcpp library with raylib.cpp implementation
-add_library(raylibcpp ./include/raylib.cpp)
+add_library(raylibcpp ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
 
 # Alias for easier referencing
 add_library(raylibcpp::raylibcpp ALIAS raylibcpp)
 
 # Link raylib to raylibcpp
-target_link_libraries(raylibcpp PRIVATE raylib)
+target_link_libraries(raylibcpp PUBLIC raylib)
 
 # Include directories for raylibcpp
 # Include raylib.h privately and raylib_wrapper.hpp publicly
 target_include_directories(raylibcpp
+        PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include  # Public include for raylib_wrapper.hpp
     PRIVATE
         ${RAYLIB_INCLUDE_DIR}  # Private include for raylib.h
-    PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include  # Public include for raylib_wrapper.hpp
+
 )
 
 # Create an interface library for external
-add_library(external INTERFACE)
+add_library(external ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
 
 # Link raylibcpp to external
-target_link_libraries(external INTERFACE raylibcpp)
+target_link_libraries(external PUBLIC raylibcpp)
 
 # Include directories for external
-target_include_directories(external INTERFACE
+target_include_directories(external PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include  # Expose raylib_wrapper.hpp
 )
 

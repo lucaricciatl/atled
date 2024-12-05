@@ -76,11 +76,11 @@ void RaylibWindow::Restore() {
     raylib::RestoreWindow();
 }
 
-void RaylibWindow::SetIcon(Image image) {
+void RaylibWindow::SetIcon(raylib::Image image) {
     raylib::SetWindowIcon(image);
 }
 
-void RaylibWindow::SetIcons(Image *images, int count) {
+void RaylibWindow::SetIcons(raylib::Image *images, int count) {
     raylib::SetWindowIcons(images, count);
 }
 

@@ -8,33 +8,33 @@ Plane::Plane()
       mSize({10.0f, 10.0f}) {}
 
 // Parameterized constructor
-Plane::Plane(const Vector3& centerPos, const Vector2& size, const Color& color)
+Plane::Plane(const raylib::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& color)
     : mCenterPos(centerPos), mSize(size){}
 
 // Override draw method
 void Plane::Draw() {
     auto gPos = ComputeGlobalPosition(mCenterPos);
-    DrawPlane(gPos, mSize, mColor);
-    DrawGrid(mSize.x, 1);
+    raylib::DrawPlane(gPos, mSize, mColor);
+    raylib::DrawGrid(mSize.x, 1);
 }
 
 // Setter for center position
-void Plane::SetCenterPos(const Vector3& centerPos) {
+void Plane::SetCenterPos(const raylib::Vector3& centerPos) {
     mCenterPos = centerPos;
 }
 
 // Setter for size
-void Plane::SetSize(const Vector2& size) {
+void Plane::SetSize(const raylib::Vector2& size) {
     mSize = size;
 }
 
 // Getter for center position
-Vector3 Plane::GetCenterPos() const {
+raylib::Vector3 Plane::GetCenterPos() const {
     return mCenterPos;
 }
 
 // Getter for size
-Vector2 Plane::GetSize() const {
+raylib::Vector2 Plane::GetSize() const {
     return mSize;
 }
 
