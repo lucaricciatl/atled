@@ -1,15 +1,10 @@
 
 #include "string"
-#include <raylib.h>
-
-#ifdef _WIN32
-#define EXPORT __declspec(dllexport)
-#else
-#define EXPORT __attribute__((visibility("default")))
-#endif
-
 
 namespace raylib{
+
+#include <raylib.h>
+#include <raymath.h>
 using namespace raylib;
 typedef GlyphInfo GlyphInfo;
 typedef ConfigFlags ConfigFlags;
