@@ -23,7 +23,7 @@ int main() {
         .SetMouseType(input::MouseType::Raylib)
         .SetGraphicsType(graphics::GraphicsType::Raylib)
         .SetCameraType(graphics::CameraType::Raylib)
-        .SetWorldType(graphics::WorldType::World3D)
+        .SetWorldType(graphics::WorldType::World2D)
         .SetTargetFramerate(60) // Set frame rate suitable for the game speed
         .Build();
 
@@ -84,8 +84,6 @@ int main() {
             }
         }
         });
-    auto entitycam = coreEngine->CreateEntity();
-    entitycam->AddComponent<FreeCameraComponent>();
     // Run the engine in the main thread
     coreEngine->Start();
 

@@ -42,22 +42,22 @@ public:
 
     // X-axis line
     auto xAxis = Model3DFactory::CreateLine3D();
-    xAxis->SetStartPos({ -100.0f, 0.0f, 0.0f });
-    xAxis->SetEndPos({ 100.0f, 0.0f, 0.0f });
+    xAxis->SetStartPos({ -1.0f, 0.0f, 0.0f });
+    xAxis->SetEndPos({ 1.0f, 0.0f, 0.0f });
     xAxis->SetColor(red);
     graphicsManager->AddShape(1, xAxis);
 
     // Y-axis line
     auto yAxis = Model3DFactory::CreateLine3D();
-    yAxis->SetStartPos({ 0.0f, -100.0f, 0.0f });
-    yAxis->SetEndPos({ 0.0f, 100.0f, 0.0f });
+    yAxis->SetStartPos({ 0.0f, -1.0f, 0.0f });
+    yAxis->SetEndPos({ 0.0f, 1.0f, 0.0f });
     yAxis->SetColor(green);
     graphicsManager->AddShape(1, yAxis);
 
     // Z-axis line
     auto zAxis = Model3DFactory::CreateLine3D();
-    zAxis->SetStartPos({ 0.0f, 0.0f, -100.0f });
-    zAxis->SetEndPos({ 0.0f, 0.0f, 100.0f });
+    zAxis->SetStartPos({ 0.0f, 0.0f, -1.0f });
+    zAxis->SetEndPos({ 0.0f, 0.0f, 1.0f });
     zAxis->SetColor(blue);
     graphicsManager->AddShape(1, zAxis);
     }
