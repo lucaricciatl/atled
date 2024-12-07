@@ -1,5 +1,4 @@
 
-add_subdirectory(units)
 
 # Define the library name based on the directory
 get_filename_component(LIB_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
@@ -24,11 +23,15 @@ add_library(${LIB_NAME} ${SOURCES} ${HEADERS}) # Adding headers is optional
 # Specify include directories for the physics target
 target_include_directories(${LIB_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/body/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/collisions/include
     ${CMAKE_CURRENT_SOURCE_DIR}/space3D/include
 )
 
 # Define include and library directories based on the library name
-set(${LIB_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/space3D/include ${CMAKE_CURRENT_SOURCE_DIR}/body/include)  # Path to include directory
+set(${LIB_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/space3D/include 
+    ${CMAKE_CURRENT_SOURCE_DIR}/body/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/collisions/include
+    )  # Path to include directory
 set(${LIB_NAME}_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)          # Path to library directory
 
 # Set properties for the physics target
