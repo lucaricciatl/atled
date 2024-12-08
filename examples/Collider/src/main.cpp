@@ -10,7 +10,7 @@
 #include <mutex>
 #include <EngineBuilder.hpp>
 #include <FreeCameraComponent.hpp>
-#include "PhisicComponent.hpp"
+#include <RigidBodyComponent.hpp>
 
 int main() {
     // Engine setup
@@ -29,15 +29,16 @@ int main() {
     auto mc = entity->AddComponent<ShapeComponent>();
     mc->SetModel<Plane>(Vector3(0, -0.1, 0), Vector2(10, 10), Color(255, 255, 255, 180));
     auto shapephisic = entity->AddComponent<RigidBodyComponent>();
-    shapephisic->EnableCollision(true);
+    shapephisic->SetCollidable(true);
     shapephisic->SetStatic(true);
 
     auto entity2 = coreEngine->CreateEntity();
+    entity2->GetComponent<FrameComponent>()->SetPosition(0, 2, 0);
     auto mc1 = entity2->AddComponent<ShapeComponent>();
-    mc1->SetModel<Sphere>(0.5, Vector3(0, 2, 0), 10, 10, Color(255, 255, 255, 180));
+    mc1->SetModel<Sphere>(0.5, Vector3(0, 0, 0), 10, 10, Color(255, 255, 255, 180));
     auto shapephisic1 = entity2->AddComponent<RigidBodyComponent>();
-    shapephisic1->EnableCollision(true);
-    shapephisic1->ApplyGravity(true);
+    shapephisic1->SetCollidable(true);
+    shapephisic1->SetUseGravity(true);
     //auto mc2 = entity->AddComponent<WorldComponent>();
     // Run the engine in the main thread
     auto entitycam = coreEngine->CreateEntity();

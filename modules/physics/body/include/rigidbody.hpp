@@ -1,50 +1,61 @@
-#ifndef RIGIDBODY_HPP
-#define RIGIDBODY_HPP
+#pragma once
 
+#include <memory>
 #include "Frame.hpp"
-#include <array>
+#include "ICollider.hpp"
+#include "raylib.hpp"
 
-namespace physics{
+namespace physics {
+
 
 class RigidBody {
-private:
-    Frame frame; // Position and orientation of the rigid body
-    double mass; // Mass of the rigid body
-    double inverseMass; // Inverse of mass (for calculations)
-
-    // Inertia tensor and its inverse in body coordinates
-    std::array<std::array<double, 3>, 3> inertiaTensor;
-    std::array<std::array<double, 3>, 3> inverseInertiaTensor;
-
-    // Accumulated forces and torques in world coordinates
-    double fx, fy, fz; // Force accumulator
-    double tx, ty, tz; // Torque accumulator
-
 public:
-    // Constructors
     RigidBody();
-    RigidBody(const Frame& frame, double mass, const std::array<std::array<double, 3>, 3>& inertiaTensor);
-    RigidBody(const RigidBody& other);
+    RigidBody(std::shared_ptr<Frame> frame, std::shared_ptr<ICollider> collider);
 
-    // Destructor
-    ~RigidBody();
+    RigidBody(const RigidBody&) = delete;
+    RigidBody& operator=(const RigidBody&) = delete;
 
-    // Assignment operator
-    RigidBody& operator=(const RigidBody& other);
+    RigidBody(RigidBody&&) noexcept = default;
+    RigidBody& operator=(RigidBody&&) noexcept = default;
 
-    // Accessors
-    Frame getFrame() const;
-    double getMass() const;
+    // Basic properties
+    void SetStatic(bool isStatic);
+    bool IsStatic() const;
 
-    // Mutators
-    void setFrame(const Frame& frame);
-    void setMass(double mass);
-    void setInertiaTensor(const std::array<std::array<double, 3>, 3>& inertiaTensor);
+    void SetUseGravity(bool useGravity);
+    bool UsesGravity() const;
 
-    // Helper methods
-    void clearForces();
+    void SetCollidable(bool isCollidable);
+    bool IsCollidable() const;
+
+    // Mass-related properties
+    void SetMass(float mass);
+    float GetMass() const;
+
+    // Force and acceleration
+    void ApplyForce(const raylib::Vector3& force);
+    raylib::Vector3 GetAccumulatedForce() const;
+    void ClearForces();
+
+    // Update position based on forces and mass
+    void UpdatePhysics(double deltaTime);
+
+    void SetFrame(std::shared_ptr<Frame> aFrame) { mFrame = aFrame; };
+    std::shared_ptr<Frame> GetFrame() const;
+    std::shared_ptr<ICollider> GetCollider() const;
+
+protected:
+    std::shared_ptr<Frame> mFrame;
+    std::shared_ptr<ICollider> mCollider;
+
+    bool mIsStatic;
+    bool mUseGravity;
+    bool mIsCollidable;
+
+    float mMass;
+    raylib::Vector3 mVelocity;
+    raylib::Vector3 mAccumulatedForce;
 };
 
-}
-
-#endif // RIGIDBODY_HPP
+} // namespace physics

@@ -12,17 +12,18 @@ public:
     // Constructors
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider);
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, const Position& position, const math::Quaternion& orientation);
-    FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, const Frame& frame);
-
+    FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, std::shared_ptr<Frame> aframe);
     // Getters
-    std::shared_ptr<Frame> GetFrame() const { return frame; };
+    std::shared_ptr<Frame> GetFrame() const { 
+        return frame; 
+    };
     std::shared_ptr<Position> GetPosition() const;
     math::Quaternion GetOrientation() const;
 
     // Setters
     void SetPosition(float x, float y, float z);
     void SetOrientation(const math::Quaternion& orientation);
-    void SetFrame(const Frame& newFrame);
+    void SetFrame(std::shared_ptr<Frame> aframe);
 
     // Destructor
     ~FrameComponent() override;

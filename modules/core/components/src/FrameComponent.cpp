@@ -12,8 +12,8 @@ FrameComponent::FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> s
     : Component(owner), frame(std::make_shared<Frame>()) {}
 
 // Constructor with owner and a Frame object
-FrameComponent::FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, const Frame& frame)
-    : Component(owner),  frame(std::make_shared<Frame>()) {}
+FrameComponent::FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, std::shared_ptr<Frame> aframe)
+    : Component(owner),  frame(aframe) {}
 
 // Destructor
 FrameComponent::~FrameComponent() {}
@@ -33,9 +33,9 @@ void FrameComponent::SetOrientation(const math::Quaternion& orientation) {
 }
 
 // Set entire frame
-void FrameComponent::SetFrame(const Frame& newFrame) {
+void FrameComponent::SetFrame(std::shared_ptr<Frame> aframe) {
     if (frame) {
-        *frame = newFrame;
+        frame = aframe;
     }
 }
 

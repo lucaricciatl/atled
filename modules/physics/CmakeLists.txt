@@ -25,7 +25,16 @@ target_include_directories(${LIB_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/body/include
     ${CMAKE_CURRENT_SOURCE_DIR}/collisions/include
     ${CMAKE_CURRENT_SOURCE_DIR}/space3D/include
+    ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
+
 )
+
+
+# Link libraries for this target
+target_link_libraries(${LIB_NAME} PUBLIC 
+    raylibcpp                                 # Link the raylib library
+)
+
 
 # Define include and library directories based on the library name
 set(${LIB_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/space3D/include 

@@ -6,7 +6,7 @@ add_library(core
     ./components/src/PositionComponent.cpp
     ./components/src/FrameComponent.cpp
     ./components/src/ControllerComponent.cpp
-    ./components/src/PhisicComponent.cpp
+    ./components/src/RigidBodyComponent.cpp
     ./components/src/FreeCameraComponent.cpp
     ./events/src/EventBus.cpp
     ./provider/src/ServiceProvider.cpp

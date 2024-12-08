@@ -36,7 +36,7 @@ namespace physics {
     }
 
     // Mutators
-    void Frame::SetPosition(const std::shared_ptr<Position>& position) {
+    void Frame::SetPosition(std::shared_ptr<Position>& position) {
         this->position = position;
     }
 

@@ -25,7 +25,7 @@ namespace physics {
         math::Quaternion GetOrientation() const;
 
         // Mutators
-        void SetPosition(const std::shared_ptr<Position>& position);
+        void SetPosition(std::shared_ptr<Position>& position);
         void SetPosition(double x, double y, double z);
         void SetOrientation(const math::Quaternion& orientation);
 
