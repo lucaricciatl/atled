@@ -1,5 +1,7 @@
 #include "Vector3.hpp"
 
+using namespace math;
+
 // Constructors
 Vector3::Vector3() : x(0), y(0), z(0) {}
 

@@ -1,10 +1,13 @@
 
 #include "string"
+#include "Vector3.hpp"
 
 namespace raylib{
 
 #include <raylib.h>
 #include <raymath.h>
+
+
 using namespace raylib;
 typedef GlyphInfo GlyphInfo;
 typedef ConfigFlags ConfigFlags;
@@ -50,10 +53,10 @@ typedef MaterialMapIndex MaterialMapIndex;
 
 
 // Draw a model (with texture if set)
-void DrawModelSimple(Model model, Vector3 position, float scale, Color tint);
+void DrawModelSimple(Model model, math::Vector3 position, float scale, Color tint);
 
 // Draw a model with extended parameters
-void DrawModelExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
+void DrawModelExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint);
 
 // Draw a model wires (with texture if set)
 void DrawModelWiresSimple(Model model, Vector3 position, float scale, Color tint);
@@ -98,7 +101,7 @@ void SetConfigFlags(unsigned int flags);                    // Setup init config
 void OpenURL(const char *url);                              // Open URL with default system browser (if available)
 
 // Basic geometric 3D shapes drawing functions
-void DrawLine3D(Vector3 startPos, Vector3 endPos, Color color);                                    // Draw a line in 3D world space
+void DrawLine3D(math::Vector3 startPos, math::Vector3 endPos, Color color);                                    // Draw a line in 3D world space
 void DrawPoint3D(Vector3 position, Color color);                                                   // Draw a point in 3D space, actually a small line
 void DrawCircle3D(Vector3 center, float radius, Vector3 rotationAxis, float rotationAngle, Color color); // Draw a circle in 3D world space
 void DrawTriangle3D(Vector3 v1, Vector3 v2, Vector3 v3, Color color);                              // Draw a color-filled triangle (vertex in counter-clockwise order!)

@@ -1,10 +1,14 @@
 
 #include "../raylib/src/raylib.h"
+#include "Vector3.hpp"
 #include <string>
 
 
 namespace raylib {
 
+namespace{
+    Vector3 toRaylibVector3(math::Vector3 v){return {v.getX(),v.getY(),v.getZ()};}
+}
 
 // Some Basic Colors
 // NOTE: Custom raylib color palette for amazing visuals on WHITE background
@@ -36,13 +40,13 @@ namespace raylib {
 #define GFX_RAYWHITE   { 245, 245, 245, 255 }   // My own White
 
 // Draw a model (with texture if set)
-void DrawModelSimple(Model model, Vector3 position, float scale, Color tint) {
-    ::DrawModel(model, position, scale, tint);
+void DrawModelSimple(Model model, math::Vector3 position, float scale, Color tint) {
+    ::DrawModel(model, toRaylibVector3(position), scale, tint);
 }
 
 // Draw a model with extended parameters
-void DrawModelExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint) {
-    ::DrawModelEx(model, position, rotationAxis, rotationAngle, scale, tint);
+void DrawModelExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint) {
+    ::DrawModelEx(model, toRaylibVector3(position), toRaylibVector3(rotationAxis), rotationAngle, toRaylibVector3(scale), tint);
 }
 
 // Draw a model wires (with texture if set)
@@ -1101,8 +1105,8 @@ namespace raylib {
     }
 
     // Draw a line in 3D world space
-    void DrawLine3D(Vector3 startPos, Vector3 endPos, Color color) {
-        ::DrawLine3D(startPos, endPos, color);
+    void DrawLine3D(math::Vector3 startPos, math::Vector3 endPos, Color color) {
+        ::DrawLine3D(toRaylibVector3(startPos), toRaylibVector3(endPos), color);
     }
 
     // Draw a point in 3D space, actually a small line

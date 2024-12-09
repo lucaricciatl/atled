@@ -1,52 +1,43 @@
-# Set raylib folder and library path globally
-set(RAYLIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/raylib)  # Adjust to the correct path
-set(RAYLIB_INCLUDE_DIR ${RAYLIB_DIR}/src)          # Path to raylib include files
-set(RAYLIB_LIB_DIR ${RAYLIB_DIR}/lib)              # Path to raylib library files
+set(RAYLIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/raylib) 
+set(RAYLIB_INCLUDE_DIR ${RAYLIB_DIR}/src)          
+set(RAYLIB_LIB_DIR ${RAYLIB_DIR}/lib)              
 
-# Add raylib as a subdirectory
 add_subdirectory(${RAYLIB_DIR})
 
-# Create the raylibcpp library with raylib.cpp implementation
 add_library(raylibcpp ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
 
-# Alias for easier referencing
+
 add_library(raylibcpp::raylibcpp ALIAS raylibcpp)
 
-# Link raylib to raylibcpp
-target_link_libraries(raylibcpp PUBLIC raylib)
 
-# Include directories for raylibcpp
-# Include raylib.h privately and raylib_wrapper.hpp publicly
+target_link_libraries(raylibcpp PUBLIC raylib geometry)
+
 target_include_directories(raylibcpp
-        PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include  # Public include for raylib_wrapper.hpp
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/include  
     PRIVATE
-        ${RAYLIB_INCLUDE_DIR}  # Private include for raylib.h
+        ${RAYLIB_INCLUDE_DIR}  
+        ${GEOMETRY_INCLUDE_DIR}
 
 )
 
-# Create an interface library for external
 add_library(external ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
 
-# Link raylibcpp to external
-target_link_libraries(external PUBLIC raylibcpp)
+target_link_libraries(external PUBLIC raylibcpp geometry)
 
-# Include directories for external
 target_include_directories(external PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include  # Expose raylib_wrapper.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include 
+    ${GEOMETRY_INCLUDE_DIR}
 )
 
-# Set properties for the external library
 set_target_properties(external PROPERTIES
     FOLDER "modules/external"
 )
 
-# Set properties for the external library
 set_target_properties(raylibcpp PROPERTIES
     FOLDER "modules/external"
 )
 
-# Set properties for the external library
 set_target_properties(raylib PROPERTIES
     FOLDER "modules/external"
 )

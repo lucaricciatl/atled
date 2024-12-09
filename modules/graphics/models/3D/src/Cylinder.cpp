@@ -61,7 +61,7 @@ void Cylinder::UpdateMesh() {
     mModel = raylib::LoadModelFromMesh(cylinderMesh);
 
     // Set the material color
-    mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
+    mModel.materials[0].maps[MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
 }
 
 } // namespace graphics

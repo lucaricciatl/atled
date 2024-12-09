@@ -26,7 +26,6 @@ target_include_directories(${LIB_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/collisions/include
     ${CMAKE_CURRENT_SOURCE_DIR}/space3D/include
     ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
-
 )
 
 

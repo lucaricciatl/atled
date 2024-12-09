@@ -5,6 +5,8 @@
 #include <cmath>
 #include <stdexcept>
 
+namespace math{
+
 class Vector3 {
 private:
     float x, y, z;
@@ -52,5 +54,7 @@ public:
     // Print the vector (for debugging)
     void print() const;
 };
+
+}
 
 #endif // VECTOR3_HPP
