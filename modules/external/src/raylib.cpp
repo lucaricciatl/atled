@@ -50,23 +50,23 @@ void DrawModelExtended(Model model, math::Vector3 position, math::Vector3 rotati
 }
 
 // Draw a model wires (with texture if set)
-void DrawModelWiresSimple(Model model, Vector3 position, float scale, Color tint) {
-    ::DrawModelWires(model, position, scale, tint);
+void DrawModelWiresSimple(Model model, math::Vector3 position, float scale, Color tint) {
+    ::DrawModelWires(model, toRaylibVector3(position), scale, tint);
 }
 
 // Draw a model wires (with texture if set) with extended parameters
-void DrawModelWiresExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint) {
-    ::DrawModelWiresEx(model, position, rotationAxis, rotationAngle, scale, tint);
+void DrawModelWiresExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint) {
+    ::DrawModelWiresEx(model, toRaylibVector3(position), toRaylibVector3(rotationAxis), rotationAngle, toRaylibVector3(scale), tint);
 }
 
 // Draw a model as points
-void DrawModelPointsSimple(Model model, Vector3 position, float scale, Color tint) {
-    ::DrawModelPoints(model, position, scale, tint);
+void DrawModelPointsSimple(Model model, math::Vector3 position, float scale, Color tint) {
+    ::DrawModelPoints(model, toRaylibVector3(position), scale, tint);
 }
 
 // Draw a model as points with extended parameters
-void DrawModelPointsExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint) {
-    ::DrawModelPointsEx(model, position, rotationAxis, rotationAngle, scale, tint);
+void DrawModelPointsExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint) {
+    ::DrawModelPointsEx(model, toRaylibVector3(position), toRaylibVector3(rotationAxis), rotationAngle, toRaylibVector3(scale), tint);
 }
 
 // Draw bounding box (wires)

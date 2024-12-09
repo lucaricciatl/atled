@@ -59,16 +59,16 @@ void DrawModelSimple(Model model, math::Vector3 position, float scale, Color tin
 void DrawModelExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint);
 
 // Draw a model wires (with texture if set)
-void DrawModelWiresSimple(Model model, Vector3 position, float scale, Color tint);
+void DrawModelWiresSimple(Model model, math::Vector3 position, float scale, Color tint);
 
 // Draw a model wires (with texture if set) with extended parameters
-void DrawModelWiresExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
+void DrawModelWiresExtended(Model model, math::Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
 
 // Draw a model as points
-void DrawModelPointsSimple(Model model, Vector3 position, float scale, Color tint);
+void DrawModelPointsSimple(Model model, math::Vector3 position, float scale, Color tint);
 
 // Draw a model as points with extended parameters
-void DrawModelPointsExtended(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
+void DrawModelPointsExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint);
 
 void DrawModel(Model model, Vector3 position, float scale, Color tint);
 // Draw bounding box (wires)
