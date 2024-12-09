@@ -62,7 +62,7 @@ void DrawModelExtended(Model model, math::Vector3 position, math::Vector3 rotati
 void DrawModelWiresSimple(Model model, math::Vector3 position, float scale, Color tint);
 
 // Draw a model wires (with texture if set) with extended parameters
-void DrawModelWiresExtended(Model model, math::Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint);
+void DrawModelWiresExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint);
 
 // Draw a model as points
 void DrawModelPointsSimple(Model model, math::Vector3 position, float scale, Color tint);
@@ -75,13 +75,13 @@ void DrawModel(Model model, Vector3 position, float scale, Color tint);
 void DrawBoundingBoxWires(BoundingBox box, Color color);
 
 // Draw a billboard texture
-void DrawBillboardTexture(Camera camera, Texture2D texture, Vector3 position, float scale, Color tint);
+void DrawBillboardTexture(Camera camera, Texture2D texture, math::Vector3 position, float scale, Color tint);
 
 // Draw a billboard texture defined by source
-void DrawBillboardTextureRec(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector2 size, Color tint);
+void DrawBillboardTextureRec(Camera camera, Texture2D texture, Rectangle source, math::Vector3 position, Vector2 size, Color tint);
 
 // Draw a billboard texture defined by source and rotation
-void DrawBillboardTexturePro(Camera camera, Texture2D texture, Rectangle source, Vector3 position, Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint);
+void DrawBillboardTexturePro(Camera camera, Texture2D texture, Rectangle source, math::Vector3 position, math::Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint);
 
 // Load shader from files and bind default locations
 Shader LoadShaderFiles(const char *vsFileName, const char *fsFileName);
@@ -102,24 +102,24 @@ void OpenURL(const char *url);                              // Open URL with def
 
 // Basic geometric 3D shapes drawing functions
 void DrawLine3D(math::Vector3 startPos, math::Vector3 endPos, Color color);                                    // Draw a line in 3D world space
-void DrawPoint3D(Vector3 position, Color color);                                                   // Draw a point in 3D space, actually a small line
-void DrawCircle3D(Vector3 center, float radius, Vector3 rotationAxis, float rotationAngle, Color color); // Draw a circle in 3D world space
-void DrawTriangle3D(Vector3 v1, Vector3 v2, Vector3 v3, Color color);                              // Draw a color-filled triangle (vertex in counter-clockwise order!)
+void DrawPoint3D(math::Vector3 position, Color color);                                                   // Draw a point in 3D space, actually a small line
+void DrawCircle3D(math::Vector3 center, float radius, math::Vector3 rotationAxis, float rotationAngle, Color color); // Draw a circle in 3D world space
+void DrawTriangle3D(math::Vector3 v1, math::Vector3 v2, math::Vector3 v3, Color color);                              // Draw a color-filled triangle (vertex in counter-clockwise order!)
 void DrawTriangleStrip3D(const Vector3 *points, int pointCount, Color color);                      // Draw a triangle strip defined by points
-void DrawCube(Vector3 position, float width, float height, float length, Color color);             // Draw cube
-void DrawCubeV(Vector3 position, Vector3 size, Color color);                                       // Draw cube (Vector version)
-void DrawCubeWires(Vector3 position, float width, float height, float length, Color color);        // Draw cube wires
-void DrawCubeWiresV(Vector3 position, Vector3 size, Color color);                                  // Draw cube wires (Vector version)
-void DrawSphere(Vector3 centerPos, float radius, Color color);                                     // Draw sphere
-void DrawSphereEx(Vector3 centerPos, float radius, int rings, int slices, Color color);            // Draw sphere with extended parameters
-void DrawSphereWires(Vector3 centerPos, float radius, int rings, int slices, Color color);         // Draw sphere wires
-void DrawCylinder(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color); // Draw a cylinder/cone
-void DrawCylinderEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color); // Draw a cylinder with base at startPos and top at endPos
-void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color); // Draw a cylinder/cone wires
-void DrawCylinderWiresEx(Vector3 startPos, Vector3 endPos, float startRadius, float endRadius, int sides, Color color); // Draw a cylinder wires with base at startPos and top at endPos
-void DrawCapsule(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color); // Draw a capsule with the center of its sphere caps at startPos and endPos
-void DrawCapsuleWires(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color); // Draw capsule wireframe with the center of its sphere caps at startPos and endPos
-void DrawPlane(Vector3 centerPos, Vector2 size, Color color);                                      // Draw a plane XZ
+void DrawCube(math::Vector3 position, float width, float height, float length, Color color);             // Draw cube
+void DrawCubeV(math::Vector3 position, math::Vector3 size, Color color);                                       // Draw cube (Vector version)
+void DrawCubeWires(math::Vector3 position, float width, float height, float length, Color color);        // Draw cube wires
+void DrawCubeWiresV(math::Vector3 position, math::Vector3 size, Color color);                                  // Draw cube wires (Vector version)
+void DrawSphere(math::Vector3 centerPos, float radius, Color color);                                     // Draw sphere
+void DrawSphereEx(math::Vector3 centerPos, float radius, int rings, int slices, Color color);            // Draw sphere with extended parameters
+void DrawSphereWires(math::Vector3 centerPos, float radius, int rings, int slices, Color color);         // Draw sphere wires
+void DrawCylinder(math::Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color); // Draw a cylinder/cone
+void DrawCylinderEx(math::Vector3 startPos, math::Vector3 endPos, float startRadius, float endRadius, int sides, Color color); // Draw a cylinder with base at startPos and top at endPos
+void DrawCylinderWires(math::Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color); // Draw a cylinder/cone wires
+void DrawCylinderWiresEx(math::Vector3 startPos, math::Vector3 endPos, float startRadius, float endRadius, int sides, Color color); // Draw a cylinder wires with base at startPos and top at endPos
+void DrawCapsule(math::Vector3 startPos, math::Vector3 endPos, float radius, int slices, int rings, Color color); // Draw a capsule with the center of its sphere caps at startPos and endPos
+void DrawCapsuleWires(math::Vector3 startPos, math::Vector3 endPos, float radius, int slices, int rings, Color color); // Draw capsule wireframe with the center of its sphere caps at startPos and endPos
+void DrawPlane(math::Vector3 centerPos, Vector2 size, Color color);                                      // Draw a plane XZ
 void DrawRay(Ray ray, Color color);                                                                // Draw a ray line
 void DrawGrid(int slices, float spacing);                                                          // Draw a grid (centered at (0, 0, 0))
 
@@ -395,9 +395,9 @@ Mesh GenMeshTorus(float radius, float size, int radSeg, int sides);
 Mesh GenMeshKnot(float radius, float size, int radSeg, int sides) ;
 
 // Generate heightmap mesh from image data
-Mesh GenMeshHeightmap(Image heightmap, Vector3 size);
+Mesh GenMeshHeightmap(Image heightmap, math::Vector3 size);
 // Generate cubes-based map mesh from image data
-Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize);
+Mesh GenMeshCubicmap(Image cubicmap, math::Vector3 cubeSize);
 Model LoadModelFromMesh(Mesh mesh);
 // Load shader from files and bind default locations
 Shader LoadShader(const char *vsFileName, const char *fsFileName) ;
