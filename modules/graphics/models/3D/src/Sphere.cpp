@@ -1,8 +1,9 @@
 #include "Sphere.hpp"
 #include "raylib.hpp"
 #include "filesystem"
-
+#include "Vector3.hpp"
 namespace graphics {
+
 
     Sphere::Sphere()
         : mRadius(1.0f), 
@@ -13,7 +14,7 @@ namespace graphics {
         UpdateMesh();
     }
 
-    Sphere::Sphere(float radius, const raylib::Vector3& centerPos, int rings, int slices, raylib::Color aColor)
+    Sphere::Sphere(float radius, const math::Vector3& centerPos, int rings, int slices, raylib::Color aColor)
         : mRadius(radius), 
           mRings(rings), 
           mSlices(slices), 
@@ -36,7 +37,7 @@ namespace graphics {
         UpdateMesh();
     }
 
-    void Sphere::SetCenterPos(const raylib::Vector3& centerPos) {
+    void Sphere::SetCenterPos(const math::Vector3& centerPos) {
         mCenterPos = centerPos;
         UpdateMesh();
     }
@@ -61,7 +62,7 @@ namespace graphics {
         return mRadius;
     }
 
-    raylib::Vector3 Sphere::GetCenterPos() const {
+    math::Vector3 Sphere::GetCenterPos() const {
         return mCenterPos;
     }
 

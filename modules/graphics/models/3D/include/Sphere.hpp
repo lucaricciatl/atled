@@ -5,12 +5,12 @@
 #include "raylib.hpp"  // Assuming raylib is used for the Vector3 and Color types
 
 namespace graphics {
-
+using namespace math;
     class Sphere : public Model3D {
     public:
         // Constructors
         Sphere();  // Default constructor
-        Sphere(float radius, const raylib::Vector3 &centerPos, int rings, int slices, raylib::Color mColor);
+        Sphere(float radius, const math::Vector3 &centerPos, int rings, int slices, raylib::Color mColor);
 
         // Override draw function
         void Draw() override;
@@ -21,9 +21,9 @@ namespace graphics {
         float GetRadius() const;
 
         // Setter for center position
-        void SetCenterPos(const raylib::Vector3& centerPos);
+        void SetCenterPos(const math::Vector3& centerPos);
         // Getter for center position
-        raylib::Vector3 GetCenterPos() const;
+        math::Vector3 GetCenterPos() const;
 
         // Setter for ring count
         void SetRings(int rings);
@@ -44,7 +44,7 @@ namespace graphics {
         float mRadius;      // Radius of the sphere
         int mRings;         // Number of rings
         int mSlices;        // Number of slices
-        raylib::Vector3 mCenterPos; // Center position of the sphere
+        math::Vector3 mCenterPos; // Center position of the sphere
     };
 
 }  // namespace graphics

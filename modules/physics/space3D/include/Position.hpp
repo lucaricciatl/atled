@@ -1,6 +1,7 @@
 #ifndef POSITION_HPP
 #define POSITION_HPP
 
+
 namespace physics{
 
 class Position {
@@ -28,6 +29,8 @@ public:
 
     // Transform operations
     void translate(double dx, double dy, double dz);
+
+
 };
 
 } // namespace physics

@@ -34,6 +34,7 @@ target_include_directories(${LIB_NAME} PUBLIC
     ${COMMON_INCLUDE_DIR}                 # Include raylib headers
     ${GRAPHICS_MANAGER_INCLUDE_DIR}
     ${PHYSICS_MANAGER_INCLUDE_DIR}
+    ${MATH_INCLUDE_DIR}
 )
 
 # Link libraries for this target
@@ -42,6 +43,8 @@ target_link_libraries(${LIB_NAME} PUBLIC
     common
     graphics_manager
     physics
+    math
+    
 )
 
 

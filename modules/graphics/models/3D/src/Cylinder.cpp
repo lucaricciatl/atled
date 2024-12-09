@@ -1,5 +1,5 @@
 #include "Cylinder.hpp"
-
+#include "Vector3.hpp"
 namespace graphics {
 
     Cylinder::Cylinder()
@@ -7,26 +7,26 @@ namespace graphics {
           mHeight(1.0f),
           mRadius(0.5f),
           mSides(64),
-          mColor(WHITE) {
+          mColor(raylib::WHITE) {
         UpdateMesh();
     }
 
-    Cylinder::Cylinder(const Vector3& aPos, float aRadius, float height,int sides,Color aColor)
+    Cylinder::Cylinder(const math::Vector3& aPos, float aRadius, float height,int sides,raylib::Color aColor)
         : mPos(aPos), mRadius(aRadius), mSides(sides),mHeight(height), mColor(aColor) {
         UpdateMesh();
     }
 
     void Cylinder::Draw() {
-        auto gPos = ComputeGlobalPosition(mPos);
+        raylib::Vector3 gPos = ComputeGlobalPosition(mPos);
 
 
         if (ShapeIsEnabled) {
-                raylib::DrawModel(mModel, gPos, 1.0f, WHITE);
+                raylib::DrawModel(mModel, gPos, 1.0f, raylib::WHITE);
         }
 
     }
 
-    void Cylinder::SetPos(const Vector3& aPos) {
+    void Cylinder::SetPos(const math::Vector3& aPos) {
         mPos = aPos;
         UpdateMesh();
     }
@@ -57,11 +57,11 @@ void Cylinder::UpdateMesh() {
     }
 
     // Generate a new mesh for the cylinder and load it into mModel
-    Mesh cylinderMesh = raylib::GenMeshCylinder(mRadius, mHeight, mSides);
+    raylib::Mesh cylinderMesh = raylib::GenMeshCylinder(mRadius, mHeight, mSides);
     mModel = raylib::LoadModelFromMesh(cylinderMesh);
 
     // Set the material color
-    mModel.materials[0].maps[MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
+    mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
 }
 
 } // namespace graphics

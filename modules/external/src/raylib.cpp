@@ -7,6 +7,7 @@
 namespace raylib {
 
 namespace{
+    
     Vector3 toRaylibVector3(math::Vector3 v){return {v.getX(),v.getY(),v.getZ()};}
 }
 
@@ -103,9 +104,9 @@ void DrawBillboardTexturePro(Camera camera, Texture2D texture, Rectangle source,
     ::DrawBillboardPro(camera, texture, source, toRaylibVector3(position), toRaylibVector3(up), size, origin, rotation, tint);
 }
 
-void DrawModel(Model model, Vector3 position, float scale, Color tint){return ::DrawModel(model, position, scale, tint);               // Draw a model (with texture if set)
+void DrawModel(Model model, ::Vector3 position, float scale, Color tint){
+    return ::DrawModel(model, position, scale, tint);               // Draw a model (with texture if set)
 };               // Draw a model (with texture if set)
-
 
 Font GetFontDefault() {
     return ::GetFontDefault();

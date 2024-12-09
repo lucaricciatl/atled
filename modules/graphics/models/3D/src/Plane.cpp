@@ -1,5 +1,5 @@
 #include "Plane.hpp"
-
+#include "Vector3.hpp"
 namespace graphics {
 
 // Default constructor
@@ -11,7 +11,7 @@ namespace graphics {
     };
 
 // Parameterized constructor
-Plane::Plane(const raylib::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& color)
+Plane::Plane(const math::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& color)
     : mCenterPos(centerPos), mSize(size){
     UpdateMesh();
 }
@@ -23,7 +23,7 @@ void Plane::Draw() {
 }
 
 // Setter for center position
-void Plane::SetCenterPos(const raylib::Vector3& centerPos) {
+void Plane::SetCenterPos(const math::Vector3& centerPos) {
     mCenterPos = centerPos;
     UpdateMesh();
 }
@@ -35,7 +35,7 @@ void Plane::SetSize(const raylib::Vector2& size) {
 }
 
 // Getter for center position
-raylib::Vector3 Plane::GetCenterPos() const {
+math::Vector3 Plane::GetCenterPos() const {
     return mCenterPos;
 }
 

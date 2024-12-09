@@ -1,8 +1,9 @@
 // Cube.cpp
 #include "Cube.hpp"
-
+#include "Vector3.hpp"
+#include "raylib.hpp"
+#include "Vector3.hpp"
 namespace graphics {
-    using namespace raylib;
 
     Cube::Cube(float width, float height, float length)
         : mDimensions{ width, height, length }, mCenterPos{ 0.0f, 0.0f, 0.0f } {
@@ -10,51 +11,51 @@ namespace graphics {
     }
 
     void Cube::Draw() {
-        auto gPos = ComputeGlobalPosition(mCenterPos);
+        raylib::Vector3 gPos = ComputeGlobalPosition(mCenterPos);
         if (ShapeIsEnabled) {
-            raylib::DrawModel(mModel, gPos, 1.0f, WHITE);
+            raylib::DrawModel(mModel, gPos, 1.0f, raylib::WHITE);
         }
         if (WireframeIsEnabled) {
-            raylib::DrawCubeWires(gPos, mDimensions.x, mDimensions.y, mDimensions.z, mWireframeColor);
+            raylib::DrawCubeWires(gPos, mDimensions.getX(), mDimensions.getY(), mDimensions.getZ(), mWireframeColor);
         }
     }
 
     // Setters for dimensions
     void Cube::SetWidth(float width) {
-        mDimensions.x = width;
+        mDimensions.setX(width);
         UpdateMesh(); // Update the mesh
     }
 
     void Cube::SetHeight(float height) {
-        mDimensions.y = height;
+        mDimensions.setY(height);
         UpdateMesh(); // Update the mesh
     }
 
     void Cube::SetLength(float length) {
-        mDimensions.z = length;
+        mDimensions.setZ(length);
         UpdateMesh(); // Update the mesh
     }
 
     // Getters for dimensions
-    float Cube::GetWidth() const {
-        return mDimensions.x;
+    float Cube::GetWidth() {
+        return mDimensions.getX();
     }
 
-    float Cube::GetHeight() const {
-        return mDimensions.y;
+    float Cube::GetHeight() {
+        return mDimensions.getY();
     }
 
-    float Cube::GetLength() const {
-        return mDimensions.z;
+    float Cube::GetLength() {
+        return mDimensions.getZ();
     }
 
     // Setter for center position
-    void Cube::SetCenterPos(const Vector3& centerPos) {
+    void Cube::SetCenterPos(const math::Vector3& centerPos) {
         mCenterPos = centerPos;
     }
 
     // Getter for center position
-    Vector3 Cube::GetCenterPos() const {
+    math::Vector3 Cube::GetCenterPos() const {
         return mCenterPos;
     }
 
@@ -65,7 +66,7 @@ namespace graphics {
         }
 
         // Generate a new mesh and load it into mModel
-        Mesh cubeMesh = raylib::GenMeshCube(mDimensions.x, mDimensions.y, mDimensions.z);
+        raylib::Mesh cubeMesh = raylib::GenMeshCube(mDimensions.getX(), mDimensions.getY(), mDimensions.getZ());
         mModel = raylib::LoadModelFromMesh(cubeMesh);
 
         // Set the material color

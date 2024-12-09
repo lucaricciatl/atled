@@ -8,6 +8,7 @@
 #include "GraphicsContext.hpp"
 #include "IDisplay.hpp"
 #include "ICamera.hpp"
+#include "Vector3.hpp"
 
 namespace graphics {
 
@@ -66,10 +67,10 @@ public:
     // 3D
     void SetFovy(float aFovy);
     void SetCameraProjection(raylib::CameraProjection aProjection);
-    void SetCameraPosition(const std::vector<float>& aPosition);
-    void SetCameraTarget(const std::vector<float>& aTarget);
-    raylib::Vector3 GetCameraPosition() const;
-    raylib::Vector3 GetCameraTarget() const;
+    void SetCameraPosition(const math::Vector3& aPosition);
+    void SetCameraTarget(const math::Vector3& aTarget);
+    math::Vector3 GetCameraPosition() const;
+    math::Vector3 GetCameraTarget() const;
     void BeginActiveCamera();
 
     void EndActiveCamera();

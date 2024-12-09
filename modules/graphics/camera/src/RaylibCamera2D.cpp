@@ -2,6 +2,16 @@
 
 namespace graphics {
 
+namespace{
+typedef math::Vector3 Vector3;
+
+namespace{
+    raylib::Vector3 toRaylibVector3(math::Vector3 v){return {v.getX(),v.getY(),v.getZ()};}
+    math::Vector3 toAtledVector3(raylib::Vector3 v){return Vector3(v.x,v.y,v.z);}
+}
+
+}
+
 RaylibCamera2D::RaylibCamera2D(raylib::Vector2 offset, raylib::Vector2 target, float rotation, float zoom)
     : mCamera{offset, target, rotation, zoom} {}
 
@@ -13,8 +23,8 @@ void RaylibCamera2D::EndCamera() {
     raylib::EndMode2D();
 }
 
-void RaylibCamera2D::SetPosition(raylib::Vector3 position) {
-    mCamera.offset = {position.x, position.y};
+void RaylibCamera2D::SetPosition(Vector3 position) {
+    mCamera.offset = {position.getX(), position.getY()};
 }
 
 void RaylibCamera2D::UpdateCamera() {
@@ -25,21 +35,21 @@ void RaylibCamera2D::SetFovy(float aFovy)
     
 }
 
-raylib::Vector3 RaylibCamera2D::GetPosition() const {
+Vector3 RaylibCamera2D::GetPosition() const {
     return {mCamera.offset.x, mCamera.offset.y, 0.0f};
 }
 
-void RaylibCamera2D::SetTarget(raylib::Vector3 target) {
-    mCamera.target = {target.x, target.y};
+void RaylibCamera2D::SetTarget(Vector3 target) {
+    mCamera.target = {target.getX(), target.getY()};
 }
 
-raylib::Vector3 RaylibCamera2D::GetTarget() const {
+Vector3 RaylibCamera2D::GetTarget() const {
     return {mCamera.target.x, mCamera.target.y, 0.0f};
 }
 
-void RaylibCamera2D::SetUp(raylib::Vector3) {}
+void RaylibCamera2D::SetUp(Vector3) {}
 
-raylib::Vector3 RaylibCamera2D::GetUp() const {
+Vector3 RaylibCamera2D::GetUp() const {
     return {0.0f, 0.0f, 0.0f};
 }
 

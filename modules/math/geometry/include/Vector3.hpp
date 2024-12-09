@@ -18,9 +18,9 @@ public:
     Vector3(const Vector3& other);
 
     // Getters
-    float getX() const;
-    float getY() const;
-    float getZ() const;
+    float getX();
+    float getY();
+    float getZ();
 
     // Setters
     void setX(float value);

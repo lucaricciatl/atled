@@ -1,4 +1,6 @@
 #include "Line3D.hpp"
+#include "Vector3.hpp"
+#include "raylib.hpp"  // For Vector3 and DrawLine3D
 
 namespace graphics {
 
@@ -8,7 +10,7 @@ Line3D::Line3D()
       mEndPos({1.0f, 1.0f, 1.0f}) {}
 
 // Parameterized constructor
-Line3D::Line3D(const raylib::Vector3& start, const raylib::Vector3& end, const raylib::Color& color)
+Line3D::Line3D(const math::Vector3& start, const math::Vector3& end, const raylib::Color& color)
     : mStartPos(start), mEndPos(end) {}
 
 // Override the draw function
@@ -19,21 +21,21 @@ void Line3D::Draw() {
 }
 
 // Setters
-void Line3D::SetStartPos(const raylib::Vector3& start) {
+void Line3D::SetStartPos(const math::Vector3& start) {
     mStartPos = start;
 }
 
-void Line3D::SetEndPos(const raylib::Vector3& end) {
+void Line3D::SetEndPos(const math::Vector3& end) {
     mEndPos = end;
 }
 
 
 // Getters
-raylib::Vector3 Line3D::GetStartPos() const {
+math::Vector3 Line3D::GetStartPos() const {
     return mStartPos;
 }
 
-raylib::Vector3 Line3D::GetEndPos() const {
+math::Vector3 Line3D::GetEndPos() const {
     return mEndPos;
 }
 

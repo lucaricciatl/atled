@@ -6,27 +6,28 @@
 
 namespace graphics {
 
+
     class Line3D : public Model3D {
     public:
         // Constructors
         Line3D();
-        Line3D(const raylib::Vector3& start, const raylib::Vector3& end, const raylib::Color& color = raylib::WHITE);
+        Line3D(const math::Vector3& start, const math::Vector3& end, const raylib::Color& color = raylib::WHITE);
 
         // Override the draw function
         void Draw() override;
 
         // Setters
-        void SetStartPos(const raylib::Vector3& start);
-        void SetEndPos(const raylib::Vector3& end);
+        void SetStartPos(const math::Vector3& start);
+        void SetEndPos(const math::Vector3& end);
 
         // Getters
-        raylib::Vector3 GetStartPos() const;
-        raylib::Vector3 GetEndPos() const;
+        math::Vector3 GetStartPos() const;
+        math::Vector3 GetEndPos() const;
 
 
     private:
-        raylib::Vector3 mStartPos;  // Starting position of the line
-        raylib::Vector3 mEndPos;    // Ending position of the line
+        math::Vector3 mStartPos;  // Starting position of the line
+        math::Vector3 mEndPos;    // Ending position of the line
 
     };
 

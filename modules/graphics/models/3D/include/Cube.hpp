@@ -2,10 +2,9 @@
 #define CUBE_HPP
 
 #include "Model3D.hpp"
-#include "raylib.hpp"  // Assuming raylib is used for Vector3 and Color types
+#include "raylib.hpp"  // Assuming raylib is used for math::Vector3 and Color types
 
 namespace graphics {
-using namespace raylib;
 
 class Cube : public Model3D {
 public:
@@ -23,20 +22,20 @@ public:
     void SetLength(float length);
 
     // Getters for dimensions
-    float GetWidth() const;
-    float GetHeight() const;
-    float GetLength() const;
+    float GetWidth() ;
+    float GetHeight();
+    float GetLength();
 
     void UpdateMesh();
     // Setter for center position
-    void SetCenterPos(const Vector3& centerPos);
+    void SetCenterPos(const math::Vector3& centerPos);
     // Getter for center position
-    Vector3 GetCenterPos() const;
+    math::Vector3 GetCenterPos() const;
 
 
 private:
-    raylib::Vector3 mDimensions;        // Dimensions of the cube (width, height, length)
-    raylib::Vector3 mCenterPos;         // Center position of the cube
+    math::Vector3 mDimensions;        // Dimensions of the cube (width, height, length)
+    math::Vector3 mCenterPos;         // Center position of the cube
     raylib::Model mModel;
 
 };

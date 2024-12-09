@@ -66,12 +66,12 @@ namespace graphics {
         }
     }
 
-    void GraphicsContext::UnsetFlag(ConfigFlags flag) {
+    void GraphicsContext::UnsetFlag(raylib::ConfigFlags flag) {
         currentFlags &= ~flag;
         raylib::SetConfigFlags(currentFlags);
     }
 
-    void GraphicsContext::SetFlag(ConfigFlags flag) {
+    void GraphicsContext::SetFlag(raylib::ConfigFlags flag) {
         currentFlags |= flag;
         raylib::SetConfigFlags(currentFlags);
     }
@@ -107,7 +107,7 @@ namespace graphics {
         raylib::EndDrawing();
     }
 
-    void GraphicsContext::Clear(Color aColor) {
+    void GraphicsContext::Clear(raylib::Color aColor) {
         raylib::ClearBackground(aColor);
     }
 

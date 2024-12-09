@@ -3,26 +3,26 @@
 
 #include "ICamera.hpp"
 #include "raylib.hpp"
+#include "Vector3.hpp"
 
 namespace graphics {
-using namespace raylib;
 
 class RaylibCamera2D : public ICamera {
 public:
-    RaylibCamera2D(Vector2 offset = {0, 0}, Vector2 target = {0, 0}, float rotation = 0.0f, float zoom = 1.0f);
+    RaylibCamera2D(raylib::Vector2 offset = {0, 0}, raylib::Vector2 target = {0, 0}, float rotation = 0.0f, float zoom = 1.0f);
 
     void BeginCamera() override;
     void UpdateCamera() override;
     void EndCamera() override;
 
-    void SetPosition(Vector3 position) override;
-    Vector3 GetPosition() const override;
+    void SetPosition(math::Vector3 position) override;
+    math::Vector3 GetPosition() const override;
 
-    void SetTarget(Vector3 target) override;
-    Vector3 GetTarget() const override;
+    void SetTarget(math::Vector3 target) override;
+    math::Vector3 GetTarget() const override;
 
-    void SetUp(Vector3 up) override;
-    Vector3 GetUp() const override;
+    void SetUp(math::Vector3 up) override;
+    math::Vector3 GetUp() const override;
 
     void SetZoom(float zoom) override;
     float GetZoom() const override;
@@ -34,7 +34,7 @@ public:
     void SetCameraProjection(raylib::CameraProjection aProjection) override;
 
 private:
-    Camera2D mCamera;
+    raylib::Camera2D mCamera;
 };
 
 }  // namespace graphics

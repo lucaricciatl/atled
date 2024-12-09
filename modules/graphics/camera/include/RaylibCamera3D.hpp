@@ -3,26 +3,27 @@
 
 #include "ICamera.hpp"
 #include "raylib.hpp"
+#include "Vector3.hpp"
 
 namespace graphics {
-using namespace raylib;
+
 class RaylibCamera3D : public ICamera {
 public:
-    RaylibCamera3D(Vector3 position = {0.0f, 0.0f, 10.0f}, Vector3 target = {0.0f, 0.0f, 0.0f},
-                   Vector3 up = {0.0f, 1.0f, 0.0f}, float fovy = 45.0f, int projection = CAMERA_PERSPECTIVE);
+    RaylibCamera3D(math::Vector3 position = {0.0f, 0.0f, 10.0f}, math::Vector3 target = {0.0f, 0.0f, 0.0f},
+                   math::Vector3 up = {0.0f, 1.0f, 0.0f}, float fovy = 45.0f, int projection = raylib::CAMERA_PERSPECTIVE);
 
     void BeginCamera() override;
     void UpdateCamera() override;  
     void EndCamera() override;
 
-    void SetPosition(Vector3 position) override;
-    Vector3 GetPosition() const override;
+    void SetPosition(math::Vector3 position) override;
+    math::Vector3 GetPosition() const override;
 
-    void SetTarget(Vector3 target) override;
-    Vector3 GetTarget() const override;
+    void SetTarget(math::Vector3 target) override;
+    math::Vector3 GetTarget() const override;
 
-    void SetUp(Vector3 up) override;
-    Vector3 GetUp() const override;
+    void SetUp(math::Vector3 up) override;
+    math::Vector3 GetUp() const override;
 
     void SetZoom(float zoom) override;
     float GetZoom() const override;
@@ -31,11 +32,11 @@ public:
     float GetRotation() const override;
 
     void SetFovy(float aFovy) override;
-    void SetCameraProjection(CameraProjection aProjection) override;
+    void SetCameraProjection(raylib::CameraProjection aProjection) override;
 
 
 private:
-    Camera3D mCamera;
+    raylib::Camera3D mCamera;
 };
 
 }  // namespace graphics

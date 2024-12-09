@@ -17,6 +17,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
     ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
     ${CONTEXT_INCLUDE_DIR}
     ${DISPLAY_INCLUDE_DIR}
+    ${MATH_INCLUDE_DIR}
 )
 
 # Link libraries for this target
@@ -24,6 +25,7 @@ target_link_libraries(${LIB_NAME} PUBLIC
     raylibcpp           
     context                      # Link the raylib library
     display
+    math
 )
 # Optionally link this library with other dependencies
 # target_link_libraries(${LIB_NAME} <other_dependencies>)

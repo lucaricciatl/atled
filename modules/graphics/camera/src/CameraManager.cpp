@@ -2,7 +2,7 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
-
+#include "Vector3.hpp"
 namespace graphics {
 
 CameraManager::CameraManager() : mRunning(false), mActiveCamera(nullptr) {}
@@ -45,29 +45,20 @@ void CameraManager::UpdateCameras() {
     }
 }
 
-void CameraManager::SetCameraPosition(const std::vector<float>& aPosition) {
-    if (aPosition.size() != 3) {
-        std::cerr << "Error: Camera position must have exactly 3 elements. Using default position." << std::endl;
-        mActiveCamera->SetPosition({ 0.0f, 0.0f, 0.0f });  // Default position
-        return;
-    }
-    mActiveCamera->SetPosition({ aPosition[0], aPosition[1], aPosition[2] });
+void CameraManager::SetCameraPosition(const math::Vector3& aPosition) {
+    mActiveCamera->SetPosition(aPosition);
 }
 
-void CameraManager::SetCameraTarget(const std::vector<float>& aTarget) {
-    if (aTarget.size() != 3) {
-        std::cerr << "Error: Camera target must have exactly 3 elements. Using default target." << std::endl;
-        mActiveCamera->SetTarget({ 0.0f, 0.0f, 0.0f });  // Default target
-        return;
-    }
-    mActiveCamera->SetTarget({ aTarget[0], aTarget[1], aTarget[2] });
+void CameraManager::SetCameraTarget(const math::Vector3& aTarget) {
+    mActiveCamera->SetTarget(aTarget);
 }
 
-raylib::Vector3 CameraManager::GetCameraPosition() const {
+
+math::Vector3 CameraManager::GetCameraPosition() const {
     return mActiveCamera->GetPosition();
 }
 
-raylib::Vector3 CameraManager::GetCameraTarget() const {
+math::Vector3 CameraManager::GetCameraTarget() const {
     return mActiveCamera->GetTarget();
 }
 void CameraManager::BeginActiveCamera() {
@@ -96,32 +87,32 @@ float CameraManager::GetCameraZoom() const {
 
 void CameraManager::SetCameraTargetY(float target) {
     if (mActiveCamera) {
-        mActiveCamera->SetTarget(raylib::Vector3{ mActiveCamera->GetTarget().x, target, mActiveCamera->GetTarget().z });
+        mActiveCamera->SetTarget(math::Vector3( mActiveCamera->GetTarget().getX(), target, mActiveCamera->GetTarget().getZ() ));
     }
 }
 
 void CameraManager::SetCameraOffsetX(float offset) {
     if (mActiveCamera) {
-        mActiveCamera->SetPosition(raylib::Vector3{ offset, mActiveCamera->GetPosition().y, mActiveCamera->GetPosition().z });
+        mActiveCamera->SetPosition(math::Vector3{ offset, mActiveCamera->GetPosition().getY(), mActiveCamera->GetPosition().getZ() });
     }
 }
 
 void CameraManager::SetCameraOffsetY(float offset) {
     if (mActiveCamera) {
-        mActiveCamera->SetPosition(raylib::Vector3{ mActiveCamera->GetPosition().x, offset, mActiveCamera->GetPosition().z });
+        mActiveCamera->SetPosition(math::Vector3{ mActiveCamera->GetPosition().getX(), offset, mActiveCamera->GetPosition().getZ() });
     }
 }
 
 float CameraManager::GetCameraTargetY() const {
     if (mActiveCamera) {
-        return mActiveCamera->GetTarget().y;
+        return mActiveCamera->GetTarget().getY();
     }
     return 0.0f;
 }
 
 float CameraManager::GetCameraOffsetX() const {
     if (mActiveCamera) {
-        return mActiveCamera->GetPosition().x;
+        return mActiveCamera->GetPosition().getX();
     }
     return 0.0f;
 }
@@ -132,7 +123,7 @@ void CameraManager::SetFovy(float aFovy) {
 
 float CameraManager::GetCameraOffsetY() const {
     if (mActiveCamera) {
-        return mActiveCamera->GetPosition().y;
+        return mActiveCamera->GetPosition().getY();
     }
     return 0.0f;
 }
@@ -140,13 +131,13 @@ float CameraManager::GetCameraOffsetY() const {
 void CameraManager::SetCameraTargetX(float target) {
     if (mActiveCamera) {
         auto currentTarget = mActiveCamera->GetTarget();
-        mActiveCamera->SetTarget(raylib::Vector3{ target, currentTarget.y, currentTarget.z });
+        mActiveCamera->SetTarget(math::Vector3{ target, currentTarget.getY(), currentTarget.getZ() });
     }
 }
 
 float CameraManager::GetCameraTargetX() const {
     if (mActiveCamera) {
-        return mActiveCamera->GetTarget().x;  // Access the active camera's target X
+        return mActiveCamera->GetTarget().getX();  // Access the active camera's target X
     }
     return 0.0f;  // Return a default value if no active camera is set
 }
