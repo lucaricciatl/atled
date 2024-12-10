@@ -1,4 +1,5 @@
 #include "Color.hpp"
+#include <unordered_map>
 
 namespace graphics {
 
