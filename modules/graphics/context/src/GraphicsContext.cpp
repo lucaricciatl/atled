@@ -8,27 +8,32 @@
 #include "raylib.hpp"
 #include "GraphicsConfig.hpp"
 
-namespace {
+namespace
+{
     static constexpr int defaultHeight = 420;
     static constexpr int defaultWidth = 680;
-    static constexpr const char* defaultTitle = "Window";
-}  // namespace
+    static constexpr const char *defaultTitle = "Window";
+} // namespace
 
-namespace graphics {
+namespace graphics
+{
 
     GraphicsContext::GraphicsContext()
         : windowWidth(defaultWidth),
-        windowHeight(defaultHeight),
-        windowTitle(defaultTitle) {}
+          windowHeight(defaultHeight),
+          windowTitle(defaultTitle) {}
 
     GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
-        const char* aWindowTitle,
-        std::shared_ptr<GraphicsConfig> flags)
+                                     const char *aWindowTitle,
+                                     std::shared_ptr<GraphicsConfig> flags)
         : windowWidth(aWindowWidth),
-        windowHeight(aWindowHeight),
-        windowTitle(aWindowTitle) {
-        if (flags) {
-            for (const auto& flag : flags->WindowConfig) {
+          windowHeight(aWindowHeight),
+          windowTitle(aWindowTitle)
+    {
+        if (flags)
+        {
+            for (const auto &flag : flags->WindowConfig)
+            {
                 SetFlag(flag);
             }
         }
@@ -36,79 +41,99 @@ namespace graphics {
     }
 
     GraphicsContext::GraphicsContext(int aWindowWidth, int aWindowHeight,
-        const char* aWindowTitle)
+                                     const char *aWindowTitle)
         : windowWidth(aWindowWidth),
-        windowHeight(aWindowHeight),
-        windowTitle(aWindowTitle) {
+          windowHeight(aWindowHeight),
+          windowTitle(aWindowTitle)
+    {
         InitWindowManager();
     }
 
-    GraphicsContext::~GraphicsContext() {
-        if (mWindow) {
+    GraphicsContext::~GraphicsContext()
+    {
+        if (mWindow)
+        {
             mWindow->CloseWindow();
         }
     }
 
-    void GraphicsContext::SetFlags(std::shared_ptr<GraphicsConfig> flags) {
-        if (flags) {
-            for (const auto& flag : flags->WindowConfig) {
+    void GraphicsContext::SetFlags(std::shared_ptr<GraphicsConfig> flags)
+    {
+        if (flags)
+        {
+            for (const auto &flag : flags->WindowConfig)
+            {
                 SetFlag(flag);
             }
         }
     }
 
-    void GraphicsContext::InitWindowManager() {
-        if (!mWindow) {
+    void GraphicsContext::InitWindowManager()
+    {
+        if (!mWindow)
+        {
             mWindow = WindowFactory::CreateWindow(WindowType::Raylib);
-            if (mWindow) {
+            if (mWindow)
+            {
                 mWindow->InitWindow(windowWidth, windowHeight, windowTitle);
             }
         }
     }
 
-    void GraphicsContext::UnsetFlag(raylib::ConfigFlags flag) {
+    void GraphicsContext::UnsetFlag(raylib::ConfigFlags flag)
+    {
         currentFlags &= ~flag;
         raylib::SetConfigFlags(currentFlags);
     }
 
-    void GraphicsContext::SetFlag(raylib::ConfigFlags flag) {
+    void GraphicsContext::SetFlag(raylib::ConfigFlags flag)
+    {
         currentFlags |= flag;
         raylib::SetConfigFlags(currentFlags);
     }
 
-    void GraphicsContext::SetTitle(const char* title) {
+    void GraphicsContext::SetTitle(const char *title)
+    {
         windowTitle = title;
-        if (mWindow) {
+        if (mWindow)
+        {
             mWindow->SetTitle(windowTitle);
         }
     }
 
-    void GraphicsContext::SetSize(int width, int height) {
+    void GraphicsContext::SetSize(int width, int height)
+    {
         windowWidth = width;
         windowHeight = height;
-        if (mWindow) {
+        if (mWindow)
+        {
             mWindow->SetSize(windowWidth, windowHeight);
         }
     }
 
-    int GraphicsContext::GetWidth() const {
+    int GraphicsContext::GetWidth() const
+    {
         return windowWidth;
     }
 
-    int GraphicsContext::GetHeight() const {
+    int GraphicsContext::GetHeight() const
+    {
         return windowHeight;
     }
 
-    void GraphicsContext::BeginDrawing() const {
+    void GraphicsContext::BeginDrawing() const
+    {
         raylib::BeginDrawing();
     }
 
-    void GraphicsContext::EndDrawing() const {
+    void GraphicsContext::EndDrawing() const
+    {
         raylib::EndDrawing();
     }
 
-    void GraphicsContext::Clear(raylib::Color aColor) {
+    void GraphicsContext::Clear(Color aColor)
+    {
         raylib::ClearBackground(aColor);
     }
 
-}  // namespace graphics
+} // namespace graphics

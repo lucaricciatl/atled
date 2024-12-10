@@ -6,7 +6,7 @@
 #include <vector>
 #include "Model2D.hpp"
 #include "Polygon.hpp"
-
+#include "raylib.hpp"
 namespace graphics {
 
 class Arc : public Model2D {

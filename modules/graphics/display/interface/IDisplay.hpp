@@ -1,14 +1,15 @@
 #ifndef IDISPLAY_HPP
 #define IDISPLAY_HPP
 
-#include <raylib.hpp>  // Assuming you're using Raylib for Vector2 and other window functions
+#include <raylib.hpp> // Assuming you're using Raylib for raylib::Vector2 and other window functions
 
-class IDisplay {
+class IDisplay
+{
 public:
     virtual ~IDisplay() = default;
 
     // Pure virtual functions that derived classes must implement
-    virtual void* GetHandle(void) = 0;
+    virtual void *GetHandle(void) = 0;
     virtual int GetScreenWidth(void) = 0;
     virtual int GetScreenHeight(void) = 0;
     virtual int GetRenderWidth(void) = 0;
@@ -23,7 +24,7 @@ public:
     virtual int GetMonitorRefreshRate(int monitor) = 0;
     virtual raylib::Vector2 GetPosition(void) = 0;
     virtual raylib::Vector2 GetScaleDPI(void) = 0;
-    virtual const char* GetMonitorName(int monitor) = 0;
+    virtual const char *GetMonitorName(int monitor) = 0;
 };
 
 #endif // IDISPLAY_HPP

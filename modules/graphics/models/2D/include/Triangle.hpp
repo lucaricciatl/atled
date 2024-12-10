@@ -21,14 +21,13 @@ class Triangle : public Model2D {
   std::array<Coordinates2D, 3> GetPoints() const;
 
   void SetColor(const Color& color);
-   raylib::Color GetColor() const;
 
   // Overridden Draw method
   void Draw() override;
 
  private:
   std::array<Coordinates2D, 3> mPoints;
-  raylib::Color mColor;
+  Color color;
 };
 
 

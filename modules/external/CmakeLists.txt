@@ -10,7 +10,7 @@ add_library(raylibcpp ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
 add_library(raylibcpp::raylibcpp ALIAS raylibcpp)
 
 
-target_link_libraries(raylibcpp PUBLIC raylib geometry)
+target_link_libraries(raylibcpp PUBLIC raylib geometry display)
 
 target_include_directories(raylibcpp
     PUBLIC
@@ -18,12 +18,13 @@ target_include_directories(raylibcpp
     PRIVATE
         ${RAYLIB_INCLUDE_DIR}  
         ${GEOMETRY_INCLUDE_DIR}
+        ${GRAPHICS_INCLUDE_DIR}
 
 )
 
 add_library(external ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
 
-target_link_libraries(external PUBLIC raylibcpp geometry)
+target_link_libraries(external PUBLIC raylibcpp::raylibcpp )
 
 target_include_directories(external PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include 

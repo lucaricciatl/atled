@@ -43,5 +43,16 @@ private:
     float alpha;
 
 };
+
+// Non-member function to get a color by name
+const Color& getColor(const std::string& name);
+
+// Check if a color exists
+bool hasColor(const std::string& name);
+
+// Load the static palette (initialization)
+void initializeColorPalette();
+
 };
+
 #endif // COLOR_HPP

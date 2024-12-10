@@ -13,10 +13,10 @@ add_subdirectory(display)
 add_subdirectory(graphics_manager)
 add_subdirectory(models)
 add_subdirectory(shader)
-add_subdirectory(texts)
+#add_subdirectory(texts)
 add_subdirectory(window)
 
-target_link_libraries(graphics INTERFACE camera context display graphics_manager models shader texts window)
+target_link_libraries(graphics INTERFACE external camera context display graphics_manager models shader  window)
 
 set_target_properties(graphics PROPERTIES FOLDER "modules")
 

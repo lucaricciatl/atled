@@ -21,7 +21,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
 
 # Link libraries for this target
 target_link_libraries(${LIB_NAME} PUBLIC 
-    raylibcpp                                 # Link the raylib library
+raylibcpp::raylibcpp                                 # Link the raylib library
     models
     context
 )

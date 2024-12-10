@@ -1,5 +1,5 @@
 #include "Circle.hpp"
-
+#include "raylib.hpp"
 #include <cassert>
 #include <iostream>
 #include <stdexcept>  // For std::invalid_argument
@@ -18,6 +18,6 @@ void Circle::SetCenter(const Coordinates2D& aCenter) {
 void Circle::SetRadius(const float& aRadius) { mRadius = aRadius; }
 
 void Circle::Draw(){
-   raylib::DrawCircleV(ComputeGlobalPosition(mCenter), mRadius, mColor);
+  //raylib::DrawCircleV(ComputeGlobalPosition(mCenter), mRadius, mColor);
 }
 }

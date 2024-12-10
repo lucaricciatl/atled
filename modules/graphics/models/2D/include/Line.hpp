@@ -6,7 +6,7 @@
 #include <vector>
 #include "Model.hpp"
 #include "Polygon.hpp"
-
+#include "raylib.hpp"
 namespace graphics {
 
 class Line : public Model2D {

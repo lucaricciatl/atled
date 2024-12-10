@@ -3,65 +3,81 @@
 #include "Vector3.hpp"
 #include "raylib.hpp"
 #include "Vector3.hpp"
-namespace graphics {
+
+namespace graphics
+{
 
     Cube::Cube(float width, float height, float length)
-        : mDimensions{ width, height, length }, mCenterPos{ 0.0f, 0.0f, 0.0f } {
+        : mDimensions{width, height, length}, mCenterPos{0.0f, 0.0f, 0.0f}
+    {
         UpdateMesh(); // Initialize mModel
     }
 
-    void Cube::Draw() {
-        raylib::Vector3 gPos = ComputeGlobalPosition(mCenterPos);
-        if (ShapeIsEnabled) {
-            raylib::DrawModel(mModel, gPos, 1.0f, raylib::WHITE);
+    void Cube::Draw()
+    {
+        math::Vector3 gPos = ComputeGlobalPosition(mCenterPos);
+        if (ShapeIsEnabled)
+        {
+            //raylib::DrawModel(mModel, gPos, 1.0f, getColor("White"));
         }
-        if (WireframeIsEnabled) {
+        if (WireframeIsEnabled)
+        {
             raylib::DrawCubeWires(gPos, mDimensions.getX(), mDimensions.getY(), mDimensions.getZ(), mWireframeColor);
         }
     }
 
     // Setters for dimensions
-    void Cube::SetWidth(float width) {
+    void Cube::SetWidth(float width)
+    {
         mDimensions.setX(width);
         UpdateMesh(); // Update the mesh
     }
 
-    void Cube::SetHeight(float height) {
+    void Cube::SetHeight(float height)
+    {
         mDimensions.setY(height);
         UpdateMesh(); // Update the mesh
     }
 
-    void Cube::SetLength(float length) {
+    void Cube::SetLength(float length)
+    {
         mDimensions.setZ(length);
         UpdateMesh(); // Update the mesh
     }
 
     // Getters for dimensions
-    float Cube::GetWidth() {
+    float Cube::GetWidth()
+    {
         return mDimensions.getX();
     }
 
-    float Cube::GetHeight() {
+    float Cube::GetHeight()
+    {
         return mDimensions.getY();
     }
 
-    float Cube::GetLength() {
+    float Cube::GetLength()
+    {
         return mDimensions.getZ();
     }
 
     // Setter for center position
-    void Cube::SetCenterPos(const math::Vector3& centerPos) {
+    void Cube::SetCenterPos(const math::Vector3 &centerPos)
+    {
         mCenterPos = centerPos;
     }
 
     // Getter for center position
-    math::Vector3 Cube::GetCenterPos() const {
+    math::Vector3 Cube::GetCenterPos() const
+    {
         return mCenterPos;
     }
 
-    void Cube::UpdateMesh() {
+    void Cube::UpdateMesh()
+    {
         // Clean up the old model to prevent memory leaks
-        if (mModel.meshCount > 0) {
+        if (mModel.meshCount > 0)
+        {
             UnloadModel(mModel);
         }
 
@@ -70,7 +86,11 @@ namespace graphics {
         mModel = raylib::LoadModelFromMesh(cubeMesh);
 
         // Set the material color
-        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
+        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = raylib::Color{
+            static_cast<unsigned char>(mColor.getRed()),
+            static_cast<unsigned char>(mColor.getGreen()),
+            static_cast<unsigned char>(mColor.getBlue()),
+            static_cast<unsigned char>(mColor.getAlpha())};
     }
 
 }

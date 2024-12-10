@@ -6,31 +6,33 @@
 #include "Point2D.hpp"
 #include "Model.hpp"
 
-namespace graphics {
+namespace graphics
+{
 	using namespace raylib;
 
-class Model2D : public Model{
- public:
-  virtual ~Model2D() = default;
-  virtual void Draw() = 0 ;
+	class Model2D : public Model
+	{
+	public:
+		virtual ~Model2D() = default;
+		virtual void Draw() = 0;
 
-  Color GetColor() const;
-  double GetRotation() const;
-  void SetColor(const Color& color);
-  void SetRotation(double rotation);
+		Color GetColor() const;
+		double GetRotation() const;
+		void SetColor(const Color &color);
+		void SetRotation(double rotation);
 
-protected:
-	Vector2 ComputeGlobalPosition(Coordinates2D aPosition) {
-		auto framepos = frame->GetPosition();
-		Vector2 globalPosition = {
-			(float)framepos->getX() + aPosition.x,
-			(float)framepos->getY() + aPosition.y,
+	protected:
+		raylib::Vector2 ComputeGlobalPosition(Coordinates2D aPosition)
+		{
+			auto framepos = frame->GetPosition();
+			raylib::Vector2 globalPosition = {
+				(float)framepos->getX() + aPosition.x,
+				(float)framepos->getY() + aPosition.y,
+			};
+			return globalPosition;
 		};
-		return globalPosition;
+		Color mColor;
+		double mRotation;
 	};
-  Color mColor;
-  double mRotation;
-};
-}  // namespace graphics
-#endif  // SHAPE_HPP
-
+} // namespace graphics
+#endif // SHAPE_HPP

@@ -22,16 +22,16 @@ add_library(${LIB_NAME} ${SOURCES} ${HEADERS}) # Adding headers is optional
 
 # Set include directories for this library
 target_include_directories(${LIB_NAME} PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/2D/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/3D/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/interface/include
+
 )
 
 # Include directories for this library
 target_include_directories(${LIB_NAME} PUBLIC 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include   # Include local project headers
-    ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
-    ${COMMON_INCLUDE_DIR}                 # Include raylib headers
+    ${CMAKE_CURRENT_SOURCE_DIR}/2D/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/3D/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/interface/include
+    ${RAYLIB_INCLUDE_DIR}                 
+    ${COMMON_INCLUDE_DIR}                 
     ${GRAPHICS_MANAGER_INCLUDE_DIR}
     ${PHYSICS_MANAGER_INCLUDE_DIR}
     ${MATH_INCLUDE_DIR}
@@ -39,14 +39,12 @@ target_include_directories(${LIB_NAME} PUBLIC
 
 # Link libraries for this target
 target_link_libraries(${LIB_NAME} PUBLIC 
-    raylibcpp                                 # Link the raylib library
+    external                                 # Link the raylib library
     common
     graphics_manager
     physics
     math
-    
 )
-
 
 # Define include and library directories based on the library name
 set(${LIB_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/interface/include)  # Path to include directory

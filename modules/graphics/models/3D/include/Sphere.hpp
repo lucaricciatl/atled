@@ -2,15 +2,16 @@
 #define SPHERE_HPP
 
 #include "Model3D.hpp"
-#include "raylib.hpp"  // Assuming raylib is used for the Vector3 and Color types
+#include "raylib.hpp" // Assuming raylib is used for the Vector3 and Color types
 
-namespace graphics {
-using namespace math;
-    class Sphere : public Model3D {
+namespace graphics
+{
+    class Sphere : public Model3D
+    {
     public:
         // Constructors
-        Sphere();  // Default constructor
-        Sphere(float radius, const math::Vector3 &centerPos, int rings, int slices, raylib::Color mColor);
+        Sphere(); // Default constructor
+        Sphere(float radius, const math::Vector3 &centerPos, int rings, int slices, Color mColor);
 
         // Override draw function
         void Draw() override;
@@ -21,7 +22,7 @@ using namespace math;
         float GetRadius() const;
 
         // Setter for center position
-        void SetCenterPos(const math::Vector3& centerPos);
+        void SetCenterPos(const math::Vector3 &centerPos);
         // Getter for center position
         math::Vector3 GetCenterPos() const;
 
@@ -38,15 +39,14 @@ using namespace math;
     private:
         void UpdateMesh();
 
-        
-        raylib::Color mColor;
+        Color mColor;
         raylib::Model mModel;
-        float mRadius;      // Radius of the sphere
-        int mRings;         // Number of rings
-        int mSlices;        // Number of slices
+        float mRadius;            // Radius of the sphere
+        int mRings;               // Number of rings
+        int mSlices;              // Number of slices
         math::Vector3 mCenterPos; // Center position of the sphere
     };
 
-}  // namespace graphics
+} // namespace graphics
 
-#endif  // SPHERE_HPP
+#endif // SPHERE_HPP

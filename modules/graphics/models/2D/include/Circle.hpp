@@ -2,7 +2,7 @@
 #define CIRCLE_HPP
 #include "Model2D.hpp"
 #include <vector>
-
+#include "raylib.hpp"
 
 namespace graphics {
 

@@ -11,8 +11,6 @@
 #include <cstdlib> // For rand()
 #include <mutex>
 #include "Sphere.hpp"
-#include "ITextDrawer.hpp"
-#include "RaylibtextDrawer.hpp"
 #include "Model2D.hpp"
 #include "Model2DFactory.hpp"
 
@@ -58,7 +56,7 @@ void Engine::OnUpdate() {
         int mouseX = inputManager->GetMouseX();
         int mouseY = inputManager->GetMouseY();
         int modelType = rand() % 4; // Extend range to 4 to include 3D sphere
-        Color randomColor(rand() % 256, rand() % 256, rand() % 256, 128);
+        graphics::Color randomColor(rand() % 256, rand() % 256, rand() % 256, 128);
 
         std::lock_guard<std::mutex> lock(graphicsMutex); // Lock graphicsManager for thread-safe access
         if (modelType == 0) { // Random Circle
@@ -107,7 +105,7 @@ void Engine::OnShutdown() {
 void Engine::OnRender() {
     std::lock_guard<std::mutex> lock(graphicsMutex); // Lock during rendering
     graphicsManager->Render();
-    RaylibTextDrawer td;
-    td.DrawText("HI :)", 400, 400, 20, Color{255, 160, 120, 255});
-    graphicsManager->Clear(BLACK);
+    //RaylibTextDrawer td;
+    //td.DrawText("HI :)", 400, 400, 20, graphics::Color{255, 160, 120, 255});
+    graphicsManager->Clear(graphics::getColor("Black"));
 }

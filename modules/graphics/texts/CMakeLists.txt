@@ -15,11 +15,13 @@ target_include_directories(${LIB_NAME} PUBLIC
 ${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
     ${CMAKE_CURRENT_SOURCE_DIR}/include   # Include local project headers
     ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
+    ${DYSPLAY_INCLUDE_DIR}
 )
 
 # Link libraries for this target
 target_link_libraries(${LIB_NAME} PUBLIC 
     raylibcpp                                 # Link the raylib library
+    display
 )
 
 set_target_properties(${LIB_NAME} PROPERTIES FOLDER "modules/graphics")

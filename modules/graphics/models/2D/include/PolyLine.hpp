@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "Model2D.hpp"
-
+#include "raylib.hpp"
 namespace graphics {
 
 class Polyline : public Model2D {

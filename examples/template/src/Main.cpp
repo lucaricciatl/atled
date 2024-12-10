@@ -11,28 +11,29 @@
 #include <EngineBuilder.hpp>
 #include <FreeCameraComponent.hpp>
 
-int main() {
+int main()
+{
     // Engine setup
     engine::EngineBuilder<AtledEngine> builder;
 
     std::unique_ptr<AtledEngine> coreEngine = builder
-        .SetKeyboardType(input::KeyboardType::Raylib)
-        .SetMouseType(input::MouseType::Raylib)
-        .SetGraphicsType(graphics::GraphicsType::Raylib)
-        .SetCameraType(graphics::CameraType::Raylib)
-        .SetWorldType(graphics::WorldType::World3D)
-        .SetTargetFramerate(60) // Set frame rate suitable for the game speed
-        .Build();
+                                                  .SetKeyboardType(input::KeyboardType::Raylib)
+                                                  .SetMouseType(input::MouseType::Raylib)
+                                                  .SetGraphicsType(graphics::GraphicsType::Raylib)
+                                                  .SetCameraType(graphics::CameraType::Raylib)
+                                                  .SetWorldType(graphics::WorldType::World3D)
+                                                  .SetTargetFramerate(60) // Set frame rate suitable for the game speed
+                                                  .Build();
 
     auto entity = coreEngine->CreateEntity();
     auto mc = entity->AddComponent<ShapeComponent>();
-    mc->SetModel<Plane>(math::Vector3(0, -0.1, 0), Vector2(10, 10), Color(255, 255, 255, 180));
+    mc->SetModel<Plane>(math::Vector3(0, -0.1, 0), raylib::Vector2(10, 10), graphics::Color(255, 255, 255, 180));
 
     auto mc1 = entity->AddComponent<ShapeComponent>();
-    mc1->SetModel<Sphere>(0.5, math::Vector3(0, 2, 0), 10, 10, Color(255, 255, 255, 180));
+    mc1->SetModel<Sphere>(0.5, math::Vector3(0, 2, 0), 10, 10, graphics::Color(255, 255, 255, 180));
 
-    //auto mc2 = entity->AddComponent<WorldComponent>();
-    // Run the engine in the main thread
+    // auto mc2 = entity->AddComponent<WorldComponent>();
+    //  Run the engine in the main thread
     auto entitycam = coreEngine->CreateEntity();
     entitycam->AddComponent<FreeCameraComponent>();
     coreEngine->Start();
