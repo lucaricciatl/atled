@@ -53,6 +53,7 @@ public:
 
     // Print the vector (for debugging)
     void print() const;
+
 };
 
 }
