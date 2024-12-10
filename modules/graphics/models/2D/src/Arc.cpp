@@ -1,8 +1,8 @@
 #include "Arc.hpp"
-#include "raylib.hpp"
 #include <cassert> // For assert
 #include <cmath>   // For M_PI
 #include <numbers> // C++20 feature
+#include "Conversion.hpp"
 
 namespace graphics
 {
@@ -49,7 +49,7 @@ namespace graphics
 
   void Arc::Draw()
   {
-    //raylib::DrawRing(ComputeGlobalPosition(center), radius - mThickess, radius + mThickess,
-    //                 mStartAngle, mEndAngle, ComputePointsNumber(), mColor);
+    graphics::DrawRing(ComputeGlobalPosition(center), radius, mThickess,
+                     mStartAngle, mEndAngle, ComputePointsNumber(), mColor);
   }
 } // namespace graphics

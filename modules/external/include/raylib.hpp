@@ -7,7 +7,7 @@ namespace raylib {
 
 #include <raylib.h>
 #include <raymath.h>
-
+using namespace raylib;
 typedef GlyphInfo GlyphInfo;
 typedef ConfigFlags ConfigFlags;
 typedef Shader Shader;
@@ -19,8 +19,13 @@ typedef Mesh Mesh;
 typedef CameraProjection CameraProjection;
 typedef Rectangle Rectangle;
 typedef MaterialMapIndex MaterialMapIndex;
+typedef Vector3 Vector3;
+typedef Color Color;
 
-void DrawModel(Model model, math::Vector3 position, float scale, graphics::Color tint);
+Vector3 toRaylibVector3(math::Vector3 v);
+Color toRaylibColor(const graphics::Color& c);
+
+void DrawModel(Model model, Vector3 position, float scale, Color tint);
 // Draw a model (with texture if set)
 void DrawModelSimple(Model model, math::Vector3 position, float scale, graphics::Color tint);
 // Draw a model with extended parameters

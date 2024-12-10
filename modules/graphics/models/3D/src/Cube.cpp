@@ -3,7 +3,7 @@
 #include "Vector3.hpp"
 #include "raylib.hpp"
 #include "Vector3.hpp"
-
+#include "Conversion.hpp"
 namespace graphics
 {
 
@@ -18,7 +18,7 @@ namespace graphics
         math::Vector3 gPos = ComputeGlobalPosition(mCenterPos);
         if (ShapeIsEnabled)
         {
-            //raylib::DrawModel(mModel, gPos, 1.0f, getColor("White"));
+            DrawModel(mModel, gPos, 1.0f, mColor);
         }
         if (WireframeIsEnabled)
         {

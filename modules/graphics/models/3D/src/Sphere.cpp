@@ -2,6 +2,7 @@
 #include "raylib.hpp"
 #include "filesystem"
 #include "Vector3.hpp"
+#include "Conversion.hpp"
 
 namespace graphics
 {
@@ -120,7 +121,7 @@ namespace graphics
             // mModel.materials[0].maps[raylib::MATERIAL_MAP_SPECULAR].texture = texture;
             //// Assign the shader to the 3D model
             // mModel.materials[0].shader = basicShader;
-            //raylib::DrawModel(mModel, gPos, 1.0f, getColor("White"));
+            DrawModel(mModel, gPos, 1.0f, mColor);
             // Unload shader after use to avoid memory leaks (not recommended for real-time use)
             // UnloadShader(basicShader);
         }

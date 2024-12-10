@@ -6,7 +6,9 @@ namespace graphics {
 Color::Color() : red(0.0f), green(0.0f), blue(0.0f), alpha(1.0f) {}
 
 Color::Color(float r, float g, float b, float a)
-    : red(clamp(r, 0.0f, 1.0f)), green(clamp(g, 0.0f, 1.0f)), blue(clamp(b, 0.0f, 1.0f)), alpha(clamp(a, 0.0f, 1.0f)) {}
+    : red(clamp(r, 0.0f, 1.0f)), green(clamp(g, 0.0f, 1.0f)), blue(clamp(b, 0.0f, 1.0f)), alpha(clamp(a, 0.0f, 1.0f)) {
+
+}
 
 float Color::getRed() const {
     return red;

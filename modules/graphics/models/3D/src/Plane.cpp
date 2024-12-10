@@ -1,6 +1,6 @@
 #include "Plane.hpp"
 #include "Vector3.hpp"
-#include "raylib.hpp"
+#include "Conversion.hpp"
 
 namespace graphics
 {
@@ -9,14 +9,14 @@ namespace graphics
     Plane::Plane()
         : mCenterPos({0.0f, 0.0f, 0.0f}),
           mSize({10.0f, 10.0f}),
-          mColor(Color(255, 255, 255, 205))
+          mColor(Color(1, 1, 1, 0))
     {
         UpdateMesh();
     };
 
     // Parameterized constructor
     Plane::Plane(const math::Vector3 &centerPos, const raylib::Vector2 &size, const Color &color)
-        : mCenterPos(centerPos), mSize(size)
+        : mCenterPos(centerPos), mSize(size), mColor(color)
     {
         UpdateMesh();
     }
@@ -25,7 +25,7 @@ namespace graphics
     void Plane::Draw()
     {
         auto gPos = ComputeGlobalPosition(mCenterPos);
-        //raylib::DrawModel(mModel, gPos, 1.0f, mColor);
+        DrawModel(mModel, gPos, 1.0f, mColor);
     }
 
     // Setter for center position
@@ -67,11 +67,7 @@ namespace graphics
         mModel = raylib::LoadModelFromMesh(PlaneMesh);
 
         // Set the material color
-        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = raylib::Color{
-            static_cast<unsigned char>(mColor.getRed()),
-            static_cast<unsigned char>(mColor.getGreen()),
-            static_cast<unsigned char>(mColor.getBlue()),
-            static_cast<unsigned char>(mColor.getAlpha())};
+        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = toRaylibColor(mColor);
     }
 
 } // namespace graphics

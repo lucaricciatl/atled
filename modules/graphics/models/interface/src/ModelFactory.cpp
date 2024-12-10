@@ -4,8 +4,6 @@
 #include "Model3DFactory.hpp"
 #include "ModelFactory.hpp"
 
-
-
 namespace graphics {
 
 

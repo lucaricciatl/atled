@@ -2,7 +2,6 @@
 #define PLANE_HPP
 
 #include "Model3D.hpp"
-#include "raylib.hpp" // For Vector3, raylib::Vector2, and Color types
 
 namespace graphics
 {

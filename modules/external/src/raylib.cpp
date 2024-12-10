@@ -17,7 +17,7 @@ namespace raylib {
 
 void DrawModel(Model model, math::Vector3 position, float scale, graphics::Color tint){
     return ::DrawModel(model, toRaylibVector3(position), scale, toRaylibColor(tint));               // Draw a model (with texture if set)
-};               // Draw a model (with texture if set)
+};               
 
 // Draw a model (with texture if set)
 void DrawModelSimple(Model model, math::Vector3 position, float scale, graphics::Color tint) {
@@ -667,8 +667,8 @@ void DrawPixelV(Vector2 position, graphics::Color color) {
     ::DrawPixelV(position, toRaylibColor(color));
 }
 // Draw a line
-void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, graphics::Color color) {
-    ::DrawLine(startPosX, startPosY, endPosX, endPosY, toRaylibColor(color));
+void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, ::Color color) {
+    ::DrawLine(startPosX, startPosY, endPosX, endPosY, color);
 }
 // Draw a line (using Vector2 positions)
 void DrawLineV(Vector2 startPos, Vector2 endPos, graphics::Color color) {
@@ -687,8 +687,8 @@ void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, graphics::Col
     ::DrawLineBezier(startPos, endPos, thick, toRaylibColor(color));
 }
 // Draw a filled circle
-void DrawCircle(int centerX, int centerY, float radius, graphics::Color color) {
-    ::DrawCircle(centerX, centerY, radius, toRaylibColor(color));
+void DrawCircle(int centerX, int centerY, float radius, ::Color color) {
+    ::DrawCircle(centerX, centerY, radius, color);
 }
 // Draw a sector of a circle
 void DrawCircleSector(Vector2 center, float radius, float startAngle, float endAngle, int segments, graphics::Color color) {
@@ -707,36 +707,36 @@ void DrawCircleV(Vector2 center, float radius, graphics::Color color) {
     ::DrawCircleV(center, radius, toRaylibColor(color));
 }
 // Draw circle outline
-void DrawCircleLines(int centerX, int centerY, float radius, graphics::Color color) {
-    ::DrawCircleLines(centerX, centerY, radius, toRaylibColor(color));
+void DrawCircleLines(int centerX, int centerY, float radius, ::Color color) {
+    ::DrawCircleLines(centerX, centerY, radius, color);
 }
 // Draw circle outline (Vector version)
 void DrawCircleLinesV(Vector2 center, float radius, graphics::Color color) {
     ::DrawCircleLinesV(center, radius, toRaylibColor(color));
 }
 // Draw an ellipse
-void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, graphics::Color color) {
-    ::DrawEllipse(centerX, centerY, radiusH, radiusV, toRaylibColor(color));
+void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, ::Color color) {
+    ::DrawEllipse(centerX, centerY, radiusH, radiusV, color);
 }
 // Draw ellipse outline
-void DrawEllipseLines(int centerX, int centerY, float radiusH, float radiusV, graphics::Color color) {
-    ::DrawEllipseLines(centerX, centerY, radiusH, radiusV, toRaylibColor(color));
+void DrawEllipseLines(int centerX, int centerY, float radiusH, float radiusV, ::Color color) {
+    ::DrawEllipseLines(centerX, centerY, radiusH, radiusV, color);
 }
 // Draw a ring
-void DrawRing(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, graphics::Color color) {
-    ::DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, toRaylibColor(color));
+void DrawRing(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, ::Color color) {
+    ::DrawRing(center, innerRadius, outerRadius, startAngle, endAngle, segments, color);
 }
 // Draw ring outline
-void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, graphics::Color color) {
-    ::DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, toRaylibColor(color));
+void DrawRingLines(Vector2 center, float innerRadius, float outerRadius, float startAngle, float endAngle, int segments, ::Color color) {
+    ::DrawRingLines(center, innerRadius, outerRadius, startAngle, endAngle, segments, color);
 }
 // Draw a rectangle
-void DrawRectangle(int posX, int posY, int width, int height, graphics::Color color) {
-    ::DrawRectangle(posX, posY, width, height, toRaylibColor(color));
+void DrawRectangle(int posX, int posY, int width, int height, ::Color color) {
+    ::DrawRectangle(posX, posY, width, height, color);
 }
 // Draw a rectangle (Vector version)
-void DrawRectangleV(Vector2 position, Vector2 size, graphics::Color color) {
-    ::DrawRectangleV(position, size, toRaylibColor(color));
+void DrawRectangleV(Vector2 position, Vector2 size, ::Color color) {
+    ::DrawRectangleV(position, size, color);
 }
 
 // Set background color (framebuffer clear color)

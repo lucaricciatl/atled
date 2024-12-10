@@ -1,7 +1,7 @@
 #include "Cylinder.hpp"
 #include "Vector3.hpp"
 #include "raylib.hpp"
-
+#include "Conversion.hpp"
 namespace graphics
 {
 
@@ -27,7 +27,7 @@ namespace graphics
 
         if (ShapeIsEnabled)
         {
-            //raylib::DrawModel(mModel, gPos, 1.0f, getColor("White"));
+           DrawModel(mModel, gPos, 1.0f, mColor);
         }
     }
 
