@@ -108,6 +108,6 @@ void Engine::OnRender() {
     std::lock_guard<std::mutex> lock(graphicsMutex); // Lock during rendering
     graphicsManager->Render();
     RaylibTextDrawer td;
-    td.DrawText("HI :)", 400, 400, 20, Color{255, 160, 120, 255});
-    graphicsManager->Clear(BLACK);
+    td.DrawText("HI :)", 400, 400, 20, raylib::Color{255, 160, 120, 255});
+    graphicsManager->Clear(raylib::BLACK);
 }

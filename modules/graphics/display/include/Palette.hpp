@@ -10,7 +10,7 @@ namespace graphics {
     void initializeColorPalette();
 
     // Retrieves a color by name. Throws std::runtime_error if not found.
-    const Color& getColor(const std::string& name);
+    Color getColor(const std::string& name);
 
     // Checks if a color exists in the palette
     bool hasColor(const std::string& name);

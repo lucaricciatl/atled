@@ -2,14 +2,14 @@
 #include "Vector3.hpp"
 #include "Color.hpp"
 #include <Model.hpp>
-
+#include "Palette.hpp"
 namespace graphics {
 
 // Default constructor
     Plane::Plane()
         : mCenterPos({ 0.0f, 0.0f, 0.0f }),
         mSize({ 10.0f, 10.0f }),
-        mColor(Color(1, 1, 1, 1)) {
+        mColor(getColor("Light Gray")) {
         UpdateMesh();
     };
 
