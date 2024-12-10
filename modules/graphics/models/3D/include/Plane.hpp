@@ -3,14 +3,16 @@
 
 #include "Model3D.hpp"
 #include "raylib.hpp"  // For Vector3, Vector2, and Color types
+#include "Color.hpp"
 
 namespace graphics {
 using namespace math;
+
 class Plane : public Model3D {
 public:
     // Constructors
     Plane();
-    Plane(const math::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& aColor);
+    Plane(const math::Vector3& centerPos, const raylib::Vector2& size, const Color& aColor);
 
     // Override draw function
     void Draw() override;
@@ -30,7 +32,7 @@ private:
     raylib::Vector2 mSize;      // Size of the plane
 
     raylib::Model mModel;
-    raylib::Color mColor;
+    Color mColor;
 };
 
 }  // namespace graphics

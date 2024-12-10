@@ -27,7 +27,7 @@ public:
     static std::shared_ptr<Cylinder> CreateCylinder();
 
     static std::shared_ptr<Plane> CreatePlane();
-    static std::shared_ptr<Plane> CreatePlane(const math::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& color);
+    static std::shared_ptr<Plane> CreatePlane(const math::Vector3& centerPos, const raylib::Vector2& size, const Color& color);
 
 
 };

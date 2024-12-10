@@ -81,4 +81,37 @@ void Color::getRGB255(int& r, int& g, int& b, int& a) const {
     a = static_cast<int>(alpha * 255);
 }
 
+// Conversion Method: Converts graphics::Color to raylib::Color
+raylib::Color Color::toRaylibColor() const {
+    int r, g, b, a;
+    getRGB255(r, g, b, a);
+     raylib::Color color{ 
+        static_cast<unsigned char>(r),
+        static_cast<unsigned char>(g),
+        static_cast<unsigned char>(b),
+        static_cast<unsigned char>(a) 
+    };
+    return color;
+}
+
+// Conversion Method: Creates graphics::Color from raylib::Color
+Color Color::fromRaylibColor(const raylib::Color& rayColor) {
+    return Color(
+        static_cast<float>(rayColor.r) / 255.0f,
+        static_cast<float>(rayColor.g) / 255.0f,
+        static_cast<float>(rayColor.b) / 255.0f,
+        static_cast<float>(rayColor.a) / 255.0f
+    );
+}
+
+// Standalone Conversion Function: graphics::Color to raylib::Color
+raylib::Color toRaylibColor(const Color& color) {
+    return color.toRaylibColor();
+}
+
+// Standalone Conversion Function: raylib::Color to graphics::Color
+Color fromRaylibColor(const raylib::Color& rayColor) {
+    return Color::fromRaylibColor(rayColor);
+}
+
 }

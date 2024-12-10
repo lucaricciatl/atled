@@ -1,25 +1,28 @@
 #include "Plane.hpp"
 #include "Vector3.hpp"
+#include "Color.hpp"
+#include <Model.hpp>
+
 namespace graphics {
 
 // Default constructor
     Plane::Plane()
         : mCenterPos({ 0.0f, 0.0f, 0.0f }),
         mSize({ 10.0f, 10.0f }),
-        mColor(raylib::Color(255, 255, 255, 205)) {
+        mColor(Color(1, 1, 1, 1)) {
         UpdateMesh();
     };
 
 // Parameterized constructor
-Plane::Plane(const math::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& color)
-    : mCenterPos(centerPos), mSize(size){
+Plane::Plane(const math::Vector3& centerPos, const raylib::Vector2& size, const Color& color)
+    : mCenterPos(centerPos), mSize(size), mColor(color){
     UpdateMesh();
 }
 
 // Override draw method
 void Plane::Draw() {
     auto gPos = ComputeGlobalPosition(mCenterPos);    
-    raylib::DrawModel(mModel, gPos, 1.0f, mColor);
+    raylib::DrawModel(mModel, gPos, 1.0f, toRaylibColor(mColor));
 }
 
 // Setter for center position
@@ -55,7 +58,7 @@ void Plane::UpdateMesh() {
     mModel = raylib::LoadModelFromMesh(PlaneMesh);
 
     // Set the material color
-    mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
+    mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = toRaylibColor(mColor);
 }
 
 }  // namespace graphics

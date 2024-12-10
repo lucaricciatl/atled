@@ -47,7 +47,7 @@ std::shared_ptr<Plane> Model3DFactory::CreatePlane() {
     return std::make_shared<Plane>();;
 }
 
-std::shared_ptr<Plane> Model3DFactory::CreatePlane(const math::Vector3& centerPos, const raylib::Vector2& size, const raylib::Color& color) {
+std::shared_ptr<Plane> Model3DFactory::CreatePlane(const math::Vector3& centerPos, const raylib::Vector2& size, const Color& color) {
     return std::make_shared<Plane>(centerPos, size, color);
 }
 

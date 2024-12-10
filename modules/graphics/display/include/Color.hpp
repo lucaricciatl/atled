@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <raylib.hpp>
 
 namespace graphics {
 
@@ -31,6 +32,8 @@ public:
 
     bool operator==(const Color& other) const;
     bool operator!=(const Color& other) const;
+    raylib::Color toRaylibColor() const; // Converts to Raylib's Color
+    static Color fromRaylibColor(const raylib::Color& rayColor); // Creates from Raylib's Color
 
 private:
     float clamp(float value, float min, float max) const;
@@ -43,5 +46,9 @@ private:
     float alpha;
 
 };
+
+raylib::Color toRaylibColor(const Color& color);
+Color fromRaylibColor(const raylib::Color& rayColor);
+
 };
 #endif // COLOR_HPP
