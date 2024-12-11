@@ -2,7 +2,7 @@
 #include "raylib.hpp"
 #include "filesystem"
 #include "Vector3.hpp"
-
+#include "Palette.hpp"
 namespace graphics {
 
 
@@ -11,11 +11,11 @@ namespace graphics {
           mRings(16), 
           mSlices(16), 
           mCenterPos({0.0f, 0.0f, 0.0f}),
-          mColor(raylib::WHITE) { // Initialize color to white
+          mColor(getColor("Timeless Gray")) { // Initialize color to white
         UpdateMesh();
     }
 
-    Sphere::Sphere(float radius, const math::Vector3& centerPos, int rings, int slices, raylib::Color aColor)
+    Sphere::Sphere(float radius, const math::Vector3& centerPos, int rings, int slices, const graphics::Color& aColor)
         : mRadius(radius), 
           mRings(rings), 
           mSlices(slices), 
@@ -104,7 +104,7 @@ void Sphere::Draw() {
         //mModel.materials[0].maps[raylib::MATERIAL_MAP_SPECULAR].texture = texture;
         //// Assign the shader to the 3D model
         //mModel.materials[0].shader = basicShader;
-        raylib::DrawModel(mModel, gPos, 1.0f, raylib::WHITE);
+        raylib::DrawModel(mModel, gPos, 1.0f, toRaylibColor(mColor));
         // Unload shader after use to avoid memory leaks (not recommended for real-time use)
         //UnloadShader(basicShader);
     }
@@ -121,7 +121,7 @@ void Sphere::Draw() {
         mModel = raylib::LoadModelFromMesh(sphereMesh);
 
         // Set the material color
-        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
+        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = toRaylibColor(mColor);
     }
 
 } // namespace graphics

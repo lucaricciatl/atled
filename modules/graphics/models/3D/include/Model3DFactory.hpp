@@ -18,7 +18,7 @@ public:
     static std::shared_ptr<Cube> CreateCube(float sideLength);
     static std::shared_ptr<Cube> CreateCube();
 
-    static std::shared_ptr<Sphere> CreateSphere(float radius, const math::Vector3& centerPos, int rings, int slices, raylib::Color mColor);
+    static std::shared_ptr<Sphere> CreateSphere(float radius, const math::Vector3& centerPos, int rings, int slices, graphics::Color mColor);
     static std::shared_ptr<Sphere> CreateSphere();
 
     static std::shared_ptr<Line3D> CreateLine3D(math::Vector3 startPos, math::Vector3 endPos);

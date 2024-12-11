@@ -3,14 +3,14 @@
 
 #include "Model3D.hpp"
 #include "raylib.hpp"  // Assuming raylib is used for the Vector3 and Color types
-
+#include "Color.hpp"
 namespace graphics {
 using namespace math;
     class Sphere : public Model3D {
     public:
         // Constructors
         Sphere();  // Default constructor
-        Sphere(float radius, const math::Vector3 &centerPos, int rings, int slices, raylib::Color mColor);
+        Sphere(float radius, const math::Vector3 &centerPos, int rings, int slices, const Color& aColor);
 
         // Override draw function
         void Draw() override;
@@ -37,9 +37,8 @@ using namespace math;
 
     private:
         void UpdateMesh();
-
         
-        raylib::Color mColor;
+        graphics::Color mColor;
         raylib::Model mModel;
         float mRadius;      // Radius of the sphere
         int mRings;         // Number of rings

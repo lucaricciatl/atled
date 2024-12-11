@@ -16,7 +16,7 @@ class Model2D : public Model{
 
   Color GetColor() const;
   double GetRotation() const;
-  void SetColor(const Color& color);
+  void SetColor(raylib::Color color);
   void SetRotation(double rotation);
 
 protected:
@@ -28,7 +28,7 @@ protected:
 		};
 		return globalPosition;
 	};
-  Color mColor;
+  raylib::Color mColor;
   double mRotation;
 };
 }  // namespace graphics

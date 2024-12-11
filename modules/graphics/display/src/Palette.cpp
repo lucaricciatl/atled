@@ -12,7 +12,7 @@ namespace graphics {
     void initializeColorPalette() {
         if (!colorMap.empty()) return; // Avoid reinitialization
 
-        colorMap = {
+                colorMap = {
             // Base Colors
             {"White", Color(1.0f, 1.0f, 1.0f, 1.0f)},
             {"Black", Color(0.0f, 0.0f, 0.0f, 1.0f)},
@@ -64,7 +64,22 @@ namespace graphics {
             {"Earth Brown", Color(0.5f, 0.4f, 0.3f, 1.0f)},
             {"Olive", Color(0.5f, 0.5f, 0.3f, 1.0f)},
             {"Muted Purple", Color(0.6f, 0.4f, 0.6f, 1.0f)},
+
+            // Timeless Harmony Palette
+            {"Timeless White", Color(1.0f, 1.0f, 1.0f, 1.0f)},
+            {"Timeless Black", Color(0.0f, 0.0f, 0.0f, 1.0f)},
+            {"Timeless Gray", Color(0.94f, 0.94f, 0.94f, 1.0f)},
+            {"Timeless Medium Gray", Color(0.63f, 0.63f, 0.63f, 1.0f)},
+            {"Timeless Dark Gray", Color(0.31f, 0.31f, 0.31f, 1.0f)},
+
+            // Elegant Shadows Palette
+            {"Elegant White", Color(1.0f, 1.0f, 1.0f, 1.0f)},
+            {"Elegant Black", Color(0.0f, 0.0f, 0.0f, 1.0f)},
+            {"Elegant Soft Gray", Color(0.69f, 0.75f, 0.77f, 1.0f)}, // #B0BEC5
+            {"Elegant Medium Blue Gray", Color(0.47f, 0.56f, 0.61f, 1.0f)}, // #78909C
+            {"Elegant Dark Blue Gray", Color(0.27f, 0.35f, 0.39f, 1.0f)}, // #455A64
         };
+
     }
 
 Color getColor(const std::string& name) {

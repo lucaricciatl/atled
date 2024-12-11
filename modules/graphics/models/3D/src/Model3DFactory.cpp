@@ -19,7 +19,7 @@ std::shared_ptr<Cube> Model3DFactory::CreateCube() {
     return std::make_shared<Cube>();
 }
 
-std::shared_ptr<Sphere> Model3DFactory::CreateSphere(float radius, const math::Vector3& centerPos, int rings, int slices, raylib::Color mColor) {
+std::shared_ptr<Sphere> Model3DFactory::CreateSphere(float radius, const math::Vector3& centerPos, int rings, int slices, graphics::Color mColor) {
     auto sphere = std::make_shared<Sphere>(radius,centerPos, rings, slices, mColor);
     return sphere;
 }

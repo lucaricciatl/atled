@@ -13,6 +13,7 @@
 #include "NBodySimulation.hpp"
 #include <EngineBuilder.hpp>
 #include <FreeCameraComponent.hpp>
+#include "raylib.hpp"
 
 int main() {
     // Engine setup
@@ -55,7 +56,7 @@ int main() {
             auto circle = shapeComponent->GetModel<Circle>();
             if (circle) {
                 circle->SetRadius(2.0f); // Set a fixed radius for all entities
-                circle->SetColor(Color(distColor(gen), distColor(gen), distColor(gen), 155)); // Set random color
+                circle->SetColor(raylib::Color(distColor(gen), distColor(gen), distColor(gen), 155)); // Set random color
             }
         }
 

@@ -9,7 +9,7 @@ namespace graphics {
     Plane::Plane()
         : mCenterPos({ 0.0f, 0.0f, 0.0f }),
         mSize({ 10.0f, 10.0f }),
-        mColor(getColor("Light Gray")) {
+        mColor(getColor("Timeless Gray")) {
         UpdateMesh();
     };
 

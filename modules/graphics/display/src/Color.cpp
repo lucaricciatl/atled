@@ -105,7 +105,7 @@ Color Color::fromRaylibColor(const raylib::Color& rayColor) {
 }
 
 // Standalone Conversion Function: graphics::Color to raylib::Color
-raylib::Color toRaylibColor(const Color& color) {
+raylib::Color toRaylibColor(const graphics::Color& color) {
     return color.toRaylibColor();
 }
 
