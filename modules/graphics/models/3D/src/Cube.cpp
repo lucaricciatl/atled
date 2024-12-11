@@ -13,10 +13,10 @@ namespace graphics {
     void Cube::Draw() {
         raylib::Vector3 gPos = ComputeGlobalPosition(mCenterPos);
         if (ShapeIsEnabled) {
-            raylib::DrawModel(mModel, gPos, 1.0f, raylib::WHITE);
+            raylib::DrawModel(mModel, gPos, 1.0f, toRaylibColor(mColor));
         }
         if (WireframeIsEnabled) {
-            raylib::DrawCubeWires(gPos, mDimensions.getX(), mDimensions.getY(), mDimensions.getZ(), mWireframeColor);
+            raylib::DrawCubeWires(gPos, mDimensions.getX(), mDimensions.getY(), mDimensions.getZ(), toRaylibColor(mWireframeColor));
         }
     }
 
@@ -70,7 +70,7 @@ namespace graphics {
         mModel = raylib::LoadModelFromMesh(cubeMesh);
 
         // Set the material color
-        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
+        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = graphics::toRaylibColor(mColor);
     }
 
 }

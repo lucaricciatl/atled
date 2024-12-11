@@ -17,7 +17,7 @@ Line3D::Line3D(const math::Vector3& start, const math::Vector3& end, const rayli
 void Line3D::Draw() {
         
     raylib::DrawLine3D(ComputeGlobalPosition(mStartPos)
-        , ComputeGlobalPosition(mEndPos), mColor);
+        , ComputeGlobalPosition(mEndPos), graphics::toRaylibColor(mColor));
 }
 
 // Setters

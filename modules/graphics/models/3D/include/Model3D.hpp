@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Model.hpp"
 #include "raylib.hpp"
+#include <Color.hpp>
+#include <Palette.hpp>
 
 namespace graphics {
 
@@ -18,18 +20,18 @@ class Model3D : public Model{
   // Enable wireframe rendering
   void EnableShape();
   void DisableShape();
-  void SetWireframeColor(raylib::Color aColor);
-  raylib::Color GetWireframeColor() const;
+  void SetWireframeColor(graphics::Color aColor);
+  graphics::Color GetWireframeColor() const;
   // Setter for color
-  void SetColor(const raylib::Color& color);
+  void SetColor(const graphics::Color& color);
 
   // Getter for color
-  raylib::Color GetColor() const;
+  graphics::Color GetColor() const;
 
 
 protected:
 
-	raylib::Vector3 ComputeGlobalPosition(math::Vector3 aPosition) {
+	  raylib::Vector3 ComputeGlobalPosition(math::Vector3 aPosition) {
 		auto framepos = frame->GetPosition();
 		raylib::Vector3 globalPosition = {
 			(float)framepos->getX() + aPosition.getX(),
@@ -41,8 +43,8 @@ protected:
 
   bool WireframeIsEnabled;    // 1 for the wirefram
   bool ShapeIsEnabled;        // 1 for the wirefram
-  raylib::Color mWireframeColor = raylib::Color(128, 128, 128, 128);      // Color of thr wireframe
-  raylib::Color mColor = raylib::Color(64, 64, 64, 64);
+  graphics::Color mWireframeColor = graphics::getColor("Timeless Gray");    // Color of thr wireframe
+  graphics::Color mColor = graphics::getColor("Timeless Gray");
 };
 
 

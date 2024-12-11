@@ -1,7 +1,7 @@
 #include "Model3D.hpp"
 
 namespace graphics{
-	raylib::Color Model3D::GetWireframeColor() const {
+	graphics::Color Model3D::GetWireframeColor() const {
 	return mWireframeColor;
 }
 
@@ -26,17 +26,17 @@ void Model3D::DisableShape() {
 }
 
 // Set wireframe color
-void Model3D::SetWireframeColor(raylib::Color aColor) {
+void Model3D::SetWireframeColor(graphics::Color aColor) {
 	mWireframeColor = aColor;
 }
 
 // Setter for color
-void Model3D::SetColor(const raylib::Color& color) {
+void Model3D::SetColor(const graphics::Color& color) {
 	mColor = color;
 }
 
 // Getter for color
-raylib::Color Model3D::GetColor() const {
+graphics::Color Model3D::GetColor() const {
 	return mColor;
 }
 
