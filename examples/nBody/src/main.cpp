@@ -34,7 +34,7 @@ int main() {
     std::uniform_real_distribution<float> distX(0.0f, 200.0f); // Range for X positions
     std::uniform_real_distribution<float> distY(0.0f, 200.0f); // Range for Y positions
     std::uniform_real_distribution<float> distMass(1.0e12f, 1.0e14f); // Range for masses
-    std::uniform_int_distribution<int> distColor(0, 255); // Range for RGB color values
+    std::uniform_real_distribution<float> distColor(0, 1); // Range for RGB color values
 
     // List to store entities
     std::vector<std::shared_ptr<Entity>> entities;
@@ -56,7 +56,7 @@ int main() {
             auto circle = shapeComponent->GetModel<Circle>();
             if (circle) {
                 circle->SetRadius(2.0f); // Set a fixed radius for all entities
-                circle->SetColor(raylib::Color(distColor(gen), distColor(gen), distColor(gen), 155)); // Set random color
+                circle->SetColor(graphics::Color(distColor(gen), distColor(gen), distColor(gen), 0.8)); // Set random color
             }
         }
 

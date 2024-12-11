@@ -63,7 +63,7 @@ void Engine::OnUpdate()
         int mouseX = inputManager->GetMouseX();
         int mouseY = inputManager->GetMouseY();
         int modelType = rand() % 4; // Extend range to 4 to include 3D sphere
-        raylib::Color randomColor(rand() % 256, rand() % 256, rand() % 256, 128);
+        graphics::Color randomColor(rand() % 256, rand() % 256, rand() % 256, 128);
 
         std::lock_guard<std::mutex> lock(graphicsMutex); // Lock graphicsManager for thread-safe access
         if (modelType == 0)

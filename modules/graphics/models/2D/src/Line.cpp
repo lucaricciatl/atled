@@ -20,7 +20,7 @@ void Line::SetThickness(double thickness) { mThickness = thickness; }
 void Line::Draw() {
    auto gStart = ComputeGlobalPosition(start);
    auto gEnd = ComputeGlobalPosition(end);
-   raylib::DrawLineEx(gStart, gEnd, static_cast<float>(mThickness), mColor);
+   raylib::DrawLineEx(gStart, gEnd, static_cast<float>(mThickness), graphics::toRaylibColor(mColor));
 }
 
 }  // namespace graphics

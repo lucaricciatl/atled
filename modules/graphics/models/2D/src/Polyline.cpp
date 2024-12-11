@@ -26,7 +26,7 @@ void Polyline::Draw() {
   for (size_t i = 0; i < mPoints.size() - 1; ++i) {
     Vector2 startPos = ComputeGlobalPosition(mPoints[0]);
     Vector2 endPos = ComputeGlobalPosition(mPoints[1]);
-     raylib::DrawLineEx(startPos, endPos, static_cast<float>(mThickness), mColor);
+     raylib::DrawLineEx(startPos, endPos, static_cast<float>(mThickness), graphics::toRaylibColor(mColor));
   }
 }
 

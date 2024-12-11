@@ -70,7 +70,7 @@ void Rectangle::Draw() {
     Vector2 origin = { (rect.width / 2.0f), (rect.height / 2.0f) };
 
     // Draw the rectangle with transformed global position
-    raylib::DrawRectanglePro(rect, origin, mRotation, mColor);
+    raylib::DrawRectanglePro(rect, origin, mRotation, graphics::toRaylibColor(mColor));
 }
 
 }  // namespace graphics

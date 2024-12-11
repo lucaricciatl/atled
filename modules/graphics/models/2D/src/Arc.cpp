@@ -8,7 +8,7 @@ namespace graphics {
 
 // Constructor
 Arc::Arc(Coordinates2D aCenter, double aRadius, double aStartAngle,
-         double aEndAngle, double thickness, const raylib::Color& aColor)
+         double aEndAngle, double thickness, const graphics::Color& aColor)
     : Model2D(),
       center(aCenter),
       radius(aRadius),
@@ -45,6 +45,6 @@ int Arc::ComputePointsNumber() {
 
 void Arc::Draw() {
      raylib::DrawRing(ComputeGlobalPosition(center), radius - mThickess, radius + mThickess,
-             mStartAngle, mEndAngle, ComputePointsNumber(), mColor);
+             mStartAngle, mEndAngle, ComputePointsNumber(), graphics::toRaylibColor(mColor));
 }
 }  // namespace graphics

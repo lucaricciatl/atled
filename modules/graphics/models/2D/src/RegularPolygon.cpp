@@ -42,7 +42,7 @@ void RegularPolygon::Draw() {
     Color polygonColor = { 255, 0, 0, 255 };  // Red color with full opacity
 
     // Call the DrawPoly function from raylib
-     raylib::DrawPoly(ComputeGlobalPosition(center), sides, static_cast<float>(radius), 0.0f, mColor);
+     raylib::DrawPoly(ComputeGlobalPosition(center), sides, static_cast<float>(radius), 0.0f, graphics::toRaylibColor(mColor));
 }
 
 
