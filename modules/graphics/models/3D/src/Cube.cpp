@@ -5,8 +5,11 @@
 #include "Vector3.hpp"
 namespace graphics {
 
-    Cube::Cube(float width, float height, float length)
-        : mDimensions{ width, height, length }, mCenterPos{ 0.0f, 0.0f, 0.0f } {
+    Cube::Cube(float width, float height, float length, graphics::Color aColor)
+    : mDimensions{width, height, length},
+      mCenterPos{0.0f, 0.0f, 0.0f},
+      mColor{aColor} 
+    {
         UpdateMesh(); // Initialize mModel
     }
 

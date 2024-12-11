@@ -10,7 +10,7 @@ class Cylinder : public Model3D {
 public:
     // Constructors
     Cylinder();
-    Cylinder(const math::Vector3 &aPos, float aRadius,float height, int sides,raylib::Color aColor);
+    Cylinder(const math::Vector3 &aPos, float aRadius,float height, int sides,graphics::Color aColor);
 
     // Override draw function
     void Draw() override;
@@ -31,7 +31,7 @@ public:
 private:
 
     void UpdateMesh();
-    raylib::Color mColor;
+    graphics::Color mColor;
     float mHeight;
     math::Vector3 mPos;    // Start position of the cylinder base
     float mRadius;     // Radius of the cylinder top

@@ -11,7 +11,7 @@ namespace graphics {
     public:
         // Constructors
         Line3D();
-        Line3D(const math::Vector3& start, const math::Vector3& end, const raylib::Color& color = raylib::WHITE);
+        Line3D(const math::Vector3& start, const math::Vector3& end, const graphics::Color& color);
 
         // Override the draw function
         void Draw() override;
@@ -28,6 +28,7 @@ namespace graphics {
     private:
         math::Vector3 mStartPos;  // Starting position of the line
         math::Vector3 mEndPos;    // Ending position of the line
+        graphics::Color mColor;
 
     };
 

@@ -11,7 +11,7 @@ public:
     
     // Constructor with default dimensions
     ~Cube() = default;
-    Cube(float width = 1.0f, float height = 1.0f, float length = 1.0f);
+    Cube(float width = 1.0f, float height = 1.0f, float length = 1.0f, graphics::Color aColor = getColor("Timeless Gray"));
 
     // Override draw function
     void Draw() override;
@@ -37,6 +37,7 @@ private:
     math::Vector3 mDimensions;        // Dimensions of the cube (width, height, length)
     math::Vector3 mCenterPos;         // Center position of the cube
     raylib::Model mModel;
+    graphics::Color mColor;
 
 };
 

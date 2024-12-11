@@ -43,8 +43,8 @@ protected:
 
   bool WireframeIsEnabled;    // 1 for the wirefram
   bool ShapeIsEnabled;        // 1 for the wirefram
-  graphics::Color mWireframeColor = graphics::getColor("Timeless Gray");    // Color of thr wireframe
-  graphics::Color mColor = graphics::getColor("Timeless Gray");
+  graphics::Color mWireframeColor;
+  graphics::Color mColor;
 };
 
 

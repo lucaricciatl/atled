@@ -7,11 +7,11 @@ namespace graphics {
           mHeight(1.0f),
           mRadius(0.5f),
           mSides(64),
-          mColor(raylib::WHITE) {
+          mColor(getColor("Timeless Gray")) {
         UpdateMesh();
     }
 
-    Cylinder::Cylinder(const math::Vector3& aPos, float aRadius, float height,int sides,raylib::Color aColor)
+    Cylinder::Cylinder(const math::Vector3& aPos, float aRadius, float height,int sides, graphics::Color aColor)
         : mPos(aPos), mRadius(aRadius), mSides(sides),mHeight(height), mColor(aColor) {
         UpdateMesh();
     }
@@ -61,7 +61,7 @@ void Cylinder::UpdateMesh() {
     mModel = raylib::LoadModelFromMesh(cylinderMesh);
 
     // Set the material color
-    mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = mColor;
+    mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = graphics::toRaylibColor(mColor);
 }
 
 } // namespace graphics

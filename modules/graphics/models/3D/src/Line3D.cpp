@@ -7,10 +7,11 @@ namespace graphics {
 // Default constructor
 Line3D::Line3D()
     : mStartPos({0.0f, 0.0f, 0.0f}),
-      mEndPos({1.0f, 1.0f, 1.0f}) {}
+      mEndPos({1.0f, 1.0f, 1.0f}),
+      mColor(getColor("Timeless Gray")) {}
 
 // Parameterized constructor
-Line3D::Line3D(const math::Vector3& start, const math::Vector3& end, const raylib::Color& color)
+Line3D::Line3D(const math::Vector3& start, const math::Vector3& end, const graphics::Color& color)
     : mStartPos(start), mEndPos(end) {}
 
 // Override the draw function
