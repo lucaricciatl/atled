@@ -20,47 +20,20 @@ public:
     using ColliderCreator = std::function<std::shared_ptr<ICollider>()>;
 
     // Registers a collider creator for a specific type and implementation
-    static void RegisterCollider(ColliderType colliderType, ImplementationType implType, ColliderCreator creator) {
-        auto key = GetKey(colliderType, implType);
-        creators[key] = creator;
-
-        // Set default implementation if not already set
-        if (defaultImplementations.find(colliderType) == defaultImplementations.end()) {
-            defaultImplementations[colliderType] = implType;
-        }
-    }
+    static void RegisterCollider(ColliderType colliderType, ImplementationType implType, ColliderCreator creator);
 
     // Sets the default implementation to use for a specific collider type
-    static void SetDefaultImplementation(ColliderType colliderType, ImplementationType implType) {
-        auto key = GetKey(colliderType, implType);
-        if (creators.find(key) == creators.end()) {
-            throw std::invalid_argument("Implementation not registered for this collider type.");
-        }
-        defaultImplementations[colliderType] = implType;
-    }
+    static void SetDefaultImplementation(ColliderType colliderType, ImplementationType implType);
 
     // Creates a collider based on the type and the current default implementation
-    static std::shared_ptr<ICollider> CreateCollider(ColliderType colliderType) {
-        if (defaultImplementations.find(colliderType) == defaultImplementations.end()) {
-            throw std::invalid_argument("Default implementation not set for this collider type.");
-        }
-        return CreateCollider(colliderType, defaultImplementations[colliderType]);
-    }
+    static std::shared_ptr<ICollider> CreateCollider(ColliderType colliderType);
 
     // Creates a collider based on the type and implementation
-    static std::shared_ptr<ICollider> CreateCollider(ColliderType colliderType, ImplementationType implType) {
-        auto key = GetKey(colliderType, implType);
-        if (creators.find(key) != creators.end()) {
-            return creators[key]();
-        }
-        throw std::invalid_argument("Collider type or implementation not registered.");
-    }
+    static std::shared_ptr<ICollider> CreateCollider(ColliderType colliderType, ImplementationType implType);
 
 private:
     // Key generator for type and implementation mapping
-    static std::string GetKey(ColliderType colliderType, ImplementationType implType) {
-        return std::to_string(static_cast<int>(colliderType)) + "_" + std::to_string(static_cast<int>(implType));
-    }
+    static std::string GetKey(ColliderType colliderType, ImplementationType implType);
 
     // Map to store registered collider creators
     static inline std::unordered_map<std::string, ColliderCreator> creators;
@@ -68,6 +41,5 @@ private:
     // Map to store default implementation for each collider type
     static inline std::unordered_map<ColliderType, ImplementationType> defaultImplementations;
 };
-
 
 #endif // COLLIDER_FACTORY_H

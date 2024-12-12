@@ -13,6 +13,7 @@
 #include <RigidBodyComponent.hpp>
 #include <Color.hpp>
 #include "Palette.hpp"
+
 int main() {
     // Engine setup
     engine::EngineBuilder<AtledEngine> builder;

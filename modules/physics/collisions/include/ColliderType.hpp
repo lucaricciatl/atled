@@ -4,11 +4,11 @@
 
 // Enum class for ColliderType
 enum class ColliderType {
-    Sphere,
-    Box,
-    Mesh,
-    Capsule,
-    Custom
+    SphereCollider,
+    BoxCollider,
+    MeshCollider,
+    CapsuleCollider,
+    CustomCollider
 };
 
 
