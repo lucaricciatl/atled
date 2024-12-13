@@ -40,7 +40,7 @@ int main() {
     mc1->SetModel<Sphere>(0.5, math::Vector3(0, 0, 0), 10, 10, getColor("Elegant Dark Blue Gray"));
     auto shapephisic1 = entity2->AddComponent<RigidBodyComponent>();
     shapephisic1->SetCollidable(true);
-    shapephisic1->SetUseGravity(true);
+    shapephisic1->SetUseGravity(false);
     //auto mc2 = entity->AddComponent<WorldComponent>();
     // Run the engine in the main thread
     auto entitycam = coreEngine->CreateEntity();

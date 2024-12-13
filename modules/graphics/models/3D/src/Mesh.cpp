@@ -1,6 +1,7 @@
 #include "Mesh.hpp"
 #include <stdexcept>
 
+
 namespace graphics{
 // Constructors and Destructor
 Mesh::Mesh() : vertexCount(0), triangleCount(0), vaoId(0) {}
@@ -113,6 +114,8 @@ Mesh Mesh::CreateCubeMesh(float size) {
     Mesh cubeMesh;
 
     float halfSize = size / 2.0f;
+
+    // Vertices (positions only)
     std::vector<float> vertices = {
         // Front face
         -halfSize, -halfSize, halfSize,
@@ -124,28 +127,63 @@ Mesh Mesh::CreateCubeMesh(float size) {
         -halfSize,  halfSize, -halfSize,
          halfSize,  halfSize, -halfSize,
          halfSize, -halfSize, -halfSize,
-        // Left face
-        -halfSize, -halfSize, -halfSize,
-        -halfSize, -halfSize,  halfSize,
-        -halfSize,  halfSize,  halfSize,
-        -halfSize,  halfSize, -halfSize,
-        // Right face
-         halfSize, -halfSize, -halfSize,
-         halfSize,  halfSize, -halfSize,
-         halfSize,  halfSize,  halfSize,
-         halfSize, -halfSize,  halfSize,
-        // Top face
-        -halfSize,  halfSize, -halfSize,
-        -halfSize,  halfSize,  halfSize,
-         halfSize,  halfSize,  halfSize,
-         halfSize,  halfSize, -halfSize,
-        // Bottom face
-        -halfSize, -halfSize, -halfSize,
-         halfSize, -halfSize, -halfSize,
-         halfSize, -halfSize,  halfSize,
-        -halfSize, -halfSize,  halfSize,
+         // Left face
+         -halfSize, -halfSize, -halfSize,
+         -halfSize, -halfSize,  halfSize,
+         -halfSize,  halfSize,  halfSize,
+         -halfSize,  halfSize, -halfSize,
+         // Right face
+          halfSize, -halfSize, -halfSize,
+          halfSize,  halfSize, -halfSize,
+          halfSize,  halfSize,  halfSize,
+          halfSize, -halfSize,  halfSize,
+          // Top face
+          -halfSize,  halfSize, -halfSize,
+          -halfSize,  halfSize,  halfSize,
+           halfSize,  halfSize,  halfSize,
+           halfSize,  halfSize, -halfSize,
+           // Bottom face
+           -halfSize, -halfSize, -halfSize,
+            halfSize, -halfSize, -halfSize,
+            halfSize, -halfSize,  halfSize,
+           -halfSize, -halfSize,  halfSize,
     };
 
+    // Normals
+    std::vector<float> normals = {
+        // Front face
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f,
+        // Back face
+        0.0f,  0.0f, -1.0f,
+        0.0f,  0.0f, -1.0f,
+        0.0f,  0.0f, -1.0f,
+        0.0f,  0.0f, -1.0f,
+        // Left face
+       -1.0f,  0.0f,  0.0f,
+       -1.0f,  0.0f,  0.0f,
+       -1.0f,  0.0f,  0.0f,
+       -1.0f,  0.0f,  0.0f,
+       // Right face
+       1.0f,  0.0f,  0.0f,
+       1.0f,  0.0f,  0.0f,
+       1.0f,  0.0f,  0.0f,
+       1.0f,  0.0f,  0.0f,
+       // Top face
+       0.0f,  1.0f,  0.0f,
+       0.0f,  1.0f,  0.0f,
+       0.0f,  1.0f,  0.0f,
+       0.0f,  1.0f,  0.0f,
+       // Bottom face
+       0.0f, -1.0f,  0.0f,
+       0.0f, -1.0f,  0.0f,
+       0.0f, -1.0f,  0.0f,
+       0.0f, -1.0f,  0.0f,
+    };
+
+    // Indices
     std::vector<unsigned short> indices = {
         0, 1, 2, 2, 3, 0,       // Front
         4, 5, 6, 6, 7, 4,       // Back
@@ -155,9 +193,36 @@ Mesh Mesh::CreateCubeMesh(float size) {
         20, 21, 22, 22, 23, 20  // Bottom
     };
 
-    cubeMesh.SetVertices(vertices);
-    cubeMesh.SetIndices(indices);
-
+    std::vector<float> texcoords = {
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+        0.0f, 0.0f,
+        0.0f, 1.0f,
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+        0.0f, 0.0f,
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f
+    }; 
+    cubeMesh.SetVertices(vertices); // Set vertex positions
+    cubeMesh.SetNormals(normals);   // Set normals
+    cubeMesh.SetTexcoords(texcoords);
+    cubeMesh.SetIndices(indices);   // Set indices
     return cubeMesh;
 }
 
@@ -234,10 +299,18 @@ Mesh Mesh::CreateCylinderMesh(float radius, float height, int slices) {
     return cylinderMesh;
 }
 
-#include <raylib.h> // Include raylib for the Mesh structure
+
 
 raylib::Mesh Mesh::ToRaylibMesh() const {
     raylib::Mesh raylibMesh;
+    raylibMesh.animVertices = NULL;
+    raylibMesh.animNormals =NULL;
+    raylibMesh.colors =NULL;
+    raylibMesh.tangents =NULL;
+    raylibMesh.texcoords2 = NULL;
+    raylibMesh.boneIds = NULL;
+    raylibMesh.boneWeights = NULL;
+    
 
     // Copy vertex data
     raylibMesh.vertexCount = vertexCount;
@@ -272,5 +345,6 @@ raylib::Mesh Mesh::ToRaylibMesh() const {
 
     return raylibMesh;
 }
+
 
 }

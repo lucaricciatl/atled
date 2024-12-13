@@ -3,6 +3,8 @@
 #include "filesystem"
 #include "Vector3.hpp"
 #include "Palette.hpp"
+#include "Mesh.hpp"
+
 namespace graphics {
 
 
@@ -117,8 +119,10 @@ void Sphere::Draw() {
         }
 
         // Generate a new mesh for the sphere and load it into mModel
-        raylib::Mesh sphereMesh = raylib::GenMeshSphere(mRadius, mSlices, mRings);
-        mModel = raylib::LoadModelFromMesh(sphereMesh);
+        raylib::Mesh SphereMesh = Mesh::CreateSphereMesh(mRadius, mSlices, mRings).ToRaylibMesh();
+        raylib:UploadMesh(&SphereMesh, false);
+
+        mModel = raylib::LoadModelFromMesh(SphereMesh);
 
         // Set the material color
         mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = toRaylibColor(mColor);
