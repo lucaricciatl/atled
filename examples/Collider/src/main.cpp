@@ -46,7 +46,6 @@ int main() {
     auto entitycam = coreEngine->CreateEntity();
     entitycam->AddComponent<FreeCameraComponent>();
     coreEngine->Start();
-
     coreEngine->Shutdown();
 
     return 0;

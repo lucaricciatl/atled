@@ -6,6 +6,7 @@
 #include <InputManager.hpp>
 #include <CameraManager.hpp>
 #include "ResourceManager.hpp"
+#include "PhysicsManager.hpp"
 
 class ServiceProvider {
 public:
@@ -23,12 +24,14 @@ public:
     std::shared_ptr<graphics::IGraphicManager> GetGraphicManager() const;
     std::shared_ptr<graphics::CameraManager> GetCameraManager() const;
     std::shared_ptr<resources::ResourceManager> GetResourceManager() const;
+    std::shared_ptr<physics::PhysicsManager> GetPhysicsManager() const;
 
 private:
     std::shared_ptr<input::InputManager> inputManager;
     std::shared_ptr<graphics::IGraphicManager> graphicsManager;
     std::shared_ptr<graphics::CameraManager> cameraManager;
     std::shared_ptr<resources::ResourceManager> resourceManager;
+    std::shared_ptr<physics::PhysicsManager> physicsManager;
 };
 
 #endif // SERVICE_PROVIDER_HPP

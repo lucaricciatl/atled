@@ -39,3 +39,7 @@ std::shared_ptr<graphics::CameraManager> ServiceProvider::GetCameraManager() con
 std::shared_ptr<resources::ResourceManager> ServiceProvider::GetResourceManager() const {
     return resourceManager;
 }
+
+std::shared_ptr<physics::PhysicsManager> ServiceProvider::GetPhysicsManager() const {
+    return physicsManager;
+}

@@ -2,16 +2,16 @@
 
 #include <memory>
 #include "Frame.hpp"
-#include "ICollider.hpp"
-#include "raylib.hpp"
+#include "Vector3.hpp"
 
 namespace physics {
+
 
 
 class RigidBody {
 public:
     RigidBody();
-    RigidBody(std::shared_ptr<Frame> frame, std::shared_ptr<ICollider> collider);
+    RigidBody(std::shared_ptr<Frame> frame);
 
     RigidBody(const RigidBody&) = delete;
     RigidBody& operator=(const RigidBody&) = delete;
@@ -34,8 +34,8 @@ public:
     float GetMass() const;
 
     // Force and acceleration
-    void ApplyForce(const raylib::Vector3& force);
-    raylib::Vector3 GetAccumulatedForce() const;
+    void ApplyForce(const math::Vector3& force);
+    math::Vector3 GetAccumulatedForce() const;
     void ClearForces();
 
     // Update position based on forces and mass
@@ -43,19 +43,18 @@ public:
 
     void SetFrame(std::shared_ptr<Frame> aFrame) { mFrame = aFrame; };
     std::shared_ptr<Frame> GetFrame() const;
-    std::shared_ptr<ICollider> GetCollider() const;
+
 
 protected:
     std::shared_ptr<Frame> mFrame;
-    std::shared_ptr<ICollider> mCollider;
 
     bool mIsStatic;
     bool mUseGravity;
     bool mIsCollidable;
 
     float mMass;
-    raylib::Vector3 mVelocity;
-    raylib::Vector3 mAccumulatedForce;
+    math::Vector3 mVelocity;
+    math::Vector3 mAccumulatedForce;
 };
 
 } // namespace physics

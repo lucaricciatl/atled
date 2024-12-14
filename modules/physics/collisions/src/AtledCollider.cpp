@@ -1,5 +1,4 @@
 #include "CollisionChecker.hpp"
-#include "BoundingBox.hpp" // Assuming Mesh has a bounding box or similar property
 
 // Constructor
 CollisionChecker::CollisionChecker(const std::vector<std::shared_ptr<Mesh>>& meshes)
@@ -45,12 +44,5 @@ std::vector<std::shared_ptr<Mesh>> CollisionChecker::CheckCollisions(const std::
 
 // Helper function to check if two meshes collide (e.g., AABB intersection)
 bool CollisionChecker::AreMeshesColliding(const Mesh& mesh1, const Mesh& mesh2) const {
-    // Assume the Mesh class has a method or property to get the bounding box
-    const BoundingBox& box1 = mesh1.GetBoundingBox();
-    const BoundingBox& box2 = mesh2.GetBoundingBox();
-
-    // AABB intersection logic
-    return (box1.min.x <= box2.max.x && box1.max.x >= box2.min.x) &&
-           (box1.min.y <= box2.max.y && box1.max.y >= box2.min.y) &&
-           (box1.min.z <= box2.max.z && box1.max.z >= box2.min.z);
+    return false;
 }

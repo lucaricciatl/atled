@@ -1,5 +1,5 @@
 #include "RigidBody.hpp"
-
+#include "Vector3.hpp"
 
 float g = 9.18;
 
@@ -7,12 +7,12 @@ namespace physics {
 
 // Default constructor
 RigidBody::RigidBody()
-    : mFrame(nullptr), mCollider(nullptr), mIsStatic(false), mUseGravity(true),
+    : mFrame(nullptr), mIsStatic(false), mUseGravity(true),
       mIsCollidable(true), mMass(1.0f), mVelocity{0, 0, 0}, mAccumulatedForce{0, 0, 0} {}
 
 // Constructor with parameters
-RigidBody::RigidBody(std::shared_ptr<Frame> frame, std::shared_ptr<ICollider> collider)
-    : mFrame(std::move(frame)), mCollider(std::move(collider)), mIsStatic(false), 
+RigidBody::RigidBody(std::shared_ptr<Frame> frame)
+    : mFrame(std::move(frame)), mIsStatic(false), 
       mUseGravity(true), mIsCollidable(true), mMass(1.0f), mVelocity{0, 0, 0}, 
       mAccumulatedForce{0, 0, 0} {}
 
@@ -57,20 +57,18 @@ float RigidBody::GetMass() const {
 }
 
 // Apply a force to the rigid body
-void RigidBody::ApplyForce(const raylib::Vector3& force) {
-    mAccumulatedForce.x += force.x;
-    mAccumulatedForce.y += force.y;
-    mAccumulatedForce.z += force.z;
+void RigidBody::ApplyForce(const math::Vector3& force) {
+    mAccumulatedForce += force;
 }
 
 // Get the accumulated force
-raylib::Vector3 RigidBody::GetAccumulatedForce() const {
+math::Vector3 RigidBody::GetAccumulatedForce() const {
     return mAccumulatedForce;
 }
 
 // Clear all accumulated forces
 void RigidBody::ClearForces() {
-    mAccumulatedForce = raylib::Vector3{0, 0, 0};
+    mAccumulatedForce = math::Vector3{0, 0, 0};
 }
 
 // Update the physics state
@@ -79,20 +77,13 @@ void RigidBody::UpdatePhysics(double deltaTime) {
         return; // Static bodies don't move
     }
     if (mUseGravity) {
-        mAccumulatedForce.y -= mMass * g;
+        mAccumulatedForce += math::Vector3(0,mAccumulatedForce.getY() - mMass * g,0);
     }
-    raylib::Vector3 acceleration = {mAccumulatedForce.x * (1.0f / mMass),mAccumulatedForce.y * (1.0f / mMass),mAccumulatedForce.z * (1.0f / mMass)}; // F = ma => a = F/m
-    mVelocity.x += acceleration.x * deltaTime; // Update velocity
-    mVelocity.y += acceleration.y * deltaTime; // Update velocity
-    mVelocity.z += acceleration.z * deltaTime; // Update velocity
-    mFrame->translate(mVelocity.x * deltaTime,mVelocity.y * deltaTime,mVelocity.z * deltaTime); // Update position
+    math::Vector3 acceleration = mAccumulatedForce / mMass; // F = ma => a = F/m
+    mVelocity += acceleration * deltaTime; // Update velocity
+    mFrame->translate(mVelocity.getX() * deltaTime,mVelocity.getY() * deltaTime,mVelocity.getZ() * deltaTime); // Update position
 
     ClearForces(); // Clear forces for the next frame
-}
-
-// Get the associated collider
-std::shared_ptr<ICollider> RigidBody::GetCollider() const {
-    return mCollider;
 }
 
 } // namespace physics

@@ -1,61 +1,57 @@
+// Vector3.hpp
 #ifndef VECTOR3_HPP
 #define VECTOR3_HPP
 
 #include <iostream>
-#include <cmath>
 #include <stdexcept>
+#include <cmath>
 
-namespace math{
+namespace math {
 
 class Vector3 {
-private:
-    float x, y, z;
-
 public:
     // Constructors
     Vector3();
     Vector3(float x, float y, float z);
     Vector3(const Vector3& other);
 
+    // Destructor
+    ~Vector3() = default;
+
     // Getters
-    float getX();
-    float getY();
-    float getZ();
+    float getX() const;
+    float getY() const;
+    float getZ() const;
 
     // Setters
     void setX(float value);
     void setY(float value);
     void setZ(float value);
 
-    // Vector addition
+    // Operator Overloads
     Vector3 operator+(const Vector3& other) const;
-
-    // Vector subtraction
+    Vector3& operator+=(const Vector3& other); // Added operator+=
     Vector3 operator-(const Vector3& other) const;
-
-    // Scalar multiplication
     Vector3 operator*(float scalar) const;
-
-    // Scalar division
     Vector3 operator/(float scalar) const;
 
-    // Dot product
+    // Dot and Cross Products
     float dot(const Vector3& other) const;
-
-    // Cross product
     Vector3 cross(const Vector3& other) const;
 
-    // Magnitude (length) of the vector
+    // Magnitude and Normalization
     float magnitude() const;
-
-    // Normalize the vector
     Vector3 normalized() const;
 
-    // Print the vector (for debugging)
+    // Utility
     void print() const;
 
+private:
+    float x;
+    float y;
+    float z;
 };
 
-}
+} // namespace math
 
 #endif // VECTOR3_HPP

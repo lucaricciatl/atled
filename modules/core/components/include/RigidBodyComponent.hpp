@@ -3,11 +3,10 @@
 
 #include "Component.hpp"
 #include "Action.hpp"  // Fixed include (correct path or filename)
-#include "ICollider.hpp"
-#include "ColliderFactory.hpp"
 #include "RigidBody.hpp"
 #include <memory> // Added for std::shared_ptr
 #include "FrameComponent.hpp"
+
 class RigidBodyComponent : public physics::RigidBody, public Component {
 public:
     RigidBodyComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider)
