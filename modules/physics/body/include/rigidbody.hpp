@@ -3,12 +3,12 @@
 #include <memory>
 #include "Frame.hpp"
 #include "Vector3.hpp"
-
+#include "body.hpp" 
 namespace physics {
 
 
 
-class RigidBody {
+class RigidBody : Body {
 public:
     RigidBody();
     RigidBody(std::shared_ptr<Frame> frame);
