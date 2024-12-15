@@ -3,6 +3,7 @@
 #include <iostream>
 #include <memory>
 #include <ResourceManager.hpp>
+#include "PhysicsManager.hpp"
 
 
 namespace engine {
@@ -16,7 +17,8 @@ namespace engine {
             std::unique_ptr<input::InputManager> inputMgr,
             std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
             std::shared_ptr<graphics::CameraManager> cameraMgr,
-            std::shared_ptr<resources::ResourceManager> resMgr)
+            std::shared_ptr<resources::ResourceManager> resMgr,
+            std::shared_ptr<physics::PhysicsManager> physicsManager)
             : inputManager(std::move(inputMgr)), 
               graphicsManager(std::move(graphicsMgr)), 
               cameraManager(std::move(cameraMgr)) {}

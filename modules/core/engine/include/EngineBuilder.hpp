@@ -10,6 +10,7 @@
 #include "CoreEngine.hpp"
 #include "IResourceManager.hpp"
 #include "ResourceManagerBuilder.hpp"
+#include "PhysicsManager.hpp"
 
 using namespace input;
 using namespace graphics;
@@ -144,6 +145,7 @@ std::unique_ptr<T> EngineBuilder<T>::Build() {
     resourceBuilder.SetType(resourceManagerType);
     auto resourceManager = resourceBuilder.Build();
 
+    auto physicsManager = std::make_shared<physics::PhysicsManager>();
     // Configure CameraManager
     auto cameraManager = std::make_shared<CameraManager>();
     if (worldType == WorldType::World2D) {
@@ -176,7 +178,8 @@ std::unique_ptr<T> EngineBuilder<T>::Build() {
         std::move(inputManager), 
         std::move(graphicsManager), 
         std::move(cameraManager), 
-        std::move(resourceManager)
+        std::move(resourceManager),
+        std::move(physicsManager)
     );
 }
 

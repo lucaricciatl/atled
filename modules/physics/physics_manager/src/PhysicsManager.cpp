@@ -1,6 +1,6 @@
 #include "PhysicsManager.hpp"
 #include <iostream>
-
+#include "body.hpp"
 
 namespace physics {
 
@@ -9,10 +9,6 @@ struct PhysicsConfig {
     // Add physics configuration parameters here
 };
 
-class Body {
-public:
-    // Add physics body properties and methods here
-};
 
 // Constructor
 PhysicsManager::PhysicsManager()
@@ -97,7 +93,7 @@ void PhysicsManager::Run() {
             ComputeCinematics();
         }
         // Sleep or wait for a fixed timestep
-        std::this_thread::sleep_for(std::chrono::milliseconds(16)); // ~60 FPS
+        std::this_thread::sleep_for(std::chrono::milliseconds(5)); // ~60 FPS
     }
 }
 

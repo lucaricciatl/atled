@@ -31,6 +31,7 @@ target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/provider/include
     ${CMAKE_CURRENT_SOURCE_DIR}/system/include
     ${RESOURCES_INCLUDE_DIR}
+    ${PHYSICS_INCLUDE_DIR}
     
 )
 

@@ -7,17 +7,16 @@
 #include <memory>
 #include <vector>
 #include <Entity.hpp>
+#include "PhysicsManager.hpp"
 
 class PhysicsSystem : public System {
 public:
-  PhysicsSystem(EventBus *eventBus);
+  PhysicsSystem(physics::PhysicsManager* physicsManager);
 
   void Update(float deltaTime) override;
 
 private:
-  EventBus *eventBus;
-  // Use weak_ptr to prevent shared ownership that could lead to cyclic
-  // references
+  physics::PhysicsManager* mPhysicsManager;
   std::vector<std::weak_ptr<Entity>> entitiesWithPhysics;
 };
 

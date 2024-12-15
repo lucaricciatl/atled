@@ -5,13 +5,15 @@
 #include <vector>
 #include <ServiceProvider.hpp>
 #include <ResourceManager.hpp>
+#include "PhysicsManager.hpp"
 
 class AtledEngine {
 public:
    AtledEngine(std::unique_ptr<input::InputManager> inputMgr,
        std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
        std::shared_ptr<graphics::CameraManager> cameraMgr,
-       std::shared_ptr<resources::ResourceManager> resMgr
+       std::shared_ptr<resources::ResourceManager> resMgr,
+       std::shared_ptr<physics::PhysicsManager> physicsManager
        );
 
   void Init();

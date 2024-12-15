@@ -1,10 +1,10 @@
 #include "PhysicsSystem.hpp"
 
-PhysicsSystem::PhysicsSystem(EventBus *eventBus) : eventBus(eventBus) {
-  // Potresti popolare le liste dei componenti qui o utilizzare un sistema di
-  // registri
+PhysicsSystem::PhysicsSystem(physics::PhysicsManager* physicsManager)
+    : mPhysicsManager(physicsManager) {
+    // Initialization logic if needed
 }
 
 void PhysicsSystem::Update(float deltaTime) {
-  
+
 }

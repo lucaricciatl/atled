@@ -18,6 +18,7 @@ public:
     void Provide(std::shared_ptr<graphics::IGraphicManager> graphicsMgr);
     void Provide(std::shared_ptr<graphics::CameraManager> cameraMgr);
     void Provide(std::shared_ptr<resources::ResourceManager> resourceMgr);
+    void Provide(std::shared_ptr<physics::PhysicsManager> physicsManager);
 
     // Getters for shared pointers
     std::shared_ptr<input::InputManager> GetInputManager() const;

@@ -8,8 +8,9 @@
 #include <functional>
 #include <vector>
 #include <ResourceManager.hpp>
-namespace engine {
+#include "PhysicsManager.hpp"
 
+namespace engine {
 
         class CoreEngine : public IEngine {
         public:
@@ -18,7 +19,8 @@ namespace engine {
                 std::unique_ptr<input::InputManager> inputMgr,
                 std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
                 std::shared_ptr<graphics::CameraManager> cameraMgr,
-                std::shared_ptr<resources::ResourceManager> resMgr);
+                std::shared_ptr<resources::ResourceManager> resMgr,
+                std::shared_ptr<physics::PhysicsManager> physicsManager);
             ~CoreEngine() override = default;
 
             void Stop() override;

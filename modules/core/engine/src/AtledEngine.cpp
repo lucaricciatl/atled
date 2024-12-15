@@ -14,7 +14,8 @@ AtledEngine::AtledEngine(
 	std::unique_ptr<input::InputManager> inputMgr,
 	std::unique_ptr<graphics::IGraphicManager> graphicsMgr,
 	std::shared_ptr<graphics::CameraManager> cameraMgr,
-    std::shared_ptr<resources::ResourceManager> resMgr)
+    std::shared_ptr<resources::ResourceManager> resMgr,
+	std::shared_ptr<physics::PhysicsManager> physicsManager)
 	:serviceProvider(std::make_shared<ServiceProvider>())
 	{
 	// Convert unique_ptr to shared_ptr
@@ -22,18 +23,20 @@ AtledEngine::AtledEngine(
 	auto sharedGraphicsMgr = std::shared_ptr<graphics::IGraphicManager>(std::move(graphicsMgr));
 	auto sharedCameraMgr = std::shared_ptr<graphics::CameraManager>(std::move(cameraMgr));
 	auto sharedResourcesMgr = std::shared_ptr<resources::ResourceManager>(std::move(resMgr));
+	auto sharedPhysicsManager = std::shared_ptr<physics::PhysicsManager>(std::move(physicsManager));	
 
 	// Provide shared pointers to the service provider
 	serviceProvider->Provide(sharedInputMgr);
 	serviceProvider->Provide(sharedGraphicsMgr);
 	serviceProvider->Provide(sharedCameraMgr);
 	serviceProvider->Provide(sharedResourcesMgr);
+	serviceProvider->Provide(sharedPhysicsManager);
 
 	// Add systems using shared pointers
 	AddSystem(std::make_unique<InputSystem>(sharedInputMgr.get(), GetEventBus()));
-	AddSystem(std::make_unique<PhysicsSystem>(GetEventBus()));
 	AddSystem(std::make_unique<RenderSystem>(sharedGraphicsMgr.get()));
 	AddSystem(std::make_unique<ResourceSystem>(sharedResourcesMgr.get()));
+	AddSystem(std::make_unique<PhysicsSystem>(sharedPhysicsManager.get()));
 
 	for (auto& system : systems) {
 		system->Init();

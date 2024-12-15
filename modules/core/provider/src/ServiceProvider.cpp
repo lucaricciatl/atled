@@ -23,6 +23,11 @@ void ServiceProvider::Provide(std::shared_ptr<resources::ResourceManager> resour
     resourceManager = std::move(resourceMgr);
 }
 
+
+void ServiceProvider::Provide(std::shared_ptr<physics::PhysicsManager> aPhysicsManager) {
+    physicsManager = std::move(aPhysicsManager);
+}
+
 // Getter methods
 std::shared_ptr<input::InputManager> ServiceProvider::GetInputManager() const {
     return inputManager;
