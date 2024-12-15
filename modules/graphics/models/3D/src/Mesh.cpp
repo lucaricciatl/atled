@@ -226,30 +226,56 @@ Mesh Mesh::CreateCubeMesh(float size) {
     return cubeMesh;
 }
 
-// Create a plane mesh
-Mesh Mesh::CreatePlaneMesh(float width, float depth) {
+Mesh Mesh::CreatePlaneMesh(float width, float depth, int subdivisionsWidth, int subdivisionsDepth) {
     Mesh planeMesh;
+
+    if (subdivisionsWidth < 1 || subdivisionsDepth < 1) {
+        throw std::invalid_argument("Subdivision counts must be greater than 0.");
+    }
 
     float halfWidth = width / 2.0f;
     float halfDepth = depth / 2.0f;
 
-    std::vector<float> vertices = {
-        -halfWidth, 0.0f, -halfDepth,
-         halfWidth, 0.0f, -halfDepth,
-         halfWidth, 0.0f,  halfDepth,
-        -halfWidth, 0.0f,  halfDepth,
-    };
+    float dx = width / subdivisionsWidth;   // Step size along width
+    float dz = depth / subdivisionsDepth;  // Step size along depth
 
-    std::vector<float> texcoords = {
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-        1.0f, 1.0f,
-        0.0f, 1.0f,
-    };
+    std::vector<float> vertices;
+    std::vector<float> texcoords;
+    std::vector<unsigned short> indices;
 
-    std::vector<unsigned short> indices = {
-        0, 1, 2, 2, 3, 0
-    };
+    // Generate vertices and texture coordinates
+    for (int z = 0; z <= subdivisionsDepth; ++z) {
+        for (int x = 0; x <= subdivisionsWidth; ++x) {
+            float px = -halfWidth + x * dx;
+            float pz = -halfDepth + z * dz;
+            vertices.push_back(px);  // x position
+            vertices.push_back(0.0f); // y position (plane is flat)
+            vertices.push_back(pz);  // z position
+
+            texcoords.push_back(static_cast<float>(x) / subdivisionsWidth); // u
+            texcoords.push_back(static_cast<float>(z) / subdivisionsDepth); // v
+        }
+    }
+
+    // Generate indices
+    for (int z = 0; z < subdivisionsDepth; ++z) {
+        for (int x = 0; x < subdivisionsWidth; ++x) {
+            int topLeft = z * (subdivisionsWidth + 1) + x;
+            int topRight = topLeft + 1;
+            int bottomLeft = (z + 1) * (subdivisionsWidth + 1) + x;
+            int bottomRight = bottomLeft + 1;
+
+            // First triangle
+            indices.push_back(topLeft);
+            indices.push_back(bottomLeft);
+            indices.push_back(topRight);
+
+            // Second triangle
+            indices.push_back(topRight);
+            indices.push_back(bottomLeft);
+            indices.push_back(bottomRight);
+        }
+    }
 
     planeMesh.SetVertices(vertices);
     planeMesh.SetTexcoords(texcoords);
@@ -304,6 +330,7 @@ Mesh Mesh::CreateCylinderMesh(float radius, float height, int slices) {
 raylib::Mesh Mesh::ToRaylibMesh() const {
     raylib::Mesh raylibMesh;
     raylibMesh.animVertices = NULL;
+    raylibMesh.normals = NULL;
     raylibMesh.animNormals =NULL;
     raylibMesh.colors =NULL;
     raylibMesh.tangents =NULL;

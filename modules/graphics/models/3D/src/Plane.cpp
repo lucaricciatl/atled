@@ -54,7 +54,9 @@ void Plane::UpdateMesh() {
     }
 
     // Generate a new mesh for the sphere and load it into mModel
-    raylib::Mesh PlaneMesh = raylib::GenMeshPlane(mSize.x, mSize.y, 100, 100);
+    mMesh = Mesh::CreatePlaneMesh(mSize.x, mSize.y,5,5);
+    raylib::Mesh PlaneMesh = mMesh.ToRaylibMesh();
+    raylib:UploadMesh(&PlaneMesh, false);
     mModel = raylib::LoadModelFromMesh(PlaneMesh);
 
     // Set the material color

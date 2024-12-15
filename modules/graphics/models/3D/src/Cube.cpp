@@ -69,7 +69,9 @@ namespace graphics {
         }
 
         // Generate a new mesh and load it into mModel
-        raylib::Mesh cubeMesh = raylib::GenMeshCube(mDimensions.getX(), mDimensions.getY(), mDimensions.getZ());
+        mMesh = Mesh::CreateCubeMesh(mDimensions.getX());
+        raylib::Mesh cubeMesh = mMesh.ToRaylibMesh();
+        raylib:UploadMesh(&cubeMesh, false);
         mModel = raylib::LoadModelFromMesh(cubeMesh);
 
         // Set the material color

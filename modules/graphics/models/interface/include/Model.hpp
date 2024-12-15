@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <Frame.hpp>
+#include "Mesh.hpp"
 
 namespace graphics {
 
@@ -24,7 +25,7 @@ public:
 
 protected:
     std::shared_ptr<physics::Frame> frame;
-
+    graphics::Mesh mMesh;
 };
 
 }  // namespace graphics

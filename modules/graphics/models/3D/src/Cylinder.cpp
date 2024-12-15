@@ -57,7 +57,10 @@ void Cylinder::UpdateMesh() {
     }
 
     // Generate a new mesh for the cylinder and load it into mModel
-    raylib::Mesh cylinderMesh = raylib::GenMeshCylinder(mRadius, mHeight, mSides);
+    mMesh = Mesh::CreateCylinderMesh(mRadius, mHeight, mSides);
+    raylib::Mesh cylinderMesh = mMesh.ToRaylibMesh();
+    raylib:UploadMesh(&cylinderMesh, false);
+
     mModel = raylib::LoadModelFromMesh(cylinderMesh);
 
     // Set the material color

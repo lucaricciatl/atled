@@ -8,3 +8,7 @@ PhysicsSystem::PhysicsSystem(physics::PhysicsManager* physicsManager)
 void PhysicsSystem::Update(float deltaTime) {
 
 }
+
+void PhysicsSystem::Init() {
+  mPhysicsManager->Init();
+}

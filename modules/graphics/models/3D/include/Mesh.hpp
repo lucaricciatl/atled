@@ -30,7 +30,7 @@ public:
 
     static Mesh CreateSphereMesh(float radius = 1.0f, int slices = 16, int stacks = 16);
     static Mesh CreateCubeMesh(float size = 1.0f);
-    static Mesh CreatePlaneMesh(float width = 1.0f, float depth = 1.0f);
+    static Mesh CreatePlaneMesh(float width, float depth, int subdivisionsWidth, int subdivisionsDepth);
     static Mesh CreateCylinderMesh(float radius = 1.0f, float height = 1.0f, int slices = 16);
     static Mesh CreateMesh();
 

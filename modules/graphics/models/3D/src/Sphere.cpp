@@ -117,9 +117,9 @@ void Sphere::Draw() {
         if (mModel.meshCount > 0) {
             UnloadModel(mModel);
         }
-
+        mMesh = Mesh::CreateSphereMesh(mRadius, mSlices, mRings);
         // Generate a new mesh for the sphere and load it into mModel
-        raylib::Mesh SphereMesh = Mesh::CreateSphereMesh(mRadius, mSlices, mRings).ToRaylibMesh();
+        raylib::Mesh SphereMesh = mMesh.ToRaylibMesh();
         raylib:UploadMesh(&SphereMesh, false);
 
         mModel = raylib::LoadModelFromMesh(SphereMesh);

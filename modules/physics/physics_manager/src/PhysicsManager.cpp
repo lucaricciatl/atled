@@ -29,9 +29,7 @@ PhysicsManager::~PhysicsManager() {
 
 // Initialize Physics Manager
 void PhysicsManager::Init() {
-    std::lock_guard<std::mutex> lock(mMutex);
-    // Initialize physics systems here
-    std::cout << "PhysicsManager initialized." << std::endl;
+    Start();
 }
 
 // Start Physics Processing

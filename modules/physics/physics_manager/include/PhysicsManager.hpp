@@ -47,6 +47,8 @@ private:
     // Synchronyization
     std::mutex mMutex;
     bool mRunning;
+
+
 };
 
 

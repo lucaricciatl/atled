@@ -14,7 +14,8 @@ public:
   PhysicsSystem(physics::PhysicsManager* physicsManager);
 
   void Update(float deltaTime) override;
-
+  void Init();
+  
 private:
   physics::PhysicsManager* mPhysicsManager;
   std::vector<std::weak_ptr<Entity>> entitiesWithPhysics;

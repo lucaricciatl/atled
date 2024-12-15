@@ -8,14 +8,15 @@
 #include "FrameComponent.hpp"
 #include "PhysicsManager.hpp"
 #include "ServiceProvider.hpp"
- 
+#include "ShapeComponent.hpp"
+
 class RigidBodyComponent : public Component {
 public:
     RigidBodyComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider)
         : Component(owner), // Call base class constructor
         physicsManager(serviceProvider->GetPhysicsManager()), // Initialize PhysicsManager
         rigidBody(std::make_shared<RigidBody>()) { // Create RigidBody instance
-
+        owner->GetComponent<ShapeComponent>();
         // Retrieve the FrameComponent and set the frame
         mFrame = owner->GetComponent<FrameComponent>()->GetFrame();
 
