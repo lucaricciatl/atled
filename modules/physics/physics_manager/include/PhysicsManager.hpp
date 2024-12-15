@@ -5,13 +5,12 @@
 #include <thread>
 #include <vector>
 #include <mutex>
-
+#include "body.hpp"
 
 
 namespace physics {
 // Forward declarations
 struct PhysicsConfig;
-class Body;
 
 
 class PhysicsManager {
@@ -27,7 +26,10 @@ public:
     void Start();
     void Init();
     void Update();
-    void AddBody(std::shared_ptr<Body> shape);
+
+    void AddBody(std::shared_ptr<Body> aBody) {
+        bodies.emplace_back(aBody);
+    }
 
     void ComputeCollisions();
     void ComputeReactions();
@@ -41,11 +43,13 @@ private:
     // Member Variables
     std::unique_ptr<std::thread> mThread;
     std::shared_ptr<PhysicsConfig> mConfigs;
-
-    // Synchronization
+    std::vector<std::shared_ptr<Body>> bodies;
+    // Synchronyization
     std::mutex mMutex;
     bool mRunning;
 };
+
+
 
 };
 #endif // PHYSICS_MANAGER_H

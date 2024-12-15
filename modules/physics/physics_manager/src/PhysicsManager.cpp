@@ -52,11 +52,6 @@ void PhysicsManager::Update() {
     }
 }
 
-// Add a Physics Body to a Specific Layer
-void PhysicsManager::AddBody(std::shared_ptr<Body> shape) {
-
-}
-
 // Compute Collisions
 void PhysicsManager::ComputeCollisions() {
     // Implement collision detection logic here

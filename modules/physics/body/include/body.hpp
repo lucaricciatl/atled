@@ -8,8 +8,8 @@ namespace physics {
 
 class Body {
 public:
-    Body();
-    ~Body();
+    Body() = default;
+    virtual ~Body();
 };
 
 } // namespace physics

@@ -6,5 +6,24 @@ void RigidBodyComponent::OnAction(Action action, bool activated) {
 }
 
 void RigidBodyComponent::Update(double deltaTime) {
-    UpdatePhysics(deltaTime);
+
 }
+
+    void RigidBodyComponent::SetCollidable(bool aCollidable){
+        rigidBody->SetCollidable(aCollidable);
+    }
+    void RigidBodyComponent::SetStatic(bool aStatic){
+        rigidBody->SetStatic(aStatic);
+    };
+
+    bool RigidBodyComponent::IsCollidable(){
+        return rigidBody->IsCollidable();
+    };
+
+    bool RigidBodyComponent::IsStatic(){
+        return rigidBody->IsStatic();
+    };
+
+    void RigidBodyComponent::SetUseGravity(bool aGravity){
+        rigidBody->SetUseGravity(aGravity);
+    };

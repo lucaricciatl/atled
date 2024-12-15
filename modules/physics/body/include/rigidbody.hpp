@@ -8,7 +8,7 @@ namespace physics {
 
 
 
-class RigidBody : Body {
+class RigidBody : public Body {
 public:
     RigidBody();
     RigidBody(std::shared_ptr<Frame> frame);

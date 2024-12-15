@@ -8,7 +8,7 @@ namespace physics {
 // Default constructor
 RigidBody::RigidBody()
     : mFrame(nullptr), mIsStatic(false), mUseGravity(true),
-      mIsCollidable(true), mMass(1.0f), mVelocity{0, 0, 0}, mAccumulatedForce{0, 0, 0} {}
+      mIsCollidable(true), mMass(1.0f), mVelocity{0, 0, 0}, mAccumulatedForce{0, 0, 0}, Body() {}
 
 // Constructor with parameters
 RigidBody::RigidBody(std::shared_ptr<Frame> frame)
