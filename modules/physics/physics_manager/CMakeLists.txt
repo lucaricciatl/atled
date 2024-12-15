@@ -15,10 +15,11 @@ target_include_directories(${LIB_NAME} PUBLIC
 ${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
     ${CMAKE_CURRENT_SOURCE_DIR}/include   # Include local project headers
     ${BODY_INCLUDE_DIR}
+    ${COLLISIONS_INCLUDE_DIR}
 )
 
 # Link libraries for this target
-target_link_libraries(${LIB_NAME} PUBLIC body
+target_link_libraries(${LIB_NAME} PUBLIC body collisions
 )
 # Optionally link this library with other dependencies
 # target_link_libraries(${LIB_NAME} <other_dependencies>)

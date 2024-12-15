@@ -13,9 +13,8 @@ struct PhysicsConfig {
 // Constructor
 PhysicsManager::PhysicsManager()
     : mConfigs(std::make_shared<PhysicsConfig>()),
-      mRunning(false) {
-    // Initialization code here
-}
+      mRunning(false),
+      mCollider(ColliderFactory::CreateCollider(ColliderType::Simple)) {}
 
 // Destructor
 PhysicsManager::~PhysicsManager() {
