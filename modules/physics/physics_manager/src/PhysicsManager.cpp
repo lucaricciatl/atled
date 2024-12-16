@@ -49,10 +49,8 @@ void PhysicsManager::Update() {
     }
 }
 
-// Compute Collisions
 void PhysicsManager::ComputeCollisions() {
-    // Implement collision detection logic here
-    std::cout << "Computing collisions." << std::endl;
+
 }
 
 // Compute Reactions
@@ -88,5 +86,9 @@ void PhysicsManager::Run() {
         std::this_thread::sleep_for(std::chrono::milliseconds(5)); // ~60 FPS
     }
 }
+
+void PhysicsManager::HandleCollision(Body* bodyA, Body* bodyB) {
+}
+
 
 };

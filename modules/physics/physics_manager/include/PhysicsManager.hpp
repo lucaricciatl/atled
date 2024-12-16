@@ -42,6 +42,8 @@ public:
 protected:
     void Run(); // Thread loop function
 
+    void HandleCollision(Body *bodyA, Body *bodyB);
+
 private:
     // Member Variables
     std::shared_ptr<ICollider> mCollider;
