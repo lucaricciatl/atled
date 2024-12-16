@@ -14,7 +14,7 @@ struct PhysicsConfig {
 PhysicsManager::PhysicsManager()
     : mConfigs(std::make_shared<PhysicsConfig>()),
       mRunning(false),
-      mCollider(ColliderFactory::CreateCollider(ColliderType::Simple)) {}
+      mCollider(ColliderFactory::CreateSimpleCollider()) {}
 
 // Destructor
 PhysicsManager::~PhysicsManager() {
@@ -51,7 +51,30 @@ void PhysicsManager::Update() {
 
 void PhysicsManager::ComputeCollisions() {
 
-}
+        for (const auto& body : bodies) {
+            if (body) {
+                mCollider->AddBody(body.get());
+            }
+        }
+
+        // Detect collisions
+        for (const auto& body : bodies) {
+            if (!body) continue;
+
+            auto potentialCollisions = std::vector<Body*>();
+            mCollider->Retrieve(potentialCollisions, body->GetBoundingBox());
+
+            for (Body* other : potentialCollisions) {
+                if (body.get() == other) continue; // Skip self-collision
+
+                if (body->GetBoundingBox().Intersects(other->GetBoundingBox())) {
+                    HandleCollision(body.get(), other);
+                }
+            }
+        }
+
+    }
+
 
 // Compute Reactions
 void PhysicsManager::ComputeReactions() {
@@ -76,6 +99,10 @@ void PhysicsManager::Run() {
     while (mRunning) {
         {
             std::lock_guard<std::mutex> lock(mMutex);
+
+            for (auto body : bodies) {
+                body->UpdatePhysics(0.01f);
+            }
             // Perform physics computations
             ComputeCollisions();
             ComputeReactions();

@@ -69,8 +69,8 @@ namespace graphics {
         }
 
         // Generate a new mesh and load it into mModel
-        mMesh = Mesh::CreateCubeMesh(mDimensions.getX());
-        raylib::Mesh cubeMesh = mMesh.ToRaylibMesh();
+        mMesh = std::make_shared<Mesh>(Mesh::CreateCubeMesh(mDimensions.getX()));
+        raylib::Mesh cubeMesh = mMesh->ToRaylibMesh();
         raylib:UploadMesh(&cubeMesh, false);
         mModel = raylib::LoadModelFromMesh(cubeMesh);
 

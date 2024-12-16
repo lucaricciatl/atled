@@ -11,7 +11,7 @@
 #include "AdvancedCollider.hpp"
 
 namespace physics{
-    
+
     enum class ColliderType {
         Simple,
         Advanced
@@ -20,16 +20,22 @@ namespace physics{
 class ColliderFactory {
 public:
 
-    // Factory method to create colliders
-    static std::shared_ptr<ICollider> CreateCollider(ColliderType type) {
-        switch (type) {
-            case ColliderType::Simple:
-                return std::make_shared<SimpleCollider>();
-            case ColliderType::Advanced:
-                return std::make_shared<AdvancedCollider>();
-            default:
-                throw std::invalid_argument("Unknown Collider Type");
-        }
+    // Create a SimpleCollider
+    static std::shared_ptr<SimpleCollider> CreateSimpleCollider() {
+        math::BoundingBox worldBounds(
+            math::Vector3(-1000.0f, -1000.0f, -1000.0f),
+            math::Vector3(1000.0f, 1000.0f, 1000.0f)
+        );
+        return std::make_shared<SimpleCollider>(worldBounds);
+    }
+
+    // Create an AdvancedCollider
+    static std::shared_ptr<AdvancedCollider> CreateAdvancedCollider() {
+        math::BoundingBox worldBounds(
+            math::Vector3(-1000.0f, -1000.0f, -1000.0f),
+            math::Vector3(1000.0f, 1000.0f, 1000.0f)
+        );
+        return std::make_shared<AdvancedCollider>(worldBounds);
     }
 };
 }

@@ -46,7 +46,7 @@ protected:
 
 private:
     // Member Variables
-    std::shared_ptr<ICollider> mCollider;
+    std::shared_ptr<SimpleCollider> mCollider;
     std::unique_ptr<std::thread> mThread;
     std::shared_ptr<PhysicsConfig> mConfigs;
     std::vector<std::shared_ptr<Body>> bodies;

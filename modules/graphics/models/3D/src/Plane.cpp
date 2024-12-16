@@ -54,8 +54,8 @@ void Plane::UpdateMesh() {
     }
 
     // Generate a new mesh for the sphere and load it into mModel
-    mMesh = Mesh::CreatePlaneMesh(mSize.x, mSize.y,5,5);
-    raylib::Mesh PlaneMesh = mMesh.ToRaylibMesh();
+    mMesh = std::make_shared<Mesh>(Mesh::CreatePlaneMesh(mSize.x, mSize.y,5,5));
+    raylib::Mesh PlaneMesh = mMesh->ToRaylibMesh();
     raylib:UploadMesh(&PlaneMesh, false);
     mModel = raylib::LoadModelFromMesh(PlaneMesh);
 

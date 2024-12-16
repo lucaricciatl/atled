@@ -6,7 +6,6 @@ void RigidBodyComponent::OnAction(Action action, bool activated) {
 }
 
 void RigidBodyComponent::Update(double deltaTime) {
-
 }
 
     void RigidBodyComponent::SetCollidable(bool aCollidable){

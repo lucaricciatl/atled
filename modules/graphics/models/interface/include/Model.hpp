@@ -19,13 +19,17 @@ public:
     // Pure virtual function for drawing
     virtual void Draw() = 0;
 
+    std::shared_ptr<graphics::Mesh> GetMesh() {
+        return mMesh;
+    }
+
     void SetFrame(std::shared_ptr<physics::Frame> aFrame) {
         frame = aFrame;
     }
 
 protected:
     std::shared_ptr<physics::Frame> frame;
-    graphics::Mesh mMesh;
+    std::shared_ptr<graphics::Mesh> mMesh;
 };
 
 }  // namespace graphics

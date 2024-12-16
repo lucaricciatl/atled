@@ -57,8 +57,8 @@ void Cylinder::UpdateMesh() {
     }
 
     // Generate a new mesh for the cylinder and load it into mModel
-    mMesh = Mesh::CreateCylinderMesh(mRadius, mHeight, mSides);
-    raylib::Mesh cylinderMesh = mMesh.ToRaylibMesh();
+    mMesh = std::make_shared<Mesh>(Mesh::CreateCylinderMesh(mRadius, mHeight, mSides));
+    raylib::Mesh cylinderMesh = mMesh->ToRaylibMesh();
     raylib:UploadMesh(&cylinderMesh, false);
 
     mModel = raylib::LoadModelFromMesh(cylinderMesh);

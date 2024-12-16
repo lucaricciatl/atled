@@ -1,33 +1,28 @@
 #pragma once
 
-#include "ICollider.hpp"
-#include <memory>
 #include <vector>
-#include "Body.hpp" 
-#include "Octree.hpp" 
+#include "Body.hpp"
+#include "Octree.hpp"
+#include "BoundingBox.hpp"
 
-namespace physics{
+namespace physics {
 
-class SimpleCollider : public ICollider {
+class SimpleCollider {
 public:
     // Constructor and Destructor
-     SimpleCollider() : SimpleCollider(100.0f) {} // Default to a world size of 100 units
-
-    SimpleCollider(float worldSize);
+    SimpleCollider(const math::BoundingBox& worldBounds, int maxDepth = 5, int maxObjects = 10);
     ~SimpleCollider() = default;
 
-    // Add a body to the collider for collision detection
+    // Add a body to the collider
     void AddBody(Body* body);
+    void Retrieve(std::vector<Body*>& results, const math::BoundingBox& queryBounds) const;
 
     // Perform collision detection
     void DetectCollisions();
 
 private:
-    // Octree for spatial partitioning
-    //math::Octree<Body*> octree;
-
-    // List of all bodies (for management purposes)
-    std::vector<Body*> bodies;
+    math::Octree<Body*> octree;  // Octree for spatial partitioning
+    std::vector<Body*> bodies;  // List of bodies (for management)
 };
 
-}
+} // namespace physics

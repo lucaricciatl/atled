@@ -14,13 +14,12 @@ class RigidBodyComponent : public Component {
 public:
     RigidBodyComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider)
         : Component(owner), // Call base class constructor
-        physicsManager(serviceProvider->GetPhysicsManager()), // Initialize PhysicsManager
-        rigidBody(std::make_shared<RigidBody>()) { // Create RigidBody instance
-        owner->GetComponent<ShapeComponent>();
-        // Retrieve the FrameComponent and set the frame
-        mFrame = owner->GetComponent<FrameComponent>()->GetFrame();
-
+        physicsManager(serviceProvider->GetPhysicsManager()),
+        mFrame(owner->GetComponent<FrameComponent>()->GetFrame()) {
+       
         // Register the rigid body with the PhysicsManager
+        rigidBody = std::make_shared<RigidBody>(mFrame);
+        rigidBody->SetMesh(owner->GetComponent<ShapeComponent>()->GetModel<graphics::Model>()->GetMesh());
         physicsManager->AddBody(std::static_pointer_cast<Body>(rigidBody));
     }
 

@@ -39,7 +39,7 @@ public:
     void ClearForces();
 
     // Update position based on forces and mass
-    void UpdatePhysics(double deltaTime);
+    void UpdatePhysics(double deltaTime) override;
 
     void SetFrame(std::shared_ptr<Frame> aFrame) { mFrame = aFrame; };
     std::shared_ptr<Frame> GetFrame() const;

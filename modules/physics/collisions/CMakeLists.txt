@@ -19,7 +19,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
 )
 
 # Link libraries for this target
-target_link_libraries(${LIB_NAME} PUBLIC space3D graphics datastructure
+target_link_libraries(${LIB_NAME} PUBLIC space3D graphics datastructure body
 )
 # Optionally link this library with other dependencies
 # target_link_libraries(${LIB_NAME} <other_dependencies>)

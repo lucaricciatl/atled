@@ -12,7 +12,7 @@ RigidBody::RigidBody()
 
 // Constructor with parameters
 RigidBody::RigidBody(std::shared_ptr<Frame> frame)
-    : mFrame(std::move(frame)), mIsStatic(false), 
+    : mFrame(frame), mIsStatic(false), 
       mUseGravity(true), mIsCollidable(true), mMass(1.0f), mVelocity{0, 0, 0}, 
       mAccumulatedForce{0, 0, 0} {}
 
