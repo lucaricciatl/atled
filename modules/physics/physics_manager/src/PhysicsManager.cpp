@@ -50,30 +50,32 @@ void PhysicsManager::Update() {
 }
 
 void PhysicsManager::ComputeCollisions() {
-
-        for (const auto& body : bodies) {
-            if (body) {
-                mCollider->AddBody(body.get());
-            }
+    // Add all bodies to the collider
+    for (const auto& body : bodies) {
+        if (body) {
+            mCollider->AddBody(body.get());
         }
-
-        // Detect collisions
-        for (const auto& body : bodies) {
-            if (!body) continue;
-
-            auto potentialCollisions = std::vector<Body*>();
-            mCollider->Retrieve(potentialCollisions, body->GetBoundingBox());
-
-            for (Body* other : potentialCollisions) {
-                if (body.get() == other) continue; // Skip self-collision
-
-                if (body->GetBoundingBox().Intersects(other->GetBoundingBox())) {
-                    HandleCollision(body.get(), other);
-                }
-            }
-        }
-
     }
+
+    // Check for collisions between every pair of bodies
+    for (size_t i = 0; i < bodies.size(); ++i) {
+        Body* a = bodies[i].get();
+        if (!a) continue;
+
+        for (size_t j = i + 1; j < bodies.size(); ++j) {
+            Body* b = bodies[j].get();
+            if (!b) continue;
+
+            // Use the direct two-body detection function
+            if (mCollider->DetectCollisions(a, b)) {
+                // Handle the collision between a and b
+                // This could include resolving overlaps, applying impulses,
+                // or triggering game events.
+            }
+        }
+    }
+}
+
 
 
 // Compute Reactions

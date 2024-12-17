@@ -1,31 +1,48 @@
-#include "SimpleCollider.hpp"
+#include <vector>
+#include <set>
+#include <algorithm>
+#include <utility> // for std::minmax
+#include "body.hpp"
+#include "BoundingBox.hpp"
+#include "Octree.hpp" // Assuming you have an octree implementation
+#include <SimpleCollider.hpp>
+
+
 namespace physics {
 
-SimpleCollider::SimpleCollider(const math::BoundingBox& worldBounds, int maxDepth, int maxObjects)
-    : octree(worldBounds, maxDepth, maxObjects) {}
+
+SimpleCollider::SimpleCollider()
+{
+    // Constructor body can be empty if initialization lists are sufficient
+}
 
 void SimpleCollider::AddBody(Body* body) {
     if (body) {
         bodies.push_back(body);
-        octree.Insert(body, body->GetBoundingBox());
-    }
-}
-void SimpleCollider::DetectCollisions() {
-    // Example of collision detection logic
-    for (const auto& body : bodies) {
-        std::vector<Body*> potentialCollisions;
-        Retrieve(potentialCollisions, body->GetBoundingBox());
-
-        for (Body* other : potentialCollisions) {
-            if (body != other && body->GetBoundingBox().Intersects(other->GetBoundingBox())) {
-                // Handle collision
-            }
-        }
+        //octree.Insert(body, body->GetBoundingBox());
     }
 }
 
-void SimpleCollider::Retrieve(std::vector<Body*>& results, const math::BoundingBox& queryBounds) const {
-    octree.Retrieve(results, queryBounds);
+bool SimpleCollider::DetectCollisions(Body* a, Body* b) {
+    // Ensure both bodies are valid
+    if (!a || !b) {
+        return false;
+    }
+
+    // First, do a bounding box intersection test
+    if (a->GetBoundingBox().Intersects(b->GetBoundingBox())) {
+        b->ApplyForce(math::Vector3(0, 20, 0));
+        return true;
+    }
+
+    // No intersection found
+    return false;
 }
 
-} // namespace physics
+
+bool SimpleCollider::PreciseCollisionCheck(Body* a, Body* b) const {
+    // Placeholder for a more advanced collision detection routine.
+    // Could use OBB checks, GJK, SAT, or any other algorithm depending on your shapes.
+    return true;
+}
+}

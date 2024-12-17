@@ -22,11 +22,7 @@ public:
 
     // Create a SimpleCollider
     static std::shared_ptr<SimpleCollider> CreateSimpleCollider() {
-        math::BoundingBox worldBounds(
-            math::Vector3(-1000.0f, -1000.0f, -1000.0f),
-            math::Vector3(1000.0f, 1000.0f, 1000.0f)
-        );
-        return std::make_shared<SimpleCollider>(worldBounds);
+        return std::make_shared<SimpleCollider>();
     }
 
     // Create an AdvancedCollider

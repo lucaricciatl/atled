@@ -7,22 +7,23 @@
 
 namespace physics {
 
-class SimpleCollider {
-public:
-    // Constructor and Destructor
-    SimpleCollider(const math::BoundingBox& worldBounds, int maxDepth = 5, int maxObjects = 10);
-    ~SimpleCollider() = default;
+    class SimpleCollider {
+    public:
+        SimpleCollider();
 
-    // Add a body to the collider
-    void AddBody(Body* body);
-    void Retrieve(std::vector<Body*>& results, const math::BoundingBox& queryBounds) const;
+        void AddBody(Body* body);
+        bool DetectCollisions(Body* a, Body* b);
 
-    // Perform collision detection
-    void DetectCollisions();
+    private:
+        // Retrieves potential collision candidates for a given bounding box
 
-private:
-    math::Octree<Body*> octree;  // Octree for spatial partitioning
-    std::vector<Body*> bodies;  // List of bodies (for management)
-};
+        // Performs a more expensive and precise collision check
+        bool PreciseCollisionCheck(Body* a, Body* b) const;
+
+        // Member variables
+        //math::Octree<Body*> octree;           // Assuming this is defined elsewhere
+        std::vector<Body*> bodies;
+    };
+
 
 } // namespace physics

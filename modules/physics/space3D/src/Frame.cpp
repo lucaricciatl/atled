@@ -1,6 +1,7 @@
 #include "Frame.hpp"
 #include "Position.hpp"
 #include "Quaternion.hpp"
+#include "Vector3.hpp"
 
 namespace physics {
 
@@ -29,6 +30,10 @@ namespace physics {
     // Accessors
     std::shared_ptr<Position> Frame::GetPosition() const {
         return position;
+    }
+
+    math::Vector3 Frame::GetVectorPosition() const {
+        return math::Vector3(position->getX(), position->getY(), position->getZ());
     }
 
     math::Quaternion Frame::GetOrientation() const {

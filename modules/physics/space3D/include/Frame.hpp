@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Position.hpp"      // Include the Position class
 #include "Quaternion.hpp"    // Include the Quaternion class
-
+#include "Vector3.hpp"
 namespace physics {
 
 class Frame {
@@ -20,6 +20,7 @@ public:
     Frame& operator=(const Frame& other);
     // Accessors
     std::shared_ptr<Position> GetPosition() const;
+    math::Vector3 GetVectorPosition() const;
     math::Quaternion GetOrientation() const;
     // Mutators
     void SetPosition(std::shared_ptr<Position>& position);
