@@ -4,7 +4,7 @@
 #define QUATERNION_HPP
 
 #include <iostream>
-
+#include <Vector3.hpp>
 namespace math{
 
 class Quaternion {
@@ -34,6 +34,8 @@ public:
     void setX(double x);
     void setY(double y);
     void setZ(double z);
+
+    math::Vector3 rotateVector(const math::Vector3& v) const;
 
     // Quaternion operations
     double magnitude() const;

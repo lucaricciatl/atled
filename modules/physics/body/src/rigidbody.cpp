@@ -11,7 +11,6 @@ RigidBody::RigidBody(std::shared_ptr<Frame> frame)
     : Body(frame) {}
 
 
-
 // Update the physics state
 void RigidBody::UpdatePhysics(double deltaTime) {
     if (mIsStatic || deltaTime <= 0.0f) {

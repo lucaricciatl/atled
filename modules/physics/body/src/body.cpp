@@ -50,6 +50,9 @@ float Body::GetMass() const {
     return mMass;
 }
 
+std::shared_ptr<Frame> Body::GetFrame() const {
+    return mFrame;
+};
 // Apply a force to the rigid body
 void Body::ApplyForce(const math::Vector3& force) {
     mAccumulatedForce += force;

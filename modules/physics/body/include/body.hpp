@@ -34,7 +34,7 @@ public:
     void SetMass(float mass);
     float GetMass() const;
 
-    math::Vector3 GetAccumulatedForce() const;
+    math::Vector3 GetAccumulatedForce() const { return mAccumulatedForce; };
     void ClearForces();
 
     void SetFrame(std::shared_ptr<Frame> aFrame) { mFrame = aFrame; };

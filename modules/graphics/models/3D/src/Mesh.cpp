@@ -33,6 +33,23 @@ const std::vector<float>& Mesh::GetVertices() const {
     return vertices;
 }
 
+const std::vector<math::Vector3>& Mesh::GetOrderedVertices() const {
+    // Clear and populate a cache for ordered vertices if needed
+    static std::vector<math::Vector3> OrderedPoints; // Thread-local or mutable caching is better in larger codebases
+    OrderedPoints.clear();
+
+    for (size_t i = 0; i < vertices.size(); i += 3) { // Step through the raw array in groups of 3 (xyz)
+        float x = vertices[i];     // x-coordinate
+        float y = vertices[i + 1]; // y-coordinate
+        float z = vertices[i + 2]; // z-coordinate
+        math::Vector3 v(x, y, z);
+        OrderedPoints.emplace_back(v); // Add a new Vector3 to the list
+    }
+
+    return OrderedPoints; // Return the vector of Vector3s
+}
+
+
 const std::vector<float>& Mesh::GetTexcoords() const {
     return texcoords;
 }

@@ -35,7 +35,7 @@ public:
     static Mesh CreateMesh();
 
     raylib::Mesh ToRaylibMesh() const;
-
+    const std::vector<math::Vector3>& GetOrderedVertices() const;
 
 private:
     int vertexCount;              // Number of vertices stored in arrays

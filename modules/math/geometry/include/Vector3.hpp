@@ -34,7 +34,17 @@ public:
     Vector3 operator-(const Vector3& other) const;
     Vector3 operator*(float scalar) const;
     Vector3 operator/(float scalar) const;
+    Vector3& operator*=(float scalar) {
+        x *= scalar;
+        y *= scalar;
+        z *= scalar;
+        return *this;
+    }
 
+    // Unary negation operator
+    Vector3 operator-() const {
+        return Vector3(-x, -y, -z);
+    }
     // Dot and Cross Products
     float dot(const Vector3& other) const;
     Vector3 cross(const Vector3& other) const;
@@ -46,6 +56,11 @@ public:
     // Utility
     void print() const;
 
+    bool isZero(float epsilon = 1e-6f) const {
+        return (std::fabs(x) < epsilon &&
+            std::fabs(y) < epsilon &&
+            std::fabs(z) < epsilon);
+    }
 private:
     float x;
     float y;

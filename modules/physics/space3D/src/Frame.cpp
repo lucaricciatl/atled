@@ -74,6 +74,15 @@ namespace physics {
         orientation = (rotation * orientation).normalized();
     }
 
+    math::Vector3 Frame::transformPointToWorld(const math::Vector3& localPoint) const {
+        // Step 1: Rotate the point using the frame's orientation
+        math::Vector3 rotatedPoint = orientation.rotateVector(localPoint);
+
+        // Step 2: Translate the rotated point using the frame's position
+        math::Vector3 worldPosition = GetVectorPosition();
+        return rotatedPoint + worldPosition;
+    }
+
     // Transformation methods
     void Frame::transformPoint(double& px, double& py, double& pz) const {
         // Apply rotation using the orientation quaternion

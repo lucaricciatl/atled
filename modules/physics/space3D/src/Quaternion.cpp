@@ -4,6 +4,7 @@
 #include <cmath>
 #include <stdexcept>
 
+
 namespace math{
 // Constructors
 Quaternion::Quaternion() : w(0), x(0), y(0), z(0) {}
@@ -39,6 +40,13 @@ void Quaternion::setW(double w) { this->w = w; }
 void Quaternion::setX(double x) { this->x = x; }
 void Quaternion::setY(double y) { this->y = y; }
 void Quaternion::setZ(double z) { this->z = z; }
+
+math::Vector3 Quaternion::rotateVector(const math::Vector3& v) const {
+    // This uses the formula: v' = q * v * q^-1
+    Quaternion vectorQuat(0, v.getX(), v.getY(), v.getZ());
+    Quaternion result = (*this) * vectorQuat * this->inverse();
+    return math::Vector3(result.x, result.y, result.z);
+}
 
 // Quaternion operations
 double Quaternion::magnitude() const {

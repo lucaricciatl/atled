@@ -30,6 +30,7 @@ public:
     void translate(double dx, double dy, double dz);
     void rotate(const math::Quaternion& rotation);
     // Transformation methods
+    math::Vector3 transformPointToWorld(const math::Vector3& localPoint) const;
     void transformPoint(double& px, double& py, double& pz) const;
     void inverseTransformPoint(double& px, double& py, double& pz) const;
     // Friend function for stream insertion
