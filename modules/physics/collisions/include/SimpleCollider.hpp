@@ -18,13 +18,14 @@ namespace physics {
         // Retrieves potential collision candidates for a given bounding box
 
         // Performs a more expensive and precise collision check
-        bool MeshCollisionTest(const graphics::Mesh& meshA, const Frame& frameA, const graphics::Mesh& meshB, const Frame& frameB, math::Vector3& collisionNormal) const;
+        bool MeshCollisionTest(const graphics::Mesh& meshA, const Frame& frameA, const graphics::Mesh& meshB, const Frame& frameB, math::Vector3& collisionNormal, float& penetrationDepth) const;
         bool TriangleTriangleIntersection(const math::Vector3& A1, const math::Vector3& A2, const math::Vector3& A3, const math::Vector3& B1, const math::Vector3& B2, const math::Vector3& B3) const;
         bool areTrianglesSeparatedByAxis(
             const math::Vector3& axis,
             const math::Vector3& A1, const math::Vector3& A2, const math::Vector3& A3,
             const math::Vector3& B1, const math::Vector3& B2, const math::Vector3& B3) const;
-        void HandleCollision(Body* body1, Body* body2, const math::Vector3& collisionNormal);
+        void HandleCollision(Body* body1, Body* body2, const math::Vector3& collisionNormal, float penetrationDepth);
+        void ResolveOverlap(physics::Body* bodyA, physics::Body* bodyB, const math::Vector3& collisionNormal, float penetrationDepth);
         void projectTriangleOntoAxis(
             const math::Vector3& axis,
             const math::Vector3& V1, const math::Vector3& V2, const math::Vector3& V3,

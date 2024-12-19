@@ -103,7 +103,7 @@ void PhysicsManager::Run() {
             std::lock_guard<std::mutex> lock(mMutex);
 
             for (auto body : bodies) {
-                body->UpdatePhysics(0.01f);
+                body->UpdatePhysics(0.001f);
             }
             // Perform physics computations
             ComputeCollisions();
@@ -112,7 +112,7 @@ void PhysicsManager::Run() {
             ComputeCinematics();
         }
         // Sleep or wait for a fixed timestep
-        std::this_thread::sleep_for(std::chrono::milliseconds(5)); // ~60 FPS
+        std::this_thread::sleep_for(std::chrono::milliseconds(1)); // ~60 FPS
     }
 }
 
