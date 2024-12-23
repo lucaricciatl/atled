@@ -13,7 +13,7 @@ namespace physics {
 
         void AddBody(Body* body);
         bool DetectCollisions(Body* a, Body* b);
-
+        void Setdt(float adt) { dt = adt; };
     private:
         // Retrieves potential collision candidates for a given bounding box
 
@@ -25,7 +25,6 @@ namespace physics {
             const math::Vector3& A1, const math::Vector3& A2, const math::Vector3& A3,
             const math::Vector3& B1, const math::Vector3& B2, const math::Vector3& B3) const;
         void HandleCollision(Body* body1, Body* body2, const math::Vector3& collisionNormal, float penetrationDepth);
-        void ResolveOverlap(physics::Body* bodyA, physics::Body* bodyB, const math::Vector3& collisionNormal, float penetrationDepth);
         void projectTriangleOntoAxis(
             const math::Vector3& axis,
             const math::Vector3& V1, const math::Vector3& V2, const math::Vector3& V3,
@@ -33,6 +32,7 @@ namespace physics {
         // Member variables
         //math::Octree<Body*> octree;           // Assuming this is defined elsewhere
         std::vector<Body*> bodies;
+        float dt ;
     };
 
 

@@ -13,7 +13,7 @@ namespace physics {
         math::Vector3 ComputeCollisionForce(
             const math::Vector3& position1, const math::Vector3& velocity1, float mass1,
             const math::Vector3& position2, const math::Vector3& velocity2, float mass2,
-            const math::Vector3& collisionNormal, float restitution
+            const math::Vector3& collisionNormal, float restitution, float dt
         ) {
             // Ensure collision normal is a unit vector
             math::Vector3 normal = collisionNormal.normalized();
@@ -21,136 +21,135 @@ namespace physics {
             // Compute relative velocity
             math::Vector3 relativeVelocity = velocity2 - velocity1;
 
+
             // Compute velocity along the collision normal
             float relativeNormalVelocity = relativeVelocity.dot(normal);
-
             // If the bodies are separating, no collision response is needed
             if (relativeNormalVelocity > 0) {
                 return math::Vector3(0, 0, 0);
             }
-
             // Compute impulse magnitude
             float impulse = -(1 + restitution) * relativeNormalVelocity /
                 ((1 / mass1) + (1 / mass2));
 
             // Compute collision force vector
-            math::Vector3 collisionForce = normal * impulse;
+            math::Vector3 collisionForce = normal * impulse / dt;
 
             return collisionForce;
         }
     }
 
-SimpleCollider::SimpleCollider()
-{
-    // Constructor body can be empty if initialization lists are sufficient
-}
-
-void SimpleCollider::AddBody(Body* body) {
-    if (body) {
-        bodies.push_back(body);
-        //octree.Insert(body, body->GetBoundingBox());
+    SimpleCollider::SimpleCollider()
+    {
+        // Constructor body can be empty if initialization lists are sufficient
     }
-}
 
-bool SimpleCollider::DetectCollisions(Body* a, Body* b) {
-    // Ensure both bodies are valid
-    if (!a || !b) {
-        return false;
-    }
-    math::Vector3 collisionNormal;
-    float penetrationDepth;
-    // First, do a bounding box intersection test
-    if (a->GetBoundingBox().Intersects(b->GetBoundingBox())) {
-        if (MeshCollisionTest(*a->mMesh, *a->mFrame, *b->mMesh, *b->mFrame, collisionNormal, penetrationDepth)) {
-            HandleCollision(a, b, collisionNormal, penetrationDepth);
+    void SimpleCollider::AddBody(Body* body) {
+        if (body) {
+            bodies.push_back(body);
+            //octree.Insert(body, body->GetBoundingBox());
         }
     }
 
-    // No intersection found
-    return false;
-}
-
-bool SimpleCollider::MeshCollisionTest(
-    const graphics::Mesh& meshA, const Frame& frameA,
-    const graphics::Mesh& meshB, const Frame& frameB,
-    math::Vector3& collisionNormal,
-    float& penetrationDepth // output parameter for depth
-) const {
-    // Fetch vertices and indices
-    const std::vector<math::Vector3> verticesA = meshA.GetOrderedVertices();
-    const std::vector<unsigned short> indicesA = meshA.GetIndices();
-    const std::vector<math::Vector3> verticesB = meshB.GetOrderedVertices();
-    const std::vector<unsigned short> indicesB = meshB.GetIndices();
-
-    auto transformA = [&](const math::Vector3& v) { return frameA.transformPointToWorld(v); };
-    auto transformB = [&](const math::Vector3& v) { return frameB.transformPointToWorld(v); };
-
-    for (size_t i = 0; i < indicesA.size(); i += 3) {
-        math::Vector3 A1 = transformA(verticesA[indicesA[i]]);
-        math::Vector3 A2 = transformA(verticesA[indicesA[i + 1]]);
-        math::Vector3 A3 = transformA(verticesA[indicesA[i + 2]]);
-
-        for (size_t j = 0; j < indicesB.size(); j += 3) {
-            math::Vector3 B1 = transformB(verticesB[indicesB[j]]);
-            math::Vector3 B2 = transformB(verticesB[indicesB[j + 1]]);
-            math::Vector3 B3 = transformB(verticesB[indicesB[j + 2]]);
-
-            if (TriangleTriangleIntersection(A1, A2, A3, B1, B2, B3)) {
-                // Compute normals
-                math::Vector3 normalA = (A2 - A1).cross(A3 - A1);
-                math::Vector3 normalB = (B2 - B1).cross(B3 - B1);
-
-                // Handle degenerate cases
-                if (normalA.isZero()) {
-                    normalA = math::Vector3(0, 0, 1);
-                }
-                else {
-                    normalA = normalA.normalized();
-                }
-
-                if (normalB.isZero()) {
-                    normalB = math::Vector3(0, 0, 1);
-                }
-                else {
-                    normalB = normalB.normalized();
-                }
-
-                // Average the normals to determine the collision normal
-                collisionNormal = (normalA + normalB).normalized();
-
-                // Compute the penetration depth:
-                // Project all vertices of the intersecting triangles onto the collision normal
-                auto project = [&](const math::Vector3& p) {
-                    return p.dot(collisionNormal);
-                    };
-
-                // Projections for triangle A
-                float A_proj1 = project(A1);
-                float A_proj2 = project(A2);
-                float A_proj3 = project(A3);
-
-                float A_min = std::min({ A_proj1, A_proj2, A_proj3 });
-                float A_max = std::max({ A_proj1, A_proj2, A_proj3 });
-
-                // Projections for triangle B
-                float B_proj1 = project(B1);
-                float B_proj2 = project(B2);
-                float B_proj3 = project(B3);
-
-                float B_min = std::min({ B_proj1, B_proj2, B_proj3 });
-                float B_max = std::max({ B_proj1, B_proj2, B_proj3 });
-
-                // Overlap along the collision normal:
-                // If A and B overlap, their projection intervals intersect
-                penetrationDepth = std::min(A_max, B_max) - std::max(A_min, B_min);
-
-                return true; // Collision detected with penetrationDepth computed
+    bool SimpleCollider::DetectCollisions(Body* a, Body* b) {
+        // Ensure both bodies are valid
+        if (!a || !b) {
+            return false;
+        }
+        math::Vector3 collisionNormal;
+        float penetrationDepth;
+        // First, do a bounding box intersection test
+        if (a->GetBoundingBox().Intersects(b->GetBoundingBox())) {
+            if (MeshCollisionTest(*a->mMesh, *a->mFrame, *b->mMesh, *b->mFrame, collisionNormal, penetrationDepth)) {
+                HandleCollision(a, b, collisionNormal, penetrationDepth);
             }
         }
+
+        // No intersection found
+        return false;
     }
 
-    return false; // No collision
-}
+    bool SimpleCollider::MeshCollisionTest(
+        const graphics::Mesh& meshA, const Frame& frameA,
+        const graphics::Mesh& meshB, const Frame& frameB,
+        math::Vector3& collisionNormal,
+        float& penetrationDepth // output parameter for depth
+    ) const {
+        // Fetch vertices and indices
+        const std::vector<math::Vector3> verticesA = meshA.GetOrderedVertices();
+        const std::vector<unsigned short> indicesA = meshA.GetIndices();
+        const std::vector<math::Vector3> verticesB = meshB.GetOrderedVertices();
+        const std::vector<unsigned short> indicesB = meshB.GetIndices();
+
+        auto transformA = [&](const math::Vector3& v) { return frameA.transformPointToWorld(v); };
+        auto transformB = [&](const math::Vector3& v) { return frameB.transformPointToWorld(v); };
+
+        for (size_t i = 0; i < indicesA.size(); i += 3) {
+            math::Vector3 A1 = transformA(verticesA[indicesA[i]]);
+            math::Vector3 A2 = transformA(verticesA[indicesA[i + 1]]);
+            math::Vector3 A3 = transformA(verticesA[indicesA[i + 2]]);
+
+            for (size_t j = 0; j < indicesB.size(); j += 3) {
+                math::Vector3 B1 = transformB(verticesB[indicesB[j]]);
+                math::Vector3 B2 = transformB(verticesB[indicesB[j + 1]]);
+                math::Vector3 B3 = transformB(verticesB[indicesB[j + 2]]);
+
+                if (TriangleTriangleIntersection(A1, A2, A3, B1, B2, B3)) {
+                    // Compute normals
+                    math::Vector3 normalA = (A2 - A1).cross(A3 - A1);
+                    math::Vector3 normalB = (B2 - B1).cross(B3 - B1);
+
+                    // Handle degenerate cases
+                    if (normalA.isZero()) {
+                        normalA = math::Vector3(0, 0, 1);
+                    }
+                    else {
+                        normalA = normalA.normalized();
+                    }
+
+                    if (normalB.isZero()) {
+                        normalB = math::Vector3(0, 0, 1);
+                    }
+                    else {
+                        normalB = normalB.normalized();
+                    }
+
+                    // Average the normals to determine the collision normal
+                    collisionNormal = (normalA + normalB).normalized();
+
+                    // Compute the penetration depth:
+                    // Project all vertices of the intersecting triangles onto the collision normal
+                    auto project = [&](const math::Vector3& p) {
+                        return p.dot(collisionNormal);
+                        };
+
+                    // Projections for triangle A
+                    float A_proj1 = project(A1);
+                    float A_proj2 = project(A2);
+                    float A_proj3 = project(A3);
+
+                    float A_min = std::min({ A_proj1, A_proj2, A_proj3 });
+                    float A_max = std::max({ A_proj1, A_proj2, A_proj3 });
+
+                    // Projections for triangle B
+                    float B_proj1 = project(B1);
+                    float B_proj2 = project(B2);
+                    float B_proj3 = project(B3);
+
+                    float B_min = std::min({ B_proj1, B_proj2, B_proj3 });
+                    float B_max = std::max({ B_proj1, B_proj2, B_proj3 });
+
+                    // Overlap along the collision normal:
+                    // If A and B overlap, their projection intervals intersect
+                    penetrationDepth = std::min(A_max, B_max) - std::max(A_min, B_min);
+
+                    return true; // Collision detected with penetrationDepth computed
+                }
+            }
+        }
+
+        return false; // No collision
+    }
 
 
 
@@ -243,74 +242,28 @@ bool SimpleCollider::MeshCollisionTest(
         float mass2 = body2->GetMass();
 
         // Coefficient of restitution (adjust as needed)
-        float restitution = 0.8; // Example value for a somewhat elastic collision
+        float restitution = 0.9; // Example value for a somewhat elastic collision
 
         // Compute collision force
-        //math::Vector3 force = physics::ComputeCollisionForce(
-        //    position1, velocity1, mass1,
-        //    position2, velocity2, mass2,
-        //    collisionNormal, restitution
-        //);
+        math::Vector3 force = physics::ComputeCollisionForce(
+            position1, velocity1, mass1,
+            position2, velocity2, mass2,
+            collisionNormal, restitution, dt
+        );
 
         // Compute the force due to overlap
-        ResolveOverlap(body1, body2, collisionNormal, penetrationDepth);
         // Apply forces to the bodies
 
 // Check if body1 is not static and apply reaction force
-        //if (!body1->IsStatic()) {
-        //    body1->ApplyForce(-force); // Reaction force on body1
-        //}
+        if (!body1->IsStatic()) {
+            body1->ApplyForce(-force); // Reaction force on body1
+        }
 
-        //// Check if body2 is not static and apply action force
-        //if (!body2->IsStatic()) {
-        //    body2->ApplyForce(force); // Action force on body2
-        //}
+        // Check if body2 is not static and apply action force
+        if (!body2->IsStatic()) {
+            body2->ApplyForce(force); // Action force on body2
+        }
 
-        
+
     }
-
-
-    void SimpleCollider::ResolveOverlap(
-        physics::Body* bodyA,
-        physics::Body* bodyB,
-        const math::Vector3& collisionNormal,
-        float penetrationDepth
-    ) {
-        if (!bodyA || !bodyB) return;
-
-        // If there's no overlap or no normal, nothing to resolve
-        if (penetrationDepth <= 0.0f || collisionNormal.isZero()) {
-            return;
-        }
-
-        // Compute inverse masses
-        float invMassA = (bodyA->IsStatic() || bodyA->GetMass() <= 0.0f) ? 0.0f : (1.0f / bodyA->GetMass());
-        float invMassB = (bodyB->IsStatic() || bodyB->GetMass() <= 0.0f) ? 0.0f : (1.0f / bodyB->GetMass());
-
-        float totalInvMass = invMassA + invMassB;
-
-        // If both are static or totalInvMass == 0, can't resolve
-        if (totalInvMass == 0.0f) {
-            return;
-        }
-
-        // Determine how much to move each body
-        // The idea is to separate them along the collision normal so that they no longer overlap
-        // The body with less mass (larger invMass) moves more
-        float moveA = (invMassA / totalInvMass) * penetrationDepth;
-        float moveB = (invMassB / totalInvMass) * penetrationDepth;
-
-        // Move bodyA opposite to collision normal (push it out)
-        if (!bodyA->IsStatic()) {
-            math::Vector3 correctionA = -collisionNormal * moveA * 800;
-            bodyA->ApplyForce(correctionA);
-        }
-
-        // Move bodyB along the collision normal
-        if (!bodyB->IsStatic()) {
-            math::Vector3 correctionB = collisionNormal * moveB*800;
-            bodyB->ApplyForce(correctionB);
-        }
-    }
-
-} 
+}

@@ -98,18 +98,20 @@ void PhysicsManager::ComputeCinematics() {
 
 // Thread Loop Function
 void PhysicsManager::Run() {
+    float dt = 0.001f;
+    mCollider->Setdt(dt);
     while (mRunning) {
         {
             std::lock_guard<std::mutex> lock(mMutex);
 
-            for (auto body : bodies) {
-                body->UpdatePhysics(0.001f);
-            }
             // Perform physics computations
             ComputeCollisions();
             ComputeReactions();
             ComputeDeformations();
             ComputeCinematics();
+            for (auto body : bodies) {
+                body->UpdatePhysics(dt);
+            }
         }
         // Sleep or wait for a fixed timestep
         std::this_thread::sleep_for(std::chrono::milliseconds(1)); // ~60 FPS
