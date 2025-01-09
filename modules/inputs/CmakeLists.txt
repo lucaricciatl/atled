@@ -4,6 +4,8 @@ add_library(inputs
     ./src/RaylibMouse.cpp
     ./src/InputManagerBuilder.cpp
     ./src/InputManager.cpp
+    ./src/AtledMouseLinux.cpp
+    ./src/AtledMouseWindows.cpp
 )
 
 

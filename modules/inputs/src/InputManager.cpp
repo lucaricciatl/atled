@@ -4,7 +4,7 @@ namespace input {
 
 InputManager::InputManager(KeyboardType keyboardType, MouseType mouseType) {
     keyboardInput = KeyboardFactory::CreateKeyboardInput();
-    mouseInput = MouseFactory::CreateMouse();
+    mouseInput = MouseFactory::CreateMouse(mouseType);
 }
 
 InputManager::~InputManager() {
@@ -13,7 +13,7 @@ InputManager::~InputManager() {
 
 InputManager::InputManager() {
     keyboardInput = KeyboardFactory::CreateKeyboardInput();
-    mouseInput = MouseFactory::CreateMouse();
+    mouseInput = MouseFactory::CreateMouse(MouseType::Raylib);
 };
 
 void InputManager::Init() {

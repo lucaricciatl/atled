@@ -3,6 +3,8 @@
 #include <FrameComponent.hpp>
 #include <cmath>
 
+
+namespace nbody{
 // Constructor to initialize entities and body data
 NBodySimulation::NBodySimulation(std::vector<std::shared_ptr<Entity>> entities)
     : entities(std::move(entities)) {
@@ -236,4 +238,5 @@ void NBodySimulation::SetDampingFactor(float damping) {
 
 void NBodySimulation::SetMinDistanceThreshold(float threshold) {
     minDistanceThreshold = threshold;
+}
 }

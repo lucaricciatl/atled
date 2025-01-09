@@ -74,7 +74,7 @@ int main() {
     std::mutex entityMutex;
 
     // NBodySimulation instance
-    NBodySimulation simulation(entities);
+    nbody::NBodySimulation simulation(entities);
 
     // Simulation thread
     std::thread simulationThread([&]() {

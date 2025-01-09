@@ -4,8 +4,9 @@
 namespace input {
 
 enum class MouseType{ 
-	Invalid,
-	Raylib
+  Raylib,
+  Atled,
+  Invalid
 };
 
 struct MousePosition {

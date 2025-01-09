@@ -6,6 +6,7 @@
 #include <Entity.hpp>
 #include <Point2D.hpp>
 
+namespace nbody{
 // Constants
 constexpr float G = 6.67430e-11f; // Gravitational constant
 constexpr float damping = 0.99f;  // Damping factor for velocity updates
@@ -94,5 +95,7 @@ private:
     float dampingFactor = 0.9999f;          // Damping applied to gravitational force
     float minDistanceThreshold = 30.0f;   // Minimum distance threshold for force calculation
 };
+
+}
 
 #endif // NBODY_SIMULATION_HPP

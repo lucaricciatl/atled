@@ -9,6 +9,6 @@ add_library(math INTERFACE geometry datastructure)
 add_subdirectory(geometry)
 add_subdirectory(datastructure)
 
-target_link_libraries(graphics INTERFACE geometry)
+target_link_libraries(math INTERFACE geometry)
 
-set_target_properties(graphics PROPERTIES FOLDER "modules")
+set_target_properties(math PROPERTIES FOLDER "modules/math")
