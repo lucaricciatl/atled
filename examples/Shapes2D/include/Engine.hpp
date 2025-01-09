@@ -1,10 +1,11 @@
-#include "CoreEngine.hpp"
 #include <memory>
-#include "InputManager.hpp"            // Include the full definition of InputManager
-#include "IGraphicManager.hpp"          // Include the full definition of IGraphicManager
+
+#include "CoreEngine.hpp"
+#include "IGraphicManager.hpp"  // Include the full definition of IGraphicManager
+#include "InputManager.hpp"     // Include the full definition of InputManager
 
 class Engine : public engine::CoreEngine {
-public:
+   public:
     using CoreEngine::CoreEngine;  // Inherit CoreEngine's constructors
     ~Engine() override = default;
 
@@ -14,5 +15,3 @@ public:
     void OnRender() override;
     void OnShutdown() override;
 };
-
-

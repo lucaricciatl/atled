@@ -1,22 +1,23 @@
 #ifndef INPUTBINDINGS_HPP
 #define INPUTBINDINGS_HPP
 
-#include "InputEvent.hpp"
-#include "Action.hpp"
+#include <mutex>
 #include <unordered_map>
 #include <vector>
-#include <mutex>
+
+#include "Action.hpp"
+#include "InputEvent.hpp"
 
 class Bindings {
-public:
+   public:
     void BindKeyToAction(Key key, Action action);
     void UnbindKey(Key key);
     std::vector<Action> GetActionsForKey(Key key) const;
     void ClearBindings();
 
-private:
+   private:
     mutable std::mutex bindingsMutex;
     std::unordered_map<Key, std::vector<Action>> keyToActionsMap;
 };
 
-#endif // INPUTBINDINGS_HPP
+#endif  // INPUTBINDINGS_HPP

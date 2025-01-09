@@ -1,18 +1,18 @@
 #ifndef CONTROLLERCOMPONENT_HPP
 #define CONTROLLERCOMPONENT_HPP
 
-#include "Component.hpp"
 #include <Action.hpp>
 
+#include "Component.hpp"
+
 class ControllerComponent : public Component {
-public:
+   public:
     ControllerComponent(Entity* owner, std::shared_ptr<ServiceProvider>) : Component(owner){};
 
     virtual void OnAction(Action action, bool activated);
     virtual void Update(float deltaTime);
 
-private:
-
+   private:
 };
 
-#endif // PLAYERCONTROLLER_HPP
+#endif  // PLAYERCONTROLLER_HPP

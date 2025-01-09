@@ -1,7 +1,8 @@
-#include "AtledMouse.hpp"
-#include "MouseFactory.hpp" // Ensure this header is included
 #include <iostream>
 #include <memory>
+
+#include "AtledMouse.hpp"
+#include "MouseFactory.hpp"  // Ensure this header is included
 
 int main() {
     try {
@@ -15,7 +16,8 @@ int main() {
         mouse->SetMousePosition(400, 300);
         std::cout << "Set mouse position to (400, 300)\n";
         mouse->GetMousePosition();
-		std::cout << "Mouse position: " << mouse->GetMousePosition().x << ", " << mouse->GetMousePosition().y << std::endl;
+        std::cout << "Mouse position: " << mouse->GetMousePosition().x << ", " << mouse->GetMousePosition().y
+                  << std::endl;
         // Show or hide cursor
         mouse->HideCursor();
         std::cout << "Cursor is hidden? " << std::boolalpha << mouse->IsCursorHidden() << std::endl;

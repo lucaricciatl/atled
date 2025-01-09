@@ -1,19 +1,20 @@
 #ifndef ACTIONSYSTEM_HPP
 #define ACTIONSYSTEM_HPP
 
-#include "System.hpp"
-#include "EventBus.hpp"
-#include "InputEvent.hpp"
-#include "Action.hpp"
-#include "InputBindings.hpp"
-#include "IActionHandler.hpp"
-#include <vector>
 #include <memory>
-#include <unordered_map>
 #include <mutex>
+#include <unordered_map>
+#include <vector>
+
+#include "Action.hpp"
+#include "EventBus.hpp"
+#include "IActionHandler.hpp"
+#include "InputBindings.hpp"
+#include "InputEvent.hpp"
+#include "System.hpp"
 
 class ActionSystem : public System {
-public:
+   public:
     ActionSystem(EventBus* eventBus, std::shared_ptr<InputBindings> bindings);
 
     void Init() override;
@@ -21,7 +22,7 @@ public:
     void AddActionHandler(std::shared_ptr<IActionHandler> handler);
     void RemoveActionHandler(std::shared_ptr<IActionHandler> handler);
 
-private:
+   private:
     void OnInputEvent(const InputEvent& event);
 
     EventBus* eventBus;
@@ -31,4 +32,4 @@ private:
     std::mutex handlersMutex;
 };
 
-#endif // ACTIONSYSTEM_HPP
+#endif  // ACTIONSYSTEM_HPP

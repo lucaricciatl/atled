@@ -5,28 +5,25 @@
 #include <typeindex>
 #include <unordered_map>
 #include <vector>
+
 #include "Event.hpp"
 
 class EventBus {
-public:
+   public:
     template <typename EventType>
     void Subscribe(std::function<void(const EventType&)> handler);
 
     template <typename EventType>
     void Publish(const EventType& event);
 
-private:
-    std::unordered_map<std::type_index,
-        std::vector<std::function<void(const Event&)>>>
-        handlers;
+   private:
+    std::unordered_map<std::type_index, std::vector<std::function<void(const Event&)>>> handlers;
 };
 
 template <typename EventType>
 void EventBus::Subscribe(std::function<void(const EventType&)> handler) {
     auto& handlersForType = handlers[std::type_index(typeid(EventType))];
-    handlersForType.push_back([handler](const Event& event) {
-        handler(static_cast<const EventType&>(event));
-        });
+    handlersForType.push_back([handler](const Event& event) { handler(static_cast<const EventType&>(event)); });
 }
 
 template <typename EventType>
@@ -39,5 +36,4 @@ void EventBus::Publish(const EventType& event) {
     }
 }
 
-
-#endif // EVENTBUS_HPP
+#endif  // EVENTBUS_HPP

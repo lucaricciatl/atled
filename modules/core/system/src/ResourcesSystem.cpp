@@ -1,5 +1,6 @@
 #include "ResourcesSystem.hpp"
-#include <iostream> // For debug/logging purposes
+
+#include <iostream>  // For debug/logging purposes
 
 ResourceSystem::ResourceSystem(ResourceManager* resourceMgr)
     : resourceManager(std::shared_ptr<ResourceManager>(resourceMgr)) {}
@@ -15,5 +16,3 @@ void ResourceSystem::Update(float deltaTime) {
 void ResourceSystem::Shutdown() {
     // Cleanup resources and shutdown
 }
-
-

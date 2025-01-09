@@ -5,11 +5,11 @@
 #include <vector>
 
 class System {
-public:
-  virtual ~System() = default;
-  virtual void Init() {}
-  virtual void Update(float deltaTime) {};
-  virtual void Shutdown() {}
+   public:
+    virtual ~System() = default;
+    virtual void Init() {}
+    virtual void Update(float deltaTime){};
+    virtual void Shutdown() {}
 };
 
-#endif // SYSTEM_HPP
+#endif  // SYSTEM_HPP

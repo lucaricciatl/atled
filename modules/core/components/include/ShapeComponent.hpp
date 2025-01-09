@@ -1,16 +1,17 @@
 #pragma once
 
+#include <memory>
+
 #include "Component.hpp"
 #include "Entity.hpp"
+#include "FrameComponent.hpp"
 #include "Model.hpp"
 #include "ModelFactory.hpp"
-#include "FrameComponent.hpp"
-#include <memory>
 
 using namespace graphics;
 
 class ShapeComponent : public Component {
-public:
+   public:
     // Constructor
     explicit ShapeComponent(Entity* entity, std::shared_ptr<ServiceProvider> serviceProvider)
         : Component(entity), mModel(nullptr) {
@@ -22,7 +23,7 @@ public:
     virtual ~ShapeComponent() {
         // Remove the model from the graphics manager if it exists
         if (mModel) {
-            //graphicsManager->RemoveShape(mModel);
+            // graphicsManager->RemoveShape(mModel);
             mModel.reset();
         }
     }
@@ -37,7 +38,7 @@ public:
     void SetModel(Args&&... args) {
         // Remove the existing model from the graphics manager if it exists
         if (mModel) {
-            //graphicsManager->RemoveShape(mModel);
+            // graphicsManager->RemoveShape(mModel);
             mModel.reset();
         }
 
@@ -46,8 +47,7 @@ public:
         if (mModel) {
             mModel->SetFrame(mFrame);
             graphicsManager->AddShape(1, mModel);
-        }
-        else {
+        } else {
             // Handle the error if model creation failed
             // You might want to log an error or throw an exception
         }
@@ -63,7 +63,7 @@ public:
         // Initialization logic if needed
     }
 
-private:
+   private:
     std::shared_ptr<graphics::Model> mModel;
     std::shared_ptr<graphics::IGraphicManager> graphicsManager;
     std::shared_ptr<physics::Frame> mFrame;

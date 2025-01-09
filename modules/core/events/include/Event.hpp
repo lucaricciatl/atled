@@ -2,8 +2,8 @@
 #define EVENT_HPP
 
 class Event {
-public:
-  virtual ~Event() = default;
+   public:
+    virtual ~Event() = default;
 };
 
-#endif // EVENT_HPP
+#endif  // EVENT_HPP

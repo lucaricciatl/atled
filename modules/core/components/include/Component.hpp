@@ -3,11 +3,10 @@
 
 #include "Entity.hpp"
 
-
-class Entity; // Forward declaration of Entity
+class Entity;  // Forward declaration of Entity
 
 class Component {
-public:
+   public:
     Entity* owner;
 
     Component(Entity* owner = nullptr) : owner(owner) {}
@@ -15,10 +14,10 @@ public:
     virtual ~Component() = default;
 
     // Update method for the component
-    virtual void Update(double deltatime) {};
+    virtual void Update(double deltatime){};
 
     // Init method for the component
-    virtual void Init() {};
+    virtual void Init(){};
 };
 
-#endif // COMPONENT_HPP
+#endif  // COMPONENT_HPP

@@ -1,16 +1,17 @@
 #ifndef RESOURCE_SYSTEM_HPP
 #define RESOURCE_SYSTEM_HPP
 
-#include "System.hpp"
-#include "ResourceManager.hpp"
 #include <memory>
-#include <vector>
 #include <string>
+#include <vector>
+
+#include "ResourceManager.hpp"
+#include "System.hpp"
 
 using namespace resources;
 
 class ResourceSystem : public System {
-public:
+   public:
     ResourceSystem(ResourceManager* resourceMgr);
     ~ResourceSystem() override = default;
 
@@ -22,10 +23,9 @@ public:
     void LoadResources();
     void UnloadResources();
 
-
-private:
+   private:
     std::shared_ptr<ResourceManager> resourceManager;
-    std::vector<std::string> searchPaths; // List of resource search paths
+    std::vector<std::string> searchPaths;  // List of resource search paths
 };
 
-#endif // RESOURCE_SYSTEM_HPP
+#endif  // RESOURCE_SYSTEM_HPP

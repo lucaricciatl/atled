@@ -1,21 +1,20 @@
 #include "InputSystem.hpp"
+
+#include <atomic>
+#include <iostream>
+#include <queue>
+#include <thread>
+
 #include "InputEvent.hpp"
 #include "Key.hpp"
-#include <thread>
-#include <atomic>
-#include <queue>
-#include <iostream>
 
 InputSystem::InputSystem(input::InputManager* inputMgr, EventBus* eventBus)
-    : inputManager(inputMgr), eventBus(eventBus), isRunning(false) {
-}
+    : inputManager(inputMgr), eventBus(eventBus), isRunning(false) {}
 
-void InputSystem::Start() {
-    isRunning = true;
-}
+void InputSystem::Start() { isRunning = true; }
 
 void InputSystem::Init() {
-    for (int key = 0; key <= 255; ++key) { // Adjust the range as needed
+    for (int key = 0; key <= 255; ++key) {  // Adjust the range as needed
         previousKeyStates[key] = false;
     }
     inputManager->Init();
@@ -25,7 +24,7 @@ void InputSystem::Init() {
 void InputSystem::Stop() {
     isRunning = false;
     if (updateThread.joinable()) {
-        updateThread.join(); // Ensure the thread finishes execution
+        updateThread.join();  // Ensure the thread finishes execution
     }
 }
 
@@ -34,7 +33,7 @@ void InputSystem::Update(float deltaTime) {
     inputManager->Update();
 
     // Iterate through all possible key codes
-    for (int key = 0; key <= 255; ++key) { // Adjust the range as needed
+    for (int key = 0; key <= 255; ++key) {  // Adjust the range as needed
         bool isCurrentlyDown = inputManager->IsKeyDown(key);
         bool wasPreviouslyDown = previousKeyStates[key];
 
@@ -56,7 +55,6 @@ void InputSystem::Update(float deltaTime) {
     }
 }
 
-
 float InputSystem::GetDeltaTime() {
     static auto lastTime = std::chrono::high_resolution_clock::now();
     auto currentTime = std::chrono::high_resolution_clock::now();
@@ -66,5 +64,5 @@ float InputSystem::GetDeltaTime() {
 }
 
 InputSystem::~InputSystem() {
-    Stop(); // Ensure the thread stops before destruction
+    Stop();  // Ensure the thread stops before destruction
 }

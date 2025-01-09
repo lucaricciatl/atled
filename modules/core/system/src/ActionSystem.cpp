@@ -4,9 +4,7 @@ ActionSystem::ActionSystem(EventBus* eventBus, std::shared_ptr<InputBindings> bi
     : eventBus(eventBus), inputBindings(bindings) {}
 
 void ActionSystem::Init() {
-    eventBus->Subscribe<InputEvent>([this](const InputEvent& event) {
-        OnInputEvent(event);
-    });
+    eventBus->Subscribe<InputEvent>([this](const InputEvent& event) { OnInputEvent(event); });
 }
 
 void ActionSystem::Update(float deltaTime) {

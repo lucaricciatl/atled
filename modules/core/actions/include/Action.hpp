@@ -14,9 +14,9 @@ enum class Action {
 };
 
 class IActionHandler {
-public:
+   public:
     virtual ~IActionHandler() = default;
     virtual void OnAction(Action action, bool activated) = 0;
 };
 
-#endif // ACTION_HPP
+#endif  // ACTION_HPP

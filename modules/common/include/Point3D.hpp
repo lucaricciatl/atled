@@ -13,42 +13,26 @@ struct Point3D {
     Point3D(const Point2D& point2D, float z_val = 0) : x(point2D.GetX()), y(point2D.GetY()), z(z_val) {}
 
     // Getters
-    float GetX() const {
-        return x;
-    }
+    float GetX() const { return x; }
 
-    float GetY() const {
-        return y;
-    }
+    float GetY() const { return y; }
 
-    float GetZ() const {
-        return z;
-    }
+    float GetZ() const { return z; }
 
     // Operator: Equality
-    bool operator==(const Point3D& other) const {
-        return x == other.x && y == other.y && z == other.z;
-    }
+    bool operator==(const Point3D& other) const { return x == other.x && y == other.y && z == other.z; }
 
     // Operator: Inequality
-    bool operator!=(const Point3D& other) const {
-        return !(*this == other);
-    }
+    bool operator!=(const Point3D& other) const { return !(*this == other); }
 
     // Operator: Addition
-    Point3D operator+(const Point3D& other) const {
-        return Point3D(x + other.x, y + other.y, z + other.z);
-    }
+    Point3D operator+(const Point3D& other) const { return Point3D(x + other.x, y + other.y, z + other.z); }
 
     // Operator: Subtraction
-    Point3D operator-(const Point3D& other) const {
-        return Point3D(x - other.x, y - other.y, z - other.z);
-    }
+    Point3D operator-(const Point3D& other) const { return Point3D(x - other.x, y - other.y, z - other.z); }
 
     // Operator: Scalar Multiplication
-    Point3D operator*(float scalar) const {
-        return Point3D(x * scalar, y * scalar, z * scalar);
-    }
+    Point3D operator*(float scalar) const { return Point3D(x * scalar, y * scalar, z * scalar); }
 
     // Operator: Compound Addition
     Point3D& operator+=(const Point3D& other) {
@@ -75,11 +59,9 @@ struct Point3D {
     }
 
     // Operator: Negation (unary minus)
-    Point3D operator-() const {
-        return Point3D(-x, -y, -z);
-    }
+    Point3D operator-() const { return Point3D(-x, -y, -z); }
 };
 
 typedef Point3D Coordinates3D;
 
-#endif // POINT3D_HPP
+#endif  // POINT3D_HPP

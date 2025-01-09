@@ -2,24 +2,24 @@
 #define ENTITY_HPP
 
 #include <Component.hpp>
-#include <typeindex>
-#include <memory>
-#include <vector>
-#include <unordered_map>
-#include <functional>
-#include <cassert> // For runtime checks (optional)
 #include <Frame.hpp>
+#include <cassert>  // For runtime checks (optional)
+#include <functional>
+#include <memory>
+#include <typeindex>
+#include <unordered_map>
+#include <vector>
 
 using namespace physics;
 // Forward declaration of Component
 class Component;
 
-class ServiceProvider; // Forward declaration of ServiceProvider
+class ServiceProvider;  // Forward declaration of ServiceProvider
 
 class Entity {
-private:
-    Entity* parent = nullptr; // Pointer to the parent entity
-    std::vector<Entity*> children; // List of child entities
+   private:
+    Entity* parent = nullptr;       // Pointer to the parent entity
+    std::vector<Entity*> children;  // List of child entities
 
     // Components associated with this entity
     std::unordered_map<std::type_index, std::shared_ptr<Component>> components;
@@ -27,7 +27,7 @@ private:
     // Service provider
     std::shared_ptr<ServiceProvider> mServiceProvider;
 
-public:
+   public:
     // Constructor and Destructor
     Entity();
     void Init();
@@ -57,7 +57,7 @@ public:
     template <typename ComponentType>
     std::shared_ptr<ComponentType> GetComponent() const;
 
-protected:
+   protected:
     // Event hooks (override in derived classes if needed)
     virtual void OnParentChanged(Entity* oldParent, Entity* newParent);
     virtual void OnChildAdded(Entity* child);
@@ -65,23 +65,19 @@ protected:
     std::shared_ptr<Frame> mFrame;
 };
 
-
-
 template <typename ComponentType, typename... Args>
 std::shared_ptr<ComponentType> Entity::AddComponent(Args&&... args) {
-    static_assert(std::is_base_of<Component, ComponentType>::value,
-        "ComponentType must derive from Component");
+    static_assert(std::is_base_of<Component, ComponentType>::value, "ComponentType must derive from Component");
 
     // Create and store the component, passing `this` and any additional arguments
-    auto component = std::make_shared<ComponentType>(this, mServiceProvider , std::forward<Args>(args)...);
+    auto component = std::make_shared<ComponentType>(this, mServiceProvider, std::forward<Args>(args)...);
     components[typeid(ComponentType)] = component;
     return component;
 }
 
 template <typename ComponentType>
 void Entity::RemoveComponent() {
-    static_assert(std::is_base_of<Component, ComponentType>::value,
-        "ComponentType must derive from Component");
+    static_assert(std::is_base_of<Component, ComponentType>::value, "ComponentType must derive from Component");
 
     auto it = components.find(typeid(ComponentType));
     if (it != components.end()) {
@@ -91,16 +87,14 @@ void Entity::RemoveComponent() {
 
 template <typename ComponentType>
 std::shared_ptr<ComponentType> Entity::GetComponent() const {
-    static_assert(std::is_base_of<Component, ComponentType>::value,
-        "ComponentType must derive from Component");
+    static_assert(std::is_base_of<Component, ComponentType>::value, "ComponentType must derive from Component");
 
     auto it = components.find(typeid(ComponentType));
     if (it != components.end()) {
         return std::static_pointer_cast<ComponentType>(it->second);
     }
 
-    return nullptr; // Component not found
+    return nullptr;  // Component not found
 }
 
-
-#endif // ENTITY_HPP
+#endif  // ENTITY_HPP

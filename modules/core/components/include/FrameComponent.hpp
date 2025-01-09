@@ -8,15 +8,14 @@ using Frame = physics::Frame;
 using Position = physics::Position;
 
 class FrameComponent : public Component {
-public:
+   public:
     // Constructors
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider);
-    FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, const Position& position, const math::Quaternion& orientation);
+    FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, const Position& position,
+                   const math::Quaternion& orientation);
     FrameComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, std::shared_ptr<Frame> aframe);
     // Getters
-    std::shared_ptr<Frame> GetFrame() const { 
-        return frame; 
-    };
+    std::shared_ptr<Frame> GetFrame() const { return frame; };
     std::shared_ptr<Position> GetPosition() const;
     math::Quaternion GetOrientation() const;
 
@@ -28,8 +27,8 @@ public:
     // Destructor
     ~FrameComponent() override;
 
-private:
+   private:
     std::shared_ptr<Frame> frame;
 };
 
-#endif // FRAME_COMPONENT_HPP
+#endif  // FRAME_COMPONENT_HPP

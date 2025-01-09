@@ -7,11 +7,11 @@
 using Position = physics::Position;
 
 class PositionComponent : public Position, public Component {
-public:
+   public:
     // Constructors
     PositionComponent(Entity* owner, std::shared_ptr<ServiceProvider>);
-    PositionComponent(Entity* owner, std::shared_ptr<ServiceProvider> ,double x, double y, double z);
-    PositionComponent(Entity* owner, std::shared_ptr<ServiceProvider> ,const Position& position);
+    PositionComponent(Entity* owner, std::shared_ptr<ServiceProvider>, double x, double y, double z);
+    PositionComponent(Entity* owner, std::shared_ptr<ServiceProvider>, const Position& position);
 
     // Destructor
     ~PositionComponent() override;
@@ -20,4 +20,4 @@ public:
     void translate(double dx, double dy, double dz);
 };
 
-#endif // POSITION_COMPONENT_HPP
+#endif  // POSITION_COMPONENT_HPP

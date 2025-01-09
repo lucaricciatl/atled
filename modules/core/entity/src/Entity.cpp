@@ -1,14 +1,16 @@
 #include "Entity.hpp"
-#include <stdexcept>
-#include <functional>
+
+#include <FrameComponent.hpp>
 #include <Position.hpp>
 #include <Quaternion.hpp>
-#include <FrameComponent.hpp>
+#include <functional>
+#include <stdexcept>
 
 // Constructor
-Entity::Entity() : mFrame(std::make_shared<Frame>()) {
-    
-};
+Entity::Entity()
+    : mFrame(std::make_shared<Frame>()){
+
+      };
 
 // Destructor
 Entity::~Entity() {
@@ -22,24 +24,24 @@ Entity::~Entity() {
 }
 
 void Entity::Update(double deltaTime) {
-        // Update all components
-        for (auto& [type, component] : components) {
-            if (component) {
-                component->Update(deltaTime); // Call the component's Update method
-            }
+    // Update all components
+    for (auto& [type, component] : components) {
+        if (component) {
+            component->Update(deltaTime);  // Call the component's Update method
         }
+    }
 
-        // Optionally update children entities
-        for (auto* child : children) {
-            if (child) {
-                child->Update(deltaTime); // Recursively update child entities
-            }
+    // Optionally update children entities
+    for (auto* child : children) {
+        if (child) {
+            child->Update(deltaTime);  // Recursively update child entities
         }
+    }
 };
 void Entity::Init() {
     for (auto& [type, component] : components) {
         if (component) {
-            component->Init(); // Correctly calls DerivedComponent1::Init()
+            component->Init();  // Correctly calls DerivedComponent1::Init()
         }
     }
 
@@ -60,7 +62,7 @@ void Entity::SetParent(Entity* newParent) {
         throw std::logic_error("An entity cannot be its own parent.");
     }
     if (parent == newParent) {
-        return; // No change
+        return;  // No change
     }
 
     Entity* oldParent = parent;
@@ -76,9 +78,7 @@ void Entity::SetParent(Entity* newParent) {
 }
 
 // Get the parent entity
-Entity* Entity::GetParent() const {
-    return parent;
-}
+Entity* Entity::GetParent() const { return parent; }
 
 // Add a child entity
 void Entity::AddChild(Entity* child) {
@@ -86,7 +86,7 @@ void Entity::AddChild(Entity* child) {
         throw std::logic_error("An entity cannot be its own child.");
     }
     if (std::find(children.begin(), children.end(), child) != children.end()) {
-        return; // Already a child
+        return;  // Already a child
     }
     children.push_back(child);
     child->parent = this;
@@ -106,9 +106,7 @@ void Entity::RemoveChild(Entity* child) {
 }
 
 // Get the list of children
-const std::vector<Entity*>& Entity::GetChildren() const {
-    return children;
-}
+const std::vector<Entity*>& Entity::GetChildren() const { return children; }
 
 // Traverse the hierarchy
 void Entity::TraverseHierarchy(const std::function<void(Entity*)>& callback) {
@@ -132,5 +130,3 @@ void Entity::OnChildAdded(Entity* child) {
 void Entity::OnChildRemoved(Entity* child) {
     // Override to implement custom behavior
 }
-
-

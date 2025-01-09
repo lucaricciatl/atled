@@ -1,17 +1,18 @@
 #ifndef SERVICE_PROVIDER_HPP
 #define SERVICE_PROVIDER_HPP
 
-#include <memory>
+#include <CameraManager.hpp>
 #include <IGraphicManager.hpp>
 #include <InputManager.hpp>
-#include <CameraManager.hpp>
-#include "ResourceManager.hpp"
+#include <memory>
+
 #include "PhysicsManager.hpp"
+#include "ResourceManager.hpp"
 
 class ServiceProvider {
-public:
-    ServiceProvider();                     // Constructor declaration
-    ~ServiceProvider();                    // Destructor declaration
+   public:
+    ServiceProvider();   // Constructor declaration
+    ~ServiceProvider();  // Destructor declaration
 
     // Provide shared pointers to the service provider
     void Provide(std::shared_ptr<input::InputManager> inputMgr);
@@ -27,7 +28,7 @@ public:
     std::shared_ptr<resources::ResourceManager> GetResourceManager() const;
     std::shared_ptr<physics::PhysicsManager> GetPhysicsManager() const;
 
-private:
+   private:
     std::shared_ptr<input::InputManager> inputManager;
     std::shared_ptr<graphics::IGraphicManager> graphicsManager;
     std::shared_ptr<graphics::CameraManager> cameraManager;
@@ -35,4 +36,4 @@ private:
     std::shared_ptr<physics::PhysicsManager> physicsManager;
 };
 
-#endif // SERVICE_PROVIDER_HPP
+#endif  // SERVICE_PROVIDER_HPP

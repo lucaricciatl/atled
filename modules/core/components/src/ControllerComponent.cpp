@@ -1,4 +1,5 @@
 #include "ControllerComponent.hpp"
+
 #include <Action.hpp>
 
 void ControllerComponent::OnAction(Action action, bool activated) {

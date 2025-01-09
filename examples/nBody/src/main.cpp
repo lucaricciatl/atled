@@ -1,40 +1,40 @@
 #include <AtledEngine.hpp>
-#include <ShapeComponent.hpp>
-#include <FrameComponent.hpp>
 #include <Frame.hpp>
-#include <random>
-#include <vector>
-#include <thread>
+#include <FrameComponent.hpp>
+#include <ShapeComponent.hpp>
 #include <atomic>
 #include <iostream>
 #include <mutex>
+#include <random>
+#include <thread>
+#include <vector>
 
 // NBodySimulation class declaration (assumed to exist)
-#include "NBodySimulation.hpp"
 #include <EngineBuilder.hpp>
 #include <FreeCameraComponent.hpp>
+
+#include "NBodySimulation.hpp"
 #include "raylib.hpp"
 
 int main() {
     // Engine setup
     engine::EngineBuilder<AtledEngine> builder;
 
-    std::unique_ptr<AtledEngine> coreEngine = builder
-        .SetKeyboardType(input::KeyboardType::Raylib)
-        .SetMouseType(input::MouseType::Raylib)
-        .SetGraphicsType(graphics::GraphicsType::Raylib)
-        .SetCameraType(graphics::CameraType::Raylib)
-        .SetWorldType(graphics::WorldType::World2D)
-        .SetTargetFramerate(60) // Set frame rate suitable for the game speed
-        .Build();
+    std::unique_ptr<AtledEngine> coreEngine = builder.SetKeyboardType(input::KeyboardType::Raylib)
+                                                  .SetMouseType(input::MouseType::Raylib)
+                                                  .SetGraphicsType(graphics::GraphicsType::Raylib)
+                                                  .SetCameraType(graphics::CameraType::Raylib)
+                                                  .SetWorldType(graphics::WorldType::World2D)
+                                                  .SetTargetFramerate(60)  // Set frame rate suitable for the game speed
+                                                  .Build();
 
     // Random number generator setup
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<float> distX(0.0f, 200.0f); // Range for X positions
-    std::uniform_real_distribution<float> distY(0.0f, 200.0f); // Range for Y positions
-    std::uniform_real_distribution<float> distMass(1.0e12f, 1.0e14f); // Range for masses
-    std::uniform_real_distribution<float> distColor(0, 1); // Range for RGB color values
+    std::uniform_real_distribution<float> distX(0.0f, 200.0f);         // Range for X positions
+    std::uniform_real_distribution<float> distY(0.0f, 200.0f);         // Range for Y positions
+    std::uniform_real_distribution<float> distMass(1.0e12f, 1.0e14f);  // Range for masses
+    std::uniform_real_distribution<float> distColor(0, 1);             // Range for RGB color values
 
     // List to store entities
     std::vector<std::shared_ptr<Entity>> entities;
@@ -46,7 +46,7 @@ int main() {
         // Add FrameComponent
         auto frameComponent = entity->AddComponent<FrameComponent>();
         if (frameComponent) {
-            frameComponent->SetPosition(distX(gen), distY(gen), 0.0f); // Set random position
+            frameComponent->SetPosition(distX(gen), distY(gen), 0.0f);  // Set random position
         }
 
         // Add ShapeComponent
@@ -55,8 +55,9 @@ int main() {
             shapeComponent->SetModel<Circle>();
             auto circle = shapeComponent->GetModel<Circle>();
             if (circle) {
-                circle->SetRadius(2.0f); // Set a fixed radius for all entities
-                circle->SetColor(graphics::Color(distColor(gen), distColor(gen), distColor(gen), 0.8)); // Set random color
+                circle->SetRadius(2.0f);  // Set a fixed radius for all entities
+                circle->SetColor(
+                    graphics::Color(distColor(gen), distColor(gen), distColor(gen), 0.8));  // Set random color
             }
         }
 
@@ -80,11 +81,11 @@ int main() {
     std::thread simulationThread([&]() {
         while (running) {
             {
-                std::lock_guard<std::mutex> lock(entityMutex); // Protect shared resources
-                simulation.Update(0.016f); // Update simulation with a fixed timestep (16ms)
+                std::lock_guard<std::mutex> lock(entityMutex);  // Protect shared resources
+                simulation.Update(0.016f);                      // Update simulation with a fixed timestep (16ms)
             }
         }
-        });
+    });
     // Run the engine in the main thread
     coreEngine->Start();
 

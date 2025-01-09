@@ -2,10 +2,9 @@
 #include "Particle.hpp"
 
 class PointCloudComponent : public Component {
-    public:
-        PointCloudComponent();
-        ~PointCloudComponent();
+   public:
+    PointCloudComponent();
+    ~PointCloudComponent();
 
-    private:
-        
+   private:
 }
