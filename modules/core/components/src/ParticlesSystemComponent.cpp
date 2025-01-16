@@ -2,7 +2,7 @@
 
 void ParticleComponent::Update(double deltaTime) {
     if (life > lifetime) {
-        // Reset the particle
+        
         life = 0;
     } else {
         auto size = StartSize + (EndSize - StartSize) * (life / lifetime);
@@ -28,3 +28,7 @@ void ParticlesSystemComponent::SetParticlesCollision(bool collision) {}
 void ParticlesSystemComponent::AddParticles(int numParticles) {}
 
 void ParticlesSystemComponent::RemoveParticles(int numParticles) {}
+
+void ParticlesSystemComponent::SetSpeed(float aSpeed){ mSpeed = aSpeed;};
+
+void ParticlesSystemComponent::SetEmissionRate(float aRate){ mRate = aRate;};

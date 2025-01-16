@@ -1,17 +1,18 @@
 #include <AtledEngine.hpp>
-#include <ShapeComponent.hpp>
-#include <FrameComponent.hpp>
+#include <EngineBuilder.hpp>
 #include <Frame.hpp>
-#include <random>
-#include <vector>
-#include <thread>
+#include <FrameComponent.hpp>
+#include <FreeCameraComponent.hpp>
+#include <Palette.hpp>
+#include <ShapeComponent.hpp>
 #include <atomic>
 #include <iostream>
 #include <mutex>
-#include <EngineBuilder.hpp>
-#include <FreeCameraComponent.hpp>
+#include <random>
+#include <thread>
+#include <vector>
+
 #include "ParticlesSystemComponent.hpp"
-#include <Palette.hpp>
 
 int main() {
     // Engine setup
