@@ -25,6 +25,9 @@ void ServiceProvider::Provide(std::shared_ptr<physics::PhysicsManager> aPhysicsM
     physicsManager = std::move(aPhysicsManager);
 }
 
+void ServiceProvider::Provide(AtledEngine* engine) { 
+    this->engine = engine; }
+
 // Getter methods
 std::shared_ptr<input::InputManager> ServiceProvider::GetInputManager() const { return inputManager; }
 
@@ -35,3 +38,5 @@ std::shared_ptr<graphics::CameraManager> ServiceProvider::GetCameraManager() con
 std::shared_ptr<resources::ResourceManager> ServiceProvider::GetResourceManager() const { return resourceManager; }
 
 std::shared_ptr<physics::PhysicsManager> ServiceProvider::GetPhysicsManager() const { return physicsManager; }
+
+AtledEngine* ServiceProvider::GetEngine() { return engine; }

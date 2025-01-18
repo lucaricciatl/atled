@@ -49,6 +49,7 @@ void AtledEngine::Init() {
             entity->Init();
         }
     }
+    serviceProvider->Provide(this);
 }
 
 void AtledEngine::Start() {

@@ -11,6 +11,8 @@
 #include "RigidBody.hpp"
 #include "ServiceProvider.hpp"
 #include "ShapeComponent.hpp"
+#include <random>
+
 
 namespace {
   constexpr int defaultmeshring = 3;
@@ -19,41 +21,51 @@ namespace {
 class ParticleComponent : public Component {
    public:
     ParticleComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, float startSize = 0.01,
-                      float EndSize = 0.01, float lifetime = 1.0f, bool collision = false, bool gravity = false, const graphics::Color &color = getColor("Elegant Soft Gray"))
+                      float endSize = 0.01, float lifetime = 1.0f, bool collision = false, bool gravity = false,
+                      float speed = 0, const graphics::Color& color = getColor("Elegant Soft Gray"))
         : Component(owner),  // Call base class constructor
           physicsManager(serviceProvider->GetPhysicsManager()),
-          mFrame(owner->GetComponent<FrameComponent>()->GetFrame()) {
+          mFrame(owner->GetComponent<FrameComponent>()->GetFrame()),
+          mSpeed(speed),
+          mStartSize(startSize),
+          mEndSize(endSize),
+          mLifetime(lifetime),
+          mCollisionEnabled(collision)
+    {
+        // Create and configure the shape component
         auto shape = owner->AddComponent<ShapeComponent>();
         shape->SetModel<Sphere>(startSize, math::Vector3(0, 0, 0), defaultmeshring, defaultmeshslice, color);
     }
 
     void Update(double deltaTime) override;
+    void SetSpeed(const float speed);
 
    private:
     std::shared_ptr<physics::PhysicsManager> physicsManager;
     std::shared_ptr<physics::RigidBody> rigidBody;
     std::shared_ptr<physics::Frame> mFrame;
     std::shared_ptr<ShapeComponent> shape;
-    float StartSize;
-    float EndSize;
-    float lifetime;
+    float mStartSize;
+    float mEndSize;
+    float mLifetime;
     float life;
-    bool collision;
+    bool mCollisionEnabled;
+    float mSpeed;
 
 };
 
 class ParticlesSystemComponent : public Component {
    public:
     ParticlesSystemComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, int numParticles = 1000,
-                             float startSize = 0.01, float EndSize = 0.01, float lifetime = 1.0f,
-                             bool collision = false)
+                             float startSize = 0.01, float EndSize = 0.01, float lifetime = 5.0f,
+                             bool collision = false, float speed = 0)
         : Component(owner),  // Call base class constructor
           physicsManager(serviceProvider->GetPhysicsManager()),
           mFrame(owner->GetComponent<FrameComponent>()->GetFrame()),
           numParticles(numParticles) {
-        // Generate particles based on the specified parameters
+
         for (int i = 0; i < numParticles; i++) {
-            owner->AddComponent<ParticleComponent>(startSize, EndSize, lifetime, collision);
+
         }
     }
 
@@ -70,11 +82,10 @@ class ParticlesSystemComponent : public Component {
    private:
     std::shared_ptr<physics::PhysicsManager> physicsManager;
     std::shared_ptr<physics::Frame> mFrame;
-
+    std::vector<std::shared_ptr<ParticleComponent>> mParticles;
+    std::vector<Entity*> particles;
     void AddParticles(int numParticles);
     void RemoveParticles(int numParticles);
-
-    std::vector<Entity*> particles;
 
     int numParticles;
     float mSpeed;
