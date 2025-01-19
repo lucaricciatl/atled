@@ -1,3 +1,6 @@
+#ifndef ATLEDENGINE_HPP
+#define ATLEDENGINE_HPP
+
 #include <Entity.hpp>
 #include <EventBus.hpp>
 #include <ResourceManager.hpp>
@@ -38,3 +41,5 @@ class AtledEngine {
     std::vector<std::shared_ptr<Entity>> entities;
     EventBus eventBus;
 };
+
+#endif ATLEDENGINE_HPP

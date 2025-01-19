@@ -31,7 +31,7 @@ AtledEngine::AtledEngine(std::unique_ptr<input::InputManager> inputMgr,
     serviceProvider->Provide(sharedCameraMgr);
     serviceProvider->Provide(sharedResourcesMgr);
     serviceProvider->Provide(sharedPhysicsManager);
-
+    serviceProvider->Provide(this);
     // Add systems using shared pointers
     AddSystem(std::make_unique<InputSystem>(sharedInputMgr.get(), GetEventBus()));
     AddSystem(std::make_unique<RenderSystem>(sharedGraphicsMgr.get()));
@@ -49,7 +49,7 @@ void AtledEngine::Init() {
             entity->Init();
         }
     }
-    serviceProvider->Provide(this);
+
 }
 
 void AtledEngine::Start() {

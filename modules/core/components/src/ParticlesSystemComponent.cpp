@@ -4,17 +4,12 @@ void ParticleComponent::Update(double deltaTime) {
     if (life > mLifetime) {
         
         life = 0;
+        auto genpos = owner->GetComponent<FrameComponent>()->GetPosition();
+        mFrame->SetPosition(0,0,0);
     } else {
         auto size = mStartSize + (mEndSize - mStartSize) * (life / mLifetime);
-        static std::random_device rd;                           // Seed for the random number engine
-        static std::mt19937 gen(rd());                          // Mersenne Twister random number generator
-        static std::uniform_real_distribution<> dis(0.0, 1.0);  // Random numbers in range [0.0, 1.0]
-        // Set position using the generated random numbers
-        // Generate random x, y, z
-        double x = dis(gen);
-        double y = dis(gen);
-        double z = dis(gen);
-        mFrame->SetPosition(x * mSpeed, y * mSpeed, z * mSpeed);
+        auto pos = mFrame->GetPosition();
+        mFrame->SetPosition(pos->getX() + xr * mSpeed * deltaTime,pos->getY() + yr * mSpeed * deltaTime,pos->getZ() + zr * mSpeed * deltaTime);
 
         life += deltaTime;
     }

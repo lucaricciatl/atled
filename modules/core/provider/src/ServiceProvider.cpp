@@ -39,4 +39,6 @@ std::shared_ptr<resources::ResourceManager> ServiceProvider::GetResourceManager(
 
 std::shared_ptr<physics::PhysicsManager> ServiceProvider::GetPhysicsManager() const { return physicsManager; }
 
-AtledEngine* ServiceProvider::GetEngine() { return engine; }
+AtledEngine* ServiceProvider::GetEngine() { 
+    return engine; 
+}
