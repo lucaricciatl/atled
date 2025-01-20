@@ -81,6 +81,7 @@ class ParticlesSystemComponent : public Component {
             auto particleEntity = engine->CreateEntity();
             particleEntity->AddComponent<ParticleComponent>();
             mParticles.emplace_back(particleEntity);
+            owner->AddChild(particleEntity.get());
         }
     }
 
@@ -105,8 +106,7 @@ class ParticlesSystemComponent : public Component {
     float mSpeed;
     float mRate;
     
-    math::Vector3 gravity;
-    math::Vector3 position;
+    math::Vector3 mGravity;
 };
 
 #endif  // PARTICLESSYSTEMCOMPONENT_HPP
