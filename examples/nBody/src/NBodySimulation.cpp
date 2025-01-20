@@ -46,7 +46,7 @@ QuadTreeNode* NBodySimulation::BuildQuadTree() {
         auto frameComponent = entities[i]->GetComponent<FrameComponent>();
         if (!frameComponent) continue;
         auto pos = frameComponent->GetPosition();
-        Coordinates2D entityPos(pos->getX(), pos->getY());
+        Coordinates2D entityPos(pos->GetX(), pos->GetY());
         InsertEntity(root, i, entityPos, root->xMin, root->xMax, root->yMin, root->yMax);
     }
     return root;
@@ -64,7 +64,7 @@ void NBodySimulation::Update(float dt) {
         auto frameComponent = entities[i]->GetComponent<FrameComponent>();
         if (!frameComponent) continue;
         auto position = frameComponent->GetPosition();
-        Coordinates2D entityPos(position->getX(), position->getY());
+        Coordinates2D entityPos(position->GetX(), position->GetY());
         ComputeForcesFMM(root, i, entityPos, forces, theta);
     }
 
@@ -87,8 +87,8 @@ void NBodySimulation::UpdateBodies(const std::vector<Coordinates2D>& forces, flo
                                            (bodies[i].velocity.GetY() + acceleration.GetY() * dt) * dampingFactor);
 
         // Update position based on velocity
-        Coordinates2D newPos(frameComponent->GetPosition()->getX() + bodies[i].velocity.GetX() * dt,
-                             frameComponent->GetPosition()->getY() + bodies[i].velocity.GetY() * dt);
+        Coordinates2D newPos(frameComponent->GetPosition()->GetX() + bodies[i].velocity.GetX() * dt,
+                             frameComponent->GetPosition()->GetY() + bodies[i].velocity.GetY() * dt);
 
         frameComponent->SetPosition(newPos.GetX(), newPos.GetY(), 0.0f);
     }
@@ -163,7 +163,7 @@ void NBodySimulation::SubdivideNode(QuadTreeNode* node) {
         if (!frameComponent) continue;
 
         auto pos = frameComponent->GetPosition();
-        Coordinates2D coord(pos->getX(), pos->getY());
+        Coordinates2D coord(pos->GetX(), pos->GetY());
         size_t quadrant = GetQuadrant(coord, node->center);
 
         InsertEntity(node->children[quadrant], entityIndex, coord, node->children[quadrant]->xMin,

@@ -7,8 +7,8 @@
 namespace raylib {
 
 namespace{
-    
-    Vector3 toRaylibVector3(math::Vector3 v){return {v.getX(),v.getY(),v.getZ()};}
+
+Vector3 toRaylibVector3(math::Vector3 v) { return {v.GetX(), v.GetY(), v.GetZ()}; }
 }
 
 // Some Basic Colors

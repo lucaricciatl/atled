@@ -12,39 +12,27 @@ Position::Position(double x, double y, double z) : x(x), y(y), z(z) {}
 Position::~Position() {}
 
 // Getters
-double Position::getX() const {
-    return x;
-}
+double Position::GetX() const { return x; }
 
-double Position::getY() const {
-    return y;
-}
+double Position::GetY() const { return y; }
 
-double Position::getZ() const {
-    return z;
-}
+double Position::GetZ() const { return z; }
 
 // Setters
-void Position::setX(double x) {
-    this->x = x;
-}
+void Position::SetX(double x) { this->x = x; }
 
-void Position::setY(double y) {
-    this->y = y;
-}
+void Position::SetY(double y) { this->y = y; }
 
-void Position::setZ(double z) {
-    this->z = z;
-}
+void Position::SetZ(double z) { this->z = z; }
 
-void Position::set(double x, double y, double z) {
+void Position::Set(double x, double y, double z) {
     this->x = x;
     this->y = y;
     this->z = z;
 }
 
 // Transform operations
-void Position::translate(double dx, double dy, double dz) {
+void Position::Translate(double dx, double dy, double dz) {
     x += dx;
     y += dy;
     z += dz;

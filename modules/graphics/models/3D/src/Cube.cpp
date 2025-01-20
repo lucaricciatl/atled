@@ -19,38 +19,33 @@ namespace graphics {
             raylib::DrawModel(mModel, gPos, 1.0f, toRaylibColor(mColor));
         }
         if (WireframeIsEnabled) {
-            raylib::DrawCubeWires(gPos, mDimensions.getX(), mDimensions.getY(), mDimensions.getZ(), toRaylibColor(mWireframeColor));
+            raylib::DrawCubeWires(gPos, mDimensions.GetX(), mDimensions.GetY(), mDimensions.GetZ(),
+                                  toRaylibColor(mWireframeColor));
         }
     }
 
     // Setters for dimensions
     void Cube::SetWidth(float width) {
-        mDimensions.setX(width);
+        mDimensions.SetX(width);
         UpdateMesh(); // Update the mesh
     }
 
     void Cube::SetHeight(float height) {
-        mDimensions.setY(height);
+        mDimensions.SetY(height);
         UpdateMesh(); // Update the mesh
     }
 
     void Cube::SetLength(float length) {
-        mDimensions.setZ(length);
+        mDimensions.SetZ(length);
         UpdateMesh(); // Update the mesh
     }
 
     // Getters for dimensions
-    float Cube::GetWidth() {
-        return mDimensions.getX();
-    }
+    float Cube::GetWidth() { return mDimensions.GetX(); }
 
-    float Cube::GetHeight() {
-        return mDimensions.getY();
-    }
+    float Cube::GetHeight() { return mDimensions.GetY(); }
 
-    float Cube::GetLength() {
-        return mDimensions.getZ();
-    }
+    float Cube::GetLength() { return mDimensions.GetZ(); }
 
     // Setter for center position
     void Cube::SetCenterPos(const math::Vector3& centerPos) {
@@ -69,7 +64,7 @@ namespace graphics {
         }
 
         // Generate a new mesh and load it into mModel
-        mMesh = std::make_shared<Mesh>(Mesh::CreateCubeMesh(mDimensions.getX()));
+        mMesh = std::make_shared<Mesh>(Mesh::CreateCubeMesh(mDimensions.GetX()));
         raylib::Mesh cubeMesh = mMesh->ToRaylibMesh();
         raylib:UploadMesh(&cubeMesh, false);
         mModel = raylib::LoadModelFromMesh(cubeMesh);

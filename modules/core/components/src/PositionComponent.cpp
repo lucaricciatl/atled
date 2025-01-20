@@ -17,4 +17,4 @@ PositionComponent::PositionComponent(Entity* owner, std::shared_ptr<ServiceProvi
 PositionComponent::~PositionComponent() {}
 
 // Additional functionality
-void PositionComponent::translate(double dx, double dy, double dz) { Position::translate(dx, dy, dz); }
+void PositionComponent::translate(double dx, double dy, double dz) { Position::Translate(dx, dy, dz); }

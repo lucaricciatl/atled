@@ -25,14 +25,14 @@ namespace graphics
 		Vector2 ComputeGlobalPosition(Coordinates2D aPosition)
 		{
 			auto framepos = frame->GetPosition();
-			Vector2 globalPosition = {
-				(float)framepos->getX() + aPosition.x,
-				(float)framepos->getY() + aPosition.y,
-			};
-			return globalPosition;
-		};
-		graphics::Color mColor;
-		double mRotation;
-	};
+            Vector2 globalPosition = {
+                (float)framepos->GetX() + aPosition.x,
+                (float)framepos->GetY() + aPosition.y,
+            };
+            return globalPosition;
+        };
+        graphics::Color mColor;
+        double mRotation;
+    };
 } // namespace graphics
 #endif // SHAPE_HPP

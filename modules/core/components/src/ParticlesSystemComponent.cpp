@@ -5,11 +5,12 @@ void ParticleComponent::Update(double deltaTime) {
         
         life = 0;
         auto genpos = owner->GetParent()->GetComponent<FrameComponent>()->GetPosition();
-        mFrame->SetPosition(genpos->getX(), genpos->getY(), genpos->getZ());
+        mFrame->SetPosition(genpos->GetX(), genpos->GetY(), genpos->GetZ());
     } else {
         auto size = mStartSize + (mEndSize - mStartSize) * (life / mLifetime);
         auto pos = mFrame->GetPosition();
-        mFrame->SetPosition(pos->getX() + xr * mSpeed * deltaTime,pos->getY() + yr * mSpeed * deltaTime,pos->getZ() + zr * mSpeed * deltaTime);
+        mFrame->SetPosition(pos->GetX() + xr * mSpeed * deltaTime, pos->GetY() + yr * mSpeed * deltaTime,
+                            pos->GetZ() + zr * mSpeed * deltaTime);
 
         life += deltaTime;
     }
@@ -17,43 +18,25 @@ void ParticleComponent::Update(double deltaTime) {
 void ParticleComponent::SetSpeed(const float speed) { 
     mSpeed = speed; 
 }
-void ParticlesSystemComponent::SetNumberOfParticles(int numParticles) { 
-    this->numParticles = numParticles; 
-}
+void ParticlesSystemComponent::SetNumberOfParticles(int numParticles) { this->numParticles = numParticles; }
 
-void ParticlesSystemComponent::SetParticleStartSize(float size) {
+void ParticlesSystemComponent::SetParticleStartSize(float size) {}
 
-}
+void ParticlesSystemComponent::SetParticleEndSize(float size) {}
 
-void ParticlesSystemComponent::SetParticleEndSize(float size) {
+void ParticlesSystemComponent::SetParticleLifetime(float lifetime) {}
 
-}
+void ParticlesSystemComponent::SetParticleGravity(math::Vector3 gravity) { mGravity = gravity; }
 
-void ParticlesSystemComponent::SetParticleLifetime(float lifetime) {
+void ParticlesSystemComponent::SetParticlesCollision(bool collision) {}
 
-}
+void ParticlesSystemComponent::AddParticles(int numParticles) {}
 
-void ParticlesSystemComponent::SetParticleGravity(math::Vector3 gravity) { 
-    mGravity = gravity; 
-}
-
-void ParticlesSystemComponent::SetParticlesCollision(bool collision) {
-
-}
-
-void ParticlesSystemComponent::AddParticles(int numParticles) {
-
-}
-
-void ParticlesSystemComponent::RemoveParticles(int numParticles) {
-
-}
+void ParticlesSystemComponent::RemoveParticles(int numParticles) {}
 
 void ParticlesSystemComponent::SetSpeed(float aSpeed) {
 
 
 }
 
-void ParticlesSystemComponent::SetEmissionRate(float aRate){ 
-    mRate = aRate;
-};
+void ParticlesSystemComponent::SetEmissionRate(float aRate) { mRate = aRate; };

@@ -17,20 +17,18 @@ public:
     ~Position();
 
     // Getters
-    double getX() const;
-    double getY() const;
-    double getZ() const;
+    double GetX() const;
+    double GetY() const;
+    double GetZ() const;
 
     // Setters
-    void setX(double x);
-    void setY(double y);
-    void setZ(double z);
-    void set(double x, double y, double z);
+    void SetX(double x);
+    void SetY(double y);
+    void SetZ(double z);
+    void Set(double x, double y, double z);
 
     // Transform operations
-    void translate(double dx, double dy, double dz);
-
-
+    void Translate(double dx, double dy, double dz);
 };
 
 } // namespace physics

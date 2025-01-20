@@ -105,7 +105,7 @@ class ParticlesSystemComponent : public Component {
     int numParticles;
     float mSpeed;
     float mRate;
-    
+
     math::Vector3 mGravity;
 };
 

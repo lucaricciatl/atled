@@ -33,13 +33,11 @@ protected:
 
 	  raylib::Vector3 ComputeGlobalPosition(math::Vector3 aPosition) {
 		auto framepos = frame->GetPosition();
-		raylib::Vector3 globalPosition = {
-			(float)framepos->getX() + aPosition.getX(),
-			(float)framepos->getY() + aPosition.getY(),
-			(float)framepos->getZ() + aPosition.getZ()
-		};
-		return globalPosition;
-	};
+        raylib::Vector3 globalPosition = {(float)framepos->GetX() + aPosition.GetX(),
+                                          (float)framepos->GetY() + aPosition.GetY(),
+                                          (float)framepos->GetZ() + aPosition.GetZ()};
+        return globalPosition;
+      };
 
   bool WireframeIsEnabled;    // 1 for the wirefram
   bool ShapeIsEnabled;        // 1 for the wirefram

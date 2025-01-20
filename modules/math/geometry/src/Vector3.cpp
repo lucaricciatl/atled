@@ -11,14 +11,14 @@ Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
 Vector3::Vector3(const Vector3& other) : x(other.x), y(other.y), z(other.z) {}
 
 // Getters
-float Vector3::getX() const { return x; }
-float Vector3::getY() const { return y; }
-float Vector3::getZ() const { return z; }
+float Vector3::GetX() const { return x; }
+float Vector3::GetY() const { return y; }
+float Vector3::GetZ() const { return z; }
 
 // Setters
-void Vector3::setX(float value) { x = value; }
-void Vector3::setY(float value) { y = value; }
-void Vector3::setZ(float value) { z = value; }
+void Vector3::SetX(float value) { x = value; }
+void Vector3::SetY(float value) { y = value; }
+void Vector3::SetZ(float value) { z = value; }
 
 // Vector addition
 Vector3 Vector3::operator+(const Vector3& other) const {
@@ -52,12 +52,10 @@ Vector3 Vector3::operator/(float scalar) const {
 }
 
 // Dot product
-float Vector3::dot(const Vector3& other) const {
-    return x * other.x + y * other.y + z * other.z;
-}
+float Vector3::Dot(const Vector3& other) const { return x * other.x + y * other.y + z * other.z; }
 
 // Cross product
-Vector3 Vector3::cross(const Vector3& other) const {
+Vector3 Vector3::Cross(const Vector3& other) const {
     return Vector3(
         y * other.z - z * other.y,
         z * other.x - x * other.z,
@@ -66,13 +64,11 @@ Vector3 Vector3::cross(const Vector3& other) const {
 }
 
 // Magnitude (length) of the vector
-float Vector3::magnitude() const {
-    return std::sqrt(x * x + y * y + z * z);
-}
+float Vector3::Magnitude() const { return std::sqrt(x * x + y * y + z * z); }
 
 // Normalize the vector
-Vector3 Vector3::normalized() const {
-    float mag = magnitude();
+Vector3 Vector3::Normalized() const {
+    float mag = Magnitude();
     if (mag == 0.0f) {
         throw std::runtime_error("Cannot normalize zero-length vector");
     }

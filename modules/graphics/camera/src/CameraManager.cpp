@@ -87,32 +87,35 @@ float CameraManager::GetCameraZoom() const {
 
 void CameraManager::SetCameraTargetY(float target) {
     if (mActiveCamera) {
-        mActiveCamera->SetTarget(math::Vector3( mActiveCamera->GetTarget().getX(), target, mActiveCamera->GetTarget().getZ() ));
+        mActiveCamera->SetTarget(
+            math::Vector3(mActiveCamera->GetTarget().GetX(), target, mActiveCamera->GetTarget().GetZ()));
     }
 }
 
 void CameraManager::SetCameraOffsetX(float offset) {
     if (mActiveCamera) {
-        mActiveCamera->SetPosition(math::Vector3{ offset, mActiveCamera->GetPosition().getY(), mActiveCamera->GetPosition().getZ() });
+        mActiveCamera->SetPosition(
+            math::Vector3{offset, mActiveCamera->GetPosition().GetY(), mActiveCamera->GetPosition().GetZ()});
     }
 }
 
 void CameraManager::SetCameraOffsetY(float offset) {
     if (mActiveCamera) {
-        mActiveCamera->SetPosition(math::Vector3{ mActiveCamera->GetPosition().getX(), offset, mActiveCamera->GetPosition().getZ() });
+        mActiveCamera->SetPosition(
+            math::Vector3{mActiveCamera->GetPosition().GetX(), offset, mActiveCamera->GetPosition().GetZ()});
     }
 }
 
 float CameraManager::GetCameraTargetY() const {
     if (mActiveCamera) {
-        return mActiveCamera->GetTarget().getY();
+        return mActiveCamera->GetTarget().GetY();
     }
     return 0.0f;
 }
 
 float CameraManager::GetCameraOffsetX() const {
     if (mActiveCamera) {
-        return mActiveCamera->GetPosition().getX();
+        return mActiveCamera->GetPosition().GetX();
     }
     return 0.0f;
 }
@@ -123,7 +126,7 @@ void CameraManager::SetFovy(float aFovy) {
 
 float CameraManager::GetCameraOffsetY() const {
     if (mActiveCamera) {
-        return mActiveCamera->GetPosition().getY();
+        return mActiveCamera->GetPosition().GetY();
     }
     return 0.0f;
 }
@@ -131,13 +134,13 @@ float CameraManager::GetCameraOffsetY() const {
 void CameraManager::SetCameraTargetX(float target) {
     if (mActiveCamera) {
         auto currentTarget = mActiveCamera->GetTarget();
-        mActiveCamera->SetTarget(math::Vector3{ target, currentTarget.getY(), currentTarget.getZ() });
+        mActiveCamera->SetTarget(math::Vector3{target, currentTarget.GetY(), currentTarget.GetZ()});
     }
 }
 
 float CameraManager::GetCameraTargetX() const {
     if (mActiveCamera) {
-        return mActiveCamera->GetTarget().getX();  // Access the active camera's target X
+        return mActiveCamera->GetTarget().GetX();  // Access the active camera's target X
     }
     return 0.0f;  // Return a default value if no active camera is set
 }

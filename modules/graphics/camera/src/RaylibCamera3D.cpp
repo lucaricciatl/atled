@@ -7,8 +7,8 @@ namespace{
 typedef math::Vector3 Vector3;
 
 namespace{
-    raylib::Vector3 toRaylibVector3(math::Vector3 v){return {v.getX(),v.getY(),v.getZ()};}
-    math::Vector3 toAtledVector3(raylib::Vector3 v){return Vector3(v.x,v.y,v.z);}
+raylib::Vector3 toRaylibVector3(math::Vector3 v) { return {v.GetX(), v.GetY(), v.GetZ()}; }
+math::Vector3 toAtledVector3(raylib::Vector3 v) { return Vector3(v.x, v.y, v.z); }
 }
 
 }

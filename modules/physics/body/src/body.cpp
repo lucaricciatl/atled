@@ -88,16 +88,10 @@ math::BoundingBox Body::GetBoundingBox() const {
     // Expand the bounding box to encompass all vertices
     for (size_t i = 3; i < vertices.size(); i += 3) { // Step by 3 (x, y, z)
         math::Vector3 vertex(vertices[i], vertices[i + 1], vertices[i + 2]);
-        min = math::Vector3(
-            std::min(min.getX(), vertex.getX()),
-            std::min(min.getY(), vertex.getY()),
-            std::min(min.getZ(), vertex.getZ())
-        );
-        max = math::Vector3(
-            std::max(max.getX(), vertex.getX()),
-            std::max(max.getY(), vertex.getY()),
-            std::max(max.getZ(), vertex.getZ())
-        );
+        min = math::Vector3(std::min(min.GetX(), vertex.GetX()), std::min(min.GetY(), vertex.GetY()),
+                            std::min(min.GetZ(), vertex.GetZ()));
+        max = math::Vector3(std::max(max.GetX(), vertex.GetX()), std::max(max.GetY(), vertex.GetY()),
+                            std::max(max.GetZ(), vertex.GetZ()));
     }
 
     return math::BoundingBox(min + mFrame->GetVectorPosition(), max+ mFrame->GetVectorPosition());

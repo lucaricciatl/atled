@@ -30,47 +30,43 @@ Quaternion& Quaternion::operator=(const Quaternion& q) {
 }
 
 // Accessors (Getters)
-double Quaternion::getW() const { return w; }
-double Quaternion::getX() const { return x; }
-double Quaternion::getY() const { return y; }
-double Quaternion::getZ() const { return z; }
+double Quaternion::GetW() const { return w; }
+double Quaternion::GetX() const { return x; }
+double Quaternion::GetY() const { return y; }
+double Quaternion::GetZ() const { return z; }
 
 // Mutators (Setters)
-void Quaternion::setW(double w) { this->w = w; }
-void Quaternion::setX(double x) { this->x = x; }
-void Quaternion::setY(double y) { this->y = y; }
-void Quaternion::setZ(double z) { this->z = z; }
+void Quaternion::SetW(double w) { this->w = w; }
+void Quaternion::SetX(double x) { this->x = x; }
+void Quaternion::SetY(double y) { this->y = y; }
+void Quaternion::SetZ(double z) { this->z = z; }
 
-math::Vector3 Quaternion::rotateVector(const math::Vector3& v) const {
+math::Vector3 Quaternion::RotateVector(const math::Vector3& v) const {
     // This uses the formula: v' = q * v * q^-1
-    Quaternion vectorQuat(0, v.getX(), v.getY(), v.getZ());
-    Quaternion result = (*this) * vectorQuat * this->inverse();
+    Quaternion vectorQuat(0, v.GetX(), v.GetY(), v.GetZ());
+    Quaternion result = (*this) * vectorQuat * this->Inverse();
     return math::Vector3(result.x, result.y, result.z);
 }
 
 // Quaternion operations
-double Quaternion::magnitude() const {
-    return std::sqrt(w * w + x * x + y * y + z * z);
-}
+double Quaternion::Magnitude() const { return std::sqrt(w * w + x * x + y * y + z * z); }
 
-Quaternion Quaternion::normalized() const {
-    double mag = magnitude();
+Quaternion Quaternion::Normalized() const {
+    double mag = Magnitude();
     if (mag == 0) {
         throw std::runtime_error("Cannot normalize a quaternion with zero magnitude");
     }
     return Quaternion(w / mag, x / mag, y / mag, z / mag);
 }
 
-Quaternion Quaternion::conjugate() const {
-    return Quaternion(w, -x, -y, -z);
-}
+Quaternion Quaternion::Conjugate() const { return Quaternion(w, -x, -y, -z); }
 
-Quaternion Quaternion::inverse() const {
+Quaternion Quaternion::Inverse() const {
     double mag_sq = w * w + x * x + y * y + z * z;
     if (mag_sq == 0) {
         throw std::runtime_error("Cannot invert a quaternion with zero magnitude");
     }
-    Quaternion conj = conjugate();
+    Quaternion conj = Conjugate();
     return Quaternion(conj.w / mag_sq, conj.x / mag_sq, conj.y / mag_sq, conj.z / mag_sq);
 }
 
@@ -102,9 +98,7 @@ Quaternion Quaternion::operator/(double scalar) const {
     return Quaternion(w / scalar, x / scalar, y / scalar, z / scalar);
 }
 
-Quaternion Quaternion::operator/(const Quaternion& q) const {
-    return (*this) * q.inverse();
-}
+Quaternion Quaternion::operator/(const Quaternion& q) const { return (*this) * q.Inverse(); }
 
 bool Quaternion::operator==(const Quaternion& q) const {
     return w == q.w && x == q.x && y == q.y && z == q.z;
@@ -120,7 +114,7 @@ std::ostream& operator<<(std::ostream& os, const Quaternion& q) {
     return os;
 }
 
-Quaternion Quaternion::fromAxisAngle(double angle, const double axis[3]) {
+Quaternion Quaternion::FromAxisAngle(double angle, const double axis[3]) {
     double halfAngle = angle * 0.5;
     double sinHalfAngle = std::sin(halfAngle);
 
@@ -131,5 +125,4 @@ Quaternion Quaternion::fromAxisAngle(double angle, const double axis[3]) {
         axis[2] * sinHalfAngle
     );
 }
-
 } 

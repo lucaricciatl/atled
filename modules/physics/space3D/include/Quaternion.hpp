@@ -24,24 +24,24 @@ public:
     Quaternion& operator=(const Quaternion& q);
 
     // Accessors (Getters)
-    double getW() const;
-    double getX() const;
-    double getY() const;
-    double getZ() const;
+    double GetW() const;
+    double GetX() const;
+    double GetY() const;
+    double GetZ() const;
 
     // Mutators (Setters)
-    void setW(double w);
-    void setX(double x);
-    void setY(double y);
-    void setZ(double z);
+    void SetW(double w);
+    void SetX(double x);
+    void SetY(double y);
+    void SetZ(double z);
 
-    math::Vector3 rotateVector(const math::Vector3& v) const;
+    math::Vector3 RotateVector(const math::Vector3& v) const;
 
     // Quaternion operations
-    double magnitude() const;
-    Quaternion normalized() const;
-    Quaternion conjugate() const;
-    Quaternion inverse() const;
+    double Magnitude() const;
+    Quaternion Normalized() const;
+    Quaternion Conjugate() const;
+    Quaternion Inverse() const;
 
     // Operator overloading
     Quaternion operator+(const Quaternion& q) const;
@@ -57,7 +57,7 @@ public:
     // Friend functions for stream insertion
     friend std::ostream& operator<<(std::ostream& os, const Quaternion& q);
 
-    static Quaternion fromAxisAngle(double angle, const double axis[3]);
+    static Quaternion FromAxisAngle(double angle, const double axis[3]);
 };
 
 } // namespace physics

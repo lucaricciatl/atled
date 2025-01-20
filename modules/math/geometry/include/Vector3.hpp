@@ -19,14 +19,14 @@ public:
     ~Vector3() = default;
 
     // Getters
-    float getX() const;
-    float getY() const;
-    float getZ() const;
+    float GetX() const;
+    float GetY() const;
+    float GetZ() const;
 
     // Setters
-    void setX(float value);
-    void setY(float value);
-    void setZ(float value);
+    void SetX(float value);
+    void SetY(float value);
+    void SetZ(float value);
 
     // Operator Overloads
     Vector3 operator+(const Vector3& other) const;
@@ -46,21 +46,22 @@ public:
         return Vector3(-x, -y, -z);
     }
     // Dot and Cross Products
-    float dot(const Vector3& other) const;
-    Vector3 cross(const Vector3& other) const;
+    float Dot(const Vector3& other) const;
+    Vector3 Cross(const Vector3& other) const;
 
     // Magnitude and Normalization
-    float magnitude() const;
-    Vector3 normalized() const;
+    float Magnitude() const;
+    Vector3 Normalized() const;
 
     // Utility
     void print() const;
 
-    bool isZero(float epsilon = 1e-6f) const {
+    bool IsZero(float epsilon = 1e-6f) const {
         return (std::fabs(x) < epsilon &&
             std::fabs(y) < epsilon &&
             std::fabs(z) < epsilon);
     }
+
 private:
     float x;
     float y;

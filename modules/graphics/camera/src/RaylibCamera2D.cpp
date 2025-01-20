@@ -6,8 +6,8 @@ namespace{
 typedef math::Vector3 Vector3;
 
 namespace{
-    raylib::Vector3 toRaylibVector3(math::Vector3 v){return {v.getX(),v.getY(),v.getZ()};}
-    math::Vector3 toAtledVector3(raylib::Vector3 v){return Vector3(v.x,v.y,v.z);}
+raylib::Vector3 toRaylibVector3(math::Vector3 v) { return {v.GetX(), v.GetY(), v.GetZ()}; }
+math::Vector3 toAtledVector3(raylib::Vector3 v) { return Vector3(v.x, v.y, v.z); }
 }
 
 }
@@ -23,9 +23,7 @@ void RaylibCamera2D::EndCamera() {
     raylib::EndMode2D();
 }
 
-void RaylibCamera2D::SetPosition(Vector3 position) {
-    mCamera.offset = {position.getX(), position.getY()};
-}
+void RaylibCamera2D::SetPosition(Vector3 position) { mCamera.offset = {position.GetX(), position.GetY()}; }
 
 void RaylibCamera2D::UpdateCamera() {
 }
@@ -39,9 +37,7 @@ Vector3 RaylibCamera2D::GetPosition() const {
     return {mCamera.offset.x, mCamera.offset.y, 0.0f};
 }
 
-void RaylibCamera2D::SetTarget(Vector3 target) {
-    mCamera.target = {target.getX(), target.getY()};
-}
+void RaylibCamera2D::SetTarget(Vector3 target) { mCamera.target = {target.GetX(), target.GetY()}; }
 
 Vector3 RaylibCamera2D::GetTarget() const {
     return {mCamera.target.x, mCamera.target.y, 0.0f};

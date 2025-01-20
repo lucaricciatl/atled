@@ -17,11 +17,12 @@ void RigidBody::UpdatePhysics(double deltaTime) {
         return; // Static bodies don't move
     }
     if (mUseGravity) {
-        mAccumulatedForce += math::Vector3(0,mAccumulatedForce.getY() - mMass * g,0);
+        mAccumulatedForce += math::Vector3(0, mAccumulatedForce.GetY() - mMass * g, 0);
     }
     math::Vector3 acceleration = mAccumulatedForce / mMass; // F = ma => a = F/m
     mVelocity += acceleration * deltaTime; // Update velocity
-    mFrame->translate(mVelocity.getX() * deltaTime,mVelocity.getY() * deltaTime,mVelocity.getZ() * deltaTime); // Update position
+    mFrame->translate(mVelocity.GetX() * deltaTime, mVelocity.GetY() * deltaTime,
+                      mVelocity.GetZ() * deltaTime);  // Update position
 
     ClearForces(); // Clear forces for the next frame
 }

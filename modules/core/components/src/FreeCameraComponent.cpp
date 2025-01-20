@@ -13,10 +13,10 @@ void FreeCameraComponent::Update(double deltaTime) {
     math::Vector3 cameraTarget = mCameraManager->GetCameraTarget();
 
     // Forward vector: normalized direction from position to target
-    math::Vector3 forward = (cameraTarget - cameraPos).normalized();
+    math::Vector3 forward = (cameraTarget - cameraPos).Normalized();
 
     // Right vector: perpendicular to forward and up vectors
-    math::Vector3 right = forward.cross(math::Vector3(0.0f, 1.0f, 0.0f)).normalized();
+    math::Vector3 right = forward.Cross(math::Vector3(0.0f, 1.0f, 0.0f)).Normalized();
 
     // Handle input for movement
     if (mInputManager->IsKeyDown(raylib::KEY_W)) {  // Move forward
@@ -36,13 +36,13 @@ void FreeCameraComponent::Update(double deltaTime) {
         cameraTarget = cameraTarget + right * cameraSpeed;
     }
     if (mInputManager->IsKeyDown(raylib::KEY_Q)) {             // Move down
-        cameraPos.setY(cameraPos.getY() - cameraSpeed);        // Using getter and setter
-        cameraTarget.setY(cameraTarget.getY() - cameraSpeed);  // Ensure consistency
+        cameraPos.SetY(cameraPos.GetY() - cameraSpeed);        // Using getter and setter
+        cameraTarget.SetY(cameraTarget.GetY() - cameraSpeed);  // Ensure consistency
     }
 
     if (mInputManager->IsKeyDown(raylib::KEY_E)) {             // Move up
-        cameraPos.setY(cameraPos.getY() + cameraSpeed);        // Using getter and setter
-        cameraTarget.setY(cameraTarget.getY() + cameraSpeed);  // Ensure consistency
+        cameraPos.SetY(cameraPos.GetY() + cameraSpeed);        // Using getter and setter
+        cameraTarget.SetY(cameraTarget.GetY() + cameraSpeed);  // Ensure consistency
     }
 
     // Update the camera manager with the new position and target
@@ -58,7 +58,7 @@ void FreeCameraComponent::Update(double deltaTime) {
         raylib::Matrix rotationMatrixX = raylib::MatrixRotateY(mouseDeltaX * DEG2RAD);
         raylib::Matrix rotationMatrixY = raylib::MatrixRotateX(mouseDeltaY * DEG2RAD);
         math::Vector3 offset = cameraTarget - cameraPos;
-        auto roffset = raylib::Vector3Transform({offset.getX(), offset.getY(), offset.getZ()}, rotationMatrixX);
+        auto roffset = raylib::Vector3Transform({offset.GetX(), offset.GetY(), offset.GetZ()}, rotationMatrixX);
         auto soffset = raylib::Vector3Transform({roffset.x, roffset.y, roffset.z}, rotationMatrixY);
         cameraTarget = cameraPos + math::Vector3(soffset.x, soffset.y, soffset.z);
 

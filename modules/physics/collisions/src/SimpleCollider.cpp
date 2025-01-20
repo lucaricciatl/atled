@@ -16,14 +16,14 @@ namespace physics {
             const math::Vector3& collisionNormal, float restitution, float dt
         ) {
             // Ensure collision normal is a unit vector
-            math::Vector3 normal = collisionNormal.normalized();
+            math::Vector3 normal = collisionNormal.Normalized();
 
             // Compute relative velocity
             math::Vector3 relativeVelocity = velocity2 - velocity1;
 
 
             // Compute velocity along the collision normal
-            float relativeNormalVelocity = relativeVelocity.dot(normal);
+            float relativeNormalVelocity = relativeVelocity.Dot(normal);
             // If the bodies are separating, no collision response is needed
             if (relativeNormalVelocity > 0) {
                 return math::Vector3(0, 0, 0);
@@ -96,32 +96,28 @@ namespace physics {
 
                 if (TriangleTriangleIntersection(A1, A2, A3, B1, B2, B3)) {
                     // Compute normals
-                    math::Vector3 normalA = (A2 - A1).cross(A3 - A1);
-                    math::Vector3 normalB = (B2 - B1).cross(B3 - B1);
+                    math::Vector3 normalA = (A2 - A1).Cross(A3 - A1);
+                    math::Vector3 normalB = (B2 - B1).Cross(B3 - B1);
 
                     // Handle degenerate cases
-                    if (normalA.isZero()) {
+                    if (normalA.IsZero()) {
                         normalA = math::Vector3(0, 0, 1);
-                    }
-                    else {
-                        normalA = normalA.normalized();
+                    } else {
+                        normalA = normalA.Normalized();
                     }
 
-                    if (normalB.isZero()) {
+                    if (normalB.IsZero()) {
                         normalB = math::Vector3(0, 0, 1);
-                    }
-                    else {
-                        normalB = normalB.normalized();
+                    } else {
+                        normalB = normalB.Normalized();
                     }
 
                     // Average the normals to determine the collision normal
-                    collisionNormal = (normalA + normalB).normalized();
+                    collisionNormal = (normalA + normalB).Normalized();
 
                     // Compute the penetration depth:
                     // Project all vertices of the intersecting triangles onto the collision normal
-                    auto project = [&](const math::Vector3& p) {
-                        return p.dot(collisionNormal);
-                        };
+                    auto project = [&](const math::Vector3& p) { return p.Dot(collisionNormal); };
 
                     // Projections for triangle A
                     float A_proj1 = project(A1);
@@ -169,8 +165,8 @@ namespace physics {
         math::Vector3 edgeB3 = B1 - B3;
 
         // Step 1: Test triangle normals as separating axes
-        math::Vector3 normalA = edgeA1.cross(edgeA2);
-        math::Vector3 normalB = edgeB1.cross(edgeB2);
+        math::Vector3 normalA = edgeA1.Cross(edgeA2);
+        math::Vector3 normalB = edgeB1.Cross(edgeB2);
 
         if (areTrianglesSeparatedByAxis(normalA, A1, A2, A3, B1, B2, B3)) {
             return false; // Separated
@@ -185,7 +181,7 @@ namespace physics {
 
         for (const auto& ea : edgesA) {
             for (const auto& eb : edgesB) {
-                math::Vector3 axis = ea.cross(eb);
+                math::Vector3 axis = ea.Cross(eb);
                 if (areTrianglesSeparatedByAxis(axis, A1, A2, A3, B1, B2, B3)) {
                     return false; // Separated
                 }
@@ -202,7 +198,7 @@ namespace physics {
         const math::Vector3& A1, const math::Vector3& A2, const math::Vector3& A3,
         const math::Vector3& B1, const math::Vector3& B2, const math::Vector3& B3) const
     {
-        if (axis.isZero()) {
+        if (axis.IsZero()) {
             return false; // Degenerate axis (zero-length), cannot separate
         }
 
@@ -222,9 +218,9 @@ namespace physics {
         float& outMin, float& outMax) const
     {
         // Project each vertex onto the axis
-        float p1 = V1.dot(axis);
-        float p2 = V2.dot(axis);
-        float p3 = V3.dot(axis);
+        float p1 = V1.Dot(axis);
+        float p2 = V2.Dot(axis);
+        float p3 = V3.Dot(axis);
 
         // Compute min and max projection
         outMin = std::min({ p1, p2, p3 });

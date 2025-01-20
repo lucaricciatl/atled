@@ -9,10 +9,10 @@ namespace physics {
     Frame::Frame() : position(std::make_shared<Position>()), orientation(1.0, 0.0, 0.0, 0.0) {}
 
     Frame::Frame(const std::shared_ptr<Position>& position, const math::Quaternion& orientation)
-        : position(position), orientation(orientation.normalized()) {}
+        : position(position), orientation(orientation.Normalized()) {}
 
     Frame::Frame(double x, double y, double z, const math::Quaternion& orientation)
-        : position(std::make_shared<Position>(x, y, z)), orientation(orientation.normalized()) {}
+        : position(std::make_shared<Position>(x, y, z)), orientation(orientation.Normalized()) {}
 
     Frame::Frame(const Frame& other)
         : position(other.position), orientation(other.orientation) {}
@@ -33,7 +33,7 @@ namespace physics {
     }
 
     math::Vector3 Frame::GetVectorPosition() const {
-        return math::Vector3(position->getX(), position->getY(), position->getZ());
+        return math::Vector3(position->GetX(), position->GetY(), position->GetZ());
     }
 
     math::Quaternion Frame::GetOrientation() const {
@@ -50,15 +50,13 @@ namespace physics {
             position = std::make_shared<Position>(x, y, z);
         }
         else {
-            position->setX(x);
-            position->setY(y);
-            position->setZ(z);
+            position->SetX(x);
+            position->SetY(y);
+            position->SetZ(z);
         }
     }
 
-    void Frame::SetOrientation(const math::Quaternion& orientation) {
-        this->orientation = orientation.normalized();
-    }
+    void Frame::SetOrientation(const math::Quaternion& orientation) { this->orientation = orientation.Normalized(); }
 
     // Frame operations
     void Frame::translate(double dx, double dy, double dz) {
@@ -66,17 +64,15 @@ namespace physics {
             position = std::make_shared<Position>(dx, dy, dz);
         }
         else {
-            position->translate(dx, dy, dz);
+            position->Translate(dx, dy, dz);
         }
     }
 
-    void Frame::rotate(const math::Quaternion& rotation) {
-        orientation = (rotation * orientation).normalized();
-    }
+    void Frame::rotate(const math::Quaternion& rotation) { orientation = (rotation * orientation).Normalized(); }
 
     math::Vector3 Frame::transformPointToWorld(const math::Vector3& localPoint) const {
         // Step 1: Rotate the point using the frame's orientation
-        math::Vector3 rotatedPoint = orientation.rotateVector(localPoint);
+        math::Vector3 rotatedPoint = orientation.RotateVector(localPoint);
 
         // Step 2: Translate the rotated point using the frame's position
         math::Vector3 worldPosition = GetVectorPosition();
@@ -87,43 +83,43 @@ namespace physics {
     void Frame::transformPoint(double& px, double& py, double& pz) const {
         // Apply rotation using the orientation quaternion
         math::Quaternion point(0, px, py, pz);
-        math::Quaternion rotatedPoint = orientation * point * orientation.conjugate();
+        math::Quaternion rotatedPoint = orientation * point * orientation.Conjugate();
 
         // Apply translation
         if (position) {
-            px = rotatedPoint.getX() + position->getX();
-            py = rotatedPoint.getY() + position->getY();
-            pz = rotatedPoint.getZ() + position->getZ();
+            px = rotatedPoint.GetX() + position->GetX();
+            py = rotatedPoint.GetY() + position->GetY();
+            pz = rotatedPoint.GetZ() + position->GetZ();
         }
         else {
-            px = rotatedPoint.getX();
-            py = rotatedPoint.getY();
-            pz = rotatedPoint.getZ();
+            px = rotatedPoint.GetX();
+            py = rotatedPoint.GetY();
+            pz = rotatedPoint.GetZ();
         }
     }
 
     void Frame::inverseTransformPoint(double& px, double& py, double& pz) const {
         // Reverse translation
         if (position) {
-            px -= position->getX();
-            py -= position->getY();
-            pz -= position->getZ();
+            px -= position->GetX();
+            py -= position->GetY();
+            pz -= position->GetZ();
         }
 
         // Reverse rotation using the conjugate of the orientation quaternion
         math::Quaternion point(0, px, py, pz);
-        math::Quaternion rotatedPoint = orientation.conjugate() * point * orientation;
+        math::Quaternion rotatedPoint = orientation.Conjugate() * point * orientation;
 
-        px = rotatedPoint.getX();
-        py = rotatedPoint.getY();
-        pz = rotatedPoint.getZ();
+        px = rotatedPoint.GetX();
+        py = rotatedPoint.GetY();
+        pz = rotatedPoint.GetZ();
     }
 
     // Friend function for stream insertion
     std::ostream& operator<<(std::ostream& os, const Frame& frame) {
         if (frame.position) {
-            os << "Frame(Position: [" << frame.position->getX() << ", " << frame.position->getY() << ", "
-                << frame.position->getZ() << "], Orientation: " << frame.orientation << ")";
+            os << "Frame(Position: [" << frame.position->GetX() << ", " << frame.position->GetY() << ", "
+               << frame.position->GetZ() << "], Orientation: " << frame.orientation << ")";
         }
         else {
             os << "Frame(Position: [null], Orientation: " << frame.orientation << ")";
