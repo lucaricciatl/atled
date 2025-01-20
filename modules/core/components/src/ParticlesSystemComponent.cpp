@@ -1,24 +1,23 @@
 #include "ParticlesSystemComponent.hpp"
 
 void ParticleComponent::Update(double deltaTime) {
-    if (life > mLifetime) {
-        
-        life = 0;
+    if (mLife > mLifetime) {
+        mLife = 0;
         auto genpos = mOwner->GetParent()->GetComponent<FrameComponent>()->GetPosition();
         mFrame->SetPosition(genpos->GetX(), genpos->GetY(), genpos->GetZ());
     } else {
-        auto size = mStartSize + (mEndSize - mStartSize) * (life / mLifetime);
+        auto size = mStartSize + (mEndSize - mStartSize) * (mLife / mLifetime);
         auto pos = mFrame->GetPosition();
         mFrame->SetPosition(pos->GetX() + xr * mSpeed * deltaTime, pos->GetY() + yr * mSpeed * deltaTime,
                             pos->GetZ() + zr * mSpeed * deltaTime);
 
-        life += deltaTime;
+        mLife += deltaTime;
     }
 }
 void ParticleComponent::SetSpeed(const float speed) { 
     mSpeed = speed; 
 }
-void ParticlesSystemComponent::SetNumberOfParticles(int numParticles) { this->numParticles = numParticles; }
+void ParticlesSystemComponent::SetNumberOfParticles(int numParticles) { mNumParticles = numParticles; }
 
 void ParticlesSystemComponent::SetParticleStartSize(float size) {}
 

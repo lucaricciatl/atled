@@ -30,7 +30,7 @@ class ParticleComponent : public Component {
           mStartSize(aStartSize),
           mEndSize(aEndSize),
           mCollisionEnabled(aCollision),
-          life(0) {
+          mLife(0) {
         // Create and configure the shape component
         auto shape = aOwner->AddComponent<ShapeComponent>();
         shape->SetModel<Sphere>(aStartSize, math::Vector3(0, 0, 0), defaultmeshring, defaultmeshslice, aColor);
@@ -45,8 +45,8 @@ class ParticleComponent : public Component {
         mLifetime = aLifetime + dis(gen);
     }
 
-    void Update(double deltaTime) override;
-    void SetSpeed(const float speed);
+    void Update(double aDt) override;
+    void SetSpeed(const float aSpeed);
 
    private:
     std::shared_ptr<physics::PhysicsManager> physicsManager;
@@ -55,30 +55,35 @@ class ParticleComponent : public Component {
     std::shared_ptr<ShapeComponent> shape;
     float mStartSize;
     float mEndSize;
-    float mLifetime;
-    float life;
+
+    float mLife;
     bool mCollisionEnabled;
     float mSpeed;
+
+    // distributions
     double xr;
     double yr;
     double zr;
+    float mLifetime;
 };
 
 class ParticlesSystemComponent : public Component {
    public:
     ParticlesSystemComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> aServiceProvider,
                              int aNumParticles = 1000, float aStartSize = 0.1, float aEndSize = 0.01,
-                             float aLifetime = 5.0f, bool aCollision = false, float aSpeed = 0)
+                             float aLifetime = 5.0f, bool aCollision = false, bool aGravity = false, float aSpeed = 1,
+                             const graphics::Color& aColor = getColor("Elegant Soft Gray"))
         : Component(aOwner),  // Call base class constructor
           mPhysicsManager(aServiceProvider->GetPhysicsManager()),
           mFrame(aOwner->GetComponent<FrameComponent>()->GetFrame()),
-          numParticles(numParticles) {
+          mNumParticles(aNumParticles) {
         // Create and store particle entities
         auto engine = aServiceProvider->GetEngine();
-        mParticles.reserve(numParticles);
-        for (int i = 0; i < numParticles; ++i) {
+        mParticles.reserve(mNumParticles);
+        for (int i = 0; i < mNumParticles; ++i) {
             auto particleEntity = engine->CreateEntity();
-            particleEntity->AddComponent<ParticleComponent>();
+            particleEntity->AddComponent<ParticleComponent>(aStartSize, aEndSize, aLifetime, aCollision, aGravity,
+                                                            aSpeed, aColor);
             mParticles.emplace_back(particleEntity);
             aOwner->AddChild(particleEntity.get());
         }
@@ -99,9 +104,13 @@ class ParticlesSystemComponent : public Component {
     std::shared_ptr<physics::Frame> mFrame;
     std::vector<std::shared_ptr<Entity>> mParticles;
 
-    int numParticles;
+    int mNumParticles;
     float mSpeed;
     float mRate;
+    float mStartSize;
+    float mEndSize;
+    float mLife;
+    bool mCollisionEnabled;
 
     math::Vector3 mGravity;
 };
