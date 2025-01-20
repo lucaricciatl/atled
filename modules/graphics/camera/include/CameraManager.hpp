@@ -30,10 +30,10 @@ public:
     ~CameraManager();
 
     // Add a camera to the manager
-    void AddCamera(std::shared_ptr<ICamera> camera);
+    void AddCamera(std::shared_ptr<ICamera> aCamera);
 
     // Set the active camera by index
-    void SetActiveCamera(size_t index);
+    void SetActiveCamera(size_t aIndex);
 
     // Get the active camera
     std::shared_ptr<ICamera> GetActiveCamera() const;
@@ -51,12 +51,12 @@ public:
     void RenderActiveCamera();
 
     // Camera manipulation functions 2D
-    void SetCameraOffsetX(float offset);
-    void SetCameraOffsetY(float offset);
-    void SetCameraTargetX(float target);
-    void SetCameraTargetY(float target);
-    void SetCameraRotation(float rotation);
-    void SetCameraZoom(float zoom);
+    void SetCameraOffsetX(float aOffset);
+    void SetCameraOffsetY(float aOffset);
+    void SetCameraTargetX(float aTarget);
+    void SetCameraTargetY(float aTarget);
+    void SetCameraRotation(float aRotation);
+    void SetCameraZoom(float aZoom);
     float GetCameraOffsetX() const;
     float GetCameraOffsetY() const;
     float GetCameraTargetX() const;

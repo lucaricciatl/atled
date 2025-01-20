@@ -20,21 +20,20 @@ namespace {
 }
 class ParticleComponent : public Component {
    public:
-    ParticleComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, float startSize = 0.01,
-                      float endSize = 0.01, float lifetime = 1.0f, bool collision = false, bool gravity = false,
-                      float speed = 3, const graphics::Color& color = getColor("Elegant Soft Gray"))
-        : Component(owner),  // Call base class constructor
-          physicsManager(serviceProvider->GetPhysicsManager()),
-          mFrame(owner->GetComponent<FrameComponent>()->GetFrame()),
-          mSpeed(speed),
-          mStartSize(startSize),
-          mEndSize(endSize),
-          mCollisionEnabled(collision),
-          life(0)
-    {
+    ParticleComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> aServiceProvider, float aStartSize = 0.01,
+                      float aEndSize = 0.01, float aLifetime = 1.0f, bool aCollision = false, bool aGravity = false,
+                      float aSpeed = 3, const graphics::Color& aColor = getColor("Elegant Soft Gray"))
+        : Component(aOwner),  // Call base class constructor
+          physicsManager(aServiceProvider->GetPhysicsManager()),
+          mFrame(aOwner->GetComponent<FrameComponent>()->GetFrame()),
+          mSpeed(aSpeed),
+          mStartSize(aStartSize),
+          mEndSize(aEndSize),
+          mCollisionEnabled(aCollision),
+          life(0) {
         // Create and configure the shape component
-        auto shape = owner->AddComponent<ShapeComponent>();
-        shape->SetModel<Sphere>(startSize, math::Vector3(0, 0, 0), defaultmeshring, defaultmeshslice, color);
+        auto shape = aOwner->AddComponent<ShapeComponent>();
+        shape->SetModel<Sphere>(aStartSize, math::Vector3(0, 0, 0), defaultmeshring, defaultmeshslice, aColor);
         static std::random_device rd;                           // Seed for the random number engine
         static std::mt19937 gen(rd());                          // Mersenne Twister random number generator
         static std::uniform_real_distribution<> dis(0.0, 1.0);  // Random numbers in range [0.0, 1.0]
@@ -43,7 +42,7 @@ class ParticleComponent : public Component {
         xr = dis(gen);
         yr = dis(gen);
         zr = dis(gen);
-        mLifetime = lifetime + dis(gen);
+        mLifetime = aLifetime + dis(gen);
     }
 
     void Update(double deltaTime) override;
@@ -67,40 +66,38 @@ class ParticleComponent : public Component {
 
 class ParticlesSystemComponent : public Component {
    public:
-    ParticlesSystemComponent(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider, int numParticles = 1000,
-                             float startSize = 0.1, float EndSize = 0.01, float lifetime = 5.0f,
-                             bool collision = false, float speed = 0)
-        : Component(owner),  // Call base class constructor
-          physicsManager(serviceProvider->GetPhysicsManager()),
-          mFrame(owner->GetComponent<FrameComponent>()->GetFrame()),
+    ParticlesSystemComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> aServiceProvider,
+                             int aNumParticles = 1000, float aStartSize = 0.1, float aEndSize = 0.01,
+                             float aLifetime = 5.0f, bool aCollision = false, float aSpeed = 0)
+        : Component(aOwner),  // Call base class constructor
+          mPhysicsManager(aServiceProvider->GetPhysicsManager()),
+          mFrame(aOwner->GetComponent<FrameComponent>()->GetFrame()),
           numParticles(numParticles) {
         // Create and store particle entities
-        auto engine = serviceProvider->GetEngine();
+        auto engine = aServiceProvider->GetEngine();
         mParticles.reserve(numParticles);
         for (int i = 0; i < numParticles; ++i) {
             auto particleEntity = engine->CreateEntity();
             particleEntity->AddComponent<ParticleComponent>();
             mParticles.emplace_back(particleEntity);
-            owner->AddChild(particleEntity.get());
+            aOwner->AddChild(particleEntity.get());
         }
     }
 
-    void SetNumberOfParticles(int numParticles);
-    void SetParticleStartSize(float size);
-    void SetParticleEndSize(float size);
-    void SetParticleLifetime(float lifetime);
-    void SetParticleGravity(math::Vector3 gravity);
-    void SetParticlesCollision(bool collision);
+    void SetNumberOfParticles(int aNumParticles);
+    void SetParticleStartSize(float aSize);
+    void SetParticleEndSize(float aSize);
+    void SetParticleLifetime(float aLifetime);
+    void SetParticleGravity(math::Vector3 aGravity);
+    void SetParticlesCollision(bool aCollision);
 
     void SetSpeed(float aSpeed);
     void SetEmissionRate(float aRate);
 
    private:
-    std::shared_ptr<physics::PhysicsManager> physicsManager;
+    std::shared_ptr<physics::PhysicsManager> mPhysicsManager;
     std::shared_ptr<physics::Frame> mFrame;
     std::vector<std::shared_ptr<Entity>> mParticles;
-    void AddParticles(int numParticles);
-    void RemoveParticles(int numParticles);
 
     int numParticles;
     float mSpeed;

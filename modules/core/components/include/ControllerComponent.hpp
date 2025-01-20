@@ -7,10 +7,10 @@
 
 class ControllerComponent : public Component {
    public:
-    ControllerComponent(Entity* owner, std::shared_ptr<ServiceProvider>) : Component(owner){};
+    ControllerComponent(Entity* aOwner, std::shared_ptr<ServiceProvider>) : Component(aOwner){};
 
-    virtual void OnAction(Action action, bool activated);
-    virtual void Update(float deltaTime);
+    virtual void OnAction(Action aAction, bool aActivated);
+    virtual void Update(float aDeltaTime);
 
    private:
 };

@@ -11,16 +11,16 @@ CameraManager::~CameraManager() {
     Stop();
 }
 
-void CameraManager::AddCamera(std::shared_ptr<ICamera> camera) {
-    mCameras.emplace_back(camera);
+void CameraManager::AddCamera(std::shared_ptr<ICamera> aCamera) {
+    mCameras.emplace_back(aCamera);
     if (!mActiveCamera) {
-        mActiveCamera = camera;
+        mActiveCamera = aCamera;
     }
 }
 
-void CameraManager::SetActiveCamera(size_t index) {
-    if (index < mCameras.size()) {
-        mActiveCamera = mCameras[index];
+void CameraManager::SetActiveCamera(size_t aIndex) {
+    if (aIndex < mCameras.size()) {
+        mActiveCamera = mCameras[aIndex];
     }
 }
 
@@ -69,12 +69,12 @@ void CameraManager::EndActiveCamera() {
     mActiveCamera->EndCamera();
 }
 
-void CameraManager::SetCameraRotation(float rotation) {
-    if (mActiveCamera) mActiveCamera->SetRotation(rotation);
+void CameraManager::SetCameraRotation(float aRotation) {
+    if (mActiveCamera) mActiveCamera->SetRotation(aRotation);
 }
 
-void CameraManager::SetCameraZoom(float zoom) {
-    if (mActiveCamera) mActiveCamera->SetZoom(zoom);
+void CameraManager::SetCameraZoom(float aZoom) {
+    if (mActiveCamera) mActiveCamera->SetZoom(aZoom);
 }
 
 float CameraManager::GetCameraRotation() const {
@@ -85,24 +85,24 @@ float CameraManager::GetCameraZoom() const {
     return mActiveCamera ? mActiveCamera->GetZoom() : 1.0f;
 }
 
-void CameraManager::SetCameraTargetY(float target) {
+void CameraManager::SetCameraTargetY(float aTarget) {
     if (mActiveCamera) {
         mActiveCamera->SetTarget(
-            math::Vector3(mActiveCamera->GetTarget().GetX(), target, mActiveCamera->GetTarget().GetZ()));
+            math::Vector3(mActiveCamera->GetTarget().GetX(), aTarget, mActiveCamera->GetTarget().GetZ()));
     }
 }
 
-void CameraManager::SetCameraOffsetX(float offset) {
+void CameraManager::SetCameraOffsetX(float aOffset) {
     if (mActiveCamera) {
         mActiveCamera->SetPosition(
-            math::Vector3{offset, mActiveCamera->GetPosition().GetY(), mActiveCamera->GetPosition().GetZ()});
+            math::Vector3{aOffset, mActiveCamera->GetPosition().GetY(), mActiveCamera->GetPosition().GetZ()});
     }
 }
 
-void CameraManager::SetCameraOffsetY(float offset) {
+void CameraManager::SetCameraOffsetY(float aOffset) {
     if (mActiveCamera) {
         mActiveCamera->SetPosition(
-            math::Vector3{mActiveCamera->GetPosition().GetX(), offset, mActiveCamera->GetPosition().GetZ()});
+            math::Vector3{mActiveCamera->GetPosition().GetX(), aOffset, mActiveCamera->GetPosition().GetZ()});
     }
 }
 
@@ -131,10 +131,10 @@ float CameraManager::GetCameraOffsetY() const {
     return 0.0f;
 }
 
-void CameraManager::SetCameraTargetX(float target) {
+void CameraManager::SetCameraTargetX(float aTarget) {
     if (mActiveCamera) {
         auto currentTarget = mActiveCamera->GetTarget();
-        mActiveCamera->SetTarget(math::Vector3{target, currentTarget.GetY(), currentTarget.GetZ()});
+        mActiveCamera->SetTarget(math::Vector3{aTarget, currentTarget.GetY(), currentTarget.GetZ()});
     }
 }
 

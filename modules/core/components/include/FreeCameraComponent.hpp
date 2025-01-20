@@ -10,7 +10,7 @@
 
 class FreeCameraComponent : public Component {
    public:
-    FreeCameraComponent(Entity* owner, std::shared_ptr<ServiceProvider> aServiceProvider) : Component(owner) {
+    FreeCameraComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> aServiceProvider) : Component(aOwner) {
         mCameraManager = aServiceProvider->GetCameraManager();
         mInputManager = aServiceProvider->GetInputManager();
     };

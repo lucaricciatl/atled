@@ -7,14 +7,14 @@ class Entity;  // Forward declaration of Entity
 
 class Component {
    public:
-    Entity* owner;
+    Entity* mOwner;
 
-    Component(Entity* owner = nullptr) : owner(owner) {}
+    Component(Entity* aOwner = nullptr) : mOwner(aOwner) {}
 
     virtual ~Component() = default;
 
     // Update method for the component
-    virtual void Update(double deltatime){};
+    virtual void Update(double aDeltatime){};
 
     // Init method for the component
     virtual void Init(){};

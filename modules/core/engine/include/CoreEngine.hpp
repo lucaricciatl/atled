@@ -43,7 +43,7 @@ class CoreEngine : public IEngine {
     bool isReady = false;
 
    private:
-    void pollInput();
+    void PollInput();
     std::unique_ptr<std::thread> inputThread;  // Thread for input handling
 };
 

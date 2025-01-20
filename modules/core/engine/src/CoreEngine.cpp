@@ -8,7 +8,7 @@
 #include "PhysicsManager.hpp"
 
 namespace engine {
-void CoreEngine::pollInput() {
+void CoreEngine::PollInput() {
     while (isRunning) {
         inputManager->Update();  // Poll inputs
     }
@@ -32,7 +32,7 @@ void CoreEngine::Start() {
     OnStart();
     isRunning = true;
     // Start the input handling thread
-    inputThread = std::make_unique<std::thread>(&CoreEngine::pollInput, this);
+    inputThread = std::make_unique<std::thread>(&CoreEngine::PollInput, this);
     EngineLoop();
 }
 

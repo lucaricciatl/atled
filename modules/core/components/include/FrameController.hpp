@@ -7,11 +7,11 @@
 
 class FrameController : public ControllerComponent {
    public:
-    FrameController(Entity* owner, std::shared_ptr<ServiceProvider> serviceProvider)
-        : ControllerComponent(owner, serviceProvider){};
+    FrameController(Entity* aOwner, std::shared_ptr<ServiceProvider> aServiceProvider)
+        : ControllerComponent(aOwner, aServiceProvider){};
 
-    void OnAction(Action action, bool activated){};
-    void Update(float deltaTime){};
+    void OnAction(Action aAction, bool aActivated){};
+    void Update(float aDeltaTime){};
 
    private:
     float speed;

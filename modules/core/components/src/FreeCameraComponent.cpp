@@ -4,7 +4,7 @@
 
 #include "Vector3.hpp"
 
-void FreeCameraComponent::Update(double deltaTime) {
+void FreeCameraComponent::Update(double aDt) {
     float cameraSpeed = 0.1f;  // Movement speed
     float mouseSensitivity = 0.1f;
     float zoomSpeed = 1.5f;
