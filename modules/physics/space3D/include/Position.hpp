@@ -1,7 +1,6 @@
 #ifndef POSITION_HPP
 #define POSITION_HPP
 
-
 namespace physics{
 
 class Position {
@@ -29,6 +28,37 @@ public:
 
     // Transform operations
     void Translate(double dx, double dy, double dz);
+
+    // Operators
+    Position operator+(const Position& other) const {
+        return Position(x + other.x, y + other.y, z + other.z);
+    }
+
+    Position operator-(const Position& other) const {
+        return Position(x - other.x, y - other.y, z - other.z);
+    }
+
+    Position& operator+=(const Position& other) {
+        x += other.x;
+        y += other.y;
+        z += other.z;
+        return *this;
+    }
+
+    Position& operator-=(const Position& other) {
+        x -= other.x;
+        y -= other.y;
+        z -= other.z;
+        return *this;
+    }
+
+    bool operator==(const Position& other) const {
+        return x == other.x && y == other.y && z == other.z;
+    }
+
+    bool operator!=(const Position& other) const {
+        return !(*this == other);
+    }
 };
 
 } // namespace physics

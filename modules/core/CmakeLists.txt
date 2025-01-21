@@ -8,6 +8,7 @@ add_library(core
     ./components/src/ControllerComponent.cpp
     ./components/src/RigidBodyComponent.cpp
     ./components/src/FreeCameraComponent.cpp
+    ./components/src/ForceFieldComponent.cpp
     ./components/src/ParticlesSystemComponent.cpp
     ./events/src/EventBus.cpp
     ./provider/src/ServiceProvider.cpp
