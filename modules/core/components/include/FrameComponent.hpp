@@ -23,7 +23,7 @@ class FrameComponent : public Component {
     void SetPosition(float x, float y, float z);
     void SetOrientation(const math::Quaternion& aOrientation);
     void SetFrame(std::shared_ptr<Frame> aFrame);
-
+    void SetPosition(const math::Vector3& position);
     // Destructor
     ~FrameComponent() override;
 

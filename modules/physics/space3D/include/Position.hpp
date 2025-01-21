@@ -1,6 +1,8 @@
 #ifndef POSITION_HPP
 #define POSITION_HPP
 
+#include "Vector3.hpp"
+
 namespace physics{
 
 class Position {
@@ -58,6 +60,14 @@ public:
 
     bool operator!=(const Position& other) const {
         return !(*this == other);
+    }
+    
+    operator math::Vector3() const {
+        return math::Vector3(static_cast<float>(x), static_cast<float>(y), static_cast<float>(z));
+    }
+
+    math::Vector3 GetVector3() const {
+        return math::Vector3(x, y, z);
     }
 };
 

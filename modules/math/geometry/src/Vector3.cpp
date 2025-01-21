@@ -70,7 +70,7 @@ float Vector3::Magnitude() const { return std::sqrt(x * x + y * y + z * z); }
 Vector3 Vector3::Normalized() const {
     float mag = Magnitude();
     if (mag == 0.0f) {
-        throw std::runtime_error("Cannot normalize zero-length vector");
+        return *this;
     }
     return *this / mag;
 }

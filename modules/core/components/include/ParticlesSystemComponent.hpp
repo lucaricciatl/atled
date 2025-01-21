@@ -36,7 +36,7 @@ class ParticleComponent : public Component {
         shape->SetModel<Sphere>(aStartSize, math::Vector3(0, 0, 0), defaultmeshring, defaultmeshslice, aColor);
         static std::random_device rd;                           // Seed for the random number engine
         static std::mt19937 gen(rd());                          // Mersenne Twister random number generator
-        static std::uniform_real_distribution<> dis(0.0, 1.0);  // Random numbers in range [0.0, 1.0]
+        static std::uniform_real_distribution<> dis(-aLifetime, aLifetime);  // Random numbers in range [0.0, 1.0]
         // Set position using the generated random numbers
         // Generate random x, y, z
         xr = dis(gen);
@@ -70,7 +70,7 @@ class ParticleComponent : public Component {
 class ParticlesSystemComponent : public Component {
    public:
     ParticlesSystemComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> aServiceProvider,
-                             int aNumParticles = 1000, float aStartSize = 0.1, float aEndSize = 0.01,
+                             int aNumParticles = 1000, float aStartSize = 0.01, float aEndSize = 0.01,
                              float aLifetime = 5.0f, bool aCollision = false, bool aGravity = false, float aSpeed = 1,
                              const graphics::Color& aColor = getColor("Elegant Soft Gray"))
         : Component(aOwner),  // Call base class constructor

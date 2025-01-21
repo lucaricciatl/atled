@@ -11,7 +11,7 @@
 #include <random>
 #include <thread>
 #include <vector>
-
+#include "ForceFieldComponent.hpp"
 #include "ParticlesSystemComponent.hpp"
 
 int main() {
@@ -29,6 +29,11 @@ int main() {
 
     auto entity = coreEngine->CreateEntity();
     auto mc = entity->AddComponent<ParticlesSystemComponent>();
+    auto entity2 = coreEngine->CreateEntity();
+    entity2->GetComponent<FrameComponent>()->SetPosition(5,0,1);
+    auto mc2 = entity2->AddComponent<ForceFieldComponent>();
+    mc2->SetStrength(-0.8);
+    mc2->AddEntitiesFromList(entity->GetChildren());
     auto entitycam = coreEngine->CreateEntity();
     entitycam->AddComponent<FreeCameraComponent>();
     coreEngine->Start();

@@ -36,6 +36,7 @@ public:
     void SetForceDirection(const math::Vector3& direction);
 
     // Add/Remove entities
+    void AddEntitiesFromList(const std::vector<Entity*>& entities);
     void AddAffectedEntity(Entity* entity);
     void RemoveAffectedEntity(Entity* entity);
 

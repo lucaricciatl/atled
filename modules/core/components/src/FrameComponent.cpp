@@ -27,6 +27,11 @@ void FrameComponent::SetPosition(float x, float y, float z) {
     }
 }
 
+void FrameComponent::SetPosition(const math::Vector3& position) {
+    if (mFrame) {
+        mFrame->SetPosition(position.GetX(), position.GetY(), position.GetZ());
+    }
+    }
 // Set orientation
 void FrameComponent::SetOrientation(const math::Quaternion& orientation) {
     if (mFrame) {
