@@ -47,6 +47,10 @@ class ParticleComponent : public Component {
 
     void Update(double aDt) override;
     void SetSpeed(const float aSpeed);
+    void SetStartSize(const float aSize);
+    void SetEndSize(const float aSize);
+    void SetCollision(const bool aCollision);
+    void SetLifetime(const float aLifetime);
 
    private:
     std::shared_ptr<physics::PhysicsManager> physicsManager;
@@ -109,7 +113,7 @@ class ParticlesSystemComponent : public Component {
     float mRate;
     float mStartSize;
     float mEndSize;
-    float mLife;
+    float mLifetime;
     bool mCollisionEnabled;
 
     math::Vector3 mGravity;
