@@ -9,11 +9,6 @@
 #include "Vector3.hpp"
 
 class ForceFieldComponent : public Component {
-private:
-    float mStrength;                               // Strength of the force field
-    math::Vector3 mForceDirection;                 // Direction for directional and wind forces
-    std::vector<Entity*> mAffectedEntities;        // Entities affected by the field
-
 public:
     ForceFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
     ~ForceFieldComponent();
@@ -27,6 +22,10 @@ public:
 
     // Update the force field
     void Update(double deltaTime) override;
+
+    float mStrength;                         // Strength of the force field
+    math::Vector3 mForceDirection;           // Direction for directional and wind forces
+    std::vector<Entity*> mAffectedEntities;  // Entities affected by the field
 };
 
 class RadialFieldComponent : public ForceFieldComponent {
@@ -39,6 +38,10 @@ class RadialFieldComponent : public ForceFieldComponent {
     void SetFallOffRadius(float aRadius);
 
     void Update(double deltaTime) override;
+
+    float mRadius;
+    math::Vector3 mCenter;
+    float mFallOffRadius;
 };
 
 class TangentFieldComponent : public ForceFieldComponent {
@@ -51,6 +54,10 @@ class TangentFieldComponent : public ForceFieldComponent {
     void SetAxis(math::Vector3 axis);
 
     void Update(double deltaTime) override;
+
+    float mRadius;
+    math::Vector3 mCenter;
+    math::Vector3 mAxis;
 };
 
 class GravitationalFieldComponent : public ForceFieldComponent {
@@ -63,6 +70,10 @@ class GravitationalFieldComponent : public ForceFieldComponent {
     void SetFallOffRadius(float aRadius);
 
     void Update(double deltaTime) override;
+
+    float mRadius;
+    math::Vector3 mCenter;
+    float mFallOffRadius;
 };
 
 class DirectionalFieldComponent : public ForceFieldComponent {
@@ -73,6 +84,8 @@ class DirectionalFieldComponent : public ForceFieldComponent {
     void SetDirection(math::Vector3 direction);
 
     void Update(double deltaTime) override;
+
+    math::Vector3 mDirection;
 };
 
 class WindFieldComponent : public ForceFieldComponent {
@@ -85,6 +98,10 @@ class WindFieldComponent : public ForceFieldComponent {
     void SetVariance(float variance);
 
     void Update(double deltaTime) override;
+
+    math::Vector3 mDirection;
+    float mFrequency;
+    float mVariance;
 };
 
 class RandomFieldComponent : public ForceFieldComponent {
@@ -96,6 +113,9 @@ class RandomFieldComponent : public ForceFieldComponent {
     void SetVariance(float variance);
 
     void Update(double deltaTime) override;
+
+    float mFrequency;
+    float mVariance;
 };
 
 #endif // FORCE_FIELD_COMPONENT_HPP
