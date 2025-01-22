@@ -8,20 +8,9 @@
 #include <memory>
 #include "Vector3.hpp"
 
-// Enum for different force field types
-enum class ForceFieldType {
-    None,
-    Radial,
-    Directional,
-    Wind,
-    Tangent
-};
-
 class ForceFieldComponent : public Component {
 private:
-    ForceFieldType mForceFieldType;                 // Type of force field
     float mStrength;                               // Strength of the force field
-    float mRadius;                                 // Effective radius of the force field
     math::Vector3 mForceDirection;                 // Direction for directional and wind forces
     std::vector<Entity*> mAffectedEntities;        // Entities affected by the field
 
@@ -29,11 +18,7 @@ public:
     ForceFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
     ~ForceFieldComponent();
 
-    // Setters
-    void SetForceFieldType(ForceFieldType type);
     void SetStrength(float strength);
-    void SetRadius(float radius);
-    void SetForceDirection(const math::Vector3& direction);
 
     // Add/Remove entities
     void AddEntitiesFromList(const std::vector<Entity*>& entities);
@@ -41,6 +26,75 @@ public:
     void RemoveAffectedEntity(Entity* entity);
 
     // Update the force field
+    void Update(double deltaTime) override;
+};
+
+class RadialFieldComponent : public ForceFieldComponent {
+   public:
+    RadialFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
+    ~RadialFieldComponent();
+
+    void SetRadius(float radius);
+    void SetCenter(math::Vector3 center);
+    void SetFallOffRadius(float aRadius);
+
+    void Update(double deltaTime) override;
+};
+
+class TangentFieldComponent : public ForceFieldComponent {
+   public:
+    TangentFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
+    ~TangentFieldComponent();
+
+    void SetRadius(float radius);
+    void SetCenter(math::Vector3 center);
+    void SetAxis(math::Vector3 axis);
+
+    void Update(double deltaTime) override;
+};
+
+class GravitationalFieldComponent : public ForceFieldComponent {
+   public:
+    GravitationalFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
+    ~GravitationalFieldComponent();
+
+    void SetRadius(float radius);
+    void SetCenter(math::Vector3 center);
+    void SetFallOffRadius(float aRadius);
+
+    void Update(double deltaTime) override;
+};
+
+class DirectionalFieldComponent : public ForceFieldComponent {
+   public:
+    DirectionalFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
+    ~DirectionalFieldComponent();
+
+    void SetDirection(math::Vector3 direction);
+
+    void Update(double deltaTime) override;
+};
+
+class WindFieldComponent : public ForceFieldComponent {
+   public:
+    WindFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
+    ~WindFieldComponent();
+
+    void SetDirection(math::Vector3 direction);
+    void SetFrequency(float frequency);
+    void SetVariance(float variance);
+
+    void Update(double deltaTime) override;
+};
+
+class RandomFieldComponent : public ForceFieldComponent {
+   public:
+    RandomFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
+    ~RandomFieldComponent();
+
+    void SetFrequency(float frequency);
+    void SetVariance(float variance);
+
     void Update(double deltaTime) override;
 };
 

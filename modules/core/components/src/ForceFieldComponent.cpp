@@ -5,30 +5,14 @@
 
 // Constructor
 ForceFieldComponent::ForceFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
-    : Component(aOwner), mForceFieldType(ForceFieldType::None), mStrength(1.0f), mRadius(10.0f), mForceDirection(0.0f, 0.0f, 0.0f) {}
+    : Component(aOwner), mStrength(1.0f) {}
 
 // Destructor
 ForceFieldComponent::~ForceFieldComponent() {}
 
-// Set force field type
-void ForceFieldComponent::SetForceFieldType(ForceFieldType type) {
-    mForceFieldType = type;
-}
-
 // Set the strength of the force field
 void ForceFieldComponent::SetStrength(float strength) {
     mStrength = strength;
-}
-
-// Set the radius of the force field
-void ForceFieldComponent::SetRadius(float radius) {
-    mRadius = radius;
-}
-
-// Set the force direction
-void ForceFieldComponent::SetForceDirection(const math::Vector3& direction) {
-    mForceDirection = direction;
-    mForceDirection.Normalized();
 }
 
 // Add an entity to the affected list
