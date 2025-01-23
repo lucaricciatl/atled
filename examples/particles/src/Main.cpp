@@ -29,10 +29,14 @@ int main() {
 
     auto entity = coreEngine->CreateEntity();
     auto mc = entity->AddComponent<ParticlesSystemComponent>();
+    mc->SetParticleLifetime(100);
+    mc->SetParticleStartSize(0.04);
+    mc->SetNumberOfParticles(5000);
     auto entity2 = coreEngine->CreateEntity();
-    entity2->GetComponent<FrameComponent>()->SetPosition(5,0,1);
-    auto mc2 = entity2->AddComponent<ForceFieldComponent>();
-    mc2->SetStrength(-0.8);
+    entity2->GetComponent<FrameComponent>()->SetPosition(0,0,6);
+    auto mc2 = entity2->AddComponent<GravitationalFieldComponent>();
+    mc2->SetStrength(10);
+    mc2->SetRadius(0.03);
     mc2->AddEntitiesFromList(entity->GetChildren());
     auto entitycam = coreEngine->CreateEntity();
     entitycam->AddComponent<FreeCameraComponent>();
