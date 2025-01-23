@@ -29,36 +29,7 @@ void ForceFieldComponent::RemoveAffectedEntity(Entity* entity) {
 
 // Update the force field, applying forces to all affected entities
 void ForceFieldComponent::Update(double deltaTime) {
-    // Iterate through all affected entities
-    for (Entity* entity : mAffectedEntities) {
-        if (entity == nullptr) continue;
 
-        // Get the entity's position
-        auto frame = entity->GetComponent<FrameComponent>();
-        if (frame == nullptr) continue;
-
-        auto entityPosition = frame->GetPosition();
-        auto fieldCenter = mOwner->GetComponent<FrameComponent>()->GetPosition();
-
-        // Calculate the direction and distance
-        auto direction = entityPosition->GetVector3() - fieldCenter->GetVector3();
-        float distance = direction.Magnitude();
-
-        // If the entity is within the radius of the force field
-
-            direction.Normalized(); // Normalize the direction vector
-
-            float forceMagnitude = mStrength / ( distance * distance ) ;
-
-            // Apply the force to the entity
-            math::Vector3 force = direction * forceMagnitude;
-
-            // Add force to the entity (assuming an AddForce method exists in the entity or its physics component)lculated force
-            math::Vector3 displacement = force * static_cast<float>(deltaTime); // Displacement = Force * deltaTime
-            auto pos=frame->GetPosition();
-            frame->SetPosition(pos->GetVector3() + displacement);
-        
-    }
 }
 
 void ForceFieldComponent::AddEntitiesFromList(const std::vector<Entity*>& entities) {
@@ -68,12 +39,6 @@ void ForceFieldComponent::AddEntitiesFromList(const std::vector<Entity*>& entiti
         }
     }
 }
-
-// RadialFieldComponent implementation
-RadialFieldComponent::RadialFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
-    : ForceFieldComponent(aOwner, serviceProvider) {}
-
-RadialFieldComponent::~RadialFieldComponent() {}
 
 void RadialFieldComponent::SetRadius(float radius) { mRadius = radius; }
 
@@ -104,11 +69,6 @@ void RadialFieldComponent::Update(double deltaTime) {
     }
 }
 
-// TangentFieldComponent implementation
-TangentFieldComponent::TangentFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
-    : ForceFieldComponent(aOwner, serviceProvider) {}
-
-TangentFieldComponent::~TangentFieldComponent() {}
 
 void TangentFieldComponent::SetRadius(float radius) { mRadius = radius; }
 
@@ -137,12 +97,6 @@ void TangentFieldComponent::Update(double deltaTime) {
     }
 }
 
-// GravitationalFieldComponent implementation
-GravitationalFieldComponent::GravitationalFieldComponent(Entity* aOwner,
-                                                         std::shared_ptr<ServiceProvider> serviceProvider)
-    : ForceFieldComponent(aOwner, serviceProvider) {}
-
-GravitationalFieldComponent::~GravitationalFieldComponent() {}
 
 void GravitationalFieldComponent::SetRadius(float radius) { mRadius = radius; }
 
@@ -163,21 +117,15 @@ void GravitationalFieldComponent::Update(double deltaTime) {
         auto direction = fieldCenter->GetVector3() - entityPosition->GetVector3();
         float distance = direction.Magnitude();
 
-        if (distance <= mRadius) {
+        if (distance >= mRadius) {
             direction.Normalized();
-            float forceMagnitude = mStrength * (1 - (distance / mFallOffRadius));
+            float forceMagnitude = mStrength / (distance * distance);
             math::Vector3 force = direction * forceMagnitude;
             math::Vector3 displacement = force * static_cast<float>(deltaTime);
             frame->SetPosition(frame->GetPosition()->GetVector3() + displacement);
         }
     }
 }
-
-// DirectionalFieldComponent implementation
-DirectionalFieldComponent::DirectionalFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
-    : ForceFieldComponent(aOwner, serviceProvider) {}
-
-DirectionalFieldComponent::~DirectionalFieldComponent() {}
 
 void DirectionalFieldComponent::SetDirection(math::Vector3 direction) { mDirection = direction; }
 
@@ -192,12 +140,6 @@ void DirectionalFieldComponent::Update(double deltaTime) {
         frame->SetPosition(frame->GetPosition()->GetVector3() + displacement);
     }
 }
-
-// WindFieldComponent implementation
-WindFieldComponent::WindFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
-    : ForceFieldComponent(aOwner, serviceProvider) {}
-
-WindFieldComponent::~WindFieldComponent() {}
 
 void WindFieldComponent::SetDirection(math::Vector3 direction) { mDirection = direction; }
 
@@ -217,12 +159,6 @@ void WindFieldComponent::Update(double deltaTime) {
         frame->SetPosition(frame->GetPosition()->GetVector3() + displacement);
     }
 }
-
-// RandomFieldComponent implementation
-RandomFieldComponent::RandomFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
-    : ForceFieldComponent(aOwner, serviceProvider) {}
-
-RandomFieldComponent::~RandomFieldComponent() {}
 
 void RandomFieldComponent::SetFrequency(float frequency) { mFrequency = frequency; }
 

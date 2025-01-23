@@ -78,11 +78,19 @@ class ParticlesSystemComponent : public Component {
                              float aLifetime = 5.0f, bool aCollision = false, bool aGravity = false, float aSpeed = 1,
                              const graphics::Color& aColor = getColor("Elegant Soft Gray"))
         : Component(aOwner),  // Call base class constructor
-          mPhysicsManager(aServiceProvider->GetPhysicsManager()),
-          mFrame(aOwner->GetComponent<FrameComponent>()->GetFrame()),
-          mNumParticles(aNumParticles) {
+            mOwner(aOwner),
+            mServiceProvider(aServiceProvider),
+            mPhysicsManager(aServiceProvider->GetPhysicsManager()),
+            mFrame(aOwner->GetComponent<FrameComponent>()->GetFrame()),
+            mNumParticles(aNumParticles),
+            mSpeed(aSpeed),
+            mRate(0.0f),  // Initialize default emission rate
+            mStartSize(aStartSize),
+            mEndSize(aEndSize),
+            mLifetime(aLifetime),
+            mCollisionEnabled(aCollision){
         // Create and store particle entities
-        auto engine = aServiceProvider->GetEngine();
+        auto engine = mServiceProvider->GetEngine();
         mParticles.reserve(mNumParticles);
         for (int i = 0; i < mNumParticles; ++i) {
             auto particleEntity = engine->CreateEntity();
@@ -104,9 +112,11 @@ class ParticlesSystemComponent : public Component {
     void SetEmissionRate(float aRate);
 
    private:
+    std::shared_ptr<ServiceProvider> mServiceProvider;
     std::shared_ptr<physics::PhysicsManager> mPhysicsManager;
     std::shared_ptr<physics::Frame> mFrame;
     std::vector<std::shared_ptr<Entity>> mParticles;
+    Entity* mOwner;
 
     int mNumParticles;
     float mSpeed;

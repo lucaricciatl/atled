@@ -27,11 +27,12 @@ public:
     math::Vector3 mForceDirection;           // Direction for directional and wind forces
     std::vector<Entity*> mAffectedEntities;  // Entities affected by the field
 };
-
 class RadialFieldComponent : public ForceFieldComponent {
    public:
-    RadialFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
-    ~RadialFieldComponent();
+    RadialFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
+        : ForceFieldComponent(aOwner, serviceProvider), mRadius(0.0f), mCenter({0, 0, 0}), mFallOffRadius(0.0f) {}
+
+    ~RadialFieldComponent() {}
 
     void SetRadius(float radius);
     void SetCenter(math::Vector3 center);
@@ -46,8 +47,10 @@ class RadialFieldComponent : public ForceFieldComponent {
 
 class TangentFieldComponent : public ForceFieldComponent {
    public:
-    TangentFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
-    ~TangentFieldComponent();
+    TangentFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
+        : ForceFieldComponent(aOwner, serviceProvider), mRadius(0.0f), mCenter({0, 0, 0}), mAxis({0, 1, 0}) {}
+
+    ~TangentFieldComponent() {}
 
     void SetRadius(float radius);
     void SetCenter(math::Vector3 center);
@@ -62,8 +65,10 @@ class TangentFieldComponent : public ForceFieldComponent {
 
 class GravitationalFieldComponent : public ForceFieldComponent {
    public:
-    GravitationalFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
-    ~GravitationalFieldComponent();
+    GravitationalFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
+        : ForceFieldComponent(aOwner, serviceProvider), mRadius(0.0f), mCenter({0, 0, 0}), mFallOffRadius(1000.0f) {}
+
+    ~GravitationalFieldComponent() {}
 
     void SetRadius(float radius);
     void SetCenter(math::Vector3 center);
@@ -78,8 +83,10 @@ class GravitationalFieldComponent : public ForceFieldComponent {
 
 class DirectionalFieldComponent : public ForceFieldComponent {
    public:
-    DirectionalFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
-    ~DirectionalFieldComponent();
+    DirectionalFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
+        : ForceFieldComponent(aOwner, serviceProvider), mDirection({0, 0, 1}) {}
+
+    ~DirectionalFieldComponent() {}
 
     void SetDirection(math::Vector3 direction);
 
@@ -90,8 +97,10 @@ class DirectionalFieldComponent : public ForceFieldComponent {
 
 class WindFieldComponent : public ForceFieldComponent {
    public:
-    WindFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
-    ~WindFieldComponent();
+    WindFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
+        : ForceFieldComponent(aOwner, serviceProvider), mDirection({0, 0, 1}), mFrequency(0.0f), mVariance(0.0f) {}
+
+    ~WindFieldComponent() {}
 
     void SetDirection(math::Vector3 direction);
     void SetFrequency(float frequency);
@@ -106,8 +115,10 @@ class WindFieldComponent : public ForceFieldComponent {
 
 class RandomFieldComponent : public ForceFieldComponent {
    public:
-    RandomFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider);
-    ~RandomFieldComponent();
+    RandomFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
+        : ForceFieldComponent(aOwner, serviceProvider), mFrequency(0.0f), mVariance(0.0f) {}
+
+    ~RandomFieldComponent() {}
 
     void SetFrequency(float frequency);
     void SetVariance(float variance);
@@ -118,4 +129,4 @@ class RandomFieldComponent : public ForceFieldComponent {
     float mVariance;
 };
 
-#endif // FORCE_FIELD_COMPONENT_HPP
+#endif
