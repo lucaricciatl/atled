@@ -2,6 +2,7 @@
 #include "ForceFieldComponent.hpp"
 #include <cmath>
 #include <algorithm> // For std::remove
+#include <RigidBodyComponent.hpp>
 
 // Constructor
 ForceFieldComponent::ForceFieldComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
@@ -121,8 +122,11 @@ void GravitationalFieldComponent::Update(double deltaTime) {
             direction.Normalized();
             float forceMagnitude = mStrength / (distance * distance);
             math::Vector3 force = direction * forceMagnitude;
+
             math::Vector3 displacement = force * static_cast<float>(deltaTime);
             frame->SetPosition(frame->GetPosition()->GetVector3() + displacement);
+            //auto rb = entity->GetComponent<RigidBodyComponent>();
+            //rb->ApplyForce(force);
         }
     }
 }

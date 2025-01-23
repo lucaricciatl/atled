@@ -30,14 +30,13 @@ public:
     void Init();
     void Update();
 
-    void AddBody(std::shared_ptr<Body> aBody) {
-        bodies.emplace_back(aBody);
-    }
+    void AddBody(std::shared_ptr<Body> aBody);
+    void RemoveBody(const std::shared_ptr<Body>& aBody);
 
     void ComputeCollisions();
     void ComputeReactions();
     void ComputeDeformations();
-    void ComputeCinematics();
+    void ComputeCinematics(float dt);
 
 protected:
     void Run(); // Thread loop function

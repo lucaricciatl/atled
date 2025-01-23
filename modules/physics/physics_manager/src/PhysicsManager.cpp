@@ -77,6 +77,15 @@ void PhysicsManager::ComputeCollisions() {
 }
 
 
+void PhysicsManager::AddBody(std::shared_ptr<Body> aBody) { bodies.emplace_back(aBody); }
+
+void PhysicsManager::RemoveBody(const std::shared_ptr<Body>& aBody) {
+    auto it = std::remove_if(bodies.begin(), bodies.end(),
+                             [&aBody](const std::shared_ptr<Body>& body) { return body == aBody; });
+    if (it != bodies.end()) {
+        bodies.erase(it, bodies.end());
+    }
+}
 
 // Compute Reactions
 void PhysicsManager::ComputeReactions() {
@@ -91,9 +100,10 @@ void PhysicsManager::ComputeDeformations() {
 }
 
 // Compute Cinematics
-void PhysicsManager::ComputeCinematics() {
-    // Implement cinematic computations here
-    std::cout << "Computing cinematics." << std::endl;
+void PhysicsManager::ComputeCinematics(float dt) {
+    for (auto body : bodies) {
+        body->UpdatePhysics(dt);
+    }
 }
 
 // Thread Loop Function
@@ -108,10 +118,8 @@ void PhysicsManager::Run() {
             ComputeCollisions();
             ComputeReactions();
             ComputeDeformations();
-            ComputeCinematics();
-            for (auto body : bodies) {
-                body->UpdatePhysics(dt);
-            }
+            ComputeCinematics(dt);
+
         }
         // Sleep or wait for a fixed timestep
         std::this_thread::sleep_for(std::chrono::milliseconds(1)); // ~60 FPS

@@ -13,6 +13,7 @@
 #include "ShapeComponent.hpp"
 #include <random>
 #include <AtledEngine.hpp>
+#include <RigidBodyComponent.hpp>
 
 namespace {
   constexpr int defaultmeshring = 3;
@@ -37,12 +38,15 @@ class ParticleComponent : public Component {
         static std::random_device rd;                           // Seed for the random number engine
         static std::mt19937 gen(rd());                          // Mersenne Twister random number generator
         static std::uniform_real_distribution<> dis(-aLifetime, aLifetime);  // Random numbers in range [0.0, 1.0]
+        //auto rb = aOwner->AddComponent<RigidBodyComponent>();
+        //rb->SetCollidable(aCollision);
         // Set position using the generated random numbers
         // Generate random x, y, z
         xr = dis(gen);
         yr = dis(gen);
         zr = dis(gen);
         mLifetime = aLifetime + dis(gen);
+
     }
 
     void Update(double aDt) override;
@@ -54,7 +58,6 @@ class ParticleComponent : public Component {
 
    private:
     std::shared_ptr<physics::PhysicsManager> physicsManager;
-    std::shared_ptr<physics::RigidBody> rigidBody;
     std::shared_ptr<physics::Frame> mFrame;
     std::shared_ptr<ShapeComponent> shape;
     float mStartSize;

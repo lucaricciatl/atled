@@ -1,8 +1,7 @@
 #ifndef PHYSICSCOMPONENT_HPP
 #define PHYSICSCOMPONENT_HPP
 
-#include <memory>  // Added for std::shared_ptr
-
+#include <memory>  // Added for std::shared_pt
 #include "Action.hpp"  // Fixed include (correct path or filename)
 #include "Component.hpp"
 #include "FrameComponent.hpp"
@@ -25,7 +24,7 @@ class RigidBodyComponent : public Component {
 
     void OnAction(Action action, bool activated);
     void Update(double deltaTime);
-
+    void ApplyForce(const math::Vector3& force) { rigidBody->ApplyForce(force); }
     void SetCollidable(bool aCollidable);
     void SetStatic(bool aStatic);
     void SetUseGravity(bool aGravity);
