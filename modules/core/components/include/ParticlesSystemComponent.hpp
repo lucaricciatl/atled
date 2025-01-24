@@ -38,8 +38,8 @@ class ParticleComponent : public Component {
         static std::random_device rd;                           // Seed for the random number engine
         static std::mt19937 gen(rd());                          // Mersenne Twister random number generator
         static std::uniform_real_distribution<> dis(-aLifetime, aLifetime);  // Random numbers in range [0.0, 1.0]
-        //auto rb = aOwner->AddComponent<RigidBodyComponent>();
-        //rb->SetCollidable(aCollision);
+        auto rb = aOwner->AddComponent<RigidBodyComponent>();
+        rb->SetCollidable(aCollision);
         // Set position using the generated random numbers
         // Generate random x, y, z
         xr = dis(gen);

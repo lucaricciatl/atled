@@ -32,24 +32,34 @@ AtledEngine::AtledEngine(std::unique_ptr<input::InputManager> inputMgr,
     serviceProvider->Provide(sharedResourcesMgr);
     serviceProvider->Provide(sharedPhysicsManager);
     serviceProvider->Provide(this);
-    // Add systems using shared pointers
-    AddSystem(std::make_unique<InputSystem>(sharedInputMgr.get(), GetEventBus()));
+    // Add systems using shared pointers  
     AddSystem(std::make_unique<RenderSystem>(sharedGraphicsMgr.get()));
-    AddSystem(std::make_unique<ResourceSystem>(sharedResourcesMgr.get()));
-    AddSystem(std::make_unique<PhysicsSystem>(sharedPhysicsManager.get()));
+
 
     for (auto& system : systems) {
         system->Init();
     }
+    AddSystem(std::make_unique<ResourceSystem>(sharedResourcesMgr.get()));
+    AddSystem(std::make_unique<PhysicsSystem>(sharedPhysicsManager.get()));
+
+    AddSystem(std::make_unique<InputSystem>(sharedInputMgr.get(), GetEventBus()));
 }
 
 void AtledEngine::Init() {
+    // Initialize all systems except for the RenderSystem (graphics)
+    for (auto& system : systems) {
+        // If the system is NOT a RenderSystem, then initialize it
+        if (dynamic_cast<RenderSystem*>(system.get()) == nullptr) {
+            system->Init();
+        }
+    }
+
+    // Initialize top-level entities (those without a parent)
     for (const auto& entity : entities) {
         if (entity->GetParent() == nullptr) {
             entity->Init();
         }
     }
-
 }
 
 void AtledEngine::Start() {

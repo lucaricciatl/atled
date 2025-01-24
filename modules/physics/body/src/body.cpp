@@ -6,7 +6,8 @@ namespace physics {
 Body::Body(std::shared_ptr<Frame> frame):
 mFrame(frame), mIsStatic(false),
 mUseGravity(true), mIsCollidable(true), mMass(1.0f), mVelocity{ 0, 0, 0 },
-mAccumulatedForce{ 0, 0, 0 } {
+mAccumulatedForce{ 0, 0, 0 },
+      mMesh(nullptr) {
 
 }
 
