@@ -24,7 +24,7 @@ class RigidBodyComponent : public Component {
 
     void OnAction(Action action, bool activated);
     void Update(double deltaTime);
-    void ApplyForce(const math::Vector3& force) { rigidBody->ApplyForce(force); }
+    void ApplyForceToPoint(const math::Vector3& force, const Position& position = Position(.0f,.0f,.0f)) { rigidBody->ApplyForceToPoint(force,position); }
     void SetCollidable(bool aCollidable);
     void SetStatic(bool aStatic);
     void SetUseGravity(bool aGravity);

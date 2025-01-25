@@ -126,7 +126,7 @@ void GravitationalFieldComponent::Update(double deltaTime) {
             math::Vector3 displacement = force * static_cast<float>(deltaTime);
             frame->SetPosition(frame->GetPosition()->GetVector3() + displacement);
             auto rb = entity->GetComponent<RigidBodyComponent>();
-            rb->ApplyForce(force);
+            rb->ApplyForceToPoint(force);
         }
     }
 }

@@ -10,7 +10,7 @@
 
 namespace physics {
     namespace {
-        math::Vector3 ComputeCollisionForce(
+        const math::Vector3 ComputeCollisionForce(
             const math::Vector3& position1, const math::Vector3& velocity1, float mass1,
             const math::Vector3& position2, const math::Vector3& velocity2, float mass2,
             const math::Vector3& collisionNormal, float restitution, float dt
@@ -33,7 +33,7 @@ namespace physics {
                 ((1 / mass1) + (1 / mass2));
 
             // Compute collision force vector
-            math::Vector3 collisionForce = normal * impulse / dt;
+            const math::Vector3 collisionForce = normal * impulse / dt;
 
             return collisionForce;
         }
@@ -241,7 +241,7 @@ namespace physics {
         float restitution = 0.9; // Example value for a somewhat elastic collision
 
         // Compute collision force
-        math::Vector3 force = physics::ComputeCollisionForce(
+        const math::Vector3 force = physics::ComputeCollisionForce(
             position1, velocity1, mass1,
             position2, velocity2, mass2,
             collisionNormal, restitution, dt
@@ -250,14 +250,14 @@ namespace physics {
         // Compute the force due to overlap
         // Apply forces to the bodies
 
-// Check if body1 is not static and apply reaction force
+        // Check if body1 is not static and apply reaction force
         if (!body1->IsStatic()) {
-            body1->ApplyForce(-force); // Reaction force on body1
+            body1->ApplyForceToPoint(-force); // Reaction force on body1
         }
 
         // Check if body2 is not static and apply action force
         if (!body2->IsStatic()) {
-            body2->ApplyForce(force); // Action force on body2
+            body2->ApplyForceToPoint(force); // Action force on body2
         }
 
 

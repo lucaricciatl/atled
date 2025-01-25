@@ -3,62 +3,51 @@
 
 namespace physics {
 
-Body::Body(std::shared_ptr<Frame> frame):
-mFrame(frame), mIsStatic(false),
-mUseGravity(true), mIsCollidable(true), mMass(1.0f), mVelocity{ 0, 0, 0 },
-mAccumulatedForce{ 0, 0, 0 },
-      mMesh(nullptr) {
-
-}
+Body::Body(std::shared_ptr<Frame> frame)
+    : mFrame(frame),
+      mIsStatic(false),
+      mUseGravity(true),
+      mIsCollidable(true),
+      mMass(1.0f),
+      mVelocity{0, 0, 0},
+      mAccumulatedForce{0, 0, 0},
+      mMesh(nullptr) {}
 
 // Set whether the rigid body is static
-void Body::SetStatic(bool isStatic) {
-    mIsStatic = isStatic;
-}
+void Body::SetStatic(bool isStatic) { mIsStatic = isStatic; }
 
 // Check if the rigid body is static
-bool Body::IsStatic() const {
-    return mIsStatic;
-}
+bool Body::IsStatic() const { return mIsStatic; }
 
 // Set whether the rigid body uses gravity
-void Body::SetUseGravity(bool useGravity) {
-    mUseGravity = useGravity;
-}
+void Body::SetUseGravity(bool useGravity) { mUseGravity = useGravity; }
 
 // Check if the rigid body uses gravity
-bool Body::UsesGravity() const {
-    return mUseGravity;
-}
+bool Body::UsesGravity() const { return mUseGravity; }
 
 // Set whether the rigid body is collidable
-void Body::SetCollidable(bool isCollidable) {
-    mIsCollidable = isCollidable;
-}
+void Body::SetCollidable(bool isCollidable) { mIsCollidable = isCollidable; }
 
 // Check if the rigid body is collidable
-bool Body::IsCollidable() const {
-    return mIsCollidable;
-}
+bool Body::IsCollidable() const { return mIsCollidable; }
 
 // Set the mass of the rigid body
 void Body::SetMass(float mass) {
-    mMass = (mass > 0.0f) ? mass : 1.0f; // Ensure mass is positive
+    mMass = (mass > 0.0f) ? mass : 1.0f;  // Ensure mass is positive
 }
 
 // Get the mass of the rigid body
-float Body::GetMass() const {
-    return mMass;
-}
+float Body::GetMass() const { return mMass; }
 
-std::shared_ptr<Frame> Body::GetFrame() const {
-    return mFrame;
+std::shared_ptr<Frame> Body::GetFrame() const { return mFrame; };
+
+void Body::ApplyForceToPoint(const math::Vector3& force, const Position& position) { 
+    mAccumulatedForce += force; 
 };
-// Apply a force to the rigid body
-void Body::ApplyForce(const math::Vector3& force) {
-    mAccumulatedForce += force;
-}
 
+void Body::ApplyMomentum(const math::Vector3& momentum) {}
+
+void Body::ApplyMomentum(const math::Vector3& axis, const float module) {}
 
 // Clear all accumulated forces
 void Body::ClearForces() {
@@ -69,7 +58,7 @@ void Body::ClearForces() {
 Body::~Body() = default;
 
 void Body::SetMesh(std::shared_ptr<graphics::Mesh> aMesh) {
-    mMesh = std::move(aMesh);
+    mMesh = aMesh;
 }
 
 math::BoundingBox Body::GetBoundingBox() const {

@@ -16,7 +16,9 @@ public:
     virtual void UpdatePhysics(double deltaTime) = 0;
     void SetMesh(std::shared_ptr<graphics::Mesh> aMesh);
 
-    void ApplyForce(const math::Vector3& force);
+    void ApplyForceToPoint(const math::Vector3& force, const Position& position = Position(0.0f, 0.0f, 0.0f));
+    void ApplyMomentum(const math::Vector3& momentum);
+    void ApplyMomentum(const math::Vector3& axis, const float module);
 
     // Compute and return the bounding box of the body
     math::BoundingBox GetBoundingBox() const;

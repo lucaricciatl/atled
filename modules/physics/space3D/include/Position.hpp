@@ -13,6 +13,7 @@ public:
     // Constructors
     Position();
     Position(double x, double y, double z);
+    Position(math::Vector3 position);
 
     // Destructor
     ~Position();
@@ -21,13 +22,14 @@ public:
     double GetX() const;
     double GetY() const;
     double GetZ() const;
+    math::Vector3 Get();
 
     // Setters
     void SetX(double x);
     void SetY(double y);
     void SetZ(double z);
     void Set(double x, double y, double z);
-
+    void Set(math::Vector3 aPos);
     // Transform operations
     void Translate(double dx, double dy, double dz);
 
