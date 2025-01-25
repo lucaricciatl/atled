@@ -83,8 +83,8 @@ math::BoundingBox Body::GetBoundingBox() const {
         max = math::Vector3(std::max(max.GetX(), vertex.GetX()), std::max(max.GetY(), vertex.GetY()),
                             std::max(max.GetZ(), vertex.GetZ()));
     }
-
-    return math::BoundingBox(min + mFrame->GetVectorPosition(), max+ mFrame->GetVectorPosition());
+    auto bbox = math::BoundingBox(min + mFrame->GetVectorPosition(), max + mFrame->GetVectorPosition());
+    return bbox;
 }
 
 void Body::Update(double deltaTime) {

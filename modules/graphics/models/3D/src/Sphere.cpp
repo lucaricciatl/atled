@@ -109,6 +109,11 @@ void Sphere::Draw() {
         raylib::DrawModel(mModel, gPos, 1.0f, toRaylibColor(mColor));
         // Unload shader after use to avoid memory leaks (not recommended for real-time use)
         //UnloadShader(basicShader);
+
+    }
+    if (WireframeIsEnabled) {
+        raylib::DrawSphereWires(gPos, mRadius, mRings, mSlices,
+                              toRaylibColor(mWireframeColor));
     }
 }
 

@@ -228,38 +228,36 @@ namespace physics {
     }
 
     void SimpleCollider::HandleCollision(Body* body1, Body* body2, const math::Vector3& collisionNormal, float penetrationDepth) {
-        // Retrieve body properties
-        math::Vector3 position1 = body1->GetFrame()->GetVectorPosition();
-        math::Vector3 velocity1 = body1->GetAccumulatedForce() / body1->GetMass();
-        float mass1 = body1->GetMass();
+        
+            // Retrieve body properties
+            math::Vector3 position1 = body1->GetFrame()->GetVectorPosition();
+            math::Vector3 velocity1 = body1->GetAccumulatedForce() / body1->GetMass();
+            float mass1 = body1->GetMass();
 
-        math::Vector3 position2 = body2->GetFrame()->GetVectorPosition();
-        math::Vector3 velocity2 = body2->mVelocity;
-        float mass2 = body2->GetMass();
+            math::Vector3 position2 = body2->GetFrame()->GetVectorPosition();
+            math::Vector3 velocity2 = body2->mVelocity;
+            float mass2 = body2->GetMass();
 
-        // Coefficient of restitution (adjust as needed)
-        float restitution = 0.9; // Example value for a somewhat elastic collision
+            // Coefficient of restitution (adjust as needed)
+            float restitution = 0.8;  // Example value for a somewhat elastic collision
 
-        // Compute collision force
-        const math::Vector3 force = physics::ComputeCollisionForce(
-            position1, velocity1, mass1,
-            position2, velocity2, mass2,
-            collisionNormal, restitution, dt
-        );
+            // Compute collision force
+            const math::Vector3 force = physics::ComputeCollisionForce(
+                position1, velocity1, mass1, position2, velocity2, mass2, collisionNormal, restitution, dt);
 
-        // Compute the force due to overlap
-        // Apply forces to the bodies
+            // Compute the force due to overlap
+            // Apply forces to the bodies
 
-        // Check if body1 is not static and apply reaction force
-        if (!body1->IsStatic()) {
-            body1->ApplyForceToPoint(-force); // Reaction force on body1
-        }
+            // Check if body1 is not static and apply reaction force
+            if (!body1->IsStatic()) {
+                body1->ApplyForceToPoint(-force);  // Reaction force on body1
+            }
 
-        // Check if body2 is not static and apply action force
-        if (!body2->IsStatic()) {
-            body2->ApplyForceToPoint(force); // Action force on body2
-        }
-
+            // Check if body2 is not static and apply action force
+            if (!body2->IsStatic()) {
+                body2->ApplyForceToPoint(force);  // Action force on body2
+            }
+        
 
     }
 }
