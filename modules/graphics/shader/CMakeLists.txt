@@ -8,7 +8,7 @@ file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
 
 # Create a library with the gathered source files
-add_library(${LIB_NAME} ${SOURCES})
+add_library(${LIB_NAME} ${HEADERS} ${SOURCES})
 
 # Include directories for this library
 target_include_directories(${LIB_NAME} PUBLIC 
@@ -25,5 +25,6 @@ target_link_libraries(${LIB_NAME} PUBLIC
 set_target_properties(${LIB_NAME} PROPERTIES FOLDER "modules/graphics")
 # Optionally link this library with other dependencies
 # target_link_libraries(${LIB_NAME} <other_dependencies>)
-
+set(${LIB_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)  # Path to include directory
+set(${LIB_NAME}_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)          # Path to library directory
 # Add to the main graphics library if needed

@@ -14,7 +14,7 @@
 #include <vector>
 #include "LightComponent.hpp"
 #include "Palette.hpp"
-
+#include "Light.hpp"
 int main() {
     // Engine setup
     engine::EngineBuilder<AtledEngine> builder;
@@ -31,13 +31,16 @@ int main() {
     auto mc = entity->AddComponent<ShapeComponent>();
 
     mc->SetModel<Plane>(math::Vector3(0, 0, 0), Vector2(10, 10), getColor("Timeless Gray"));
-
     auto entity2 = coreEngine->CreateEntity();
     entity2->GetComponent<FrameComponent>()->SetPosition(0, 1, 0.0f);
     auto mc1 = entity2->AddComponent<ShapeComponent>();
     mc1->SetModel<Cube>();
     // auto mc2 = entity->AddComponent<WorldComponent>();
     // Run the engine in the main thread
+    auto entity3 = coreEngine->CreateEntity();
+    entity3->GetComponent<FrameComponent>()->SetPosition(1, 1, 0.0f);
+    auto mc2 = entity3->AddComponent<LightComponent>();
+
     auto entitycam = coreEngine->CreateEntity();
     entitycam->AddComponent<FreeCameraComponent>();
     coreEngine->Start();

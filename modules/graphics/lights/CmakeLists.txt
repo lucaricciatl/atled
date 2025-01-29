@@ -18,11 +18,13 @@ ${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
     ${CMAKE_CURRENT_SOURCE_DIR}/include   # Include local project headers
     ${CMAKE_CURRENT_SOURCE_DIR}/interface/include   # Include local project headers
     ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
+    ${CMAKE_CURRENT_SOURCE_DIR}/../shader//include
 )
 
 # Link libraries for this target
 target_link_libraries(${LIB_NAME} PUBLIC 
-    raylibcpp                                 # Link the raylib library
+    raylibcpp    
+    ${SHADER_LIB_DIR}                             # Link the raylib library
 )
 # Optionally link this library with other dependencies
 # target_link_libraries(${LIB_NAME} <other_dependencies>)

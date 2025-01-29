@@ -5,6 +5,8 @@
 #include "Light.hpp"
 #include "LightsFactory.hpp"  // For createLight(...) and LightImplType
 #include <memory>
+#include "ServiceProvider.hpp"
+#include "Entity.hpp"
 
 class LightComponent : public Component 
 {

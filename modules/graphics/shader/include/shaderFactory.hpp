@@ -4,6 +4,7 @@
 #include "IShader.hpp"
 #include <memory>
 #include <string>
+#include "RaylibShader.hpp"
 
 class ShaderFactory {
 public:
@@ -15,7 +16,10 @@ public:
 
 class RaylibShaderFactory : public ShaderFactory {
 public:
-    std::unique_ptr<IShader> CreateShader() const override;
+    inline std::unique_ptr<IShader> CreateShader() const override {
+    return std::make_unique<RaylibShader>();
+};
+
 };
 
 #endif // SHADERFACTORY_HPP
