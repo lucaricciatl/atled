@@ -10,8 +10,8 @@ public:
     ~RaylibShader();
 
     bool LoadFromFiles(const std::string& vertexShaderPath, const std::string& fragmentShaderPath) override;
+    raylib::Shader GetShader(){return shader;}
 
-private:
     raylib::Shader shader;
     bool isLoaded;
 };

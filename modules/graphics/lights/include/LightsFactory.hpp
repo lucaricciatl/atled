@@ -16,10 +16,18 @@ public:
     // Create a Light. Arguments can vary depending on your needs.
     static Light* CreateLight(LightImplType aImplType){
         auto afs= RaylibShaderFactory();
-        auto sh = afs.CreateShader();
+        std::unique_ptr<IShader> shaderPtr = afs.CreateShader();
+
+        RaylibShader* sh = dynamic_cast<RaylibShader*>(shaderPtr.get());
+
         // Corrected version:
-        sh->LoadFromFiles("C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.fs",
-                  "C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\base.vs");
+        sh->LoadFromFiles("C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.vs",
+                  "C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.fs");
+    int ambientLoc = GetShaderLocation(sh->GetShader(), "ambient");
+    float ambientColor[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
+    SetShaderValue(sh->GetShader(), ambientLoc, ambientColor, raylib::SHADER_UNIFORM_VEC4);
+    
+
     switch (aImplType)
     {
         case LightImplType::RaylibLightImpl:

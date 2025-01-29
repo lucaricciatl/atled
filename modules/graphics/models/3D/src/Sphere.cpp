@@ -4,7 +4,8 @@
 #include "Vector3.hpp"
 #include "Palette.hpp"
 #include "Mesh.hpp"
-
+#include <RaylibShader.hpp>
+#include <LightsFactory.hpp>
 namespace graphics {
 
 
@@ -84,13 +85,29 @@ void Sphere::Draw() {
         // Create and load a simple shader dynamically
         //std::cout << "Current Working Directory: " << std::filesystem::current_path() << std::endl;
 
-        //raylib::Shader basicShader = raylib::LoadShader(
-        //    "C:/Users/atled/source/repos/atled/assets/shaders/basic.vs",
-        //    "C:/Users/atled/source/repos/atled/assets/shaders/basic.fs"
-        //);
 
+
+    // Create a Light. Arguments can vary depending on your needs.
+        auto afs = RaylibShaderFactory();
+        std::unique_ptr<IShader> shaderPtr = afs.CreateShader();
+
+        RaylibShader* sh = dynamic_cast<RaylibShader*>(shaderPtr.get());
+
+        // Corrected version:
+        sh->LoadFromFiles(
+            "C:"
+            "\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\gl"
+            "sl120\\blur.vs",
+            "C:"
+            "\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\gl"
+            "sl120\\blur.fs");
 
         // Set the framebuffer size in the shader
+
+
+        raylib::Texture2D texture = raylib::LoadTexture("C:/Users/atled/source/repos/atled/assets/textures/p.png");
+        mModel.materials[0].maps[raylib::MATERIAL_MAP_DIFFUSE].texture = texture;
+        mModel.materials[0].maps[raylib::MATERIAL_MAP_SPECULAR].texture = texture;
         //raylib::Vector2 screenSize = { 800.0f, 450.0f }; // Update to match your screen resolution
         //SetShaderValue(basicShader, GetShaderLocation(basicShader, "size"), &screenSize, SHADER_UNIFORM_VEC2);
         //float samplesVal = 8.0f; // Number of blur samples
@@ -105,10 +122,12 @@ void Sphere::Draw() {
         //mModel.materials[0].maps[raylib::MATERIAL_MAP_DIFFUSE].texture = texture;
         //mModel.materials[0].maps[raylib::MATERIAL_MAP_SPECULAR].texture = texture;
         //// Assign the shader to the 3D model
-        //mModel.materials[0].shader = basicShader;
+        mModel.materials[0].shader = sh->GetShader();
+
+        raylib::BeginShaderMode(sh->GetShader());
         raylib::DrawModel(mModel, gPos, 1.0f, toRaylibColor(mColor));
         // Unload shader after use to avoid memory leaks (not recommended for real-time use)
-        //UnloadShader(basicShader);
+        raylib::EndShaderMode();
 
     }
     if (WireframeIsEnabled) {

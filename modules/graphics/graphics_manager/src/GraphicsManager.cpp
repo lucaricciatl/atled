@@ -13,6 +13,7 @@
 #include "Point2D.hpp"
 #include "Cube.hpp"
 
+
 namespace graphics {
 
 GraphicsManager::GraphicsManager()
@@ -69,17 +70,25 @@ void GraphicsManager::SetCameraMng(std::shared_ptr<graphics::CameraManager> aCam
     mCameraManager = aCameraMng;
 }
 void GraphicsManager::Render() {
+
+
+
+        
     std::lock_guard<std::mutex> lock(layersMutex);
     GetGraphicsContext()->BeginDrawing();
     Clear(raylib::BLACK);
+    
     mCameraManager->BeginActiveCamera();
     for (const auto& [layerId, primitives] : layers) {
+
         DrawLayer(layerId);
+        
     }
 
     mCameraManager->EndActiveCamera();
 
     GetGraphicsContext()->EndDrawing(); // Finish the current frame
+    
 
 }
 
