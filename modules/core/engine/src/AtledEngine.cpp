@@ -58,7 +58,7 @@ void AtledEngine::Init() {
 void AtledEngine::Start() {
     isRunning = true;
     Init();
-
+    serviceProvider->GetPhysicsManager()->Start();
     // Main loop
     while (isRunning) {
         // Calculate deltaTime

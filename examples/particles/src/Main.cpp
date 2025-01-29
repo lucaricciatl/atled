@@ -30,12 +30,12 @@ int main() {
     auto entity = coreEngine->CreateEntity();
     auto mc = entity->AddComponent<ParticlesSystemComponent>();
     mc->SetParticleLifetime(10);
-    mc->SetParticleStartSize(0.04);
-    mc->SetNumberOfParticles(10000);
+    mc->SetParticleStartSize(0.08);
+    mc->SetNumberOfParticles(5000);
     auto entity2 = coreEngine->CreateEntity();
     entity2->GetComponent<FrameComponent>()->SetPosition(0,0,20);
     auto mc2 = entity2->AddComponent<GravitationalFieldComponent>();
-    mc2->SetStrength(40);
+    mc2->SetStrength(70);
     mc2->SetRadius(1);
     mc2->AddEntitiesFromList(entity->GetChildren());
     auto entitycam = coreEngine->CreateEntity();

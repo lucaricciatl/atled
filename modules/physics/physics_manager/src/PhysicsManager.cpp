@@ -28,7 +28,7 @@ PhysicsManager::~PhysicsManager() {
 
 // Initialize Physics Manager
 void PhysicsManager::Init() {
-    Start();
+
 }
 
 // Start Physics Processing
