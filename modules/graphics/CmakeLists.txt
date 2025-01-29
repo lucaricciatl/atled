@@ -3,9 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(graphics)
 
-
 add_library(graphics INTERFACE)
-
 
 add_subdirectory(camera)
 add_subdirectory(context)
@@ -15,11 +13,11 @@ add_subdirectory(models)
 add_subdirectory(shader)
 add_subdirectory(texts)
 add_subdirectory(window)
+add_subdirectory(lights)
 
-target_link_libraries(graphics INTERFACE camera context display graphics_manager models shader texts window)
+target_link_libraries(graphics INTERFACE camera context display graphics_manager models shader texts window lights)
 
 set_target_properties(graphics PROPERTIES FOLDER "modules")
-
 
 #set(SHADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/shaders)
 #file(GLOB SHADER_FILES ${SHADER_DIR}/*)
