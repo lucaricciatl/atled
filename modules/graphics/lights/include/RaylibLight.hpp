@@ -18,7 +18,7 @@ struct rLight {
     int positionLoc;
     int targetLoc;
     int colorLoc;
-    int attenuationLoc;
+    int attenuationLoc = 0;
 };
 
 class RaylibLight : public Light

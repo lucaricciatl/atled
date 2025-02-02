@@ -27,9 +27,10 @@ void UpdateLightValues(raylib::Shader shader, rLight light) {
 
     // Send to shader light color values
     float color[4] = {(float)light.color.r / (float)255, (float)light.color.g / (float)255,
-                      (float)light.color.b / (float)255, (float)light.color.a / (float)340};
+                      (float)light.color.b / (float)255, (float)light.color.a / (float)255};
     SetShaderValue(shader, light.colorLoc, color, raylib::SHADER_UNIFORM_VEC4);
 }
+
 
 rLight RaylibLight::CreateLight(int type, math::Vector3 position, math::Vector3 target, raylib::Color color,
                                 raylib::Shader shader) {
@@ -41,6 +42,7 @@ rLight RaylibLight::CreateLight(int type, math::Vector3 position, math::Vector3 
         light.position = position;
         light.target = target;
         light.color = color;
+        light.attenuationLoc = 0.0f;
 
         // NOTE: Lighting shader naming must be the provided ones
         light.enabledLoc = raylib::GetShaderLocation(shader, raylib::TextFormat("lights[%i].enabled", 0));

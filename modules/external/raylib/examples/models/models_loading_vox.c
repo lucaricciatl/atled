@@ -86,7 +86,7 @@ int main(void)
 		TextFormat("resources/shaders/glsl%i/voxel_lighting.fs", GLSL_VERSION));
 
 	// Get some required shader locations
-	shader.locs[SHADER_] = GetShaderLocation(shader, "viewPos");
+	shader.locs[SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(shader, "viewPos");
 	// NOTE: "matModel" location name is automatically assigned on shader loading, 
 	// no need to get the location again if using that uniform name
 	//shader.locs[SHADER_LOC_MATRIX_MODEL] = GetShaderLocation(shader, "matModel");
