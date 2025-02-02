@@ -6,6 +6,7 @@
 #include "Color.hpp"
 namespace graphics {
 using namespace math;
+
     class Sphere : public Model3D {
     public:
         // Constructors

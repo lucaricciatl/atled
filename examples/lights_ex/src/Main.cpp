@@ -27,7 +27,6 @@ int main() {
                                                   .SetTargetFramerate(60)  // Set frame rate suitable for the game speed
                                                   .Build();
 
-
     auto entity2 = coreEngine->CreateEntity();
     entity2->GetComponent<FrameComponent>()->SetPosition(0, 1, 0.0f);
     auto mc1 = entity2->AddComponent<ShapeComponent>();
@@ -35,9 +34,16 @@ int main() {
     mc1->GetModel<Sphere>()->DisableWireframe();
     // auto mc2 = entity->AddComponent<WorldComponent>();
     // Run the engine in the main thread
+    auto entity = coreEngine->CreateEntity();
+    auto mc = entity->AddComponent<ShapeComponent>();
+    mc->SetModel<Plane>(math::Vector3(0, 0, 0), Vector2(10, 10), getColor("Timeless Gray"));
+    auto shapephisic = entity->AddComponent<RigidBodyComponent>();
+    shapephisic->SetCollidable(true);
+    shapephisic->SetStatic(true);
     auto entity3 = coreEngine->CreateEntity();
     entity3->GetComponent<FrameComponent>()->SetPosition(1, 1, 0.0f);
     auto mc2 = entity3->AddComponent<LightComponent>();
+
 
     auto entitycam = coreEngine->CreateEntity();
     entitycam->AddComponent<FreeCameraComponent>();

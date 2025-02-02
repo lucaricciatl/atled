@@ -1,15 +1,33 @@
 #pragma once
 
 #include "Light.hpp"
+#include "Vector3.hpp"
+#include "raylib.hpp"
 
-// Forward-declare anything else you might need from Raylib:
-// e.g. #include "raylib.h" in the .cpp instead of here.
+struct rLight {
+    int type;
+    bool enabled;
+    math::Vector3 position;
+    math::Vector3 target;
+    raylib::Color color;
+    float attenuation;
+
+    // Shader locations
+    int enabledLoc;
+    int typeLoc;
+    int positionLoc;
+    int targetLoc;
+    int colorLoc;
+    int attenuationLoc;
+};
 
 class RaylibLight : public Light
 {
 public:
     RaylibLight();
     virtual ~RaylibLight();
+    rLight CreateLight(int type, math::Vector3 position, math::Vector3 target, raylib::Color color,
+                       raylib::Shader shader);
 
 private:
     

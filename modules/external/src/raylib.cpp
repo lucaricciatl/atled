@@ -2,14 +2,16 @@
 #include "../raylib/src/raylib.h"
 #include "Vector3.hpp"
 #include <string>
+#include <raylib.hpp>
 
 
 namespace raylib {
 
 namespace{
 
-Vector3 toRaylibVector3(math::Vector3 v) { return {v.GetX(), v.GetY(), v.GetZ()}; }
-}
+}  // namespace
+raylib::Vector3 raylib::toRaylibVector3(math::Vector3 v) { return {v.GetX(), v.GetY(), v.GetZ()}; }
+
 
 // Some Basic Colors
 // NOTE: Custom raylib color palette for amazing visuals on WHITE background
@@ -42,32 +44,32 @@ Vector3 toRaylibVector3(math::Vector3 v) { return {v.GetX(), v.GetY(), v.GetZ()}
 
 // Draw a model (with texture if set)
 void DrawModelSimple(Model model, math::Vector3 position, float scale, Color tint) {
-    ::DrawModel(model, toRaylibVector3(position), scale, tint);
+    ::DrawModel(model, raylib::toRaylibVector3(position), scale, tint);
 }
 
 // Draw a model with extended parameters
 void DrawModelExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint) {
-    ::DrawModelEx(model, toRaylibVector3(position), toRaylibVector3(rotationAxis), rotationAngle, toRaylibVector3(scale), tint);
+    ::DrawModelEx(model, raylib::toRaylibVector3(position), raylib::toRaylibVector3(rotationAxis), rotationAngle, raylib::toRaylibVector3(scale), tint);
 }
 
 // Draw a model wires (with texture if set)
 void DrawModelWiresSimple(Model model, math::Vector3 position, float scale, Color tint) {
-    ::DrawModelWires(model, toRaylibVector3(position), scale, tint);
+    ::DrawModelWires(model, raylib::toRaylibVector3(position), scale, tint);
 }
 
 // Draw a model wires (with texture if set) with extended parameters
 void DrawModelWiresExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint) {
-    ::DrawModelWiresEx(model, toRaylibVector3(position), toRaylibVector3(rotationAxis), rotationAngle, toRaylibVector3(scale), tint);
+    ::DrawModelWiresEx(model, raylib::toRaylibVector3(position), raylib::toRaylibVector3(rotationAxis), rotationAngle, raylib::toRaylibVector3(scale), tint);
 }
 
 // Draw a model as points
 void DrawModelPointsSimple(Model model, math::Vector3 position, float scale, Color tint) {
-    ::DrawModelPoints(model, toRaylibVector3(position), scale, tint);
+    ::DrawModelPoints(model, raylib::toRaylibVector3(position), scale, tint);
 }
 
 // Draw a model as points with extended parameters
 void DrawModelPointsExtended(Model model, math::Vector3 position, math::Vector3 rotationAxis, float rotationAngle, math::Vector3 scale, Color tint) {
-    ::DrawModelPointsEx(model, toRaylibVector3(position), toRaylibVector3(rotationAxis), rotationAngle, toRaylibVector3(scale), tint);
+    ::DrawModelPointsEx(model, raylib::toRaylibVector3(position), raylib::toRaylibVector3(rotationAxis), rotationAngle, raylib::toRaylibVector3(scale), tint);
 }
 
 // Draw bounding box (wires)
@@ -91,17 +93,17 @@ bool IsShaderReady(Shader shader) {
 }
 // Draw a billboard texture
 void DrawBillboardTexture(Camera camera, Texture2D texture,  math::Vector3 position, float scale, Color tint) {
-    ::DrawBillboard(camera, texture, toRaylibVector3(position), scale, tint);
+    ::DrawBillboard(camera, texture, raylib::toRaylibVector3(position), scale, tint);
 }
 
 // Draw a billboard texture defined by source
 void DrawBillboardTextureRec(Camera camera, Texture2D texture, Rectangle source,  math::Vector3 position, Vector2 size, Color tint) {
-    ::DrawBillboardRec(camera, texture, source, toRaylibVector3(position), size, tint);
+    ::DrawBillboardRec(camera, texture, source, raylib::toRaylibVector3(position), size, tint);
 }
 
 // Draw a billboard texture defined by source and rotation
 void DrawBillboardTexturePro(Camera camera, Texture2D texture, Rectangle source, math::Vector3 position, math::Vector3 up, Vector2 size, Vector2 origin, float rotation, Color tint) {
-    ::DrawBillboardPro(camera, texture, source, toRaylibVector3(position), toRaylibVector3(up), size, origin, rotation, tint);
+    ::DrawBillboardPro(camera, texture, source, raylib::toRaylibVector3(position), raylib::toRaylibVector3(up), size, origin, rotation, tint);
 }
 
 void DrawModel(Model model, ::Vector3 position, float scale, Color tint){
@@ -833,35 +835,35 @@ void EndVrStereoMode() {
 
 // Draw sphere wires
 void DrawSphereWires(math::Vector3 centerPos, float radius, int rings, int slices, Color color) {
-    ::DrawSphereWires(toRaylibVector3(centerPos), radius, rings, slices, color);
+    ::DrawSphereWires(raylib::toRaylibVector3(centerPos), radius, rings, slices, color);
 }
 // Draw a cylinder/cone
 void DrawCylinder(math::Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color) {
-    ::DrawCylinder(toRaylibVector3(position), radiusTop, radiusBottom, height, slices, color);
+    ::DrawCylinder(raylib::toRaylibVector3(position), radiusTop, radiusBottom, height, slices, color);
 }
 // Draw a cylinder with base at startPos and top at endPos
 void DrawCylinderEx(math::Vector3 startPos, math::Vector3 endPos, float startRadius, float endRadius, int sides, Color color) {
-    ::DrawCylinderEx(toRaylibVector3(startPos), toRaylibVector3(endPos), startRadius, endRadius, sides, color);
+    ::DrawCylinderEx(raylib::toRaylibVector3(startPos), raylib::toRaylibVector3(endPos), startRadius, endRadius, sides, color);
 }
 // Draw cylinder/cone wires
 void DrawCylinderWires(math::Vector3 position, float radiusTop, float radiusBottom, float height, int slices, Color color) {
-    ::DrawCylinderWires(toRaylibVector3(position), radiusTop, radiusBottom, height, slices, color);
+    ::DrawCylinderWires(raylib::toRaylibVector3(position), radiusTop, radiusBottom, height, slices, color);
 }
 // Draw cylinder wires with base at startPos and top at endPos
 void DrawCylinderWiresEx(math::Vector3 startPos, math::Vector3 endPos, float startRadius, float endRadius, int sides, Color color) {
-    ::DrawCylinderWiresEx(toRaylibVector3(startPos), toRaylibVector3(endPos), startRadius, endRadius, sides, color);
+    ::DrawCylinderWiresEx(raylib::toRaylibVector3(startPos), raylib::toRaylibVector3(endPos), startRadius, endRadius, sides, color);
 }
 // Draw a capsule with the center of its sphere caps at startPos and endPos
 void DrawCapsule(math::Vector3 startPos, math::Vector3 endPos, float radius, int slices, int rings, Color color) {
-    ::DrawCapsule(toRaylibVector3(startPos), toRaylibVector3(endPos), radius, slices, rings, color);
+    ::DrawCapsule(raylib::toRaylibVector3(startPos), raylib::toRaylibVector3(endPos), radius, slices, rings, color);
 }
 // Draw capsule wireframe with the center of its sphere caps at startPos and endPos
 void DrawCapsuleWires(math::Vector3 startPos, math::Vector3 endPos, float radius, int slices, int rings, Color color) {
-    ::DrawCapsuleWires(toRaylibVector3(startPos), toRaylibVector3(endPos), radius, slices, rings, color);
+    ::DrawCapsuleWires(raylib::toRaylibVector3(startPos), raylib::toRaylibVector3(endPos), radius, slices, rings, color);
 }
 // Draw a plane on the XZ axis
 void DrawPlane(math::Vector3 centerPos, Vector2 size, Color color) {
-    ::DrawPlane(toRaylibVector3(centerPos), size, color);
+    ::DrawPlane(raylib::toRaylibVector3(centerPos), size, color);
 }
 // Draw a ray line
 void DrawRay(Ray ray, Color color) {
@@ -885,19 +887,19 @@ void OpenURL(const char *url) {
 }
 // Draw a line in 3D world space
 void DrawLine3D(math::Vector3 startPos, math::Vector3 endPos, Color color) {
-    ::DrawLine3D(toRaylibVector3(startPos), toRaylibVector3(endPos), color);
+    ::DrawLine3D(raylib::toRaylibVector3(startPos), raylib::toRaylibVector3(endPos), color);
 }
 // Draw a point in 3D space, actually a small line
 void DrawPoint3D(math::Vector3 position, Color color) {
-    ::DrawPoint3D(toRaylibVector3(position), color);
+    ::DrawPoint3D(raylib::toRaylibVector3(position), color);
 }
 // Draw a circle in 3D world space
 void DrawCircle3D(math::Vector3 center, float radius, math::Vector3 rotationAxis, float rotationAngle, Color color) {
-    ::DrawCircle3D(toRaylibVector3(center), radius, toRaylibVector3(rotationAxis), rotationAngle, color);
+    ::DrawCircle3D(raylib::toRaylibVector3(center), radius, raylib::toRaylibVector3(rotationAxis), rotationAngle, color);
 }
 // Draw a color-filled triangle (vertex in counter-clockwise order!)
 void DrawTriangle3D(math::Vector3 v1, math::Vector3 v2, math::Vector3 v3, Color color) {
-    ::DrawTriangle3D(toRaylibVector3(v1), toRaylibVector3(v2), toRaylibVector3(v3), color);
+    ::DrawTriangle3D(raylib::toRaylibVector3(v1), raylib::toRaylibVector3(v2), raylib::toRaylibVector3(v3), color);
 }
 // Draw a triangle strip defined by points
 void DrawTriangleStrip3D(const Vector3 *points, int pointCount, Color color) {
@@ -905,27 +907,27 @@ void DrawTriangleStrip3D(const Vector3 *points, int pointCount, Color color) {
 }
 // Draw a cube
 void DrawCube(math::Vector3 position, float width, float height, float length, Color color) {
-    ::DrawCube(toRaylibVector3(position), width, height, length, color);
+    ::DrawCube(raylib::toRaylibVector3(position), width, height, length, color);
 }
 // Draw cube (Vector version)
 void DrawCubeV(math::Vector3 position, math::Vector3 size, Color color) {
-    ::DrawCubeV(toRaylibVector3(position), toRaylibVector3(size), color);
+    ::DrawCubeV(raylib::toRaylibVector3(position), raylib::toRaylibVector3(size), color);
 }
 // Draw cube wires
 void DrawCubeWires(math::Vector3 position, float width, float height, float length, Color color) {
-    ::DrawCubeWires(toRaylibVector3(position), width, height, length, color);
+    ::DrawCubeWires(raylib::toRaylibVector3(position), width, height, length, color);
 }
 // Draw cube wires (Vector version)
 void DrawCubeWiresV(math::Vector3 position, math::Vector3 size, Color color) {
-    ::DrawCubeWiresV(toRaylibVector3(position), toRaylibVector3(size), color);
+    ::DrawCubeWiresV(raylib::toRaylibVector3(position), raylib::toRaylibVector3(size), color);
 }
 // Draw sphere
 void DrawSphere(math::Vector3 centerPos, float radius, Color color) {
-    ::DrawSphere(toRaylibVector3(centerPos), radius, color);
+    ::DrawSphere(raylib::toRaylibVector3(centerPos), radius, color);
 }
 // Draw sphere with extended parameters
 void DrawSphereEx(math::Vector3 centerPos, float radius, int rings, int slices, Color color) {
-    ::DrawSphereEx(toRaylibVector3(centerPos), radius, rings, slices, color);
+    ::DrawSphereEx(raylib::toRaylibVector3(centerPos), radius, rings, slices, color);
 }
 void DrawFPS(int posX, int posY) {
     ::DrawFPS(posX, posY);

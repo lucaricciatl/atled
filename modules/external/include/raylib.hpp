@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include "string"
 #include "Vector3.hpp"
 
@@ -6,14 +8,12 @@ namespace raylib{
 
 
 #include <raylib.h>
-
 #include <raymath.h>
 
 
 using namespace raylib;
 typedef GlyphInfo GlyphInfo;
 typedef ConfigFlags ConfigFlags;
-typedef Color Color;  // Using the fully qualified type from raylib
 typedef Shader Shader;
 typedef Vector2 Vector2;
 typedef Model Model;
@@ -24,6 +24,9 @@ typedef Mesh Mesh;
 typedef CameraProjection CameraProjection;
 typedef Rectangle Rectangle;
 typedef MaterialMapIndex MaterialMapIndex;
+typedef ShaderUniformDataType ShaderUniformDataType;
+enum LightType { LIGHT_DIRECTIONAL = 0, LIGHT_POINT };
+
 // Some Basic Colors
 // NOTE: Custom raylib color palette for amazing visuals on WHITE background
 #define GFX_LIGHTGRAY  { 200, 200, 200, 255 }   // Light Gray
@@ -53,7 +56,7 @@ typedef MaterialMapIndex MaterialMapIndex;
 #define GFX_MAGENTA    { 255, 0, 255, 255 }     // Magenta
 #define GFX_RAYWHITE   { 245, 245, 245, 255 }   // My own White
 
-
+raylib::Vector3 toRaylibVector3(math::Vector3 v);
 // Draw a model (with texture if set)
 void DrawModelSimple(Model model, math::Vector3 position, float scale, Color tint);
 
@@ -409,5 +412,7 @@ Shader LoadShaderFromMemory(const char *vsCode, const char *fsCode);
 
 // Check if a shader is ready
 bool IsShaderReady(Shader shader);
+
+
 
 }

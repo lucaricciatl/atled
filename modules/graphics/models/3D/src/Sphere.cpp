@@ -6,6 +6,7 @@
 #include "Mesh.hpp"
 #include <RaylibShader.hpp>
 #include <LightsFactory.hpp>
+
 namespace graphics {
 
 
@@ -82,10 +83,6 @@ void Sphere::Draw() {
     auto gPos = ComputeGlobalPosition(mCenterPos);
 
     if (ShapeIsEnabled) {
-        // Create and load a simple shader dynamically
-        //std::cout << "Current Working Directory: " << std::filesystem::current_path() << std::endl;
-
-
 
     // Create a Light. Arguments can vary depending on your needs.
         auto afs = RaylibShaderFactory();
@@ -97,33 +94,17 @@ void Sphere::Draw() {
         sh->LoadFromFiles(
             "C:"
             "\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\gl"
-            "sl120\\blur.vs",
+            "sl120\\lighting.vs",
             "C:"
             "\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\gl"
-            "sl120\\blur.fs");
+            "sl120\\lighting.fs");
 
-        // Set the framebuffer size in the shader
-
-
-        raylib::Texture2D texture = raylib::LoadTexture("C:/Users/atled/source/repos/atled/assets/textures/p.png");
-        mModel.materials[0].maps[raylib::MATERIAL_MAP_DIFFUSE].texture = texture;
-        mModel.materials[0].maps[raylib::MATERIAL_MAP_SPECULAR].texture = texture;
-        //raylib::Vector2 screenSize = { 800.0f, 450.0f }; // Update to match your screen resolution
-        //SetShaderValue(basicShader, GetShaderLocation(basicShader, "size"), &screenSize, SHADER_UNIFORM_VEC2);
-        //float samplesVal = 8.0f; // Number of blur samples
-        //float qualityVal = 2.0f; // Blur quality multiplier
-        //int samplesLoc = raylib::GetShaderLocation(basicShader, "samples");
-        //int qualityLoc = raylib::GetShaderLocation(basicShader, "quality");
-        //raylib::SetShaderValue(basicShader, samplesLoc, &samplesVal, raylib::SHADER_UNIFORM_FLOAT);
-        //raylib::SetShaderValue(basicShader, qualityLoc, &qualityVal, raylib::SHADER_UNIFORM_FLOAT);
-        ////SetShaderValue(basicShader, GetShaderLocation(basicShader, "samples"), &samples, SHADER_UNIFORM_FLOAT);
-        ////SetShaderValue(basicShader, GetShaderLocation(basicShader, "quality"), &quality, SHADER_UNIFORM_FLOAT);
-        //raylib::Texture2D texture = raylib::LoadTexture("C:/Users/atled/source/repos/atled/assets/textures/p.png");
-        //mModel.materials[0].maps[raylib::MATERIAL_MAP_DIFFUSE].texture = texture;
-        //mModel.materials[0].maps[raylib::MATERIAL_MAP_SPECULAR].texture = texture;
-        //// Assign the shader to the 3D model
-        mModel.materials[0].shader = sh->GetShader();
-
+        RaylibLight l;
+        rLight light = l.CreateLight(raylib::LightType::LIGHT_POINT, math::Vector3{2, 2, 0}, math::Vector3{0, 2, 0},
+                                     raylib::BLUE, sh->shader);
+        int ambientLoc = GetShaderLocation(sh->GetShader(), "ambient");
+        float ambientColor[4] = {0.6f, 0.1f, 0.1f, 0.5f};
+        SetShaderValue(sh->GetShader(), ambientLoc, ambientColor, raylib::SHADER_UNIFORM_VEC4);
         raylib::BeginShaderMode(sh->GetShader());
         raylib::DrawModel(mModel, gPos, 1.0f, toRaylibColor(mColor));
         // Unload shader after use to avoid memory leaks (not recommended for real-time use)
@@ -149,7 +130,7 @@ void Sphere::Draw() {
         mModel = raylib::LoadModelFromMesh(SphereMesh);
 
         // Set the material color
-        mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = toRaylibColor(mColor);
+        //mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = toRaylibColor(mColor);
     }
 
 } // namespace graphics
