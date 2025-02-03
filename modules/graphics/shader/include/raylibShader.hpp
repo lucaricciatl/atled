@@ -3,9 +3,9 @@
 
 #include "IShader.hpp"
 #include "raylib.hpp"
-
+#include "vector"
 class RaylibShader : public IShader {
-public:
+   public:
     RaylibShader();
     ~RaylibShader();
 
@@ -13,6 +13,7 @@ public:
     raylib::Shader GetShader(){return shader;}
 
     raylib::Shader shader;
+    std::string shaderSearchPaths;
     bool isLoaded;
 };
 
