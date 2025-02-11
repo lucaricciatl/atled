@@ -60,5 +60,4 @@ if (${BUILD_EXAMPLES})
   MESSAGE(STATUS "Building examples is enabled")
   add_subdirectory(examples)
 endif()
-add_subdirectory(examples)
-enable_testing()
+

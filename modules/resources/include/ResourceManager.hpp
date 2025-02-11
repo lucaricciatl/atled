@@ -7,6 +7,9 @@
 #include <memory>
 #include <string>
 #include "Resouce.hpp"
+#include "MaterialFactory.hpp"
+#include "LightsFactory.hpp"
+#include "shaderFactory.hpp"
 
 namespace resources {
 
@@ -27,7 +30,8 @@ public:
     void UnloadAll() override;
 
 private:
-
+    MaterialFactory mMaterialFactory;
+    LightFactory mLightsFactory;
 };
 
 }
