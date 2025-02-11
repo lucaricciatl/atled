@@ -3,6 +3,7 @@ set(RAYLIB_INCLUDE_DIR ${RAYLIB_DIR}/src)
 set(RAYLIB_LIB_DIR ${RAYLIB_DIR}/lib)              
 
 add_subdirectory(${RAYLIB_DIR})
+#add_subdirectory(./opencv)
 
 add_library(raylibcpp ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
 
@@ -46,6 +47,17 @@ set_target_properties(raylib PROPERTIES
 set_target_properties(uninstall PROPERTIES
     FOLDER "modules/external"
 )
+
+# Set properties for the external library
+set_target_properties(glfw PROPERTIES
+    FOLDER "modules/external"
+)
+
+# Set properties for the external library
+set_target_properties(update_mappings PROPERTIES
+    FOLDER "modules/external"
+)
+
 ## Organize raylib and other targets under a unified folder structure
 #set_target_properties(raylib PROPERTIES FOLDER "modules/external/raylib")
 #

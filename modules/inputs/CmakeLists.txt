@@ -17,3 +17,14 @@ target_include_directories(inputs PUBLIC
 )
 set_target_properties(inputs PROPERTIES FOLDER "modules")
 target_link_libraries(inputs PRIVATE external)
+
+if(BUILD_TESTING)
+    # Enable testing features in CMake
+    enable_testing()
+
+    # Create the test executable
+    add_executable(InputLibTests main.cpp)
+
+    # Add the test. Note: The recommended syntax is to specify a NAME and a COMMAND.
+    add_test(NAME InputLibTests COMMAND InputLibTests)
+endif()
