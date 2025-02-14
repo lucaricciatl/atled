@@ -18,14 +18,7 @@
 int main() {
     // Engine setup
     engine::EngineBuilder<AtledEngine> builder;
-
-    std::unique_ptr<AtledEngine> coreEngine = builder.SetKeyboardType(input::KeyboardType::Raylib)
-                                                  .SetMouseType(input::MouseType::Raylib)
-                                                  .SetGraphicsType(graphics::GraphicsType::Raylib)
-                                                  .SetCameraType(graphics::CameraType::Raylib)
-                                                  .SetWorldType(graphics::WorldType::World3D)
-                                                  .SetTargetFramerate(60)  // Set frame rate suitable for the game speed
-                                                  .Build();
+    std::unique_ptr<AtledEngine> coreEngine = builder.Configure().Build();
 
     auto entity = coreEngine->CreateEntity();
     auto mc = entity->AddComponent<ShapeComponent>();

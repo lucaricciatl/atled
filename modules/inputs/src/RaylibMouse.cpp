@@ -80,8 +80,6 @@ void RaylibMouse::Run() {
   while (running) {
     // Example: log RaylibMouse position every frame
     MousePosition pos = GetMousePosition();
-    std::cout << "RaylibMouse Position: (" << pos.x << ", " << pos.y << ")"
-              << std::endl;
 
     // Sleep to avoid overwhelming the CPU
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
