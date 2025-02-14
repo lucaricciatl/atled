@@ -1,16 +1,20 @@
-set(RAYLIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/raylib) 
-set(RAYLIB_INCLUDE_DIR ${RAYLIB_DIR}/src)          
-set(RAYLIB_LIB_DIR ${RAYLIB_DIR}/lib)              
+cmake_minimum_required(VERSION 3.10)
+project(MyProject)
 
+# Define directories for raylib
+set(RAYLIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/raylib)
+set(RAYLIB_INCLUDE_DIR ${RAYLIB_DIR}/src)
+set(RAYLIB_LIB_DIR ${RAYLIB_DIR}/lib)
+
+# Add subdirectories for external libraries
 add_subdirectory(${RAYLIB_DIR})
-#add_subdirectory(./opencv)
+add_subdirectory(json)
 
+# Create raylibcpp target from our source file
 add_library(raylibcpp ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
-
-
 add_library(raylibcpp::raylibcpp ALIAS raylibcpp)
 
-
+# Link libraries: raylib and geometry must be defined in one of the subdirectories
 target_link_libraries(raylibcpp PUBLIC raylib geometry)
 
 target_include_directories(raylibcpp
@@ -19,97 +23,29 @@ target_include_directories(raylibcpp
     PRIVATE
         ${RAYLIB_INCLUDE_DIR}  
         ${GEOMETRY_INCLUDE_DIR}
-
 )
 
+# Optionally, create an "external" target if needed. Note: 
+# This duplicates the same source file as raylibcpp. Adjust if this is not intended.
 add_library(external ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
-
-target_link_libraries(external PUBLIC raylibcpp geometry)
-
+target_link_libraries(external PUBLIC raylibcpp geometry nlohmann_json)
 target_include_directories(external PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include 
     ${GEOMETRY_INCLUDE_DIR}
 )
 
-set_target_properties(external PROPERTIES
-    FOLDER "modules/external"
-)
+# Organize targets under a unified folder structure
+set_target_properties(raylibcpp PROPERTIES FOLDER "modules/external")
+set_target_properties(raylib PROPERTIES FOLDER "modules/external")
+set_target_properties(external PROPERTIES FOLDER "modules/external")
 
-set_target_properties(raylibcpp PROPERTIES
-    FOLDER "modules/external"
-)
+# Set folder properties for additional targets if they exist
+foreach(target uninstall glfw update_mappings)
+    if(TARGET ${target})
+        set_target_properties(${target} PROPERTIES FOLDER "modules/external")
+    endif()
+endforeach()
 
-set_target_properties(raylib PROPERTIES
-    FOLDER "modules/external"
-)
-
-# Set properties for the external library
-set_target_properties(uninstall PROPERTIES
-    FOLDER "modules/external"
-)
-
-# Set properties for the external library
-set_target_properties(glfw PROPERTIES
-    FOLDER "modules/external"
-)
-
-# Set properties for the external library
-set_target_properties(update_mappings PROPERTIES
-    FOLDER "modules/external"
-)
-
-## Organize raylib and other targets under a unified folder structure
-#set_target_properties(raylib PROPERTIES FOLDER "modules/external/raylib")
-#
-## Define additional targets associated with raylib if they exist
-#set_target_properties(uninstall PROPERTIES FOLDER "modules/external/raylib")
-#foreach(raylib_target IN LISTS uninstall update_mappings glfw)
-#    if(TARGET ${raylib_target})
-#        set_target_properties(${raylib_target} PROPERTIES FOLDER "modules/external/raylib")
-#    endif()
-#endforeach()
-#set_target_properties(update_mappings PROPERTIES FOLDER "modules/external/raylib")
-#set_target_properties(glfw PROPERTIES FOLDER "modules/external/raylib")
-#
-#target_include_directories(external INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/include")
-#
-## OpenCV setup
-#set(OpenCV_VERSION "4.8.0")
-#set(OpenCV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/opencv")
-#
-## Define essential OpenCV modules and disable extras for a minimal build
-#set(BUILD_LIST "core,imgproc" CACHE STRING "Subset of OpenCV modules to build")
-#set(BUILD_opencv_videoio OFF CACHE BOOL "Disable videoio module")
-#set(BUILD_EXAMPLES OFF CACHE BOOL "Don't build examples")
-#set(BUILD_TESTS OFF CACHE BOOL "Don't build tests")
-#set(BUILD_JAVA OFF CACHE BOOL "Don't build Java bindings")
-#
-## Add OpenCV as a subdirectory with the designated build directory
-#add_subdirectory(${OpenCV_DIR} ${OpenCV_BINARY_DIR})
-#
-## Link core OpenCV modules to the main project target
-#target_link_libraries(${PROJECT_NAME} INTERFACE opencv_core opencv_imgproc)
-#
-## Specify OpenCV include directories
-#target_include_directories(${PROJECT_NAME} INTERFACE ${OpenCV_DIR}/include
-#${CMAKE_BINARY_DIR})
-#
-## Collect all include directories within OpenCV modules
-#file(GLOB OPENCV_INCLUDE_DIRS "${OpenCV_DIR}/modules/*/include")
-#
-## Add include directories for OpenCV modules if they exist
-#if(DEFINED OPENCV_INCLUDE_DIRS)
-#    target_include_directories(${PROJECT_NAME} INTERFACE ${OPENCV_INCLUDE_DIRS})
-#endif()
-#
-#set_target_properties(opencv_dnn_plugins PROPERTIES FOLDER "modules/external/opencv")
-#set_target_properties(opencv_highgui_plugins PROPERTIES FOLDER "modules/external/opencv")
-#set_target_properties(opencv_videoio_plugins PROPERTIES FOLDER "modules/external/opencv")
-#set_target_properties(opencv_core PROPERTIES FOLDER "modules/external/opencv")
-#set_target_properties(opencv_imgproc PROPERTIES FOLDER "modules/external/opencv")
-#set_target_properties(opencv_modules PROPERTIES FOLDER "modules/external/opencv")
-#set_target_properties(opencv_perf_tests PROPERTIES FOLDER "modules/external/opencv")
-#
-## Install core OpenCV libraries and headers to the build/install directory
-#install(TARGETS opencv_core opencv_imgproc DESTINATION lib)
-#install(DIRECTORY ${opencv_SOURCE_DIR}/include/opencv2 DESTINATION include/opencv2)
+# Set JSON system include property for clang-tidy purposes
+set(JSON_SystemInclude "Include as system headers (skip for clang-tidy)." ON)
+set_target_properties(nlohmann_json PROPERTIES FOLDER "modules/external")

@@ -1,6 +1,7 @@
 #include "ResourceManager.hpp"
 #include "Resouce.hpp"
 #include <stdexcept>
+#include "nlohmann/json.hpp"
 
 using namespace resources;
 

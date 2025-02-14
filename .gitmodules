@@ -10,3 +10,6 @@
 [submodule "modules/external/Vulkan-Hpp"]
 	path = modules/external/Vulkan-Hpp
 	url = https://github.com/KhronosGroup/Vulkan-Hpp
+[submodule "modules/external/json"]
+	path = modules/external/json
+	url = https://github.com/nlohmann/json.git

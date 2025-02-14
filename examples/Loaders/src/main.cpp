@@ -12,8 +12,8 @@
 #include <random>
 #include <thread>
 #include <vector>
-
 #include "Palette.hpp"
+
 
 int main() {
     // Engine setup
@@ -27,19 +27,6 @@ int main() {
                                                   .SetTargetFramerate(60)  // Set frame rate suitable for the game speed
                                                   .Build();
 
-    auto sphereEntity = coreEngine->CreateEntity();
-    sphereEntity->GetComponent<FrameComponent>()->SetPosition(0, 2, 0.0f);
-    auto sphere = sphereEntity->AddComponent<ShapeComponent>();
-    sphere->SetModel<Sphere>();
-
-    // sphere->SetMaterial("plastic grey");
-    // sphere->SetShader("blur");
-
-    // sphere->SetMaterial(material);
-    // sphere->SetShader(shader);
-
-    auto entitycam = coreEngine->CreateEntity();
-    entitycam->AddComponent<FreeCameraComponent>();
     coreEngine->Start();
     coreEngine->Shutdown();
 

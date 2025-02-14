@@ -22,7 +22,7 @@ add_library(core
 )
 
 # Link inputs and graphics libraries
-target_link_libraries(core PUBLIC inputs graphics physics resources math)
+target_link_libraries(core PUBLIC inputs graphics physics resources math nlohmann_json)
 
 # Specify include directories for the submodule
 target_include_directories(core PUBLIC
@@ -39,4 +39,5 @@ target_include_directories(core PUBLIC
 )
 
 # Organize target in the IDE
+
 set_target_properties(core PROPERTIES FOLDER "modules")
