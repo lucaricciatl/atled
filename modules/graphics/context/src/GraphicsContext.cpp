@@ -50,6 +50,8 @@ namespace graphics {
     }
 
     void GraphicsContext::SetFlags(std::shared_ptr<GraphicsConfig> flags) {
+        windowWidth = flags->width;
+        windowHeight = flags->height;
         if (flags) {
             for (const auto& flag : flags->WindowConfig) {
                 SetFlag(flag);

@@ -12,6 +12,8 @@
 #include "InputManagerBuilder.hpp"
 #include "PhysicsManager.hpp"
 #include "ResourceManagerBuilder.hpp"
+#include "nlohmann/json.hpp"
+#include <fstream>
 
 using namespace input;
 using namespace graphics;
@@ -37,7 +39,8 @@ class EngineBuilder {
     EngineBuilder& SetWorldType(WorldType type);
     EngineBuilder& SetDefaultImplementation();
     EngineBuilder& SetImplementation(EngineImplementation impl);
-
+    EngineBuilder<T>& InitializeFromJson(const nlohmann::json& json);
+    EngineBuilder<T>& InitializeFromJsonFile(const std::string& filePath);
     // Build method to create an instance of the specified engine type
     std::unique_ptr<T> Build();
 
@@ -173,5 +176,103 @@ std::unique_ptr<T> EngineBuilder<T>::Build() {
     return std::make_unique<T>(std::move(inputManager), std::move(graphicsManager), std::move(cameraManager),
                                std::move(resourceManager), std::move(physicsManager));
 }
+
+template <typename T>
+EngineBuilder<T>& EngineBuilder<T>::InitializeFromJson(const nlohmann::json& json) {
+    // Configure keyboard type
+    if (json.contains("keyboardType")) {
+        std::string keyType = json["keyboardType"].get<std::string>();
+        if (keyType == "Raylib") SetKeyboardType(KeyboardType::Raylib);
+        // Add additional conditions as needed
+    }
+
+    // Configure mouse type
+    if (json.contains("mouseType")) {
+        std::string mouseTypeStr = json["mouseType"].get<std::string>();
+        if (mouseTypeStr == "Raylib") SetMouseType(MouseType::Raylib);
+    }
+
+    // Configure graphics type
+    if (json.contains("graphicsType")) {
+        std::string gfxType = json["graphicsType"].get<std::string>();
+        if (gfxType == "Raylib") SetGraphicsType(GraphicsType::Raylib);
+    }
+
+    // Configure camera type
+    if (json.contains("cameraType")) {
+        std::string camType = json["cameraType"].get<std::string>();
+        if (camType == "Raylib") SetCameraType(CameraType::Raylib);
+    }
+
+    // Configure world type
+    if (json.contains("worldType")) {
+        std::string worldStr = json["worldType"].get<std::string>();
+        if (worldStr == "World2D")
+            SetWorldType(WorldType::World2D);
+        else if (worldStr == "World3D")
+            SetWorldType(WorldType::World3D);
+    }
+
+    // Configure resource manager type
+    if (json.contains("resourceManagerType")) {
+        std::string resMgrType = json["resourceManagerType"].get<std::string>();
+        if (resMgrType == "Default") SetResourceManagerType(ResourceManagerType::Default);
+    }
+
+    // Configure target framerate
+    if (json.contains("targetFramerate")) {
+        SetTargetFramerate(json["targetFramerate"].get<unsigned int>());
+    }
+
+    // Manually extract the graphics configuration values
+    if (json.contains("graphicsConfig")) {
+        const auto& gfxJson = json["graphicsConfig"];
+
+        if (gfxJson.contains("width")) gfxConfig.width = gfxJson["width"].get<int>();
+        if (gfxJson.contains("height")) gfxConfig.height = gfxJson["height"].get<int>();
+        if (gfxJson.contains("fullscreen")) gfxConfig.fullscreen = gfxJson["fullscreen"].get<bool>();
+        if (gfxJson.contains("vsync")) gfxConfig.vsync = gfxJson["vsync"].get<bool>();
+        if (gfxJson.contains("antialiasing")) gfxConfig.antialiasing = gfxJson["antialiasing"].get<int>();
+
+        // Process custom configuration flags, if provided.
+        if (gfxJson.contains("windowConfig") && gfxJson["windowConfig"].is_array()) {
+            // Clear the default flags if custom ones are provided
+            gfxConfig.WindowConfig.clear();
+            for (const auto& flagValue : gfxJson["windowConfig"]) {
+                std::string flagStr = flagValue.get<std::string>();
+                // Map the string to the corresponding raylib::ConfigFlags value
+                if (flagStr == "FLAG_VSYNC_HINT") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_VSYNC_HINT);
+                } else if (flagStr == "FLAG_MSAA_4X_HINT") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_MSAA_4X_HINT);
+                } else if (flagStr == "FLAG_WINDOW_HIGHDPI") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_HIGHDPI);
+                } else if (flagStr == "FLAG_WINDOW_RESIZABLE") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_RESIZABLE);
+                } else {
+                    // Optionally, handle unknown flags here.
+                    std::cerr << "Warning: Unknown config flag \"" << flagStr << "\" provided." << std::endl;
+                }
+            }
+        }
+    }
+
+    return *this;
+}
+
+template <typename T>
+EngineBuilder<T>& EngineBuilder<T>::InitializeFromJsonFile(const std::string& filePath) {
+    std::ifstream fileStream(filePath);
+    if (!fileStream.is_open()) {
+        throw std::runtime_error("Unable to open JSON file: " + filePath);
+    }
+
+    nlohmann::json jsonData;
+    fileStream >> jsonData;
+    fileStream.close();
+
+    return InitializeFromJson(jsonData);
+}
+
 
 }  // namespace engine

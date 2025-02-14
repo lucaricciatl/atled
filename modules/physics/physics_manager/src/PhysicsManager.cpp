@@ -90,13 +90,11 @@ void PhysicsManager::RemoveBody(const std::shared_ptr<Body>& aBody) {
 // Compute Reactions
 void PhysicsManager::ComputeReactions() {
     // Implement collision response logic here
-    std::cout << "Computing reactions." << std::endl;
 }
 
 // Compute Deformations
 void PhysicsManager::ComputeDeformations() {
     // Implement deformation calculations here
-    std::cout << "Computing deformations." << std::endl;
 }
 
 // Compute Cinematics

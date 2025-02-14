@@ -5,6 +5,14 @@
 namespace graphics{
 
 struct GraphicsConfig {
+
+    int width;
+    int height;
+    bool fullscreen;
+    bool vsync;
+    int antialiasing;
+
+
     // Static default flag
     const std::vector<raylib::ConfigFlags> defaultFlags = {
         raylib::ConfigFlags::FLAG_VSYNC_HINT,
@@ -12,6 +20,7 @@ struct GraphicsConfig {
         raylib::ConfigFlags::FLAG_WINDOW_HIGHDPI,
         raylib::ConfigFlags::FLAG_WINDOW_RESIZABLE
     };
+
     // Vector to store window configuration flags
     std::vector<raylib::ConfigFlags> WindowConfig;
 
