@@ -19,8 +19,7 @@ int main() {
     // Engine setup
     engine::EngineBuilder<AtledEngine> builder;
 
-    std::unique_ptr<AtledEngine> coreEngine =
-        builder.InitializeFromJsonFile("C:\\Users\\ricciluca\\dev\\ActiveStories\\atled\\config.json").Build();
+    std::unique_ptr<AtledEngine> coreEngine = builder.Configure().Build();
 
     coreEngine->Start();
     coreEngine->Shutdown();

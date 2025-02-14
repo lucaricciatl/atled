@@ -39,6 +39,7 @@ class EngineBuilder {
     EngineBuilder& SetWorldType(WorldType type);
     EngineBuilder& SetDefaultImplementation();
     EngineBuilder& SetImplementation(EngineImplementation impl);
+    EngineBuilder<T>& Configure();
     EngineBuilder<T>& InitializeFromJson(const nlohmann::json& json);
     EngineBuilder<T>& InitializeFromJsonFile(const std::string& filePath);
     // Build method to create an instance of the specified engine type
@@ -127,8 +128,13 @@ EngineBuilder<T>& EngineBuilder<T>::SetImplementation(EngineImplementation impl)
     }
     return *this;
 }
-
 template <typename T>
+EngineBuilder<T>& EngineBuilder<T>::Configure() {
+    InitializeFromJsonFile("./ config.json");
+    return *this;
+}
+
+    template <typename T>
 std::unique_ptr<T> EngineBuilder<T>::Build() {
     // Build InputManager using InputManagerBuilder
     InputManagerBuilder inputBuilder;
@@ -263,16 +269,43 @@ EngineBuilder<T>& EngineBuilder<T>::InitializeFromJson(const nlohmann::json& jso
 template <typename T>
 EngineBuilder<T>& EngineBuilder<T>::InitializeFromJsonFile(const std::string& filePath) {
     std::ifstream fileStream(filePath);
-    if (!fileStream.is_open()) {
-        throw std::runtime_error("Unable to open JSON file: " + filePath);
-    }
-
     nlohmann::json jsonData;
-    fileStream >> jsonData;
-    fileStream.close();
+
+    if (!fileStream.is_open()) {
+        // JSON file not found. Create a default JSON configuration.
+        jsonData = {{"keyboardType", "Raylib"},
+                    {"mouseType", "Raylib"},
+                    {"graphicsType", "Raylib"},
+                    {"cameraType", "Raylib"},
+                    {"worldType", "World3D"},
+                    {"resourceManagerType", "Default"},
+                    {"targetFramerate", 60},
+                    {"graphicsConfig",
+                     {{"width", 800},
+                      {"height", 600},
+                      {"fullscreen", false},
+                      {"vsync", true},
+                      {"antialiasing", 0},
+                      {"windowConfig", {"FLAG_VSYNC_HINT", "FLAG_MSAA_4X_HINT"}}}}};
+
+        // Write the default JSON to the file
+        std::ofstream outFile(filePath);
+        if (!outFile.is_open()) {
+            throw std::runtime_error("Unable to create JSON file: " + filePath);
+        }
+        outFile << jsonData.dump(4);  // pretty print with 4-space indentation
+        outFile.close();
+
+        std::cout << "Default configuration written to " << filePath << std::endl;
+    } else {
+        // Read existing JSON file
+        fileStream >> jsonData;
+        fileStream.close();
+    }
 
     return InitializeFromJson(jsonData);
 }
+
 
 
 }  // namespace engine
