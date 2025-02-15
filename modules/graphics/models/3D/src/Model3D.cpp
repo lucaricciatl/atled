@@ -12,8 +12,11 @@ void Model3D::EnableWireframe() {
 
 // Disable wireframe rendering
 void Model3D::DisableWireframe() {
-	WireframeIsEnabled = false;
-}
+	WireframeIsEnabled = false; }
+
+void Model3D::SetShader() {}
+
+void Model3D::SetMaterial() {}
 
 // Enable wireframe rendering
 void Model3D::EnableShape() {
@@ -22,8 +25,7 @@ void Model3D::EnableShape() {
 
 // Disable wireframe rendering
 void Model3D::DisableShape() {
-	ShapeIsEnabled = false;
-}
+	ShapeIsEnabled = false; }
 
 // Set wireframe color
 void Model3D::SetWireframeColor(graphics::Color aColor) {

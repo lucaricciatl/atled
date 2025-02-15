@@ -4,9 +4,11 @@
 #include <memory>
 #include <string>
 #include <vector>
-
+#include "nlohmann/json.hpp"
+#include <fstream>
 #include "ResourceManager.hpp"
 #include "System.hpp"
+#include <string>
 
 using namespace resources;
 
@@ -24,6 +26,12 @@ class ResourceSystem : public System {
     void UnloadResources();
 
    private:
+    void LoadTextures();
+    void LoadSound();
+    void LoadShaders();
+    void LoadAssets();
+
+    std::string ResPath = "/resources";
     std::shared_ptr<ResourceManager> resourceManager;
     std::vector<std::string> searchPaths;  // List of resource search paths
 };

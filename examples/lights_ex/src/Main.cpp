@@ -15,6 +15,8 @@
 #include "LightComponent.hpp"
 #include "Palette.hpp"
 #include "Light.hpp"
+
+
 int main() {
     // Engine setup
     engine::EngineBuilder<AtledEngine> builder;

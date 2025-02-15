@@ -40,7 +40,6 @@ using namespace math;
         void UpdateMesh();
         
         graphics::Color mColor;
-        raylib::Model mModel;
         float mRadius;      // Radius of the sphere
         int mRings;         // Number of rings
         int mSlices;        // Number of slices

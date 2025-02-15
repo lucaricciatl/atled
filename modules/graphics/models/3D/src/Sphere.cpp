@@ -55,6 +55,7 @@ namespace graphics {
         UpdateMesh();
     }
 
+
     void Sphere::SetSlices(int slices) {
         if (slices < 3) {
             throw std::invalid_argument("Slices must be at least 3.");
@@ -83,35 +84,7 @@ void Sphere::Draw() {
     auto gPos = ComputeGlobalPosition(mCenterPos);
 
     if (ShapeIsEnabled) {
-
-    // Create a Light. Arguments can vary depending on your needs.
-
-    //    // Corrected version:
-    //    sh->LoadFromFiles(
-    //        "C:"
-    //        "\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\gl"
-    //        "sl120\\lighting.vs",
-    //        "C:"
-    //        "\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\gl"
-    //        "sl120\\lighting.fs");
-    //        sh->shader.locs[raylib::SHADER_LOC_VECTOR_VIEW] = raylib::GetShaderLocation(sh->shader, "viewPos");
-    //int ambientLoc = raylib::GetShaderLocation(sh->shader, "ambient");
-    //    float ambientColor[4] = {0.6f, 0.1f, 0.1f, 0.5f};
-    //    SetShaderValue(sh->GetShader(), ambientLoc, ambientColor, raylib::SHADER_UNIFORM_VEC4);
-    //    RaylibLight l;
-    //    rLight light = l.CreateLight(raylib::LightType::LIGHT_POINT, math::Vector3{2, 2, 0}, math::Vector3{0, 2, 0},
-    //                                 raylib::BLUE, sh->shader);
-
-
-        //raylib::BeginShaderMode(mShader->GetShader());
-
-
-        //mModel.materials->shader = sh->GetShader();
         raylib::DrawModel(mModel, gPos, 1.0f, toRaylibColor(mColor));
-        // Unload shader after use to avoid memory leaks (not recommended for real-time use)
-
-        //raylib::EndShaderMode();
-        //raylib::UnloadShader(sh->GetShader());
     }
     if (WireframeIsEnabled) {
         raylib::DrawSphereWires(gPos, mRadius, mRings, mSlices,
@@ -130,9 +103,6 @@ void Sphere::Draw() {
         raylib:UploadMesh(&SphereMesh, false);
 
         mModel = raylib::LoadModelFromMesh(SphereMesh);
-
-        // Set the material color
-        //mModel.materials[0].maps[raylib::MaterialMapIndex::MATERIAL_MAP_ALBEDO].color = toRaylibColor(mColor);
     }
 
 } // namespace graphics

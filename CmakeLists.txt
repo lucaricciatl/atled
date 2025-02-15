@@ -52,3 +52,11 @@ set_target_properties(gmock_main PROPERTIES FOLDER "modules/external/gtest")
 set_target_properties(gtest PROPERTIES FOLDER "modules/external/gtest")
 set_target_properties(gtest_main PROPERTIES FOLDER "modules/external/gtest")
 set_target_properties(tests PROPERTIES FOLDER "tests")
+
+# Create a custom target that always copies the resources folder into the build directory.
+add_custom_target(copy_resources ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/resources
+        ${CMAKE_BINARY_DIR}/resources
+    COMMENT "Copying resources folder to build directory"
+)
