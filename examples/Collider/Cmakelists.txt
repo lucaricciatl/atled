@@ -16,15 +16,3 @@ target_include_directories(Collider PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(${PROJECT_NAME} PUBLIC atled)
 
 set_target_properties(Collider PROPERTIES FOLDER "examples")
-
-function(copy_res_to_target target)
-    add_custom_command(TARGET ${target} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${CMAKE_SOURCE_DIR}/resources"         # Path to your res folder in the main project
-            "$<TARGET_FILE_DIR:${target}>/resources"  # Destination: where the executable is located
-        COMMENT "Copying res folder to $<TARGET_FILE_DIR:${target}>"
-    )
-endfunction()
-
-
-copy_res_to_target(Collider)

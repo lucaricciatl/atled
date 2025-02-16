@@ -43,17 +43,7 @@ target_include_directories(${PROJECT_NAME} INTERFACE
     ${CMAKE_SOURCE_DIR}/modules/vision/include
 )
 
-
-
 set_target_properties(gmock PROPERTIES FOLDER "modules/external/gtest")
 set_target_properties(gmock_main PROPERTIES FOLDER "modules/external/gtest")
 set_target_properties(gtest PROPERTIES FOLDER "modules/external/gtest")
 set_target_properties(gtest_main PROPERTIES FOLDER "modules/external/gtest")
-
-
-add_custom_target(copy_resources ALL
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${CMAKE_SOURCE_DIR}/resources"            # Source: your resources folder in the source tree
-        "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources"  # Destination: same directory as the built executable
-    COMMENT "Copying resources folder to runtime output directory"
-)
