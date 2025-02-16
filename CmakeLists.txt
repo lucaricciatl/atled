@@ -43,20 +43,17 @@ target_include_directories(${PROJECT_NAME} INTERFACE
     ${CMAKE_SOURCE_DIR}/modules/vision/include
 )
 
-# Link Google Test to your tests
-add_executable(tests tests/test_main.cpp)  # Create a test executable; you can add more test files
-target_link_libraries(tests PRIVATE gtest gtest_main atled)
+
 
 set_target_properties(gmock PROPERTIES FOLDER "modules/external/gtest")
 set_target_properties(gmock_main PROPERTIES FOLDER "modules/external/gtest")
 set_target_properties(gtest PROPERTIES FOLDER "modules/external/gtest")
 set_target_properties(gtest_main PROPERTIES FOLDER "modules/external/gtest")
-set_target_properties(tests PROPERTIES FOLDER "tests")
 
-# Create a custom target that always copies the resources folder into the build directory.
+
 add_custom_target(copy_resources ALL
     COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${CMAKE_CURRENT_SOURCE_DIR}/resources
-        ${CMAKE_BINARY_DIR}/resources
-    COMMENT "Copying resources folder to build directory"
+        "${CMAKE_SOURCE_DIR}/resources"            # Source: your resources folder in the source tree
+        "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources"  # Destination: same directory as the built executable
+    COMMENT "Copying resources folder to runtime output directory"
 )
