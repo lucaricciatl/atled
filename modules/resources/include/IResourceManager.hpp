@@ -24,6 +24,14 @@ public:
     virtual bool IsLoaded() = 0;
 
     virtual void UnloadAll() = 0;
+
+    virtual void LoadShaders() = 0;
+
+    virtual void LoadLights() = 0;
+
+    virtual void LoadMaterials() = 0;
+
+    virtual void LoadTextures() = 0;
 };
 
 

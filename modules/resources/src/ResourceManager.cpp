@@ -25,3 +25,11 @@ ResourceManager::~ResourceManager() {
 
     void ResourceManager::UnloadAll() {
 }
+
+void ResourceManager::LoadShaders() {};
+
+void ResourceManager::LoadLights() {};
+
+void ResourceManager::LoadMaterials() {};
+
+void ResourceManager::LoadTextures() {};

@@ -29,9 +29,21 @@ public:
 
     void UnloadAll() override;
 
+     void LoadShaders() override;
+
+     void LoadLights() override;
+
+     void LoadMaterials() override;
+
+     void LoadTextures() override;
+
 private:
     MaterialFactory mMaterialFactory;
     LightFactory mLightsFactory;
+
+    std::unordered_map<std::string, ConcreteMaterial> materials;
+    std::unordered_map<std::string, RaylibShader> shaders;
+    std::unordered_map<std::string, Light> lights;
 };
 
 }

@@ -9,6 +9,7 @@ void RigidBodyComponent::OnAction(Action action, bool activated) {
 void RigidBodyComponent::Update(double deltaTime) {}
 
 void RigidBodyComponent::SetCollidable(bool aCollidable) { rigidBody->SetCollidable(aCollidable); }
+
 void RigidBodyComponent::SetStatic(bool aStatic) { rigidBody->SetStatic(aStatic); };
 
 bool RigidBodyComponent::IsCollidable() { return rigidBody->IsCollidable(); };

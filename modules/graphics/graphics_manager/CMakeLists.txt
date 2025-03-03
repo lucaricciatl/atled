@@ -6,6 +6,8 @@ file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 # Gather header files from the 'include' directory
 file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/interface)
 
 # Create a library with the gathered source files
 add_library(${LIB_NAME} ${SOURCES})
@@ -18,6 +20,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
     ${MODELS_INCLUDE_DIR}
     ${CONTEXT_INCLUDE_DIR}
 )
+
 
 # Link libraries for this target
 target_link_libraries(${LIB_NAME} PUBLIC 
