@@ -7,6 +7,7 @@
 
 #include "InputEvent.hpp"
 #include "Key.hpp"
+#include <chrono>
 
 InputSystem::InputSystem(input::InputManager* inputMgr, EventBus* eventBus)
     : inputManager(inputMgr), eventBus(eventBus), isRunning(false) {}
@@ -56,8 +57,9 @@ void InputSystem::Update(float deltaTime) {
 }
 
 float InputSystem::GetDeltaTime() {
-    static auto lastTime = std::chrono::high_resolution_clock::now();
-    auto currentTime = std::chrono::high_resolution_clock::now();
+    using clock = std::chrono::high_resolution_clock;
+    static auto lastTime = clock::now();
+    auto currentTime = clock::now();
     float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
     lastTime = currentTime;
     return deltaTime;

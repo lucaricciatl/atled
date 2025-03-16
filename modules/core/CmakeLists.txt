@@ -24,6 +24,14 @@ add_library(core
 # Link inputs and graphics libraries
 target_link_libraries(core PUBLIC inputs graphics physics resources math nlohmann_json)
 
+
+# Set C++20 standard
+set_target_properties(core PROPERTIES 
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
+
 # Specify include directories for the submodule
 target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/engine/include
