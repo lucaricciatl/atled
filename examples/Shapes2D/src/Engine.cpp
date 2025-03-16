@@ -88,8 +88,7 @@ void Engine::OnStart() {
     auto ctx = graphicsManager->GetGraphicsContext();
     ctx->SetSize(900, 900);
     ctx->SetTitle("Window");
-    auto configs = graphics::GraphicsConfig({raylib::FLAG_WINDOW_RESIZABLE, raylib::FLAG_VSYNC_HINT,
-                                             raylib::FLAG_WINDOW_HIGHDPI, raylib::FLAG_MSAA_4X_HINT});
+    auto configs = graphics::GraphicsConfig({raylib::FLAG_WINDOW_RESIZABLE, raylib::FLAG_VSYNC_HINT});
     graphicsManager->SetConfigs(configs);
     ctx->InitWindowManager();
 }

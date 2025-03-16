@@ -130,7 +130,7 @@ EngineBuilder<T>& EngineBuilder<T>::SetImplementation(EngineImplementation impl)
 }
 template <typename T>
 EngineBuilder<T>& EngineBuilder<T>::Configure() {
-    InitializeFromJsonFile("./ config.json");
+    InitializeFromJsonFile("./config.json");
     return *this;
 }
 

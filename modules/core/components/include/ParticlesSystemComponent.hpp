@@ -23,7 +23,7 @@ class ParticleComponent : public Component {
    public:
     ParticleComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> aServiceProvider, float aStartSize = 0.01,
                       float aEndSize = 0.01, float aLifetime = 1.0f, bool aCollision = false, bool aGravity = false,
-                      float aSpeed = 3, const graphics::Color& aColor = getColor("Elegant Soft Gray"))
+                      float aSpeed = 0, const graphics::Color& aColor = getColor("Elegant Soft Gray"))
         : Component(aOwner),  // Call base class constructor
           physicsManager(aServiceProvider->GetPhysicsManager()),
           mFrame(aOwner->GetComponent<FrameComponent>()->GetFrame()),
