@@ -7,7 +7,6 @@ project(Shapes2D)
 # Add the source files
 set(SOURCES
     src/main.cpp
-    src/Engine.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -18,3 +17,10 @@ target_link_libraries(${PROJECT_NAME} PUBLIC atled)
 
 set_target_properties(Shapes2D PROPERTIES FOLDER "examples")
 
+add_custom_command(
+    TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+            ${CMAKE_CURRENT_SOURCE_DIR}/config.json
+            $<TARGET_FILE_DIR:${PROJECT_NAME}>/config.json
+    COMMENT "Copying config.json to executable directory"
+)

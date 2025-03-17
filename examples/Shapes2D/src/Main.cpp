@@ -1,22 +1,35 @@
-// main.cpp
-#include <engine.hpp>
-#include <memory>
+#include <AtledEngine.hpp>
+#include <Color.hpp>
+#include <EngineBuilder.hpp>
+#include <Frame.hpp>
+#include <FrameComponent.hpp>
+#include <FreeCameraComponent.hpp>
+#include <RigidBodyComponent.hpp>
+#include <ShapeComponent.hpp>
+#include <atomic>
+#include <iostream>
+#include <mutex>
+#include <random>
+#include <thread>
+#include <vector>
 
-#include "CoreEngine.hpp"
-#include "EngineBuilder.hpp"
+#include "Light.hpp"
+#include "LightComponent.hpp"
+#include "Palette.hpp"
 
 int main() {
-    engine::EngineBuilder<Engine> builder;
+    // Engine setup
+    engine::EngineBuilder<AtledEngine> builder;
 
-    std::unique_ptr<Engine> coreEngine = builder.SetKeyboardType(input::KeyboardType::Raylib)
-                                             .SetMouseType(input::MouseType::Raylib)
-                                             .SetGraphicsType(graphics::GraphicsType::Raylib)
-                                             .SetCameraType(graphics::CameraType::Raylib)
-                                             .SetWorldType(graphics::WorldType::World2D)
-                                             .SetTargetFramerate(60)  // Set frame rate suitable for the game speed
-                                             .Build();
+    std::unique_ptr<AtledEngine> coreEngine = builder.Configure().Build();
 
-    // Run the engine
+    auto entity = coreEngine->CreateEntity();
+    auto mc = entity->AddComponent<ShapeComponent>();
+    mc->SetModel<Circle>();
+    auto circle = mc->GetModel<Circle>();
+    circle->SetCenter(Coordinates2D(400, 200));
+    circle->SetRadius(70);
+    circle->SetColor(getColor("Elegant Soft Gray"));
     coreEngine->Start();
     coreEngine->Shutdown();
 
