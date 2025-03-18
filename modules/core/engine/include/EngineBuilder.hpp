@@ -38,6 +38,7 @@ class EngineBuilder {
     EngineBuilder& SetResourceManagerType(ResourceManagerType type);
     EngineBuilder& SetWorldType(WorldType type);
     EngineBuilder& SetDefaultImplementation();
+    EngineBuilder& SetDefault2DImplementation();
     EngineBuilder& SetImplementation(EngineImplementation impl);
     EngineBuilder<T>& Configure();
     EngineBuilder<T>& InitializeFromJson(const nlohmann::json& json);
@@ -112,6 +113,16 @@ EngineBuilder<T>& EngineBuilder<T>::SetDefaultImplementation() {
         .SetMouseType(MouseType::Raylib)
         .SetGraphicsType(GraphicsType::Raylib)
         .SetWorldType(WorldType::World3D)
+        .SetResourceManagerType(ResourceManagerType::Default)
+        .SetTargetFramerate(60);
+}
+
+template <typename T>
+EngineBuilder<T>& EngineBuilder<T>::SetDefault2DImplementation() {
+    return SetKeyboardType(KeyboardType::Raylib)
+        .SetMouseType(MouseType::Raylib)
+        .SetGraphicsType(GraphicsType::Raylib)
+        .SetWorldType(WorldType::World2D)
         .SetResourceManagerType(ResourceManagerType::Default)
         .SetTargetFramerate(60);
 }
@@ -286,7 +297,7 @@ EngineBuilder<T>& EngineBuilder<T>::InitializeFromJsonFile(const std::string& fi
                       {"fullscreen", false},
                       {"vsync", true},
                       {"antialiasing", 0},
-                      {"windowConfig", {"FLAG_VSYNC_HINT", "FLAG_MSAA_4X_HINT"}}}}};
+                      {"windowConfig", {"FLAG_VSYNC_HINT"}}}}};
 
         // Write the default JSON to the file
         std::ofstream outFile(filePath);

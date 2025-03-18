@@ -18,9 +18,17 @@ target_link_libraries(${PROJECT_NAME} PUBLIC atled)
 set_target_properties(Shapes2D PROPERTIES FOLDER "examples")
 
 add_custom_command(
-    TARGET ${PROJECT_NAME} POST_BUILD
+    TARGET ${PROJECT_NAME}
     COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_CURRENT_SOURCE_DIR}/config.json
             $<TARGET_FILE_DIR:${PROJECT_NAME}>/config.json
     COMMENT "Copying config.json to executable directory"
+)
+
+add_custom_command(
+    TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+            ${CMAKE_CURRENT_SOURCE_DIR}/config.json
+            ${CMAKE_CURRENT_BINARY_DIR}/config.json
+    COMMENT "Copying config.json to solution folder"
 )
