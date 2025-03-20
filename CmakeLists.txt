@@ -26,7 +26,7 @@ add_subdirectory(examples)
 
 # Add additional platform-specific libraries (for Linux)
 if (UNIX)
-    target_link_libraries(atled m pthread dl rt X11)
+    target_link_libraries(atled INTERFACE m pthread dl)
 endif()
 
 # Specify include directories for the project

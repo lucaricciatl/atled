@@ -32,7 +32,7 @@ int main() {
     // Run the engine in the main thread
     auto entity = coreEngine->CreateEntity();
     auto mc = entity->AddComponent<ShapeComponent>();
-    mc->SetModel<Plane>(math::Vector3(0, 0, 0), Vector2(10, 10), getColor("Timeless Gray"));
+    mc->SetModel<Plane>(math::Vector3(0, 0, 0), Vector2{10, 10}, getColor("Timeless Gray"));
     auto shapephisic = entity->AddComponent<RigidBodyComponent>();
     shapephisic->SetCollidable(true);
     shapephisic->SetStatic(true);
