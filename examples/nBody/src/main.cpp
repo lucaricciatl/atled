@@ -33,7 +33,7 @@ int main() {
     std::vector<std::shared_ptr<Entity>> entities;
 
     // Generate 50 entities with random positions and appearance
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < 1000; ++i) {
         auto entity = coreEngine->CreateEntity();
 
         // Add FrameComponent
