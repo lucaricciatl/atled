@@ -17,22 +17,15 @@
 #include "raylib.hpp"
 
 int main() {
-    // Engine setup
     engine::EngineBuilder<AtledEngine> builder;
 
-    std::unique_ptr<AtledEngine> coreEngine = builder.SetKeyboardType(input::KeyboardType::Raylib)
-                                                  .SetMouseType(input::MouseType::Raylib)
-                                                  .SetGraphicsType(graphics::GraphicsType::Raylib)
-                                                  .SetCameraType(graphics::CameraType::Raylib)
-                                                  .SetWorldType(graphics::WorldType::World2D)
-                                                  .SetTargetFramerate(60)  // Set frame rate suitable for the game speed
-                                                  .Build();
+    std::unique_ptr<AtledEngine> coreEngine = builder.Configure().Build();
 
     // Random number generator setup
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<float> distX(0.0f, 200.0f);         // Range for X positions
-    std::uniform_real_distribution<float> distY(0.0f, 200.0f);         // Range for Y positions
+    std::uniform_real_distribution<float> distX(200.0f, 400.0f);         // Range for X positions
+    std::uniform_real_distribution<float> distY(200.0f, 400.0f);         // Range for Y positions
     std::uniform_real_distribution<float> distMass(1.0e12f, 1.0e14f);  // Range for masses
     std::uniform_real_distribution<float> distColor(0, 1);             // Range for RGB color values
 
