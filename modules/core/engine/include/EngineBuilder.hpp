@@ -266,6 +266,13 @@ EngineBuilder<T>& EngineBuilder<T>::InitializeFromJson(const nlohmann::json& jso
                     gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_HIGHDPI);
                 } else if (flagStr == "FLAG_WINDOW_RESIZABLE") {
                     gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_RESIZABLE);
+                } else if (flagStr == "FLAG_WINDOW_UNDECORATED") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_UNDECORATED);
+                } else if (flagStr == "FLAG_FULLSCREEN_MODE") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_FULLSCREEN_MODE);
+                } else if (flagStr == "FLAG_WINDOW_TRANSPARENT") {
+                    SetConfigFlags(FLAG_WINDOW_TRANSPARENT);
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_TRANSPARENT);
                 } else {
                     // Optionally, handle unknown flags here.
                     std::cerr << "Warning: Unknown config flag \"" << flagStr << "\" provided." << std::endl;
@@ -316,7 +323,5 @@ EngineBuilder<T>& EngineBuilder<T>::InitializeFromJsonFile(const std::string& fi
 
     return InitializeFromJson(jsonData);
 }
-
-
 
 }  // namespace engine

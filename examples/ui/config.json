@@ -1,0 +1,24 @@
+{
+    "keyboardType": "Raylib",
+    "mouseType": "Raylib",
+    "graphicsType": "Raylib",
+    "cameraType": "Raylib",
+    "worldType": "World2D",
+    "resourceManagerType": "Default",
+    "targetFramerate": 60,
+    "graphicsConfig": {
+      "width": 1280,
+      "height": 920,
+      "fullscreen": false,
+      "vsync": true,
+      "antialiasing": 4,
+      "windowConfig": [
+        "FLAG_VSYNC_HINT",
+        "FLAG_MSAA_4X_HINT",
+        "FLAG_WINDOW_HIGHDPI",
+        "FLAG_WINDOW_UNDECORATED",
+        "FLAG_WINDOW_TRANSPARENT"
+      ]
+    }
+  }
+  
