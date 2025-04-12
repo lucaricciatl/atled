@@ -10,6 +10,7 @@ add_library(core
     ./components/src/FreeCameraComponent.cpp
     ./components/src/ForceFieldComponent.cpp
     ./components/src/ParticlesSystemComponent.cpp
+    ./components/src/GuiBoxComponent.cpp
     ./components/src/LightComponent.cpp
     ./events/src/EventBus.cpp
     ./provider/src/ServiceProvider.cpp
@@ -22,7 +23,7 @@ add_library(core
 )
 
 # Link inputs and graphics libraries
-target_link_libraries(core PUBLIC inputs graphics physics resources math nlohmann_json)
+target_link_libraries(core PUBLIC inputs graphics gui physics resources math nlohmann_json)
 
 
 # Set C++20 standard
