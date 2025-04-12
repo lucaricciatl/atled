@@ -71,12 +71,9 @@ void GraphicsManager::SetCameraMng(std::shared_ptr<graphics::CameraManager> aCam
 }
 void GraphicsManager::Render() {
 
-
-
-        
     std::lock_guard<std::mutex> lock(layersMutex);
     GetGraphicsContext()->BeginDrawing();
-    Clear(raylib::BLACK);
+    Clear(raylib::BLANK);
     
     mCameraManager->BeginActiveCamera();
     for (const auto& [layerId, primitives] : layers) {

@@ -22,6 +22,7 @@ int main() {
     // Engine setup
     engine::EngineBuilder<AtledEngine> builder;
     std::unique_ptr<AtledEngine> coreEngine = builder.Configure().Build();
+
     coreEngine->Start();
     coreEngine->Shutdown();
 
