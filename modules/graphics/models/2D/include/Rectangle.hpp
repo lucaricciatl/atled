@@ -12,7 +12,6 @@ class Rectangle : public Model2D {
   Coordinates2D mUpperLeft;    
   Coordinates2D mBottomRight; 
 
-
  public:
   Rectangle(const Coordinates2D& aUpperLeft, const Coordinates2D& aBottomRight);
   Rectangle() = default;

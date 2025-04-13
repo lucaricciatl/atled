@@ -13,6 +13,7 @@ namespace graphics
 	class Model2D : public Model
 	{
 	public:
+        Model2D() : mRotation(0) {};
 		virtual ~Model2D() = default;
 		virtual void Draw() = 0;
 

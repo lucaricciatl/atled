@@ -38,15 +38,16 @@ public:
     graphics::Color GetBorderColor() const;
     float GetBorderThickness() const;
     float GetCornerRadius() const;
+    // Visual components
+    std::shared_ptr<graphics::Rectangle> mBackground;
+    std::shared_ptr<graphics::Rectangle> mBorder;
 
-protected:
+   protected:
     // Protected utility functions
     void UpdateGeometry() override;
 
 private:
-    // Visual components
-    std::unique_ptr<graphics::Rectangle> mBackground;
-    std::unique_ptr<graphics::Rectangle> mBorder;
+
 
     // Box properties
     float mCornerRadius{0.0f};

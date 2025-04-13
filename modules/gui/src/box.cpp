@@ -13,20 +13,11 @@ Box::Box(const Coordinates2D& position, float width, float height)
     , mHasBorder(false)
 {
     // Set default colors
-    mBackground->SetColor(graphics::Color(255, 255, 255, 0)); // White background
-    mBorder->SetColor(graphics::Color(0, 0, 0, 255));          // Black border
+    mBackground->SetColor(graphics::Color(0, 0, 0, 1));      // Black background
+    mBorder->SetColor(graphics::Color(0, 0, 0, 1));          // Black border
 }
 
 void Box::Draw() {
-    assert(mBackground && "Background rectangle is null");
-    
-    // Draw background
-    mBackground->Draw();
-    
-    // Draw border if enabled
-    if (mHasBorder && mBorder) {
-        mBorder->Draw();
-    }
 }
 
 void Box::Update(float deltaTime) {
