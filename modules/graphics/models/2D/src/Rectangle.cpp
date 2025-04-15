@@ -67,10 +67,15 @@ void Rectangle::Draw() {
     RectangleStruct rect = { globalUpperLeft.x, globalUpperLeft.y, width, height };
 
     // Calculate the origin for rotation (center of the rectangle)
-    Vector2 origin = { (rect.width / 2.0f), (rect.height / 2.0f) };
+    Vector2 origin = {0,0 };
 
     // Draw the rectangle with transformed global position
     raylib::DrawRectanglePro(rect, origin, mRotation, graphics::toRaylibColor(mColor));
+
+    if (mDrawBorder) {
+        raylib::DrawRectangleLinesEx(rect, mBorderThickness, graphics::toRaylibColor(mBorderColor));
+    }
+
 }
 
 }  // namespace graphics

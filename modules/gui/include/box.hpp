@@ -40,7 +40,6 @@ public:
     float GetCornerRadius() const;
     // Visual components
     std::shared_ptr<graphics::Rectangle> mBackground;
-    std::shared_ptr<graphics::Rectangle> mBorder;
 
    protected:
     // Protected utility functions

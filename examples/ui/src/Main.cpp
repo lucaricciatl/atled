@@ -34,7 +34,7 @@ void SetupGUI(AtledEngine* engine) {
     guiBox->SetSize(900.0f, 100.0f);
     guiBox->SetPosition({100.0f, 200.0f});
     guiBox->SetBackgroundColor(graphics::Color(0.255, 0.255, 0.255, 0.255));
-    guiBox->SetBorderColor(graphics::Color(0.255, 0.255, 0.255, 0.255));
+    guiBox->SetBorderColor(graphics::Color(1, 0.255, 0.255, 0.5));
     guiBox->SetBorderThickness(3.0f);
     guiBox->SetCornerRadius(5.0f);
 }

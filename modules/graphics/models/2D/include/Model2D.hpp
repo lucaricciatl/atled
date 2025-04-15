@@ -18,11 +18,15 @@ namespace graphics
 		virtual void Draw() = 0;
 
 		Color GetColor() const;
-		double GetRotation() const;
+        Color GetBorderColor() const;
+        double GetRotation() const;
 		void SetColor(graphics::Color color);
+        void SetBorderColor(graphics::Color color);
 		void SetRotation(double rotation);
+        void SetDrawBorder(const bool drawborder);
+        void SetBorderThickness(const int thickness);
 
-	protected:
+       protected:
 		Vector2 ComputeGlobalPosition(Coordinates2D aPosition)
 		{
 			auto framepos = frame->GetPosition();
@@ -33,7 +37,11 @@ namespace graphics
             return globalPosition;
         };
         graphics::Color mColor;
+        graphics::Color mBorderColor;
+        int mBorderThickness;
         double mRotation;
+        bool mDrawBorder;
+
     };
 } // namespace graphics
 #endif // SHAPE_HPP

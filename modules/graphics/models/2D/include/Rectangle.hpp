@@ -25,6 +25,7 @@ class Rectangle : public Model2D {
   void SetUpperLeft(const Coordinates2D& aUpperLeft);
   void SetBottomRight(const Coordinates2D& aBottomRight);
 
+
   void Draw() override;
 };
 

@@ -6,15 +6,13 @@ namespace gui {
 Box::Box(const Coordinates2D& position, float width, float height)
     : mBackground(std::make_unique<graphics::Rectangle>(position, 
         Coordinates2D(position.x + width, position.y + height)))
-    , mBorder(std::make_unique<graphics::Rectangle>(position, 
-        Coordinates2D(position.x + width, position.y + height)))
     , mCornerRadius(0.0f)
     , mBorderThickness(1.0f)
-    , mHasBorder(false)
+    , mHasBorder(true)
 {
     // Set default colors
     mBackground->SetColor(graphics::Color(0, 0, 0, 1));      // Black background
-    mBorder->SetColor(graphics::Color(0, 0, 0, 1));          // Black border
+    mBackground->SetBorderColor(graphics::Color(0, 0, 0, 1));  // Black border
 }
 
 void Box::Draw() {
@@ -26,46 +24,25 @@ void Box::Update(float deltaTime) {
 
 void Box::SetPosition(const Coordinates2D& position) {
     mBackground->SetPosition(position);
-    if (mHasBorder) {
-        Coordinates2D borderPos(
-            position.x - mBorderThickness,
-            position.y - mBorderThickness
-        );
-        mBorder->SetPosition(borderPos);
-    }
+    
 }
 
 void Box::SetSize(float width, float height) {
     mBackground->SetSize(width, height);
-    if (mHasBorder) {
-        mBorder->SetSize(width + 2 * mBorderThickness, height + 2 * mBorderThickness);
-    }
 }
 
 void Box::SetBackgroundColor(const graphics::Color& color) {
     mBackground->SetColor(color);
 }
 
-void Box::SetBorderColor(const graphics::Color& color) {
-    mBorder->SetColor(color);
-}
+void Box::SetBorderColor(const graphics::Color& color) { mBackground->SetBorderColor(color); }
 
 void Box::SetBorderThickness(float thickness) {
     mBorderThickness = thickness;
     mHasBorder = thickness > 0;
     
     if (mHasBorder) {
-        // Update border size and position
-        Coordinates2D currentPos = mBackground->GetUpperLeft();
-        float width = mBackground->GetBottomRight().x - currentPos.x;
-        float height = mBackground->GetBottomRight().y - currentPos.y;
-        
-        Coordinates2D borderPos(
-            currentPos.x - thickness,
-            currentPos.y - thickness
-        );
-        mBorder->SetPosition(borderPos);
-        mBorder->SetSize(width + 2 * thickness, height + 2 * thickness);
+        mBackground->SetBorderThickness(thickness);
     }
 }
 
@@ -89,9 +66,8 @@ graphics::Color Box::GetBackgroundColor() const {
     return mBackground->GetColor();
 }
 
-graphics::Color Box::GetBorderColor() const {
-    return mBorder->GetColor();
-}
+graphics::Color Box::GetBorderColor() const { 
+    return mBackground->GetBorderColor(); }
 
 float Box::GetBorderThickness() const {
     return mBorderThickness;

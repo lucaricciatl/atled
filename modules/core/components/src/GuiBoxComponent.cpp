@@ -28,7 +28,6 @@ void GuiBoxComponent::InitializeBox() {
     mBox->SetBorderThickness(1.0f);
     mBox->SetSize(100.0f, 100.0f);  // Default size
     mServiceProvider->GetGraphicManager()->AddShape(1, mBox->mBackground);
-    mServiceProvider->GetGraphicManager()->AddShape(1, mBox->mBorder);
 }
 
 void GuiBoxComponent::Update(double aDeltatime) {
