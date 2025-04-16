@@ -12,6 +12,7 @@ add_library(core
     ./components/src/ParticlesSystemComponent.cpp
     ./components/src/GuiBoxComponent.cpp
     ./components/src/LightComponent.cpp
+    ./components/src/FixedCameraComponent.cpp
     ./events/src/EventBus.cpp
     ./provider/src/ServiceProvider.cpp
     ./entity/src/Entity.cpp
