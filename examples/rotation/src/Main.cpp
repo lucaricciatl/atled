@@ -24,6 +24,7 @@ int main() {
 
     auto entity2 = coreEngine->CreateEntity();
     entity2->GetComponent<FrameComponent>()->SetPosition(0, 0, 0.0f);
+    entity2->GetComponent<FrameComponent>()->SetOrientation(math::Quaternion(0, 0.4, 0, 1));
     auto mc1 = entity2->AddComponent<ShapeComponent>();
     mc1->SetModel<Cube>();
     auto shapephisic1 = entity2->AddComponent<RigidBodyComponent>();

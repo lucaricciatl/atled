@@ -27,6 +27,7 @@ class Model3D : public Model {
     graphics::Color GetWireframeColor() const;
     // Setter for color
     void SetColor(const graphics::Color& color);
+    void SetOrientation(const math::Quaternion& aOrientation) { mOrientation = aOrientation; }
 
     // Getter for color
     graphics::Color GetColor() const;
@@ -40,7 +41,7 @@ class Model3D : public Model {
         return globalPosition;
     };
 
-
+    math::Quaternion mOrientation;
     bool WireframeIsEnabled;  // 1 for the wirefram
     bool ShapeIsEnabled;      // 1 for the wirefram
     graphics::Color mWireframeColor;
