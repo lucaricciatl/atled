@@ -7,6 +7,8 @@
 
 namespace gui {
 
+
+
 class Box : public GuiElement {
 public:
     // Constructors
@@ -46,8 +48,6 @@ public:
     void UpdateGeometry() override;
 
 private:
-
-
     // Box properties
     float mCornerRadius{0.0f};
     float mBorderThickness{1.0f};

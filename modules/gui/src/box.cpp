@@ -40,15 +40,12 @@ void Box::SetBorderColor(const graphics::Color& color) { mBackground->SetBorderC
 void Box::SetBorderThickness(float thickness) {
     mBorderThickness = thickness;
     mHasBorder = thickness > 0;
-    
     if (mHasBorder) {
         mBackground->SetBorderThickness(thickness);
     }
 }
 
-void Box::SetCornerRadius(float radius) {
-    mCornerRadius = radius;
-}
+void Box::SetCornerRadius(float radius) { mBackground->SetRoundness(radius);}
 
 Coordinates2D Box::GetPosition() const {
     return mBackground->GetUpperLeft();
@@ -76,7 +73,6 @@ float Box::GetBorderThickness() const {
 float Box::GetCornerRadius() const {
     return mCornerRadius;
 }
-
 
 // Implementation for SetAnchor
 void gui::GuiElement::SetAnchor(gui::Anchor anchor) {

@@ -1,6 +1,8 @@
 #include "GuiBoxComponent.hpp"
 #include <cassert>
 #include "ServiceProvider.hpp"
+#include "Text.hpp"
+
 GuiBoxComponent::GuiBoxComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> serviceProvider)
     : Component(aOwner), mServiceProvider(serviceProvider) {
     Init();
@@ -70,6 +72,10 @@ void GuiBoxComponent::SetCornerRadius(float radius) {
     if (mBox) {
         mBox->SetCornerRadius(radius);
     }
+}
+
+void GuiBoxComponent::SetText(Text aText){
+
 }
 
 void GuiBoxComponent::SetVisible(bool visible) {

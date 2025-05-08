@@ -10,7 +10,7 @@ namespace {
 namespace graphics {
 
     Rectangle::Rectangle(const Coordinates2D& aUpperLeft, const Coordinates2D& aBottomRight)
-        : mUpperLeft(aUpperLeft), mBottomRight(aBottomRight){}
+    : mUpperLeft(aUpperLeft), mBottomRight(aBottomRight), mRoundness(0), mSegments(4){}
 
 void Rectangle::SetUpperLeft(const Coordinates2D& aUpperLeft) {
   mUpperLeft = aUpperLeft;
@@ -20,7 +20,15 @@ void Rectangle::SetBottomRight(const Coordinates2D& aBottomRight) {
   mBottomRight = aBottomRight;
 }
 
-// Implementation of SetSize
+void Rectangle::SetRoundness(const float& aRoundness) { 
+    mRoundness = aRoundness;
+    Vector2 globalUpperLeft = ComputeGlobalPosition(mUpperLeft);
+    Vector2 globalBottomRight = ComputeGlobalPosition(mBottomRight);
+    float width = globalBottomRight.x - globalUpperLeft.x;
+    float height = globalBottomRight.y - globalUpperLeft.y;
+    mSegments = aRoundness * width / height;
+} 
+    // Implementation of SetSize
 void Rectangle::SetSize(float width, float height) {
     assert(width >= 0 && height >= 0 && "Width and height must be non-negative");
 
@@ -68,12 +76,12 @@ void Rectangle::Draw() {
 
     // Calculate the origin for rotation (center of the rectangle)
     Vector2 origin = {0,0 };
-
     // Draw the rectangle with transformed global position
-    raylib::DrawRectanglePro(rect, origin, mRotation, graphics::toRaylibColor(mColor));
+    raylib::DrawRectangleRounded(rect, mRoundness, mSegments, graphics::toRaylibColor(mColor));
 
     if (mDrawBorder) {
-        raylib::DrawRectangleLinesEx(rect, mBorderThickness, graphics::toRaylibColor(mBorderColor));
+        raylib::DrawRectangleRoundedLinesEx(rect, mRoundness, mSegments, mBorderThickness,
+                                            graphics::toRaylibColor(mBorderColor));
     }
 
 }

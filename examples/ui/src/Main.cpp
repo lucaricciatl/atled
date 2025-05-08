@@ -36,7 +36,9 @@ void SetupGUI(AtledEngine* engine) {
     guiBox->SetBackgroundColor(graphics::Color(0.255, 0.255, 0.255, 0.255));
     guiBox->SetBorderColor(graphics::Color(1, 0.255, 0.255, 0.5));
     guiBox->SetBorderThickness(3.0f);
-    guiBox->SetCornerRadius(5.0f);
+    guiBox->SetCornerRadius(0.1f);
+    //guiBox->SetText(Text("1234"));
+    //guiBox->SetText("HI");
 }
 
 int main() {

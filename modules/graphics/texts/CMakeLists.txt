@@ -7,8 +7,10 @@ file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 # Gather header files from the 'include' directory
 file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
 
+file(GLOB_RECURSE INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/interface/*.hpp")
+
 # Create a library with the gathered source files
-add_library(${LIB_NAME} ${SOURCES})
+add_library(${LIB_NAME} ${SOURCES} ${INTERFACE})
 
 # Include directories for this library
 target_include_directories(${LIB_NAME} PUBLIC 
