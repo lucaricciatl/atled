@@ -13,6 +13,7 @@ add_library(core
     ./components/src/GuiBoxComponent.cpp
     ./components/src/LightComponent.cpp
     ./components/src/FixedCameraComponent.cpp
+    ./components/src/ComputerUse.cpp
     ./events/src/EventBus.cpp
     ./provider/src/ServiceProvider.cpp
     ./entity/src/Entity.cpp

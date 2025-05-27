@@ -17,7 +17,11 @@ Text::Text()
 
 // Constructor with style JSON input (assuming aText is a style JSON string)
 Text::Text(std::string aString)
-    : mString(aString), mWidthSpacing(defaultWidthSpacing), mHeightSpacing(defaultHeightSpacing) {}
+    : mString(aString),
+      mWidthSpacing(defaultWidthSpacing),
+      mHeightSpacing(defaultHeightSpacing),
+      mColor(defaultColor),
+      mSize(defaultSize) {}
 
 // Sets the text string
 void Text::SetString(const std::string& aString) { mString = aString; }

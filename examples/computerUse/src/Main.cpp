@@ -18,6 +18,7 @@
 #include "Palette.hpp"
 #include "GuiBoxComponent.hpp"
 #include "Main.h"
+#include "ComputerUse.hpp"
 
 // Example GUI setup function
 void SetupGUI(AtledEngine* engine) {
@@ -29,15 +30,20 @@ void SetupGUI(AtledEngine* engine) {
     
     // Add GUI box component
     auto guiBox = guiEntity->AddComponent<GuiBoxComponent>();
-    
     // Configure the GUI box
-    guiBox->SetSize(900.0f, 100.0f);
-    guiBox->SetPosition({100.0f, 200.0f});
-    guiBox->SetBackgroundColor(graphics::Color(0.255, 0.255, 0.255, 0.255));
+    guiBox->SetSize(1920.0f-6, 1080.0f-6);
+    guiBox->SetPosition({3.0f, 3.0f});
+    guiBox->SetBackgroundColor(graphics::Color(0.0, 0.0, 0.0, 0.0));
     guiBox->SetBorderColor(graphics::Color(1, 0.255, 0.255, 0.5));
     guiBox->SetBorderThickness(3.0f);
-    guiBox->SetCornerRadius(0.1f);
-    guiBox->SetText("HI");
+    guiBox->SetCornerRadius(0.0f);
+}
+
+void SetupComputerUSe(AtledEngine* engine) {
+    // Create an entity for our GUI element
+    auto ComputerUseEntity = engine->CreateEntity();
+    ComputerUseEntity->AddComponent<ComputerUse>();
+    
 }
 
 int main() {
@@ -48,6 +54,7 @@ int main() {
     // Setup GUI elements
     SetupGUI(coreEngine.get());
 
+    SetupComputerUSe(coreEngine.get());
     // Start the engine
     coreEngine->Start();
     
