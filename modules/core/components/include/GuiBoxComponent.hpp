@@ -7,8 +7,6 @@
 #include "Color.hpp"
 #include "FrameComponent.hpp"
 #include <memory>
-#include "Text.hpp"
-#include <label.hpp>
 #include <label.hpp>
 
 class GuiBoxComponent : public Component {
@@ -29,7 +27,7 @@ public:
     void SetSize(float aWidth, float aHeight);
     void SetPosition(const Coordinates2D& aPosition);
     void SetVisible(bool visible);
-    void SetText(Text aText);
+
     // Getters
     graphics::Color GetBackgroundColor() const;
     graphics::Color GetBorderColor() const;
@@ -38,6 +36,7 @@ public:
     float GetWidth() const;
     float GetHeight() const;
     Coordinates2D GetPosition() const;
+    void SetText(const std::string& atext);
     // Additional functionality
     void Show();
     void Hide();
@@ -47,7 +46,7 @@ private:
     std::shared_ptr<ServiceProvider> mServiceProvider;
 
     std::unique_ptr<gui::Box> mBox;
-    std::unique_ptr<gui::Label> mText;
+    std::unique_ptr<gui::Label> mLabel;
 
 
     bool mInitialized{false};

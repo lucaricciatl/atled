@@ -23,13 +23,15 @@ void GuiBoxComponent::InitializeBox() {
 
     // Create box with initial values
     mBox = std::make_unique<gui::Box>(initialPosition, initialWidth, initialHeight);
-
+    mLabel = std::make_unique<gui::Label>();
     // Set default properties
     mBox->SetBackgroundColor(graphics::Color(0.255, 0.255, 0.255, 0.255));  // White
     mBox->SetBorderColor(graphics::Color(0, 0, 0, 0.255));                // Black
     mBox->SetBorderThickness(1.0f);
     mBox->SetSize(100.0f, 100.0f);  // Default size
     mServiceProvider->GetGraphicManager()->AddShape(1, mBox->mBackground);
+    mServiceProvider->GetGraphicManager()->AddShape(1, mLabel->mText);
+
 }
 
 void GuiBoxComponent::Update(double aDeltatime) {
@@ -74,10 +76,6 @@ void GuiBoxComponent::SetCornerRadius(float radius) {
     }
 }
 
-void GuiBoxComponent::SetText(Text aText){
-
-}
-
 void GuiBoxComponent::SetVisible(bool visible) {
     if (mBox) {
         mBox->SetVisible(visible);
@@ -114,4 +112,11 @@ float GuiBoxComponent::GetCornerRadius() const {
 
 bool GuiBoxComponent::IsVisible() const {
     return mBox ? mBox->IsVisible() : false;
+}
+
+void GuiBoxComponent::SetText(const std::string& atext) {
+    if (mLabel) {
+        mLabel->SetText(atext);
+        mLabel->SetPosition(GetPosition());
+    }
 }

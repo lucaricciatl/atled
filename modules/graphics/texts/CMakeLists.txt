@@ -10,18 +10,22 @@ file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
 file(GLOB_RECURSE INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/interface/*.hpp")
 
 # Create a library with the gathered source files
-add_library(${LIB_NAME} ${SOURCES} ${INTERFACE})
+add_library(${LIB_NAME} ${SOURCES} ${HEADERS})
 
 # Include directories for this library
 target_include_directories(${LIB_NAME} PUBLIC 
 ${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
     ${CMAKE_CURRENT_SOURCE_DIR}/include   # Include local project headers
     ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
+    ${MODELS_INCLUDE_DIR}
+    ${CONTEXT_INCLUDE_DIR}
 )
 
 # Link libraries for this target
 target_link_libraries(${LIB_NAME} PUBLIC 
-    raylibcpp                                 # Link the raylib library
+    raylibcpp
+    graphics
+    models
 )
 
 set_target_properties(${LIB_NAME} PROPERTIES FOLDER "modules/graphics")
