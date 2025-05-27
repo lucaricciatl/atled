@@ -2,11 +2,18 @@
 #include "Color.hpp"
 
 namespace graphics {
-static constexpr int defaultWidthSpacing = 1;
-static constexpr int defaultHeightSpacing = 1;
+constexpr int defaultWidthSpacing = 1;
+constexpr int defaultHeightSpacing = 1;
+constexpr int defaultSize = 12;
+const Color defaultColor = Color(1, 1, 1, 1);
 
-// Default constructor
-Text::Text() : mString(""), mWidthSpacing(defaultWidthSpacing), mHeightSpacing(defaultHeightSpacing) {}
+    // Default constructor
+Text::Text()
+    : mString(""),
+      mWidthSpacing(defaultWidthSpacing),
+      mHeightSpacing(defaultHeightSpacing),
+      mColor(defaultColor),
+      mSize(defaultSize) {}
 
 // Constructor with style JSON input (assuming aText is a style JSON string)
 Text::Text(std::string aString)
@@ -37,8 +44,6 @@ void Text::SetWidthSpacing(float aSpacing) { mWidthSpacing = aSpacing; }
 void Text::SetHeightSpacing(float aSpacing) { mHeightSpacing = aSpacing; }
 
 void Text::Draw() { 
-    auto col = Color(1, 1, 1, 1);
-    auto colr = col.toRaylibColor();
-    raylib::DrawText(mString.c_str(), mPosition.GetX(), mPosition.GetY(), 100, colr);
+    raylib::DrawText(mString.c_str(), mPosition.GetX(), mPosition.GetY(), mSize, mColor.toRaylibColor());
 };
 }  // namespace Graphics

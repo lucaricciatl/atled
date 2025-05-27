@@ -5,6 +5,8 @@
 #include <string>
 #include "Model.hpp"
 #include <Point2D.hpp>
+#include "Color.hpp"
+
 namespace graphics {
 
 class Text : public Model {
@@ -25,6 +27,8 @@ class Text : public Model {
     float mHeightSpacing;
     std::string mString;
     Point2D mPosition;
+    Color mColor;
+    int mSize;
 };
 
 }  // namespace graphics
