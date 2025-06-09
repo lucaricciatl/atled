@@ -257,23 +257,57 @@ EngineBuilder<T>& EngineBuilder<T>::InitializeFromJson(const nlohmann::json& jso
             gfxConfig.WindowConfig.clear();
             for (const auto& flagValue : gfxJson["windowConfig"]) {
                 std::string flagStr = flagValue.get<std::string>();
+
                 // Map the string to the corresponding raylib::ConfigFlags value
                 if (flagStr == "FLAG_VSYNC_HINT") {
                     gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_VSYNC_HINT);
-                } else if (flagStr == "FLAG_MSAA_4X_HINT") {
-                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_MSAA_4X_HINT);
-                } else if (flagStr == "FLAG_WINDOW_HIGHDPI") {
-                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_HIGHDPI);
-                } else if (flagStr == "FLAG_WINDOW_RESIZABLE") {
-                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_RESIZABLE);
-                } else if (flagStr == "FLAG_WINDOW_TRANSPARENT") {
-                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_TRANSPARENT);
-                } else if (flagStr == "FLAG_WINDOW_UNDECORATED") {
-                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_UNDECORATED);
+
                 } else if (flagStr == "FLAG_FULLSCREEN_MODE") {
                     gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_FULLSCREEN_MODE);
+
+                } else if (flagStr == "FLAG_WINDOW_RESIZABLE") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_RESIZABLE);
+
+                } else if (flagStr == "FLAG_WINDOW_UNDECORATED") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_UNDECORATED);
+
+                } else if (flagStr == "FLAG_WINDOW_HIDDEN") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_HIDDEN);
+
+                } else if (flagStr == "FLAG_WINDOW_MINIMIZED") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_MINIMIZED);
+
+                } else if (flagStr == "FLAG_WINDOW_MAXIMIZED") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_MAXIMIZED);
+
+                } else if (flagStr == "FLAG_WINDOW_UNFOCUSED") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_UNFOCUSED);
+
+                } else if (flagStr == "FLAG_WINDOW_TOPMOST") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_TOPMOST);
+
+                } else if (flagStr == "FLAG_WINDOW_ALWAYS_RUN") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_ALWAYS_RUN);
+
+                } else if (flagStr == "FLAG_WINDOW_TRANSPARENT") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_TRANSPARENT);
+
+                } else if (flagStr == "FLAG_WINDOW_HIGHDPI") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_HIGHDPI);
+
+                } else if (flagStr == "FLAG_WINDOW_MOUSE_PASSTHROUGH") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_WINDOW_MOUSE_PASSTHROUGH);
+
+                } else if (flagStr == "FLAG_BORDERLESS_WINDOWED_MODE") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_BORDERLESS_WINDOWED_MODE);
+
+                } else if (flagStr == "FLAG_MSAA_4X_HINT") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_MSAA_4X_HINT);
+
+                } else if (flagStr == "FLAG_INTERLACED_HINT") {
+                    gfxConfig.WindowConfig.push_back(raylib::ConfigFlags::FLAG_INTERLACED_HINT);
+
                 } else {
-                    // Optionally, handle unknown flags here.
                     std::cerr << "Warning: Unknown config flag \"" << flagStr << "\" provided." << std::endl;
                 }
             }

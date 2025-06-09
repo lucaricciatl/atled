@@ -24,6 +24,7 @@ class ComputerUse : public Component {
     void KeyboardType(void);
     void Mouseclick(void);
     void Respond(void);
+    void Update(double dt);
 
    private:
     std::shared_ptr<input::InputManager> mInputManager;
