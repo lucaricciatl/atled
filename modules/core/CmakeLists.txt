@@ -25,7 +25,7 @@ add_library(core
 )
 
 # Link inputs and graphics libraries
-target_link_libraries(core PUBLIC inputs graphics gui physics resources math nlohmann_json)
+target_link_libraries(core PUBLIC inputs graphics gui physics resources math nlohmann_json utils)
 
 
 # Set C++20 standard
@@ -46,6 +46,7 @@ target_include_directories(core PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/system/include
     ${RESOURCES_INCLUDE_DIR}
     ${PHYSICS_INCLUDE_DIR}
+    ${UTILS_INCLUDE_DIR}
     
 )
 

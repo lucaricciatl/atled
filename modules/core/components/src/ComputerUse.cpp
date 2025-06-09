@@ -1,5 +1,6 @@
-#include "ComputerUse.hpp"
+﻿#include "ComputerUse.hpp"
 #include <iostream>
+#include "screenshot_util.hpp"
 
 void ComputerUse::SetupAgentEndopoint(void){
 
@@ -11,11 +12,9 @@ void ComputerUse::Wait(void){
 void ComputerUse::StartAction(void){
 };
 
-void ComputerUse::TakeScreenShot(void) {
+void ComputerUse::TakeScreenShot(void) { SaveScreenshot(); }
 
-}
-
-void ComputerUse::Update(double dt) {  }
+void ComputerUse::Update(double dt) { TakeScreenShot(); }
 
 
 void ComputerUse::SetMousePosition(void){
