@@ -12,6 +12,7 @@ namespace graphics {
 
 class Model3D : public Model {
    public:
+    explicit Model3D() : ShapeIsEnabled(true) {};
     virtual ~Model3D() = default;
     virtual void Draw() = 0;
 
