@@ -39,11 +39,11 @@ public:
 
 private:
     MaterialFactory mMaterialFactory;
-    LightFactory mLightsFactory;
+    rendering::LightFactory mLightsFactory;
 
     std::unordered_map<std::string, ConcreteMaterial> materials;
     std::unordered_map<std::string, RaylibShader> shaders;
-    std::unordered_map<std::string, Light> lights;
+    std::unordered_map<std::string, rendering::Light> lights;
 };
 
 }

@@ -15,7 +15,7 @@ add_library(raylibcpp ${CMAKE_CURRENT_SOURCE_DIR}/src/raylib.cpp)
 add_library(raylibcpp::raylibcpp ALIAS raylibcpp)
 
 # Link libraries: raylib and geometry must be defined in one of the subdirectories
-target_link_libraries(raylibcpp PUBLIC raylib geometry)
+target_link_libraries(raylibcpp PUBLIC raylib geometry )
 
 target_include_directories(raylibcpp
     PUBLIC

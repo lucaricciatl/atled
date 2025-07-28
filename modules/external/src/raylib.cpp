@@ -1014,6 +1014,17 @@ Mesh GenMeshCubicmap(Image cubicmap, Vector3 cubeSize) {
     return ::GenMeshCubicmap(cubicmap, cubeSize);
 }
 
+void UpdateLightValues(raylib::Shader shader, Light light) {
+    UpdateLightValues(shader,light);
+}
+
+
+Light CreateLight(int type, math::Vector3 position, math::Vector3 target, ::Color color,
+                                ::Shader shader) {
+    Light light = CreateLight(type,position,target,color,shader);
+    return light;
+}
+
 
 } // namespace raylib
 

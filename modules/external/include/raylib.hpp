@@ -9,6 +9,7 @@ namespace raylib{
 
 #include <raylib.h>
 #include <raymath.h>
+#include "../raylib/examples/models/rlights.h"
 
 
 using namespace raylib;
@@ -25,7 +26,6 @@ typedef CameraProjection CameraProjection;
 typedef Rectangle Rectangle;
 typedef MaterialMapIndex MaterialMapIndex;
 typedef ShaderUniformDataType ShaderUniformDataType;
-enum LightType { LIGHT_DIRECTIONAL = 0, LIGHT_POINT };
 
 // Some Basic Colors
 // NOTE: Custom raylib color palette for amazing visuals on WHITE background
@@ -413,6 +413,9 @@ Shader LoadShaderFromMemory(const char *vsCode, const char *fsCode);
 // Check if a shader is ready
 bool IsShaderReady(Shader shader);
 
+void UpdateLightValues(Shader shader, Light light);
 
+Light CreateLight(int type, math::Vector3 position, math::Vector3 target, Color color,
+                                Shader shader);
 
 }
