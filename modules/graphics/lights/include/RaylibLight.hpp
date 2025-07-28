@@ -10,7 +10,7 @@ class RaylibLight : public Light
 {
 public:
     RaylibLight();
-    virtual ~RaylibLight();
+    ~RaylibLight();
 
 private:
     

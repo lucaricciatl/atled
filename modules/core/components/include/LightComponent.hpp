@@ -16,7 +16,7 @@ public:
     {
         // Optionally initialize the light
 
-        //mLight = std::unique_ptr<Light>(LightFactory::CreateLight(LightImplType::RaylibLightImpl));
+        auto mLight = rendering::LightFactory::CreateLight(rendering::LightImplType::RaylibLightImpl);
         if (mLight)
         {
 

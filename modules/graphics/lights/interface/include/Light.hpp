@@ -8,6 +8,9 @@ class Light {
 public:
     virtual ~Light() = default;
 
+    //math::Vector3 mPosition; 
+    //math::Vector3 mTarget;
+    //graphics::Color mColor;
 };
 
 }
