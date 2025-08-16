@@ -1,7 +1,17 @@
 #include "Body.hpp"
 #include "BoundingBox.hpp"
+#include "Mat3.hpp"
 
 namespace physics {
+
+namespace{
+static inline math::Vector3 vsub(math::Vector3 a, math::Vector3 b) { return math::Vector3(a.GetX()-b.GetX(), a.GetY()-b.GetY(), a.GetZ()-b.GetZ()); }
+
+math::Vector3 ComputeMomentum(math::Vector3 F, math::Vector3 P, math::Vector3 C) {
+    math::Vector3 r = vsub(P, C);
+    return r.Cross(F);
+}
+}
 
 Body::Body(std::shared_ptr<Frame> frame)
     : mFrame(frame),
@@ -11,6 +21,9 @@ Body::Body(std::shared_ptr<Frame> frame)
       mMass(1.0f),
       mVelocity{0, 0, 0},
       mAccumulatedForce{0, 0, 0},
+      mAccumulatedMomentum{0, 0, 0},
+      mCenterOfMass{0, 0, 0},
+      //mInertia{math::Mat3::Identity()},
       mMesh(nullptr) {}
 
 // Set whether the rigid body is static
@@ -42,16 +55,20 @@ float Body::GetMass() const { return mMass; }
 std::shared_ptr<physics::Frame> Body::GetFrame() const { return mFrame; };
 
 void Body::ApplyForceToPoint(const math::Vector3& force, const Position& position) { 
-    mAccumulatedForce += force; 
+    mAccumulatedForce += force;
+    ApplyMomentum(ComputeMomentum(force,position,mCenterOfMass));
 };
 
-void Body::ApplyMomentum(const math::Vector3& momentum) {}
+void Body::ApplyMomentum(const math::Vector3& momentum) {
+    mAccumulatedMomentum += momentum;
+}
 
 void Body::ApplyMomentum(const math::Vector3& axis, const float module) {}
 
 // Clear all accumulated forces
 void Body::ClearForces() {
     mAccumulatedForce = math::Vector3{ 0, 0, 0 };
+    //mAccumulatedMomentum = math::Vector3{ 0, 0, 0 };
 }
 
 
@@ -90,4 +107,7 @@ math::BoundingBox Body::GetBoundingBox() const {
 void Body::Update(double deltaTime) {
     UpdatePhysics(deltaTime);
 }
+
 } // namespace physics
+
+

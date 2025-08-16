@@ -62,6 +62,7 @@ public:
             std::fabs(z) < epsilon);
     }
 
+    
 private:
     float x;
     float y;

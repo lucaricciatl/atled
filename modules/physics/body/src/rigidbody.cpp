@@ -20,6 +20,7 @@ void RigidBody::UpdatePhysics(double deltaTime) {
         mAccumulatedForce += math::Vector3(0, mAccumulatedForce.GetY() - mMass * g, 0);
     }
     math::Vector3 acceleration = mAccumulatedForce / mMass; // F = ma => a = F/m
+    //math::Vector3 angularAcceleration = mAccumulatedMomentum / InertiaMatrix;
     mVelocity += acceleration * deltaTime; // Update velocity
     mFrame->translate(mVelocity.GetX() * deltaTime, mVelocity.GetY() * deltaTime,
                       mVelocity.GetZ() * deltaTime);  // Update position

@@ -48,9 +48,11 @@ public:
     bool mIsStatic;
     bool mUseGravity;
     bool mIsCollidable;
-
+    math::Vector3 mAccumulatedMomentum;
+    math::Vector3 mCenterOfMass;
     float mMass;
     math::Vector3 mVelocity;
+    //math::Mat3 mInertia;
 };
 
 } // namespace physics
