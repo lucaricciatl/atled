@@ -1,5 +1,6 @@
 #include "RigidBody.hpp"
 #include "Vector3.hpp"
+#include "MathUtils.hpp"
 
 float g = 9.18;
 
@@ -20,10 +21,17 @@ void RigidBody::UpdatePhysics(double deltaTime) {
         mAccumulatedForce += math::Vector3(0, mAccumulatedForce.GetY() - mMass * g, 0);
     }
     math::Vector3 acceleration = mAccumulatedForce / mMass; // F = ma => a = F/m
-    //math::Vector3 angularAcceleration = mAccumulatedMomentum / InertiaMatrix;
-    mVelocity += acceleration * deltaTime; // Update velocity
+    auto InvInertia = math::Pinv(mInertia);
+    math::Matrix<float> momentumVector(3, 1);
+    momentumVector(0,0) = mAccumulatedMomentum.GetX();
+    momentumVector(0,1) = mAccumulatedMomentum.GetY();
+    momentumVector(0,2) = mAccumulatedMomentum.GetZ();
+    auto AngularAcceleration = momentumVector * InvInertia;
+    math::Vector3 AngularVelocity( AngularAcceleration(0,0)* deltaTime, AngularAcceleration(0,1)* deltaTime , AngularAcceleration(0,2)* deltaTime) ;
+    //mAngularVelocity += angularAcceleration * deltaTime;
     mFrame->translate(mVelocity.GetX() * deltaTime, mVelocity.GetY() * deltaTime,
                       mVelocity.GetZ() * deltaTime);  // Update position
+    //mFrame->rotate()
 
     ClearForces(); // Clear forces for the next frame
 }

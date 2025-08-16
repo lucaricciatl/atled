@@ -53,34 +53,11 @@ Mat3::Mat3(const Vector3& diagonal) :
     m10(0.0f), m11(diagonal.GetY()), m12(0.0f),
     m20(0.0f), m21(0.0f), m22(diagonal.GetZ()) {}
 
-inline Mat3::Mat3() : 
-    m00(0.0f), m01(0.0f), m02(0.0f),
-    m10(0.0f), m11(0.0f), m12(0.0f),
-    m20(0.0f), m21(0.0f), m22(0.0f) {}
 
-inline Mat3::Mat3(const Mat3& other) :
-    m00(other.m00), m01(other.m01), m02(other.m02),
-    m10(other.m10), m11(other.m11), m12(other.m12),
-    m20(other.m20), m21(other.m21), m22(other.m22) {}
 
-inline Mat3::Mat3(float _m00, float _m01, float _m02,
-                  float _m10, float _m11, float _m12,
-                  float _m20, float _m21, float _m22) :
-    m00(_m00), m01(_m01), m02(_m02),
-    m10(_m10), m11(_m11), m12(_m12),
-    m20(_m20), m21(_m21), m22(_m22) {}
 
-inline Mat3 Mat3::Identity() {
-    return Mat3(1.0f, 0.0f, 0.0f,
-                0.0f, 1.0f, 0.0f,
-                0.0f, 0.0f, 1.0f);
-}
 
-inline Mat3 Mat3::Zero() {
-    return Mat3();
-}
-
-inline Mat3& Mat3::operator=(const Mat3& other) {
+Mat3& Mat3::operator=(const Mat3& other) {
     if (this != &other) {
         m00 = other.m00; m01 = other.m01; m02 = other.m02;
         m10 = other.m10; m11 = other.m11; m12 = other.m12;
@@ -89,62 +66,62 @@ inline Mat3& Mat3::operator=(const Mat3& other) {
     return *this;
 }
 
-inline Mat3 Mat3::operator+(const Mat3& other) const {
+Mat3 Mat3::operator+(const Mat3& other) const {
     return Mat3(m00 + other.m00, m01 + other.m01, m02 + other.m02,
                 m10 + other.m10, m11 + other.m11, m12 + other.m12,
                 m20 + other.m20, m21 + other.m21, m22 + other.m22);
 }
 
-inline Mat3 Mat3::operator-(const Mat3& other) const {
+Mat3 Mat3::operator-(const Mat3& other) const {
     return Mat3(m00 - other.m00, m01 - other.m01, m02 - other.m02,
                 m10 - other.m10, m11 - other.m11, m12 - other.m12,
                 m20 - other.m20, m21 - other.m21, m22 - other.m22);
 }
 
-inline Mat3 Mat3::operator*(float scalar) const {
+Mat3 Mat3::operator*(float scalar) const {
     return Mat3(m00 * scalar, m01 * scalar, m02 * scalar,
                 m10 * scalar, m11 * scalar, m12 * scalar,
                 m20 * scalar, m21 * scalar, m22 * scalar);
 }
 
-inline Mat3 Mat3::operator/(float scalar) const {
+Mat3 Mat3::operator/(float scalar) const {
     float invScalar = 1.0f / scalar;
     return Mat3(m00 * invScalar, m01 * invScalar, m02 * invScalar,
                 m10 * invScalar, m11 * invScalar, m12 * invScalar,
                 m20 * invScalar, m21 * invScalar, m22 * invScalar);
 }
 
-inline Mat3 Mat3::operator-() const {
+Mat3 Mat3::operator-() const {
     return Mat3(-m00, -m01, -m02,
                 -m10, -m11, -m12,
                 -m20, -m21, -m22);
 }
 
-inline bool Mat3::operator!=(const Mat3& other) const {
+bool Mat3::operator!=(const Mat3& other) const {
     return !(*this == other);
 }
 
-inline float Mat3::trace() const {
+float Mat3::trace() const {
     return m00 + m11 + m22;
 }
 
-inline void Mat3::makeIdentity() {
-    *this = Identity();
+void Mat3::makeIdentity() {
+    *this = Identity3();
 }
 
-inline void Mat3::makeZero() {
-    *this = Zero();
+void Mat3::makeZero() {
+    *this = Zero3();
 }
 
-inline void Mat3::scale(float scalar) {
+void Mat3::scale(float scalar) {
     *this *= scalar;
 }
 
-inline Mat3 operator*(float scalar, const Mat3& matrix) {
+Mat3 operator*(float scalar, const Mat3& matrix) {
     return matrix * scalar;
 }
 
-inline bool Mat3::isEqual(float a, float b, float tolerance) const {
+bool Mat3::isEqual(float a, float b, float tolerance) const {
     return std::abs(a - b) <= tolerance;
 }
 }

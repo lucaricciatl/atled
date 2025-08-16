@@ -1,7 +1,7 @@
 #include "Body.hpp"
 #include "BoundingBox.hpp"
-#include "Mat3.hpp"
-
+#include "Matrix.hpp"
+#include "MathUtils.hpp"
 namespace physics {
 
 namespace{
@@ -23,7 +23,7 @@ Body::Body(std::shared_ptr<Frame> frame)
       mAccumulatedForce{0, 0, 0},
       mAccumulatedMomentum{0, 0, 0},
       mCenterOfMass{0, 0, 0},
-      //mInertia{math::Mat3::Identity()},
+      mInertia{math::Identity<float>(3)},
       mMesh(nullptr) {}
 
 // Set whether the rigid body is static
@@ -68,7 +68,7 @@ void Body::ApplyMomentum(const math::Vector3& axis, const float module) {}
 // Clear all accumulated forces
 void Body::ClearForces() {
     mAccumulatedForce = math::Vector3{ 0, 0, 0 };
-    //mAccumulatedMomentum = math::Vector3{ 0, 0, 0 };
+    mAccumulatedMomentum = math::Vector3{ 0, 0, 0 };
 }
 
 

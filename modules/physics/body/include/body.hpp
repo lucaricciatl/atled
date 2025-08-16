@@ -3,6 +3,7 @@
 #include <memory>
 #include "Frame.hpp"
 #include "Vector3.hpp"
+#include "Matrix.hpp"
 #include "Mesh.hpp"
 #include "BoundingBox.hpp" // Include your BoundingBox class
 
@@ -52,7 +53,8 @@ public:
     math::Vector3 mCenterOfMass;
     float mMass;
     math::Vector3 mVelocity;
-    //math::Mat3 mInertia;
+    math::Vector3 mAngularVelocity;
+    math::Matrix<float> mInertia;
 };
 
 } // namespace physics

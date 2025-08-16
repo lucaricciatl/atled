@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <Vector3.hpp>
+
 namespace math {
 
 // Forward declaration for Vector3 class
@@ -17,11 +18,22 @@ public:
     float m20, m21, m22;
 
     // Constructors
-    Mat3();                                                     // Default constructor (zero matrix)
-    Mat3(const Mat3& other);                                   // Copy constructor
-    Mat3(float m00, float m01, float m02,                      // Constructor from 9 values
-         float m10, float m11, float m12,
-         float m20, float m21, float m22);
+    Mat3() : 
+        m00(0.0f), m01(0.0f), m02(0.0f),
+        m10(0.0f), m11(0.0f), m12(0.0f),
+        m20(0.0f), m21(0.0f), m22(0.0f) {}
+
+    Mat3(const Mat3& other) :
+        m00(other.m00), m01(other.m01), m02(other.m02),
+        m10(other.m10), m11(other.m11), m12(other.m12),
+        m20(other.m20), m21(other.m21), m22(other.m22) {}
+
+    Mat3(float _m00, float _m01, float _m02,
+                      float _m10, float _m11, float _m12,
+                      float _m20, float _m21, float _m22) :
+        m00(_m00), m01(_m01), m02(_m02),
+        m10(_m10), m11(_m11), m12(_m12),
+        m20(_m20), m21(_m21), m22(_m22) {}
     Mat3(const Vector3& col0, const Vector3& col1, const Vector3& col2, bool asColumns = true);
     explicit Mat3(const Vector3& diagonal);  // Diagonal matrix from vector
 
@@ -40,9 +52,7 @@ public:
     Mat3 withRow(int row, const Vector3& newRow) const;
     Mat3 withColumn(int col, const Vector3& newCol) const;
 
-    // Static factory methods
-    static Mat3 Identity();                                    // Create identity matrix
-    static Mat3 Zero();                                        // Create zero matrix
+    // Create zero matrix
     static Mat3 Scale(float sx, float sy, float sz = 1.0f);   // Create scaling matrix
     static Mat3 RotationX(float angleRad);                    // Create rotation matrix around X-axis
     static Mat3 RotationY(float angleRad);                    // Create rotation matrix around Y-axis
@@ -148,16 +158,26 @@ public:
     
     // Interpolation
     static Mat3 lerp(const Mat3& a, const Mat3& b, float t);
-
     // Constants
     static const Mat3 IDENTITY;
     static const Mat3 ZERO;
-    static const float MEPSILON;
 
 private:
     // Helper methods
     float minor(int row, int col) const;                       // Calculate minor for determinant calculation
     bool isEqual(float a, float b, float tolerance) const;     // Floating point comparison helper
 };
+
+
+// Static factory methods
+inline static Mat3 Identity3() {
+    return Mat3(1.0f, 0.0f, 0.0f,
+                0.0f, 1.0f, 0.0f,
+                0.0f, 0.0f, 1.0f);
+}
+
+inline static Mat3 Zero3() {
+    return Mat3();
+}
 
 } // namespace math
