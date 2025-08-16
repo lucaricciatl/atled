@@ -12,21 +12,22 @@ enum LightImplType {
 
 class LightFactory {
 public:
-    ~LightFactory(){};
+    ~LightFactory(){
+    };
+
     // Create a Light. Arguments can vary depending on your needs.
     static std::shared_ptr<Light> CreateLight(LightImplType aImplType){
-        //    auto afs= RaylibShaderFactory();
-        //    std::unique_ptr<IShader> shaderPtr = afs.CreateShader();
-
-        //    RaylibShader* sh = dynamic_cast<RaylibShader*>(shaderPtr.get());
-
-        //    // Corrected version:
-        //    sh->LoadFromFiles("C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.vs",
-        //              "C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.fs");
-        // int ambientLoc = GetShaderLocation(sh->GetShader(), "ambient");
-        // float ambientColor[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
-        // SetShaderValue(sh->GetShader(), ambientLoc, ambientColor, raylib::SHADER_UNIFORM_VEC4);
-
+        RaylibShaderFactory shaderFactory;
+        auto shader = shaderFactory.CreateShader();
+        RaylibShader* raylibshader = dynamic_cast<RaylibShader*>(shader.get());
+        // Corrected version:
+        raylibshader->LoadFromFiles("C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.vs",
+                      "C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.fs");
+        int ambientLoc = GetShaderLocation(raylibshader->GetShader(), "ambient");
+        //raylibshader->GetShader().locs[11] = raylibshader->GetShaderLocation(raylibshader->GetShader(), "viewPos");
+        float ambientColor[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
+        SetShaderValue(raylibshader->GetShader(), ambientLoc, ambientColor, raylib::SHADER_UNIFORM_VEC4);
+        
         switch (aImplType) {
             case LightImplType::RaylibLightImpl:
                 return std::make_shared<RaylibLight>();
@@ -34,7 +35,8 @@ public:
                 // Add more cases here if you have other LightImplType values
                 // case LightImplType::someOther:
                 //     return new SomeOtherLight();
-
+            default:
+                return std::make_shared<RaylibLight>();
             };
         }   
     };

@@ -22,7 +22,7 @@ target_link_libraries(${LIB_NAME} PUBLIC
 )
 
 
-set_target_properties(${LIB_NAME} PROPERTIES FOLDER "modules/graphics")
+set_target_properties(${LIB_NAME} PROPERTIES FOLDER "modules")
 # Optionally link this library with other dependencies
 # target_link_libraries(${LIB_NAME} <other_dependencies>)
 set(${LIB_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)  # Path to include directory

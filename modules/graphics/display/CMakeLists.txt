@@ -12,9 +12,9 @@ add_library(${LIB_NAME} ${SOURCES})
 
 # Include directories for this library
 target_include_directories(${LIB_NAME} PUBLIC 
-${CMAKE_CURRENT_SOURCE_DIR}/interface   # Include local project headers
-    ${CMAKE_CURRENT_SOURCE_DIR}/include   # Include local project headers
-    ${RAYLIB_INCLUDE_DIR}                 # Include raylib headers
+    ${CMAKE_CURRENT_SOURCE_DIR}/interface       # Include local project headers
+    ${CMAKE_CURRENT_SOURCE_DIR}/include         # Include local project headers
+    ${RAYLIB_INCLUDE_DIR}                       # Include raylib headers
 )
 
 # Link libraries for this target
@@ -30,4 +30,4 @@ set(${LIB_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)  # Path to incl
 set(${LIB_NAME}_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)          # Path to library directory
 
 
-set_target_properties(${LIB_NAME} PROPERTIES FOLDER "modules")
+set_target_properties(${LIB_NAME} PROPERTIES FOLDER "modules/graphics")

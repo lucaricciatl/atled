@@ -1021,7 +1021,26 @@ void UpdateLightValues(raylib::Shader shader, Light light) {
 
 Light CreateLight(int type, math::Vector3 position, math::Vector3 target, ::Color color,
                                 ::Shader shader) {
-    Light light = CreateLight(type,position,target,color,shader);
+    auto raypos = toRaylibVector3(position);
+    auto raypos2 = toRaylibVector3(target);
+    Light light = { 0 };
+
+    light.enabled = true;
+    light.type = type;
+    light.position = raypos;
+    light.target = raypos2;
+    light.color = color;
+
+    // NOTE: Lighting shader naming must be the provided ones
+    light.enabledLoc = GetShaderLocation(shader, TextFormat("lights.enabled"));
+    light.typeLoc = GetShaderLocation(shader, TextFormat("lights.type"));
+    light.positionLoc = GetShaderLocation(shader, TextFormat("lights.position"));
+    light.targetLoc = GetShaderLocation(shader, TextFormat("lights.target"));
+    light.colorLoc = GetShaderLocation(shader, TextFormat("lights.color"));
+
+    UpdateLightValues(shader, light);
+        
+
     return light;
 }
 
