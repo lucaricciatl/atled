@@ -5,6 +5,8 @@
 
 #include <iostream>
 #include <Vector3.hpp>
+#include <Matrix.hpp>
+
 namespace math{
 
 class Quaternion {
@@ -58,6 +60,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Quaternion& q);
 
     static Quaternion FromAxisAngle(double angle, const double axis[3]);
+    void Rotate(double wx, double wy, double wz, double dt);
 };
 
 } // namespace physics

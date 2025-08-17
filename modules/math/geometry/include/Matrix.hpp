@@ -162,6 +162,7 @@ public:
     
     // ==================== UTILITY FUNCTIONS ====================
     
+    
     /**
      * Create identity matrix
      */
@@ -172,7 +173,68 @@ public:
         }
         return result;
     }
-    
+
+/**
+ * Same as above, but accepts a vector of a different (convertible) value type U.
+ * Values are static_cast to T.
+ */
+template <class U>
+static Matrix FromVector(const std::vector<U>& v, bool asColumn = true) {
+    const size_t n = v.size();
+    if (n == 0) {
+        return Matrix(); // empty by convention
+    }
+    Matrix M(asColumn ? n : 1, asColumn ? 1 : n);
+    if (asColumn) {
+        for (size_t i = 0; i < n; ++i) M(i, 0) = static_cast<T>(v[i]);
+    } else {
+        for (size_t j = 0; j < n; ++j) M(0, j) = static_cast<T>(v[j]);
+    }
+    return M;
+}
+    /**
+ * Create a matrix with 'diagonal' placed on the k-th diagonal (minimal shape).
+ * If diagonal is empty and k == 0, returns an empty matrix (0×0).
+ * Otherwise, shape is:
+ *   rows = diagonal.size() + max(0, -k)
+ *   cols = diagonal.size() + max(0,  k)
+ * All non-diagonal entries are T{}.
+ */
+static Matrix DiagonalMatrix(const std::vector<T>& diagonal, int k = 0) {
+    const size_t n = diagonal.size();
+    const size_t minRows = n + (k < 0 ? static_cast<size_t>(-k) : size_t{0});
+    const size_t minCols = n + (k > 0 ? static_cast<size_t>( k) : size_t{0});
+
+    // Respect class invariant: constructor disallows 0×0, so handle explicitly
+    if (minRows == 0 || minCols == 0) {
+        return Matrix(); // empty
+    }
+
+    Matrix M(minRows, minCols); // zero-initialized
+    size_t i = (k < 0) ? static_cast<size_t>(-k) : size_t{0};
+    size_t j = (k > 0) ? static_cast<size_t>( k) : size_t{0};
+
+    for (size_t t = 0; t < n && i < minRows && j < minCols; ++t, ++i, ++j) {
+        M(i, j) = diagonal[t];
+    }
+    return M;
+}
+/**
+ * Get a single element (i, j) with bounds checking.
+ * Returns a const reference; overload returns non-const reference.
+ */
+const T& GetElement(size_t i, size_t j) const {
+    if (i >= rows_ || j >= cols_) {
+        throw std::out_of_range("GetElement: index out of range");
+    }
+    return (*this)(i, j);
+}
+T& GetElement(size_t i, size_t j) {
+    if (i >= rows_ || j >= cols_) {
+        throw std::out_of_range("GetElement: index out of range");
+    }
+    return (*this)(i, j);
+}
     /**
      * Create zero matrix
      */
@@ -673,5 +735,10 @@ public:
         return std::to_string(rows_) + "×" + std::to_string(cols_);
     }
 };
+
+
+
+
+
 
 }

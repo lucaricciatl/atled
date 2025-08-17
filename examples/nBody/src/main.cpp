@@ -58,6 +58,29 @@ int main() {
         entities.push_back(entity);
     }
 
+    auto entity = coreEngine->CreateEntity();
+
+        // Add FrameComponent
+        auto frameComponent = entity->AddComponent<FrameComponent>();
+        if (frameComponent) {
+            frameComponent->SetPosition(400,600, 0.0f);  // Set random position
+        }
+
+        // Add ShapeComponent
+        auto shapeComponent = entity->AddComponent<ShapeComponent>();
+        if (shapeComponent) {
+            shapeComponent->SetModel<Circle>();
+            auto circle = shapeComponent->GetModel<Circle>();
+            if (circle) {
+                circle->SetRadius(60.0f);  // Set a fixed radius for all entities
+                circle->SetColor(
+                    graphics::Color(distColor(gen), distColor(gen), distColor(gen), 0.8));  // Set random color
+            }
+        }
+
+        // Add entity to the list
+        entities.push_back(entity);
+
     // Print how many entities were created
     std::cout << "Created " << entities.size() << " entities." << std::endl;
 

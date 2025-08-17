@@ -125,4 +125,30 @@ Quaternion Quaternion::FromAxisAngle(double angle, const double axis[3]) {
         axis[2] * sinHalfAngle
     );
 }
+
+void Quaternion::Rotate(double wx, double wy, double wz, double dt){
+    std::vector<double> v;
+    v.emplace_back(wx);
+    v.emplace_back(wy);
+    v.emplace_back(wz);
+    std::vector<double> quat;
+    quat.emplace_back(w);
+    quat.emplace_back(x);
+    quat.emplace_back(y);
+    quat.emplace_back(z);
+    auto skewMat = math::Matrix<double>::identity(4);
+    auto qMat = math::Matrix<double>::FromVector(quat);
+    auto Id = math::Matrix<double>::identity(4);
+    auto dt_half = dt/2;
+    qMat.print();
+    Id.print();
+    skewMat.print();
+    auto W = Id + skewMat * dt_half;
+    auto result = W * qMat;
+    w = result.GetElement(0,0);
+    x = result.GetElement(0,1);
+    y = result.GetElement(0,2);
+    z = result.GetElement(0,3);
+}
+
 } 

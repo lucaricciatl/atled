@@ -1,0 +1,19 @@
+{
+    "cameraType": "Raylib",
+    "graphicsConfig": {
+        "antialiasing": 0,
+        "fullscreen": false,
+        "height": 600,
+        "vsync": true,
+        "width": 800,
+        "windowConfig": [
+            "FLAG_VSYNC_HINT"
+        ]
+    },
+    "graphicsType": "Raylib",
+    "keyboardType": "Raylib",
+    "mouseType": "Raylib",
+    "resourceManagerType": "Default",
+    "targetFramerate": 60,
+    "worldType": "World3D"
+}

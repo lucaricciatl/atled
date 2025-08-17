@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "name": "(lldb-dap) Debug",
+            "type": "lldb-dap",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/examples/NBody/NBody",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+
+        },
+        {
+            "name": "C/C++: clang build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "C/C++: clang build active file",
+            "miDebuggerPath": "/opt/homebrew/bin/gdb"
+        }
+    ],
+    "version": "2.0.0"
+}

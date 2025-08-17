@@ -24,13 +24,13 @@ int main() {
     mc->SetParticleLifetime(10);
     mc->SetParticlesCollision(false);
     mc->SetParticleStartSize(0.1);
-    mc->SetNumberOfParticles(5000);
+    mc->SetNumberOfParticles(1);
     auto entity2 = coreEngine->CreateEntity();
     entity2->GetComponent<FrameComponent>()->SetPosition(0,0,20);
     auto mc2 = entity2->AddComponent<GravitationalFieldComponent>();
     mc2->SetStrength(40);
     mc2->SetRadius(0.4);
-    mc2->AddEntitiesFromList(entity->GetChildren());
+    //mc2->AddEntitiesFromList(entity->GetChildren());
     auto entitycam = coreEngine->CreateEntity();
     entitycam->AddComponent<FreeCameraComponent>();
     coreEngine->Start();
