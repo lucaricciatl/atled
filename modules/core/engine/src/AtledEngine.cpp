@@ -68,6 +68,10 @@ void AtledEngine::Start() {
         lastTime = currentTime;
         Update(deltaTime);
         std::this_thread::sleep_for(std::chrono::milliseconds(16));  // Sleep for ~16ms (60 FPS)
+        if (serviceProvider->GetInputManager()->IsKeyDown(raylib::KEY_ESCAPE) && serviceProvider->GetInputManager()->IsKeyDown(raylib::KEY_LEFT_CONTROL)) {  // EXIT
+            Shutdown();
+            break;
+        }
     }
 
     Shutdown();
@@ -77,6 +81,7 @@ void AtledEngine::UpdateSystems(float deltaTime) {
     for (auto& system : systems) {
         system->Update(deltaTime);
     }
+
 }
 
 void AtledEngine::Shutdown() {
@@ -116,4 +121,5 @@ void AtledEngine::UpdateEntities(double deltaTime) {
 void AtledEngine::Update(double deltatime) {
     UpdateSystems(deltatime);
     UpdateEntities(deltatime);
+
 }

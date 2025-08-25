@@ -76,7 +76,6 @@ void PhysicsManager::ComputeCollisions() {
     }
 }
 
-
 void PhysicsManager::AddBody(std::shared_ptr<Body> aBody) { bodies.emplace_back(aBody); }
 
 void PhysicsManager::RemoveBody(const std::shared_ptr<Body>& aBody) {

@@ -48,7 +48,7 @@ public:
     bool IsMouseButtonDown(int button) const;
     bool IsMouseButtonReleased(int button) const;
     bool IsMouseButtonUp(int button) const;
-
+    //bool IsHardEscapeCombinationEnabled(){} const;
     float GetMouseDeltaX() const;
     float GetMouseDeltaY() const;
 
