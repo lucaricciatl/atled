@@ -22,6 +22,8 @@ void RigidBody::UpdatePhysics(double deltaTime) {
         mAccumulatedForce += math::Vector3(0, mAccumulatedForce.GetY() - mMass * g, 0);
     }
     math::Vector3 acceleration = mAccumulatedForce / mMass; // F = ma => a = F/m
+    mVelocity += acceleration * deltaTime; // Update velocity
+
     auto InvInertia = math::Pinv(mInertia);
     math::Matrix<float> momentumVector(1, 3);
     momentumVector(0,0) = mAccumulatedMomentum.GetX();
@@ -29,7 +31,7 @@ void RigidBody::UpdatePhysics(double deltaTime) {
     momentumVector(0,2) = mAccumulatedMomentum.GetZ();
     auto AngularAcceleration = momentumVector * InvInertia;
     math::Vector3 AngularVelocity( AngularAcceleration(0,0)* deltaTime, AngularAcceleration(0,1)* deltaTime , AngularAcceleration(0,2)* deltaTime) ;
-    //mAngularVelocity += angularAcceleration * deltaTime;
+    //mAngularVelocity = AngularAcceleration * deltaTime;
     mFrame->translate(mVelocity.GetX() * deltaTime, mVelocity.GetY() * deltaTime,
                       mVelocity.GetZ() * deltaTime);  // Update position
     //auto orientation = mFrame->GetOrientation();

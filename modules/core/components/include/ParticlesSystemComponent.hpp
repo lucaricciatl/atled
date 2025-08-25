@@ -77,7 +77,7 @@ class ParticleComponent : public Component {
 class ParticlesSystemComponent : public Component {
    public:
     ParticlesSystemComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> aServiceProvider,
-                             int aNumParticles = 1000, float aStartSize = 0.01, float aEndSize = 0.01,
+                             int aNumParticles = 0, float aStartSize = 0.01, float aEndSize = 0.01,
                              float aLifetime = 5.0f, bool aCollision = false, bool aGravity = false, float aSpeed = 1,
                              const graphics::Color& aColor = getColor("Elegant Soft Gray"))
         : Component(aOwner),  // Call base class constructor
