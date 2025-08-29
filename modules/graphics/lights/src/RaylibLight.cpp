@@ -8,7 +8,7 @@ RaylibLight::RaylibLight(raylib::LightType lightType, const math::Vector3& posit
                         graphics::Color color,
                         RaylibShader shader)
 {
-    //raylib::CreateLight(raylib::LIGHT_POINT, position , math::Vector3(0,0,0), color.toRaylibColor() , shader.GetShader());
+    auto mLight = raylib::CreateLight(lightType, position , math::Vector3(0,0,0), color.toRaylibColor() , shader.GetShader());
 }
 
 RaylibLight::RaylibLight()

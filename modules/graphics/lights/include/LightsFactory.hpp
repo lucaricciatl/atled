@@ -4,7 +4,7 @@
 #include "Light.hpp"
 #include "RaylibLight.hpp"
 #include "ShaderFactory.hpp"
-
+#include "Color.hpp"
 namespace rendering{
 enum LightImplType {
     RaylibLightImpl,
@@ -18,25 +18,27 @@ public:
     // Create a Light. Arguments can vary depending on your needs.
     static std::shared_ptr<Light> CreateLight(LightImplType aImplType){
         RaylibShaderFactory shaderFactory;
-        auto shader = shaderFactory.CreateShader();
-        RaylibShader* raylibshader = dynamic_cast<RaylibShader*>(shader.get());
+        auto raylibshader = RaylibShader();
         // Corrected version:
-        raylibshader->LoadFromFiles("C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.vs",
+        raylibshader.LoadFromFiles("C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.vs",
                       "C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.fs");
-        int ambientLoc = GetShaderLocation(raylibshader->GetShader(), "ambient");
-        //raylibshader->GetShader().locs[11] = raylibshader->GetShaderLocation(raylibshader->GetShader(), "viewPos");
-        float ambientColor[4] = { 0.1f, 0.1f, 0.1f, 1.0f };
-        SetShaderValue(raylibshader->GetShader(), ambientLoc, ambientColor, raylib::SHADER_UNIFORM_VEC4);
-        
+                std::string loc = "ambient";
+        int ambientLoc = GetShaderLocation(raylibshader.GetShader(), "matModel");
+        raylibshader.GetShader().locs[11] = GetShaderLocation(raylibshader.GetShader(), "viewPos");
+        float ambientColor[4] = { 0.1f, 0.1f, 0.8f, 1.0f };
+        SetShaderValue(raylibshader.GetShader(), ambientLoc, ambientColor, raylib::SHADER_UNIFORM_VEC4);
+        auto color = graphics::Color(1.3,0.2,0.1,1);
+        auto position = math::Vector3(0.1,4,4); 
         switch (aImplType) {
             case LightImplType::RaylibLightImpl:
-                return std::make_shared<RaylibLight>();
+                //auto rlight = RaylibLight(raylib::LIGHT_POINT,position,color,raylibshader.GetShader());
+                return nullptr;
 
                 // Add more cases here if you have other LightImplType values
                 // case LightImplType::someOther:
                 //     return new SomeOtherLight();
             default:
-                return std::make_shared<RaylibLight>();
+                return nullptr;
             };
         }   
     };

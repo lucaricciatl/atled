@@ -19,7 +19,7 @@ public:
     ~RaylibLight();
 
 private:
-    
+    raylib::Light mLight;
 };
 
 }

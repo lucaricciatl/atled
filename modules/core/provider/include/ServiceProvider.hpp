@@ -12,6 +12,7 @@
 class AtledEngine;
 
 class ServiceProvider {
+
    public:
     ServiceProvider();   // Constructor declaration
     ~ServiceProvider();  // Destructor declaration

@@ -10,12 +10,13 @@
 
 class LightComponent : public Component 
 {
+
 public:
-    LightComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> sp)
+    LightComponent(Entity* aOwner, std::shared_ptr<ServiceProvider> aServiceProvider)
         : Component(aOwner)
     {
         // Optionally initialize the light
-
+        auto graphicManager = aServiceProvider.get()->GetGraphicManager();
         auto mLight = rendering::LightFactory::CreateLight(rendering::LightImplType::RaylibLightImpl);
         if (mLight)
         {
