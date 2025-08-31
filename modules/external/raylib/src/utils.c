@@ -10,7 +10,7 @@
 *
 *   LICENSE: zlib/libpng
 *
-*   Copyright (c) 2014-2024 Ramon Santamaria (@raysan5)
+*   Copyright (c) 2014-2025 Ramon Santamaria (@raysan5)
 *
 *   This software is provided "as-is", without any express or implied warranty. In no event
 *   will the authors be held liable for any damages arising from the use of this software.
@@ -75,7 +75,6 @@ void SetLoadFileDataCallback(LoadFileDataCallback callback) { loadFileData = cal
 void SetSaveFileDataCallback(SaveFileDataCallback callback) { saveFileData = callback; }  // Set custom file data saver
 void SetLoadFileTextCallback(LoadFileTextCallback callback) { loadFileText = callback; }  // Set custom file text loader
 void SetSaveFileTextCallback(SaveFileTextCallback callback) { saveFileText = callback; }  // Set custom file text saver
-
 
 #if defined(PLATFORM_ANDROID)
 static AAssetManager *assetManager = NULL;          // Android assets manager pointer
@@ -309,7 +308,7 @@ bool ExportDataAsCode(const unsigned char *data, int dataSize, const char *fileN
     byteCount += sprintf(txtData + byteCount, "// more info and bugs-report:  github.com/raysan5/raylib                              //\n");
     byteCount += sprintf(txtData + byteCount, "// feedback and support:       ray[at]raylib.com                                      //\n");
     byteCount += sprintf(txtData + byteCount, "//                                                                                    //\n");
-    byteCount += sprintf(txtData + byteCount, "// Copyright (c) 2022-2024 Ramon Santamaria (@raysan5)                                //\n");
+    byteCount += sprintf(txtData + byteCount, "// Copyright (c) 2022-2025 Ramon Santamaria (@raysan5)                                //\n");
     byteCount += sprintf(txtData + byteCount, "//                                                                                    //\n");
     byteCount += sprintf(txtData + byteCount, "////////////////////////////////////////////////////////////////////////////////////////\n\n");
 
@@ -406,7 +405,7 @@ void UnloadFileText(char *text)
 }
 
 // Save text data to file (write), string must be '\0' terminated
-bool SaveFileText(const char *fileName, char *text)
+bool SaveFileText(const char *fileName, const char *text)
 {
     bool success = false;
 

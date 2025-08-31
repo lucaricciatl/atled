@@ -1,7 +1,9 @@
 /*******************************************************************************************
 *
-*   raylib [core] example - Doing skinning on the gpu using a vertex shader
-* 
+*   raylib [models] example - gpu skinning
+*
+*   Example complexity rating: [★★★☆] 3/4
+*
 *   Example originally created with raylib 4.5, last time updated with raylib 4.5
 *
 *   Example contributed by Daniel Holden (@orangeduck) and reviewed by Ramon Santamaria (@raysan5)
@@ -9,7 +11,9 @@
 *   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
 *   BSD-like license that allows static linking with closed source software
 *
-*   Copyright (c) 2024 Daniel Holden (@orangeduck)
+*   Copyright (c) 2024-2025 Daniel Holden (@orangeduck)
+*
+*   Note: Due to limitations in the Apple OpenGL driver, this feature does not work on MacOS
 *
 ********************************************************************************************/
 
@@ -33,7 +37,7 @@ int main(void)
     const int screenWidth = 800;
     const int screenHeight = 450;
 
-    InitWindow(screenWidth, screenHeight, "raylib [models] example - GPU skinning");
+    InitWindow(screenWidth, screenHeight, "raylib [models] example - gpu skinning");
 
     // Define the camera to look into our 3d world
     Camera camera = { 0 };
@@ -45,13 +49,13 @@ int main(void)
 
     // Load gltf model
     Model characterModel = LoadModel("resources/models/gltf/greenman.glb"); // Load character model
-    
+
     // Load skinning shader
     Shader skinningShader = LoadShader(TextFormat("resources/shaders/glsl%i/skinning.vs", GLSL_VERSION),
                                        TextFormat("resources/shaders/glsl%i/skinning.fs", GLSL_VERSION));
-    
+
     characterModel.materials[1].shader = skinningShader;
-    
+
     // Load gltf model animations
     int animsCount = 0;
     unsigned int animIndex = 0;
@@ -71,7 +75,7 @@ int main(void)
         // Update
         //----------------------------------------------------------------------------------
         UpdateCamera(&camera, CAMERA_THIRD_PERSON);
-        
+
         // Select current animation
         if (IsKeyPressed(KEY_T)) animIndex = (animIndex + 1)%animsCount;
         else if (IsKeyPressed(KEY_G)) animIndex = (animIndex + animsCount - 1)%animsCount;
@@ -79,7 +83,8 @@ int main(void)
         // Update model animation
         ModelAnimation anim = modelAnimations[animIndex];
         animCurrentFrame = (animCurrentFrame + 1)%anim.frameCount;
-        UpdateModelAnimationBoneMatrices(characterModel, anim, animCurrentFrame);
+        characterModel.transform = MatrixTranslate(position.x, position.y, position.z);
+        UpdateModelAnimationBones(characterModel, anim, animCurrentFrame);
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -89,13 +94,12 @@ int main(void)
             ClearBackground(RAYWHITE);
 
             BeginMode3D(camera);
-            
-                // Draw character
-                characterModel.transform = MatrixTranslate(position.x, position.y, position.z);
-                UpdateModelAnimationBoneMatrices(characterModel, anim, animCurrentFrame);
+
+                // Draw character mesh, pose calculation is done in shader (GPU skinning)
                 DrawMesh(characterModel.meshes[0], characterModel.materials[1], characterModel.transform);
 
                 DrawGrid(10, 1.0f);
+
             EndMode3D();
 
             DrawText("Use the T/G to switch animation", 10, 10, 20, GRAY);
@@ -106,11 +110,11 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
-    UnloadModelAnimations(modelAnimations, animsCount);
-    UnloadModel(characterModel);         // Unload character model and meshes/material
-    UnloadShader(skinningShader);
-    
-    CloseWindow();              // Close window and OpenGL context
+    UnloadModelAnimations(modelAnimations, animsCount); // Unload model animation
+    UnloadModel(characterModel);    // Unload model and meshes/material
+    UnloadShader(skinningShader);   // Unload GPU skinning shader
+
+    CloseWindow();                  // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
     return 0;

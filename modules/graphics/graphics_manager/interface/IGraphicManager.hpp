@@ -15,7 +15,6 @@
 
 namespace graphics {
 
-
 class IGraphicManager {
 public:
     virtual ~IGraphicManager() = default;

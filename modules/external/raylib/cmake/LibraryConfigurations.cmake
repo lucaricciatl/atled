@@ -69,6 +69,14 @@ elseif (${PLATFORM} MATCHES "Android")
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
     list(APPEND raylib_sources ${ANDROID_NDK}/sources/android/native_app_glue/android_native_app_glue.c)
     include_directories(${ANDROID_NDK}/sources/android/native_app_glue)
+
+    # NOTE: We remove '-Wl,--no-undefined' (set by default) as it conflicts with '-Wl,-undefined,dynamic_lookup' needed 
+    #       for compiling with the missing 'void main(void)' declaration in `android_main()`.
+    #       We also remove other unnecessary or problematic flags.
+
+    string(REPLACE "-Wl,--no-undefined -Qunused-arguments" "" CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}")
+    string(REPLACE "-static-libstdc++" "" CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}")
+
     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--exclude-libs,libatomic.a -Wl,--build-id -Wl,-z,noexecstack -Wl,-z,relro -Wl,-z,now -Wl,--warn-shared-textrel -Wl,--fatal-warnings -u ANativeActivity_onCreate -Wl,-undefined,dynamic_lookup")
 
     find_library(OPENGL_LIBRARY OpenGL)
@@ -93,16 +101,44 @@ elseif ("${PLATFORM}" MATCHES "DRM")
     set(LIBS_PRIVATE ${GLESV2} ${EGL} ${DRM} ${GBM} atomic pthread m dl)
 
 elseif ("${PLATFORM}" MATCHES "SDL")
-    find_package(SDL2 REQUIRED)
-    set(PLATFORM_CPP "PLATFORM_DESKTOP_SDL")
-    set(LIBS_PRIVATE SDL2::SDL2)
+	# First, check if SDL is included as a subdirectory
+	if(TARGET SDL3::SDL3)
+		message(STATUS "Using SDL3 from subdirectory")
+		set(PLATFORM_CPP "PLATFORM_DESKTOP_SDL")
+		set(LIBS_PRIVATE SDL3::SDL3)
+		add_compile_definitions(USING_SDL3_PROJECT)
+	elseif(TARGET SDL2::SDL2)
+		message(STATUS "Using SDL2 from subdirectory")
+		set(PLATFORM_CPP "PLATFORM_DESKTOP_SDL")
+		set(LIBS_PRIVATE SDL2::SDL2)
+		add_compile_definitions(USING_SDL2_PROJECT)
+	else()
+		# No SDL added via add_subdirectory(), try find_package()
+		message(STATUS "No SDL target from subdirectory, searching via find_package()...")
 
+		# First try SDL3
+		find_package(SDL3 QUIET)
+		if(SDL3_FOUND)
+			message(STATUS "Found SDL3 via find_package()")
+			set(PLATFORM_CPP "PLATFORM_DESKTOP_SDL")
+			set(LIBS_PRIVATE SDL3::SDL3)
+			add_compile_definitions(USING_SDL3_PACKAGE)
+		else()
+			# Fallback to SDL2
+			find_package(SDL2 REQUIRED)
+			message(STATUS "Found SDL2 via find_package()")
+			set(PLATFORM_CPP "PLATFORM_DESKTOP_SDL")
+			set(LIBS_PRIVATE SDL2::SDL2)
+			add_compile_definitions(USING_SDL2_PACKAGE)
+		endif()
+	endif()	
 endif ()
 
 if (NOT ${OPENGL_VERSION} MATCHES "OFF")
-    set(${SUGGESTED_GRAPHICS} "${GRAPHICS}")
+    set(SUGGESTED_GRAPHICS "${GRAPHICS}")
+
     if (${OPENGL_VERSION} MATCHES "4.3")
-		set(GRAPHICS "GRAPHICS_API_OPENGL_43")
+        set(GRAPHICS "GRAPHICS_API_OPENGL_43")
     elseif (${OPENGL_VERSION} MATCHES "3.3")
         set(GRAPHICS "GRAPHICS_API_OPENGL_33")
     elseif (${OPENGL_VERSION} MATCHES "2.1")
@@ -114,8 +150,8 @@ if (NOT ${OPENGL_VERSION} MATCHES "OFF")
     elseif (${OPENGL_VERSION} MATCHES "ES 3.0")
         set(GRAPHICS "GRAPHICS_API_OPENGL_ES3")
     endif ()
-    if ("${SUGGESTED_GRAPHICS}" AND NOT "${SUGGESTED_GRAPHICS}" STREQUAL "${GRAPHICS}")
-        message(WARNING "You are overriding the suggested GRAPHICS=${SUGGESTED_GRAPHICS} with ${GRAPHICS}! This may fail")
+    if (NOT "${SUGGESTED_GRAPHICS}" STREQUAL "" AND NOT "${SUGGESTED_GRAPHICS}" STREQUAL "${GRAPHICS}")
+        message(WARNING "You are overriding the suggested GRAPHICS=${SUGGESTED_GRAPHICS} with ${GRAPHICS}! This may fail.")
     endif ()
 endif ()
 

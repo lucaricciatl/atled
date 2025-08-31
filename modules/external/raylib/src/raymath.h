@@ -1,6 +1,6 @@
 /**********************************************************************************************
 *
-*   raymath v1.5 - Math functions to work with Vector2, Vector3, Matrix and Quaternions
+*   raymath v2.0 - Math functions to work with Vector2, Vector3, Matrix and Quaternions
 *
 *   CONVENTIONS:
 *     - Matrix structure is defined as row-major (memory layout) but parameters naming AND all
@@ -12,7 +12,7 @@
 *     - Functions are always self-contained, no function use another raymath function inside,
 *       required code is directly re-implemented inside
 *     - Functions input parameters are always received by value (2 unavoidable exceptions)
-*     - Functions use always a "result" variable for return
+*     - Functions use always a "result" variable for return (except C++ operators)
 *     - Functions are always defined inline
 *     - Angles are always in radians (DEG2RAD/RAD2DEG macros provided for convenience)
 *     - No compound literals used to make sure libray is compatible with C++
@@ -27,10 +27,12 @@
 *           Define static inline functions code, so #include header suffices for use.
 *           This may use up lots of memory.
 *
+*       #define RAYMATH_DISABLE_CPP_OPERATORS
+*           Disables C++ operator overloads for raymath types.
 *
 *   LICENSE: zlib/libpng
 *
-*   Copyright (c) 2015-2024 Ramon Santamaria (@raysan5)
+*   Copyright (c) 2015-2025 Ramon Santamaria (@raysan5)
 *
 *   This software is provided "as-is", without any express or implied warranty. In no event
 *   will the authors be held liable for any damages arising from the use of this software.
@@ -302,6 +304,14 @@ RMAPI float Vector2DotProduct(Vector2 v1, Vector2 v2)
     return result;
 }
 
+// Calculate two vectors cross product
+RMAPI float Vector2CrossProduct(Vector2 v1, Vector2 v2)
+{
+    float result = (v1.x*v2.y - v1.y*v2.x);
+
+    return result;
+}
+
 // Calculate distance between two vectors
 RMAPI float Vector2Distance(Vector2 v1, Vector2 v2)
 {
@@ -318,8 +328,9 @@ RMAPI float Vector2DistanceSqr(Vector2 v1, Vector2 v2)
     return result;
 }
 
-// Calculate angle between two vectors
-// NOTE: Angle is calculated from origin point (0, 0)
+// Calculate the signed angle from v1 to v2, relative to the origin (0, 0)
+// NOTE: Coordinate system convention: positive X right, positive Y down
+// positive angles appear clockwise, and negative angles appear counterclockwise
 RMAPI float Vector2Angle(Vector2 v1, Vector2 v2)
 {
     float result = 0.0f;
@@ -1457,19 +1468,35 @@ RMAPI int Vector4Equals(Vector4 p, Vector4 q)
 RMAPI float MatrixDeterminant(Matrix mat)
 {
     float result = 0.0f;
-
+/*
     // Cache the matrix values (speed optimization)
     float a00 = mat.m0, a01 = mat.m1, a02 = mat.m2, a03 = mat.m3;
     float a10 = mat.m4, a11 = mat.m5, a12 = mat.m6, a13 = mat.m7;
     float a20 = mat.m8, a21 = mat.m9, a22 = mat.m10, a23 = mat.m11;
     float a30 = mat.m12, a31 = mat.m13, a32 = mat.m14, a33 = mat.m15;
 
+    // NOTE: It takes 72 multiplication to calculate 4x4 matrix determinant
     result = a30*a21*a12*a03 - a20*a31*a12*a03 - a30*a11*a22*a03 + a10*a31*a22*a03 +
              a20*a11*a32*a03 - a10*a21*a32*a03 - a30*a21*a02*a13 + a20*a31*a02*a13 +
              a30*a01*a22*a13 - a00*a31*a22*a13 - a20*a01*a32*a13 + a00*a21*a32*a13 +
              a30*a11*a02*a23 - a10*a31*a02*a23 - a30*a01*a12*a23 + a00*a31*a12*a23 +
              a10*a01*a32*a23 - a00*a11*a32*a23 - a20*a11*a02*a33 + a10*a21*a02*a33 +
              a20*a01*a12*a33 - a00*a21*a12*a33 - a10*a01*a22*a33 + a00*a11*a22*a33;
+*/
+    // Using Laplace expansion (https://en.wikipedia.org/wiki/Laplace_expansion),
+    // previous operation can be simplified to 40 multiplications, decreasing matrix 
+    // size from 4x4 to 2x2 using minors
+
+    // Cache the matrix values (speed optimization)
+    float m0 = mat.m0, m1 = mat.m1, m2 = mat.m2, m3 = mat.m3;
+    float m4 = mat.m4, m5 = mat.m5, m6 = mat.m6, m7 = mat.m7;
+    float m8 = mat.m8, m9 = mat.m9, m10 = mat.m10, m11 = mat.m11;
+    float m12 = mat.m12, m13 = mat.m13, m14 = mat.m14, m15 = mat.m15;
+
+    result = (m0*((m5*(m10*m15 - m11*m14) - m9*(m6*m15 - m7*m14) + m13*(m6*m11 - m7*m10))) -
+        m4*((m1*(m10*m15 - m11*m14) - m9*(m2*m15 - m3*m14) + m13*(m2*m11 - m3*m10))) +
+        m8*((m1*(m6*m15 - m7*m14) - m5*(m2*m15 - m3*m14) + m13*(m2*m7 - m3*m6))) -
+        m12*((m1*(m6*m11 - m7*m10) - m5*(m2*m11 - m3*m10) + m9*(m2*m7 - m3*m6))));
 
     return result;
 }
@@ -2567,7 +2594,13 @@ RMAPI void MatrixDecompose(Matrix mat, Vector3 *translation, Quaternion *rotatio
     if (!FloatEquals(det, 0))
     {
         clone.m0 /= s.x;
+        clone.m4 /= s.x;
+        clone.m8 /= s.x;
+        clone.m1 /= s.y;
         clone.m5 /= s.y;
+        clone.m9 /= s.y;
+        clone.m2 /= s.z;
+        clone.m6 /= s.z;
         clone.m10 /= s.z;
 
         // Extract rotation
@@ -2579,5 +2612,355 @@ RMAPI void MatrixDecompose(Matrix mat, Vector3 *translation, Quaternion *rotatio
         *rotation = QuaternionIdentity();
     }
 }
+
+#if defined(__cplusplus) && !defined(RAYMATH_DISABLE_CPP_OPERATORS)
+
+// Optional C++ math operators
+//-------------------------------------------------------------------------------
+
+// Vector2 operators
+static constexpr Vector2 Vector2Zeros = { 0, 0 };
+static constexpr Vector2 Vector2Ones = { 1, 1 };
+static constexpr Vector2 Vector2UnitX = { 1, 0 };
+static constexpr Vector2 Vector2UnitY = { 0, 1 };
+
+inline Vector2 operator + (const Vector2& lhs, const Vector2& rhs)
+{
+    return Vector2Add(lhs, rhs);
+}
+
+inline const Vector2& operator += (Vector2& lhs, const Vector2& rhs)
+{
+    lhs = Vector2Add(lhs, rhs);
+    return lhs;
+}
+
+inline Vector2 operator - (const Vector2& lhs, const Vector2& rhs)
+{
+    return Vector2Subtract(lhs, rhs);
+}
+
+inline const Vector2& operator -= (Vector2& lhs, const Vector2& rhs)
+{
+    lhs = Vector2Subtract(lhs, rhs);
+    return lhs;
+}
+
+inline Vector2 operator * (const Vector2& lhs, const float& rhs)
+{
+    return Vector2Scale(lhs, rhs);
+}
+
+inline const Vector2& operator *= (Vector2& lhs, const float& rhs)
+{
+    lhs = Vector2Scale(lhs, rhs);
+    return lhs;
+}
+
+inline Vector2 operator * (const Vector2& lhs, const Vector2& rhs)
+{
+    return Vector2Multiply(lhs, rhs);
+}
+
+inline const Vector2& operator *= (Vector2& lhs, const Vector2& rhs)
+{
+    lhs = Vector2Multiply(lhs, rhs);
+    return lhs;
+}
+
+inline Vector2 operator * (const Vector2& lhs, const Matrix& rhs)
+{
+    return Vector2Transform(lhs, rhs);
+}
+
+inline const Vector2& operator *= (Vector2& lhs, const Matrix& rhs)
+{
+    lhs = Vector2Transform(lhs, rhs);
+    return lhs;
+}
+
+inline Vector2 operator / (const Vector2& lhs, const float& rhs)
+{
+    return Vector2Scale(lhs, 1.0f/rhs);
+}
+
+inline const Vector2& operator /= (Vector2& lhs, const float& rhs)
+{
+    lhs = Vector2Scale(lhs, 1.0f/rhs);
+    return lhs;
+}
+
+inline Vector2 operator / (const Vector2& lhs, const Vector2& rhs)
+{
+    return Vector2Divide(lhs, rhs);
+}
+
+inline const Vector2& operator /= (Vector2& lhs, const Vector2& rhs)
+{
+    lhs = Vector2Divide(lhs, rhs);
+    return lhs;
+}
+
+inline bool operator == (const Vector2& lhs, const Vector2& rhs)
+{
+    return FloatEquals(lhs.x, rhs.x) && FloatEquals(lhs.y, rhs.y);
+}
+
+inline bool operator != (const Vector2& lhs, const Vector2& rhs)
+{
+    return !FloatEquals(lhs.x, rhs.x) || !FloatEquals(lhs.y, rhs.y);
+}
+
+// Vector3 operators
+static constexpr Vector3 Vector3Zeros = { 0, 0, 0 };
+static constexpr Vector3 Vector3Ones = { 1, 1, 1 };
+static constexpr Vector3 Vector3UnitX = { 1, 0, 0 };
+static constexpr Vector3 Vector3UnitY = { 0, 1, 0 };
+static constexpr Vector3 Vector3UnitZ = { 0, 0, 1 };
+
+inline Vector3 operator + (const Vector3& lhs, const Vector3& rhs)
+{
+    return Vector3Add(lhs, rhs);
+}
+
+inline const Vector3& operator += (Vector3& lhs, const Vector3& rhs)
+{
+    lhs = Vector3Add(lhs, rhs);
+    return lhs;
+}
+
+inline Vector3 operator - (const Vector3& lhs, const Vector3& rhs)
+{
+    return Vector3Subtract(lhs, rhs);
+}
+
+inline const Vector3& operator -= (Vector3& lhs, const Vector3& rhs)
+{
+    lhs = Vector3Subtract(lhs, rhs);
+    return lhs;
+}
+
+inline Vector3 operator * (const Vector3& lhs, const float& rhs)
+{
+    return Vector3Scale(lhs, rhs);
+}
+
+inline const Vector3& operator *= (Vector3& lhs, const float& rhs)
+{
+    lhs = Vector3Scale(lhs, rhs);
+    return lhs;
+}
+
+inline Vector3 operator * (const Vector3& lhs, const Vector3& rhs)
+{
+    return Vector3Multiply(lhs, rhs);
+}
+
+inline const Vector3& operator *= (Vector3& lhs, const Vector3& rhs)
+{
+    lhs = Vector3Multiply(lhs, rhs);
+    return lhs;
+}
+
+inline Vector3 operator * (const Vector3& lhs, const Matrix& rhs)
+{
+    return Vector3Transform(lhs, rhs);
+}
+
+inline const Vector3& operator *= (Vector3& lhs, const Matrix& rhs)
+{
+    lhs = Vector3Transform(lhs, rhs);
+    return lhs;
+}
+
+inline Vector3 operator / (const Vector3& lhs, const float& rhs)
+{
+    return Vector3Scale(lhs, 1.0f/rhs);
+}
+
+inline const Vector3& operator /= (Vector3& lhs, const float& rhs)
+{
+    lhs = Vector3Scale(lhs, 1.0f/rhs);
+    return lhs;
+}
+
+inline Vector3 operator / (const Vector3& lhs, const Vector3& rhs)
+{
+    return Vector3Divide(lhs, rhs);
+}
+
+inline const Vector3& operator /= (Vector3& lhs, const Vector3& rhs)
+{
+    lhs = Vector3Divide(lhs, rhs);
+    return lhs;
+}
+
+inline bool operator == (const Vector3& lhs, const Vector3& rhs)
+{
+    return FloatEquals(lhs.x, rhs.x) && FloatEquals(lhs.y, rhs.y) && FloatEquals(lhs.z, rhs.z);
+}
+
+inline bool operator != (const Vector3& lhs, const Vector3& rhs)
+{
+    return !FloatEquals(lhs.x, rhs.x) || !FloatEquals(lhs.y, rhs.y) || !FloatEquals(lhs.z, rhs.z);
+}
+
+// Vector4 operators
+static constexpr Vector4 Vector4Zeros = { 0, 0, 0, 0 };
+static constexpr Vector4 Vector4Ones = { 1, 1, 1, 1 };
+static constexpr Vector4 Vector4UnitX = { 1, 0, 0, 0 };
+static constexpr Vector4 Vector4UnitY = { 0, 1, 0, 0 };
+static constexpr Vector4 Vector4UnitZ = { 0, 0, 1, 0 };
+static constexpr Vector4 Vector4UnitW = { 0, 0, 0, 1 };
+
+inline Vector4 operator + (const Vector4& lhs, const Vector4& rhs)
+{
+    return Vector4Add(lhs, rhs);
+}
+
+inline const Vector4& operator += (Vector4& lhs, const Vector4& rhs)
+{
+    lhs = Vector4Add(lhs, rhs);
+    return lhs;
+}
+
+inline Vector4 operator - (const Vector4& lhs, const Vector4& rhs)
+{
+    return Vector4Subtract(lhs, rhs);
+}
+
+inline const Vector4& operator -= (Vector4& lhs, const Vector4& rhs)
+{
+    lhs = Vector4Subtract(lhs, rhs);
+    return lhs;
+}
+
+inline Vector4 operator * (const Vector4& lhs, const float& rhs)
+{
+    return Vector4Scale(lhs, rhs);
+}
+
+inline const Vector4& operator *= (Vector4& lhs, const float& rhs)
+{
+    lhs = Vector4Scale(lhs, rhs);
+    return lhs;
+}
+
+inline Vector4 operator * (const Vector4& lhs, const Vector4& rhs)
+{
+    return Vector4Multiply(lhs, rhs);
+}
+
+inline const Vector4& operator *= (Vector4& lhs, const Vector4& rhs)
+{
+    lhs = Vector4Multiply(lhs, rhs);
+    return lhs;
+}
+
+inline Vector4 operator / (const Vector4& lhs, const float& rhs)
+{
+    return Vector4Scale(lhs, 1.0f/rhs);
+}
+
+inline const Vector4& operator /= (Vector4& lhs, const float& rhs)
+{
+    lhs = Vector4Scale(lhs, 1.0f/rhs);
+    return lhs;
+}
+
+inline Vector4 operator / (const Vector4& lhs, const Vector4& rhs)
+{
+    return Vector4Divide(lhs, rhs);
+}
+
+inline const Vector4& operator /= (Vector4& lhs, const Vector4& rhs)
+{
+    lhs = Vector4Divide(lhs, rhs);
+    return lhs;
+}
+
+inline bool operator == (const Vector4& lhs, const Vector4& rhs)
+{
+    return FloatEquals(lhs.x, rhs.x) && FloatEquals(lhs.y, rhs.y) && FloatEquals(lhs.z, rhs.z) && FloatEquals(lhs.w, rhs.w);
+}
+
+inline bool operator != (const Vector4& lhs, const Vector4& rhs)
+{
+    return !FloatEquals(lhs.x, rhs.x) || !FloatEquals(lhs.y, rhs.y) || !FloatEquals(lhs.z, rhs.z) || !FloatEquals(lhs.w, rhs.w);
+}
+
+// Quaternion operators
+static constexpr Quaternion QuaternionZeros = { 0, 0, 0, 0 };
+static constexpr Quaternion QuaternionOnes = { 1, 1, 1, 1 };
+static constexpr Quaternion QuaternionUnitX = { 0, 0, 0, 1 };
+
+inline Quaternion operator + (const Quaternion& lhs, const float& rhs)
+{
+    return QuaternionAddValue(lhs, rhs);
+}
+
+inline const Quaternion& operator += (Quaternion& lhs, const float& rhs)
+{
+    lhs = QuaternionAddValue(lhs, rhs);
+    return lhs;
+}
+
+inline Quaternion operator - (const Quaternion& lhs, const float& rhs)
+{
+    return QuaternionSubtractValue(lhs, rhs);
+}
+
+inline const Quaternion& operator -= (Quaternion& lhs, const float& rhs)
+{
+    lhs = QuaternionSubtractValue(lhs, rhs);
+    return lhs;
+}
+
+inline Quaternion operator * (const Quaternion& lhs, const Matrix& rhs)
+{
+    return QuaternionTransform(lhs, rhs);
+}
+
+inline const Quaternion& operator *= (Quaternion& lhs, const Matrix& rhs)
+{
+    lhs = QuaternionTransform(lhs, rhs);
+    return lhs;
+}
+
+// Matrix operators
+inline Matrix operator + (const Matrix& lhs, const Matrix& rhs)
+{
+    return MatrixAdd(lhs, rhs);
+}
+
+inline const Matrix& operator += (Matrix& lhs, const Matrix& rhs)
+{
+    lhs = MatrixAdd(lhs, rhs);
+    return lhs;
+}
+
+inline Matrix operator - (const Matrix& lhs, const Matrix& rhs)
+{
+    return MatrixSubtract(lhs, rhs);
+}
+
+inline const Matrix& operator -= (Matrix& lhs, const Matrix& rhs)
+{
+    lhs = MatrixSubtract(lhs, rhs);
+    return lhs;
+}
+
+inline Matrix operator * (const Matrix& lhs, const Matrix& rhs)
+{
+    return MatrixMultiply(lhs, rhs);
+}
+
+inline const Matrix& operator *= (Matrix& lhs, const Matrix& rhs)
+{
+    lhs = MatrixMultiply(lhs, rhs);
+    return lhs;
+}
+//-------------------------------------------------------------------------------
+#endif  // C++ operators
 
 #endif  // RAYMATH_H

@@ -89,7 +89,6 @@ Shader LoadShaderFromMemory(const char *vsCode, const char *fsCode) {
 
 // Check if a shader is ready
 bool IsShaderReady(Shader shader) {
-    return ::IsShaderReady(shader);
 }
 // Draw a billboard texture
 void DrawBillboardTexture(Camera camera, Texture2D texture,  math::Vector3 position, float scale, Color tint) {
@@ -126,7 +125,6 @@ Font LoadFontFromMemory(const char* fileType, const unsigned char* fileData, int
     return ::LoadFontFromMemory(fileType, fileData, dataSize, fontSize, codepoints, codepointCount);
 }
 bool IsFontReady(Font font) {
-    return ::IsFontReady(font);
 }
 GlyphInfo* LoadFontData(const unsigned char* fileData, int dataSize, int fontSize, int* codepoints, int codepointCount, int type) {
     return ::LoadFontData(fileData, dataSize, fontSize, codepoints, codepointCount, type);
@@ -497,7 +495,6 @@ int SetGamepadMappings(const char *mappings) {
 }
 // Set gamepad vibration for both motors
 void SetGamepadVibration(int gamepad, float leftMotor, float rightMotor) {
-    ::SetGamepadVibration(gamepad, leftMotor, rightMotor);
 }
 // Check collision between two rectangles
 bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2) {

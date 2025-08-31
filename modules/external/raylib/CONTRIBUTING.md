@@ -5,7 +5,7 @@ Hello contributors! Welcome to raylib!
 Do you enjoy raylib and want to contribute? Nice! You can help with the following points:
 
 - `C programming` - Can you write/review/test/improve the code? 
-- `Documentation/Tutorials/Example` - Can you write some tutorial/example?
+- `Documentation/Tutorials/Example` - Can you write some tutorials/examples?
 - `Porting to other platforms` - Can you port/adapt/compile raylib on other systems?
 - `Web Development` - Can you help [with the website](https://github.com/raysan5/raylib.com)?
 - `Testing` - Can you find some bugs in raylib?
@@ -54,7 +54,7 @@ To open new issues for raylib (bug, enhancement, discussion...), just try to fol
  - If applicable, attach some screenshot of the issue and a .zip file with the code sample and required resources.
  - On issue description, add a brackets tag about the raylib module that relates to this issue. 
  If don't know which module, just report the issue, I will review it.
- - You can check other issues to see how is being done!
+ - You can check other issues to see how it's being done!
 
 ### Sending a Pull-Request
 
