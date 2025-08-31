@@ -12,6 +12,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
+#include <RaylibShader.hpp>
 
 namespace graphics {
 
@@ -32,7 +33,7 @@ public:
     void DrawLayer(const int& aLayerId) override;
 
     // Drawing 3D methods
-
+    RaylibShader mShader;
 
     // clear methods
     void Clear(raylib::Color aColor) override;
@@ -50,6 +51,7 @@ private:
     // Storage for drawing primitives, organized by layer
     std::unordered_map<int, std::vector<std::shared_ptr<Model>>> layers;
     std::shared_ptr<CameraManager> mCameraManager;
+    
     // Synchronization
     std::mutex layersMutex;
 };

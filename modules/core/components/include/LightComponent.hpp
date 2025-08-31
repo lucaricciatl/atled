@@ -16,8 +16,8 @@ public:
         : Component(aOwner)
     {
         // Optionally initialize the light
-        auto graphicManager = aServiceProvider.get()->GetGraphicManager();
-        auto mLight = rendering::LightFactory::CreateLight(rendering::LightImplType::RaylibLightImpl);
+        auto shader = aServiceProvider.get()->GetGraphicManager()->mShader;
+        auto mLight = rendering::LightFactory::CreateLight(rendering::LightImplType::RaylibLightImpl,shader);
         if (mLight)
         {
 

@@ -12,6 +12,7 @@
 #include "raylib.hpp"
 #include "Point2D.hpp"
 #include "Cube.hpp"
+#include "ShaderFactory.hpp"
 
 
 namespace graphics {
@@ -74,9 +75,19 @@ void GraphicsManager::Render() {
     std::lock_guard<std::mutex> lock(layersMutex);
     GetGraphicsContext()->BeginDrawing();
     Clear(raylib::BLANK);
-    raylib::Shader shader;
+            RaylibShaderFactory shaderFactory;
+        auto raylibshader = RaylibShader();
+        // Corrected version:
+        raylibshader.LoadFromFiles("C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.vs",
+                      "C:\\Users\\atled\\source\\repos\\atled\\modules\\external\\raylib\\examples\\shaders\\resources\\shaders\\glsl120\\lighting.fs");
+                std::string loc = "ambient";
+        int ambientLoc = GetShaderLocation(raylibshader.GetShader(), "matModel");
+        raylibshader.GetShader().locs[11] = GetShaderLocation(raylibshader.GetShader(), "viewPos");
+        float ambientColor[4] = { 0.1f, 0.1f, 0.8f, 1.0f };
+        SetShaderValue(raylibshader.GetShader(), ambientLoc, ambientColor, raylib::SHADER_UNIFORM_VEC4);
+    mShader =raylibshader;
     mCameraManager->BeginActiveCamera();
-    raylib::BeginShaderMode(shader);
+    raylib::BeginShaderMode(raylibshader.GetShader());
     for (const auto& [layerId, primitives] : layers) {
 
         DrawLayer(layerId);
