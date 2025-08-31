@@ -74,15 +74,10 @@ void GraphicsManager::Render() {
     std::lock_guard<std::mutex> lock(layersMutex);
     GetGraphicsContext()->BeginDrawing();
     Clear(raylib::BLANK);
-    raylib::Shader shader;
     mCameraManager->BeginActiveCamera();
-    raylib::BeginShaderMode(shader);
     for (const auto& [layerId, primitives] : layers) {
-
-        DrawLayer(layerId);
-        
+        DrawLayer(layerId); 
     }
-    raylib::EndShaderMode();
     mCameraManager->EndActiveCamera();
 
     GetGraphicsContext()->EndDrawing(); // Finish the current frame

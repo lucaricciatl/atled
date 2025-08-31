@@ -72,7 +72,7 @@ int main() {
             shapeComponent->SetModel<Circle>();
             auto circle = shapeComponent->GetModel<Circle>();
             if (circle) {
-                circle->SetRadius(60.0f);  // Set a fixed radius for all entities
+                circle->SetRadius(6.0f);  // Set a fixed radius for all entities
                 circle->SetColor(
                     graphics::Color(distColor(gen), distColor(gen), distColor(gen), 0.8));  // Set random color
             }
