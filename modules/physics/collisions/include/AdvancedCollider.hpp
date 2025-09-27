@@ -2,7 +2,7 @@
 
 #include "ICollider.hpp"
 #include "BoundingBox.hpp"
-#include "Body.hpp"
+#include "body.hpp"
 #include <vector>
 
 namespace physics {

@@ -1,4 +1,4 @@
-#ifdef __APPLE__
+#ifdef __linux__
 
 #include "AtledMouse.hpp"
 #include <stdexcept>
@@ -95,4 +95,4 @@ void AtledMouse::runUpdateLoop() {
 
 } // namespace input
 
-#endif // __APPLE__
+#endif 

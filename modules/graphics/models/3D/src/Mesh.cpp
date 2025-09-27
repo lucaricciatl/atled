@@ -362,29 +362,29 @@ raylib::Mesh Mesh::ToRaylibMesh() const {
 
     if (!vertices.empty()) {
         raylibMesh.vertices = new float[vertices.size()];
-        std::memcpy(raylibMesh.vertices, vertices.data(), vertices.size() * sizeof(float));
+        std::copy(vertices.data(), vertices.data() + vertices.size(), raylibMesh.vertices);
     }
 
     if (!texcoords.empty()) {
         raylibMesh.texcoords = new float[texcoords.size()];
-        std::memcpy(raylibMesh.texcoords, texcoords.data(), texcoords.size() * sizeof(float));
+        std::copy(texcoords.data(), texcoords.data() + texcoords.size(), raylibMesh.texcoords);
     }
 
     if (!normals.empty()) {
         raylibMesh.normals = new float[normals.size()];
-        std::memcpy(raylibMesh.normals, normals.data(), normals.size() * sizeof(float));
+        std::copy(normals.data(), normals.data() + normals.size(), raylibMesh.normals);
     }
 
     if (!indices.empty()) {
         raylibMesh.indices = new unsigned short[indices.size()];
-        std::memcpy(raylibMesh.indices, indices.data(), indices.size() * sizeof(unsigned short));
+        std::copy(indices.data(), indices.data() + indices.size(), raylibMesh.indices);
     }
 
     // Allocate and initialize default OpenGL VAO/VBO IDs
     raylibMesh.vaoId = vaoId;
     if (!vboIds.empty()) {
         raylibMesh.vboId = new unsigned int[vboIds.size()];
-        std::memcpy(raylibMesh.vboId, vboIds.data(), vboIds.size() * sizeof(unsigned int));
+        std::copy(vboIds.data(), vboIds.data() + vboIds.size(), raylibMesh.vboId);
     }
 
     return raylibMesh;

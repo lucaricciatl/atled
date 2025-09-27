@@ -8,7 +8,7 @@
 #include "Component.hpp"
 #include "FrameComponent.hpp"
 #include "PhysicsManager.hpp"
-#include "RigidBody.hpp"
+#include "rigidbody.hpp"
 #include "ServiceProvider.hpp"
 #include "ShapeComponent.hpp"
 #include <random>

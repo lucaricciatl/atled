@@ -4,7 +4,7 @@
 #include "Vector3.hpp"
 #include "Palette.hpp"
 #include "Mesh.hpp"
-#include <RaylibShader.hpp>
+#include <raylibShader.hpp>
 #include <LightsFactory.hpp>
 
 namespace graphics {

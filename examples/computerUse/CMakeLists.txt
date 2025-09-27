@@ -6,7 +6,7 @@ project(computer-use)
 
 # Add the source files
 set(SOURCES
-    src/main.cpp
+    src/Main.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

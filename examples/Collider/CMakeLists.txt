@@ -2,20 +2,20 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Project name
-project(template)
+project(Collider)
 
 # Add the source files
 set(SOURCES
-    src/main.cpp
+    src/Main.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_include_directories(template PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(Collider PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC atled)
 
-set_target_properties(template PROPERTIES FOLDER "examples")
+set_target_properties(Collider PROPERTIES FOLDER "examples")
 
 add_custom_command(
     TARGET ${PROJECT_NAME} POST_BUILD

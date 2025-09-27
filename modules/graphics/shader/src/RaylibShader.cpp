@@ -1,4 +1,4 @@
-#include "RaylibShader.hpp"
+#include "raylibShader.hpp"
     #define GLSL_VERSION            330
 
 RaylibShader::RaylibShader() : isLoaded(false) {

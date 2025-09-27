@@ -4,8 +4,7 @@
 #include <chrono>
 
 namespace input{
-RaylibKeyboard::RaylibKeyboard() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false) {
-}
+RaylibKeyboard::RaylibKeyboard() : running(false), keyStates(512, false), prevKeyStates(512, false), keyStatesBuffer(512, false) {}
 
 void RaylibKeyboard::Start() {
     if (running == false) {

@@ -7,7 +7,7 @@
 #include "Color.hpp"
 #include "FrameComponent.hpp"
 #include <memory>
-#include <label.hpp>
+#include <Label.hpp>
 
 class GuiBoxComponent : public Component {
 public:

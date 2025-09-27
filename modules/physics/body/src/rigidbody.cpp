@@ -1,4 +1,4 @@
-#include "RigidBody.hpp"
+#include "rigidbody.hpp"
 #include "Vector3.hpp"
 #include "MathUtils.hpp"
 #include "Quaternion.hpp"

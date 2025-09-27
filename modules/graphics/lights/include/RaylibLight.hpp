@@ -3,7 +3,7 @@
 #include "Light.hpp"
 #include "Vector3.hpp"
 #include "raylib.hpp"
-#include "RaylibShader.hpp"
+#include "raylibShader.hpp"
 #include "Color.hpp"
 
 namespace rendering{

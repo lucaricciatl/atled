@@ -7,10 +7,7 @@
 
 namespace raylib {
 
-namespace{
-
-}  // namespace
-raylib::Vector3 raylib::toRaylibVector3(math::Vector3 v) { return {v.GetX(), v.GetY(), v.GetZ()}; }
+Vector3 toRaylibVector3(math::Vector3 v) { return {v.GetX(), v.GetY(), v.GetZ()}; }
 
 
 // Some Basic Colors

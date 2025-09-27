@@ -3,7 +3,7 @@
 
 #include "Light.hpp"
 #include "RaylibLight.hpp"
-#include "ShaderFactory.hpp"
+#include "shaderFactory.hpp"
 #include "Color.hpp"
 namespace rendering{
 enum LightImplType {

@@ -4,7 +4,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
-void LinuxScreenshot(const char* filename) {
+/* void LinuxScreenshot(const char* filename) {
     // Linux implementation using X11
     Display* display = XOpenDisplay(nullptr);
     if (display == nullptr) {
@@ -27,5 +27,5 @@ void LinuxScreenshot(const char* filename) {
         std::cerr << "Failed to capture screenshot on Linux." << std::endl;
     }
     XCloseDisplay(display);
-}
+} */
 #endif

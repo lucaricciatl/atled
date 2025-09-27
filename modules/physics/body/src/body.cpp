@@ -1,4 +1,4 @@
-#include "Body.hpp"
+#include "body.hpp"
 #include "BoundingBox.hpp"
 #include "Matrix.hpp"
 #include "MathUtils.hpp"

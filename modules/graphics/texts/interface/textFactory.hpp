@@ -2,7 +2,7 @@
 #define TEXTDRAWERFACTORY_HPP
 
 #include "ITextDrawer.hpp"
-#include "RaylibTextDrawer.hpp"
+#include "RaylibtextDrawer.hpp"
 
 namespace graphics {
 // Factory class to create instances of TextDrawer

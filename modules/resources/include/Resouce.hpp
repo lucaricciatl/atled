@@ -39,6 +39,7 @@ public:
     }
 
     bool IsLoaded() const {
+        return true;
     }
 
 private:

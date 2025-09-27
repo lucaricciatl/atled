@@ -64,7 +64,7 @@ void SaveScreenshot() {
 #elif defined(__APPLE__)
     MacScreenshot(fullPath.c_str());
 #elif defined(__linux__)
-    LinuxScreenshot(fullPath.c_str());
+    //LinuxScreenshot(fullPath.c_str());
 #else
     std::cerr << "Screenshot functionality is not implemented for this platform." << std::endl;
 #endif

@@ -6,7 +6,7 @@
 #include <string>
 
 #include "IShader.hpp"
-#include "RaylibShader.hpp"
+#include "raylibShader.hpp"
 
 class ShaderFactory {
 public:

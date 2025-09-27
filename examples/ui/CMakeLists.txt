@@ -2,23 +2,23 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Project name
-project(particles_ex)
+project(ui-example)
 
 # Add the source files
 set(SOURCES
-    src/main.cpp
+    src/Main.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_include_directories(particles_ex PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(ui-example PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC atled)
 
-set_target_properties(particles_ex PROPERTIES FOLDER "examples")
+set_target_properties(ui-example PROPERTIES FOLDER "examples")
 
 add_custom_command(
-    TARGET ${PROJECT_NAME} POST_BUILD
+    TARGET ${PROJECT_NAME}
     COMMAND ${CMAKE_COMMAND} -E copy
             ${CMAKE_CURRENT_SOURCE_DIR}/config.json
             $<TARGET_FILE_DIR:${PROJECT_NAME}>/config.json

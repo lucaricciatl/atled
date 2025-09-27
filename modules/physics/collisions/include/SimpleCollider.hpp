@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Body.hpp"
+#include "body.hpp"
 #include "Octree.hpp"
 #include "BoundingBox.hpp"
 

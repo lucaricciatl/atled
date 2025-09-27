@@ -1,7 +1,7 @@
 #ifndef ICOLLIDER_H
 #define ICOLLIDER_H
 
-#include "Body.hpp"
+#include "body.hpp"
 #include <memory>
 
 namespace physics {

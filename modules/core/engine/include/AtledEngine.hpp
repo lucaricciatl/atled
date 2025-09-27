@@ -42,4 +42,4 @@ class AtledEngine {
     EventBus eventBus;
 };
 
-#endif ATLEDENGINE_HPP
+#endif // ATLEDENGINE_HPP

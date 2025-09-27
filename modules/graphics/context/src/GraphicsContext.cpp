@@ -2,7 +2,7 @@
 #include "ICamera.hpp"
 #include "CameraFactory.hpp"
 #include <string_view>
-#include "WindowFactory.hpp"
+#include "windowFactory.hpp"
 #include "RaylibCamera2D.hpp"
 #include "RaylibCamera3D.hpp"
 #include "raylib.hpp"

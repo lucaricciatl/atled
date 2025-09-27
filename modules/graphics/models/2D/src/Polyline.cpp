@@ -1,4 +1,4 @@
-#include "Polyline.hpp"
+#include "PolyLine.hpp"
 
 namespace graphics {
 

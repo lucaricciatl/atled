@@ -8,7 +8,6 @@ add_library(inputs
     ./src/AtledMouseWindows.cpp
 )
 
-
 # Specify include directories for the submodule
 target_include_directories(inputs PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
