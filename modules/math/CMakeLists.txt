@@ -9,6 +9,7 @@ add_library(math INTERFACE geometry datastructure)
 
 add_subdirectory(geometry)
 add_subdirectory(datastructure)
+add_subdirectory(math_tests)
 
 target_link_libraries(math INTERFACE geometry)
 
