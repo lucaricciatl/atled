@@ -53,10 +53,6 @@ Mat3::Mat3(const Vector3& diagonal) :
     m10(0.0f), m11(diagonal.GetY()), m12(0.0f),
     m20(0.0f), m21(0.0f), m22(diagonal.GetZ()) {}
 
-
-
-
-
 Mat3& Mat3::operator=(const Mat3& other) {
     if (this != &other) {
         m00 = other.m00; m01 = other.m01; m02 = other.m02;
@@ -78,6 +74,15 @@ Mat3 Mat3::operator-(const Mat3& other) const {
                 m20 - other.m20, m21 - other.m21, m22 - other.m22);
 }
 
+
+
+Mat3& Mat3::operator*=(float scalar) {
+    m00 *= scalar; m01 *= scalar; m02 *= scalar;
+    m10 *= scalar; m11 *= scalar; m12 *= scalar;
+    m20 *= scalar; m21 *= scalar; m22 *= scalar;
+    return *this;
+}
+
 Mat3 Mat3::operator*(float scalar) const {
     return Mat3(m00 * scalar, m01 * scalar, m02 * scalar,
                 m10 * scalar, m11 * scalar, m12 * scalar,
@@ -95,10 +100,6 @@ Mat3 Mat3::operator-() const {
     return Mat3(-m00, -m01, -m02,
                 -m10, -m11, -m12,
                 -m20, -m21, -m22);
-}
-
-bool Mat3::operator!=(const Mat3& other) const {
-    return !(*this == other);
 }
 
 float Mat3::trace() const {

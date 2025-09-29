@@ -6,6 +6,6 @@ set(SOURCES ${TEST_SOURCES})
 enable_testing()
 add_executable(${LIB_NAME} ${TEST_SOURCES})
 
-target_link_libraries(${LIB_NAME} PUBLIC gtest)
+target_link_libraries(${LIB_NAME} PUBLIC gtest math)
 
 set_target_properties(${LIB_NAME} PROPERTIES FOLDER "test")

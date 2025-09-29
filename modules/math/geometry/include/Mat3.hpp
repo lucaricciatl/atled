@@ -93,10 +93,6 @@ public:
 
     // Vector operations
     Vector3 operator*(const Vector3& vec) const;               // Matrix * Vector
-    
-    // Comparison operators
-    bool operator==(const Mat3& other) const;
-    bool operator!=(const Mat3& other) const;
 
     // Element access
     float& operator()(int row, int col);                       // Mutable access
