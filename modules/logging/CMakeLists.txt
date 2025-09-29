@@ -1,8 +1,9 @@
 # Create a library from the submodule's source files
 add_library(logging
     ./src/Logging.cpp
+    ./src/ProgressBar.cpp
 )
-
+add_subdirectory(LoggingTest)
 
 # Specify include directories for the submodule
 target_include_directories(logging PUBLIC

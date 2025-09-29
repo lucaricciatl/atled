@@ -21,7 +21,12 @@ std::string Logger::GetCurrentDateForFile() const {
     std::tm nowTm;
 
     // Thread-safe localtime conversion
-    localtime_s(&nowTm, &nowTime);
+    #if defined(_WIN32) || defined(_WIN64)
+        localtime_s(&nowTm, &nowTime);
+    #else
+        localtime_r(&nowTime, &nowTm);
+    #endif
+
 
     std::stringstream ss;
     ss << std::put_time(&nowTm, "%Y-%m-%d");
@@ -59,36 +64,6 @@ void Logger::Log(const std::string& aMessage, LogLevel aLevel) {
     std::cout << levelColor << "[" << timestamp << "] [" << levelStr << "] " << aMessage << ColorReset << std::endl;
 }
 
-void Logger::PrintProgressBar(float aProgress) {
-    constexpr int barWidth = 50;
-    
-   // Set color codes for the progress bar
-    constexpr const char* barColor = "\033[47m";  // White background
-    constexpr const char* resetColor = "\033[0m"; // Reset (transparent)
-
-    
-    std::cout << "";
-    int pos = static_cast<int>(barWidth * aProgress);
-
-    for (int i = 0; i < barWidth; ++i) {
-        if (i < pos) {
-            // Fill completed part of the bar with color
-            std::cout << barColor << " " << resetColor;
-        }
-        else if (i == pos) {
-            // Show the current progress position with a different symbol (optional)
-            std::cout << ">";
-        }
-        else {
-            // Fill the remaining part of the bar with spaces
-            std::cout << " ";
-        }
-    }
-
-    std::cout << " " << int(aProgress * 100.0) << " %\r";
-    std::cout.flush();
-}
-
 // Get string representation of log level
 std::string Logger::GetLogLevelString(LogLevel aLevel) const {
     switch (aLevel) {
@@ -104,9 +79,11 @@ std::string Logger::GetCurrentTime() const {
     auto now = std::chrono::system_clock::now();
     std::time_t nowTime = std::chrono::system_clock::to_time_t(now);
     std::tm nowTm;
-
-    // Thread-safe localtime conversion
-    localtime_s(&nowTm, &nowTime);
+    #if defined(_WIN32) || defined(_WIN64)
+        localtime_s(&nowTm, &nowTime);
+    #else
+        localtime_r(&nowTime, &nowTm);
+    #endif
 
     std::stringstream ss;
     ss << std::put_time(&nowTm, "%Y-%m-%d %H:%M:%S");

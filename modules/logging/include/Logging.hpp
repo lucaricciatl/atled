@@ -18,7 +18,6 @@ public:
     ~Logger();
 
     void Log(const std::string& aMessage, LogLevel aLevel);
-    void PrintProgressBar(float aProgress);
 
 private:
     std::ofstream mLogFile;
