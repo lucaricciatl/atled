@@ -17,19 +17,16 @@
 int main() {
     // Engine setup
     engine::EngineBuilder<AtledEngine> builder;
+    builder.SetTargetFramerate(100);
     std::unique_ptr<AtledEngine> coreEngine = builder.Configure().Build();
 
     auto entity = coreEngine->CreateEntity();
     auto mc = entity->AddComponent<ParticlesSystemComponent>();
-    mc->SetParticleLifetime(10);
+    mc->SetParticleLifetime(6);
     mc->SetParticlesCollision(false);
-    mc->SetParticleStartSize(0.1);
-    mc->SetNumberOfParticles(1);
-    auto entity2 = coreEngine->CreateEntity();
-    entity2->GetComponent<FrameComponent>()->SetPosition(0,0,20);
-    auto mc2 = entity2->AddComponent<GravitationalFieldComponent>();
-    mc2->SetStrength(40);
-    mc2->SetRadius(0.4);
+    mc->SetParticleStartSize(0.01);
+    mc->SetNumberOfParticles(10000);
+
     //mc2->AddEntitiesFromList(entity->GetChildren());
     auto entitycam = coreEngine->CreateEntity();
     entitycam->AddComponent<FreeCameraComponent>();
