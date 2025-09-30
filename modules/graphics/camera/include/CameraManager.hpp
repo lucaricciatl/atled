@@ -72,13 +72,12 @@ public:
     math::Vector3 GetCameraPosition() const;
     math::Vector3 GetCameraTarget() const;
     void BeginActiveCamera();
-
     void EndActiveCamera();
 
 private:
     std::vector<std::shared_ptr<ICamera>> mCameras;
     std::shared_ptr<ICamera> mActiveCamera;
-    std::atomic<bool> mRunning;
+    bool mRunning;
     std::unique_ptr<std::thread> mThread;
 
     // Internal method for render loop

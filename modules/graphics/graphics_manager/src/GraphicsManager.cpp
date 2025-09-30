@@ -12,6 +12,7 @@
 #include "raylib.hpp"
 #include "Point2D.hpp"
 #include "Cube.hpp"
+#include "CameraFactory.hpp" // Add this include for CameraFactory
 
 
 namespace graphics {
@@ -50,8 +51,8 @@ void GraphicsManager::Init() {
 
 void GraphicsManager::Start() {
     auto frameDuration = std::chrono::milliseconds(1000 / mFrameRate);
-
-    while (true) {
+    isAlive = true;
+    while (isAlive) {
         auto frameStart = std::chrono::steady_clock::now();
 
         Render();
@@ -66,8 +67,21 @@ void GraphicsManager::Start() {
     }
 }
 
+void GraphicsManager::Stop() {
+    isAlive = false;
+    if (mThread && mThread->joinable()) {
+        mThread->join();
+    }
+}
+
 void GraphicsManager::SetCameraMng(std::shared_ptr<graphics::CameraManager> aCameraMng) {
+    if (!aCameraMng || aCameraMng->GetActiveCamera() == nullptr) {
+        throw std::invalid_argument("CameraManager pointer is null");
+        aCameraMng->AddCamera(CameraFactory::createCamera3D(CameraType3D::Raylib));
+        aCameraMng->SetActiveCamera(0);
+    }
     mCameraManager = aCameraMng;
+    
 }
 void GraphicsManager::Render() {
 

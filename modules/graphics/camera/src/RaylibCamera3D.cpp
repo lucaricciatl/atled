@@ -60,16 +60,20 @@ Vector3 RaylibCamera3D::GetUp() const {
     return toAtledVector3(mCamera.up);
 }
 
-void RaylibCamera3D::SetZoom(float) {}
+void RaylibCamera3D::SetZoom(const float zoom) {
+    // Not applicable for Camera3D
+}
 
 float RaylibCamera3D::GetZoom() const {
     return 1.0f;  // Not applicable for Camera3D
 }
 
-void RaylibCamera3D::SetRotation(float) {}
+void RaylibCamera3D::SetRotation(const float rotation) {
+
+}
 
 float RaylibCamera3D::GetRotation() const {
-    return 0.0f;  // Not applicable for Camera3D
+
 }
 
 void RaylibCamera3D::SetCameraProjection(raylib::CameraProjection aProjection) {

@@ -62,9 +62,6 @@ const std::vector<unsigned short>& Mesh::GetIndices() const {
     return indices;
 }
 
-#include <cmath>
-#include <external/stb_vorbis.c>
-
 // Helper to generate an empty Mesh
 Mesh Mesh::CreateMesh() {
     return Mesh();

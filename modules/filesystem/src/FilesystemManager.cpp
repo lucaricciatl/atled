@@ -119,3 +119,9 @@ std::filesystem::path FileSystem::findPathRecursive(
 
     return "";
 }
+
+void FileSystem::createDirectory(const std::filesystem::path& dirPath) const {
+    if (!std::filesystem::exists(dirPath)) {
+        std::filesystem::create_directories(dirPath);
+    }
+}

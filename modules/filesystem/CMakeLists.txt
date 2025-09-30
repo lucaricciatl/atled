@@ -3,6 +3,8 @@ add_library(filesystem
     src/FilesystemManager.cpp
 )
 
+add_subdirectory(filesystemTest)
+
 # Specify include directories for the submodule
 target_include_directories(filesystem PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include

@@ -16,6 +16,8 @@ add_subdirectory(window)
 add_subdirectory(lights)
 add_subdirectory(materials)
 
+add_subdirectory(graphicsTest)
+
 target_link_libraries(graphics INTERFACE camera context display graphics_manager models shader texts window lights materials texts)
 
 set_target_properties(graphics PROPERTIES FOLDER "modules")

@@ -15,7 +15,8 @@ namespace graphics {
           mRings(16), 
           mSlices(16), 
           mCenterPos({0.0f, 0.0f, 0.0f}),
-          mColor(getColor("Timeless Gray")) { // Initialize color to white
+          mColor(getColor("Timeless Gray")),
+          Model3D() { // Initialize color to white
         UpdateMesh();
     }
 

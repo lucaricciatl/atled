@@ -48,6 +48,7 @@ public:
         const std::string& filename) const;
 
     // Additional filesystem operations can be added here
+    void createDirectory(const std::filesystem::path& dirPath) const;
 };
 
 #endif // FILESYSTEM_HPP

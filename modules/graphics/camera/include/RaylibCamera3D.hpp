@@ -25,10 +25,10 @@ public:
     void SetUp(math::Vector3 up) override;
     math::Vector3 GetUp() const override;
 
-    void SetZoom(float zoom) override;
+    void SetZoom(const float zoom) override;
     float GetZoom() const override;
 
-    void SetRotation(float rotation) override;
+    void SetRotation(const float rotation) override;
     float GetRotation() const override;
 
     void SetFovy(float aFovy) override;

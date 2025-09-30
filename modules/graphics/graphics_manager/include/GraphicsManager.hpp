@@ -15,6 +15,8 @@
 
 namespace graphics {
 
+static constexpr int defaultFrameRate = 60;
+
 class GraphicsManager : public IGraphicManager {
 public:
     GraphicsManager();
@@ -28,7 +30,7 @@ public:
     void Render() override;
     void SetCameraMng(std::shared_ptr<graphics::CameraManager> aCameraMng);
     void AddShape(const int& aLayerId, std::shared_ptr<Model> aShape);
-
+    void Stop() override;
     void DrawLayer(const int& aLayerId) override;
 
     // Drawing 3D methods
@@ -42,7 +44,8 @@ protected:
     void Run(); // Thread loop function
 
 private:
-    int mFrameRate = 60;
+    std::atomic<bool> isAlive{true};
+    int mFrameRate{defaultFrameRate};
     std::unique_ptr<std::thread> mThread;
     std::shared_ptr<GraphicsContext> mContext;
     std::shared_ptr<GraphicsConfig> mConfigs;

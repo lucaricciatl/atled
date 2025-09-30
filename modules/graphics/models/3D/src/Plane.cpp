@@ -3,19 +3,21 @@
 #include "Color.hpp"
 #include <Model.hpp>
 #include "Palette.hpp"
+
 namespace graphics {
 
 // Default constructor
     Plane::Plane()
         : mCenterPos({ 0.0f, 0.0f, 0.0f }),
         mSize({ 10.0f, 10.0f }),
-        mColor(getColor("Timeless Gray")) {
+        mColor(getColor("Timeless Gray")),
+        Model3D() {
         UpdateMesh();
     };
 
 // Parameterized constructor
 Plane::Plane(const math::Vector3& centerPos, const raylib::Vector2& size, const Color& color)
-    : mCenterPos(centerPos), mSize(size), mColor(color){
+    : mCenterPos(centerPos), mSize(size), mColor(color) {
     UpdateMesh();
 }
 

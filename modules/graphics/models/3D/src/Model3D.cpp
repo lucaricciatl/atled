@@ -42,4 +42,16 @@ graphics::Color Model3D::GetColor() const {
 	return mColor;
 }
 
+raylib::Model CreateEmptyModel() {
+		raylib::Model mModel;
+		mModel.meshCount = 0;
+		mModel.materialCount = 0;
+		mModel.meshes = nullptr;
+		mModel.materials = nullptr;
+		mModel.meshMaterial = nullptr;
+		mModel.boneCount = 0;
+		mModel.bones = nullptr;
+		mModel.bindPose = nullptr;
+		return mModel;
+	}
 }

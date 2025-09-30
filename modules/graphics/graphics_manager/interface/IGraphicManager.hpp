@@ -25,7 +25,7 @@ public:
     virtual std::shared_ptr<GraphicsContext> GetGraphicsContext() = 0;
     virtual void Init() = 0;
     virtual void Render() = 0;
-
+    virtual void Stop() = 0;
     virtual void SetCameraMng(std::shared_ptr<CameraManager> aCameraMng) = 0 ;
 
     virtual void AddShape(const int& aLayerId, std::shared_ptr<Model> aShape) = 0;

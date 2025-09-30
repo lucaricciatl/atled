@@ -30,8 +30,6 @@ private:
 
     math::Vector3 mCenterPos; // Center position of the plane
     raylib::Vector2 mSize;      // Size of the plane
-
-    raylib::Model mModel;
     Color mColor;
 };
 

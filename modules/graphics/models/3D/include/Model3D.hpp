@@ -10,9 +10,11 @@
 
 namespace graphics {
 
+raylib::Model CreateEmptyModel();
 class Model3D : public Model {
    public:
-    explicit Model3D() : ShapeIsEnabled(true) {};
+    Model3D() : ShapeIsEnabled(true), mModel(CreateEmptyModel()), Model() {}
+
     virtual ~Model3D() = default;
     virtual void Draw() = 0;
 
@@ -47,7 +49,7 @@ class Model3D : public Model {
     bool ShapeIsEnabled;      // 1 for the wirefram
     graphics::Color mWireframeColor;
     graphics::Color mColor;
-    raylib::Model mModel;
+    raylib::Model  mModel = CreateEmptyModel();
 };
 
 }  // namespace graphics

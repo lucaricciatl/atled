@@ -2,6 +2,7 @@
 #include <chrono>
 #include <thread>
 #include <iostream>
+#include <cassert>
 #include "Vector3.hpp"
 namespace graphics {
 
@@ -62,11 +63,21 @@ math::Vector3 CameraManager::GetCameraTarget() const {
     return mActiveCamera->GetTarget();
 }
 void CameraManager::BeginActiveCamera() {
-    mActiveCamera->BeginCamera();     
+    if (mActiveCamera) {
+        mActiveCamera->BeginCamera();     
+    }
+    else {
+        assert(false && "No active camera set.");
+    }
 }
 
 void CameraManager::EndActiveCamera() {
-    mActiveCamera->EndCamera();
+    if (mActiveCamera) {
+        mActiveCamera->EndCamera();
+    }
+    else {
+        assert(false && "No active camera set.");
+    }
 }
 
 void CameraManager::SetCameraRotation(float aRotation) {
